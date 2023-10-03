@@ -1,0 +1,8 @@
+package com.system.artworkspace.user;
+
+public class Artist extends User{
+    public Artist(String userId, String username, String firstName, String lastName, String email, String password) {
+        super(userId, username, firstName, lastName, email, password);
+    }
+
+}
