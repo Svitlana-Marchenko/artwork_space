@@ -23,11 +23,24 @@ public class User{
         this.password = password;
     }
 
-    public User() {
-
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User() {
+    }
     public String getUsername() {
         return username;
     }

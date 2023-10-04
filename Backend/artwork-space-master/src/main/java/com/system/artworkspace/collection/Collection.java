@@ -17,6 +17,18 @@ public class Collection {
     @ManyToMany
     private List<Artwork> artworks;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     public void setArtworks(List<Artwork> artworks) {
         this.artworks = artworks;
     }

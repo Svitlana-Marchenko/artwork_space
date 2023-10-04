@@ -21,6 +21,18 @@ public class Exhibition {
     private Date startDate;
     private Date endDate;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCurator(User curator) {
+        this.curator = curator;
+    }
+
     public String getDescription() {
         return description;
     }

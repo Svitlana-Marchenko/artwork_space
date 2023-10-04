@@ -13,6 +13,14 @@ public class Rating {
     private User curator;
     private String comment;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Rating(double rate, User curator, String comment) {
         this.rate = rate;
         this.curator = curator;

@@ -40,6 +40,22 @@ public class Auction {
                 '}';
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getCurrentBuyer() {
+        return currentBuyer;
+    }
+
+    public void setCurrentBuyer(User currentBuyer) {
+        this.currentBuyer = currentBuyer;
+    }
+
     public String getAuctionName() {
         return auctionName;
     }
