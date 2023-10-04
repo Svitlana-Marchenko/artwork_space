@@ -18,8 +18,8 @@ public class Auction {
     private Date closingTime;
     private Collectioneer currentBuyer;
     private double currentBid;
-    @Autowired
-    private boolean dateFormatResult;
+   // @Autowired
+    //private boolean dateFormatResult;
 
     @Override
     public String toString() {

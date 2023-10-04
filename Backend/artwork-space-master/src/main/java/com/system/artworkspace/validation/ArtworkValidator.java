@@ -8,7 +8,8 @@ public class ArtworkValidator {
     private long fileSizeLimitInMB;
 
     public ArtworkValidator() {
-        this.fileSizeLimitInMB = Long.parseLong(System.getProperty("custom.file-size-limit"));
+        this.fileSizeLimitInMB = 1000;
+        //this.fileSizeLimitInMB = Long.parseLong(System.getProperty("custom.file-size-limit"));
     }
 
     public boolean isFileSizeValid(long fileSizeInBytes) {

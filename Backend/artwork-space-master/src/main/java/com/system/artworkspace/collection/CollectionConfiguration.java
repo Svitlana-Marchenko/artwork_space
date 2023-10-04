@@ -16,4 +16,12 @@ public class CollectionConfiguration {
     public boolean isEnabled() {
         return enabledToCreate;
     }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public void setEnabledToCreate(boolean enabledToCreate) {
+        this.enabledToCreate = enabledToCreate;
+    }
 }
