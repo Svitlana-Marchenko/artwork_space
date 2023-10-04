@@ -1,26 +1,26 @@
 package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
+@Entity
 public class Rating {
-    private String ratingId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private double rate;
+    @ManyToOne
     private User curator;
     private String comment;
 
-    public Rating(String ratingId, double rate, User curator, String comment) {
-        this.ratingId = ratingId;
+    public Rating(double rate, User curator, String comment) {
         this.rate = rate;
         this.curator = curator;
         this.comment = comment;
     }
 
-    public String getRatingId() {
-        return ratingId;
-    }
+    public Rating() {
 
-    public void setRatingId(String ratingId) {
-        this.ratingId = ratingId;
     }
 
     public double getRate() {

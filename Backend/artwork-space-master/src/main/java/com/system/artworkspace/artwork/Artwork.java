@@ -2,29 +2,33 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.user.Artist;
 import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
+import java.util.Set;
+
+@Entity
 public class Artwork {
-    private String artworkId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String title;
     private String description;
     private String technique;
     private double width;
     private double height;
+    @ManyToOne
     private User artist;
     private String imageURL;
     private double imageSize;
-    private Rating[] ratings;
+    @OneToMany
+    private Set<Rating> ratings;
 
     public Artwork(Artist artist) {
         this.artist = artist;
     }
 
-    public String getArtworkId() {
-        return artworkId;
-    }
+    public Artwork() {
 
-    public void setArtworkId(String artworkId) {
-        this.artworkId = artworkId;
     }
 
     public String getTitle() {
@@ -83,13 +87,6 @@ public class Artwork {
         this.imageURL = imageURL;
     }
 
-    public Rating[] getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Rating[] ratings) {
-        this.ratings = ratings;
-    }
 
     public double getImageSize() {
         return imageSize;

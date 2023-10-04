@@ -2,21 +2,26 @@ package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.Collectioneer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
 import java.util.Date;
+
+@Entity
 public class Auction {
-    private String auctionId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String auctionName;
     private String auctionDescription;
+    @OneToOne
     private Artwork artwork;
-
     private double startingPrice;
     private double step;
     private Date closingTime;
-    private Collectioneer currentBuyer;
+    @ManyToOne
+    private User currentBuyer;
     private double currentBid;
    // @Autowired
     //private boolean dateFormatResult;
@@ -24,7 +29,6 @@ public class Auction {
     @Override
     public String toString() {
         return "Auction{" +
-                "auctionId='" + auctionId + '\'' +
                 ", auctionName='" + auctionName + '\'' +
                 ", auctionDescription='" + auctionDescription + '\'' +
                 ", artwork=" + artwork +
@@ -34,14 +38,6 @@ public class Auction {
                 ", currentBuyer=" + currentBuyer +
                 ", currentPrice=" + currentBid +
                 '}';
-    }
-
-    public String getAuctionId() {
-        return auctionId;
-    }
-
-    public void setAuctionId(String auctionId) {
-        this.auctionId = auctionId;
     }
 
     public String getAuctionName() {
@@ -92,9 +88,6 @@ public class Auction {
         this.closingTime = closingTime;
     }
 
-    public Collectioneer getCurrentBuyer() {
-        return currentBuyer;
-    }
 
     public void setCurrentBuyer(Collectioneer currentBuyer) {
         this.currentBuyer = currentBuyer;

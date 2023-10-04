@@ -3,16 +3,20 @@ package com.system.artworkspace.exhibition;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.Curator;
 import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
-
+@Entity
 public class Exhibition {
-    private String exhibitionId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+@ManyToOne
     private User curator;
     private String name;
     private String description;
-
+    @OneToMany
     private List<Artwork> artworks;
     private Date startDate;
     private Date endDate;
@@ -23,14 +27,6 @@ public class Exhibition {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getExhibitionId() {
-        return exhibitionId;
-    }
-
-    public void setExhibitionId(String exhibitionId) {
-        this.exhibitionId = exhibitionId;
     }
 
     public void setArtworks(List<Artwork> artworks) {

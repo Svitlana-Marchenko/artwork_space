@@ -1,15 +1,21 @@
 package com.system.artworkspace.user;
 
-public abstract class User{
-    private String userId;
+import jakarta.persistence.*;
+
+@Entity
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    @ManyToOne
+    private Role role;
 
     public User(String userId, String username, String firstName,String lastName, String email, String password) {
-        this.userId = userId;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,13 +23,10 @@ public abstract class User{
         this.password = password;
     }
 
-    public String getUserId() {
-        return userId;
+    public User() {
+
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getUsername() {
         return username;

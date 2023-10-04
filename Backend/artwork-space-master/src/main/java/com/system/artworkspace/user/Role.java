@@ -1,6 +1,15 @@
 package com.system.artworkspace.user;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Role {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
 
@@ -10,23 +19,12 @@ public class Role {
         this.name = name;
     }
 
-    public Role(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Role(Integer id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
         return this.name;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

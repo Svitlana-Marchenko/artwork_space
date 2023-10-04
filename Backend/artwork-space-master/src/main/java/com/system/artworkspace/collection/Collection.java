@@ -3,21 +3,19 @@ package com.system.artworkspace.collection;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.Collectioneer;
 import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
 import java.util.List;
+@Entity
 public class Collection {
-    private String collectionId;
-    private Collectioneer owner;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    private User owner;
     private String name;
+    @ManyToMany
     private List<Artwork> artworks;
-
-    public String getCollectionId() {
-        return collectionId;
-    }
-
-    public void setCollectionId(String collectionId) {
-        this.collectionId = collectionId;
-    }
 
     public void setArtworks(List<Artwork> artworks) {
         this.artworks = artworks;
