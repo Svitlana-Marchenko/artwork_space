@@ -7,7 +7,7 @@ import java.util.List;
 public interface AuctionCollectioneerService {
     List<Auction> getAvailableAuctions();
 
-    void placeBid(Auction auction, double bidAmount);
+    Auction placeBid(Auction auction, double bidAmount);
 
     double getCurrentBid(Auction auction);
 

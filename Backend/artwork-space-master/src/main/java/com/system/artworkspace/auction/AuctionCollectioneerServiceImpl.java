@@ -12,8 +12,8 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
     }
 
     @Override
-    public void placeBid(Auction auction, double bidAmount) {
-
+    public Auction placeBid(Auction auction, double bidAmount) {
+        return null;
     }
 
     @Override

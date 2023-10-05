@@ -13,7 +13,7 @@ public interface AuctionArtistService {
     Collectioneer displayCurrenBuyer(Auction auction);
     List<Auction> getAllActiveAuctions();
     void closeAuction(Auction auction);
-    void editName (Auction auction);
-    void editDescription(Auction auction);
+    Auction updateName (Auction auction);
+    Auction updateDescription(Auction auction);
 
 }
