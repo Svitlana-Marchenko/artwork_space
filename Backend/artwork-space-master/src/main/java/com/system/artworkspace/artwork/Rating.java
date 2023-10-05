@@ -10,7 +10,6 @@ public class Rating {
     private Long id;
     private double rate;
     @ManyToOne
-    @Column(nullable = false)
     private User curator;
     @Column(length = 2000)
     private String comment;
