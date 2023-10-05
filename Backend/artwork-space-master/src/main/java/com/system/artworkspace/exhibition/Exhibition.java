@@ -18,8 +18,24 @@ public class Exhibition {
     private String description;
     @OneToMany
     private List<Artwork> artworks;
+    @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     private Date endDate;
+
+
+    public Exhibition(User curator, String name, String description, List<Artwork> artworks, Date startDate, Date endDate) {
+        this.curator = curator;
+        this.name = name;
+        this.description = description;
+        this.artworks = artworks;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Exhibition() {
+
+    }
 
     public Long getId() {
         return id;
@@ -80,4 +96,5 @@ public class Exhibition {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
 }
