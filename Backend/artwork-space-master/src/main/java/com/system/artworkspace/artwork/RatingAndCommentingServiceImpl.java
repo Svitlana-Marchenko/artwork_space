@@ -16,8 +16,8 @@ public class RatingAndCommentingServiceImpl implements RatingAndCommentService{
     }
 
     @Override
-    public void addRating(Rating rating, Artwork artwork) {
-
+    public Rating addRating(Rating rating, Artwork artwork) {
+        return null;
     }
 
     @Override
@@ -26,8 +26,8 @@ public class RatingAndCommentingServiceImpl implements RatingAndCommentService{
     }
 
     @Override
-    public void editRating(Rating rating, String newComment, double newRate) {
-
+    public Rating updateRating(Rating rating, String newComment, double newRate) {
+        return null;
     }
 
 }
