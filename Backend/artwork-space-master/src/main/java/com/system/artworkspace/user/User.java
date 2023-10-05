@@ -3,6 +3,7 @@ package com.system.artworkspace.user;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "\"user\"")
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +16,7 @@ public class User{
     @ManyToOne
     private Role role;
 
-    public User(String userId, String username, String firstName,String lastName, String email, String password) {
+    public User(String username, String firstName,String lastName, String email, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
