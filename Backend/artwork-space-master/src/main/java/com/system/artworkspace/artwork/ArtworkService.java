@@ -1,8 +1,9 @@
 package com.system.artworkspace.artwork;
 
 public interface ArtworkService {
-    void addArtwork(Artwork artwork);
-    void editArtwork(Artwork artwork);
+    Artwork addArtwork(Artwork artwork);
+    Artwork updateArtwork(Artwork artwork);
     void deleteArtwork(String artworkId);
     Artwork findArtworkById(String id);
+    String generateUniqueArtworkId();
 }

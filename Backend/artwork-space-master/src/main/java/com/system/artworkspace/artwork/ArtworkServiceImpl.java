@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 public class ArtworkServiceImpl implements ArtworkService{
 
     @Override
-    public void addArtwork(Artwork artwork) {
-
+    public Artwork addArtwork(Artwork artwork) {
+        return null;
     }
 
     @Override
-    public void editArtwork(Artwork artwork) {
-
+    public Artwork updateArtwork(Artwork artwork) {
+        return null;
     }
 
     @Override
@@ -23,6 +23,11 @@ public class ArtworkServiceImpl implements ArtworkService{
 
     @Override
     public Artwork findArtworkById(String id) {
+        return null;
+    }
+
+    @Override
+    public String generateUniqueArtworkId() {
         return null;
     }
 }
