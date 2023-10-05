@@ -1,10 +1,7 @@
 package com.system.artworkspace.collection;
 
 import com.system.artworkspace.artwork.Artwork;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public interface CollectionService {
-
     Collection createCollection(Collection collection);
 
     void addToCollection(Collection collection, Artwork artwork);

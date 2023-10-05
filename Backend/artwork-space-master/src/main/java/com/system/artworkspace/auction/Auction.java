@@ -1,6 +1,7 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.Rating;
 import com.system.artworkspace.user.Collectioneer;
 import com.system.artworkspace.user.User;
 import jakarta.persistence.*;
@@ -26,8 +27,16 @@ public class Auction {
     @ManyToOne
     private User currentBuyer;
     private double currentBid;
-   // @Autowired
+    // @Autowired
     //private boolean dateFormatResult;
+    public Auction(){}
+    public Auction(Artwork artwork, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
+        this.auctionName = auctionName;
+        this.auctionDescription = auctionDescription;
+        this.artwork = artwork;
+        this.startingPrice = startingPrice;
+        this.step = step;
+    }
 
     @Override
     public String toString() {

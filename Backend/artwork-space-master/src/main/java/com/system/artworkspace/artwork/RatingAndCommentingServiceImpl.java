@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class RatingAndCommentingServiceImpl implements RatingAndCommentService{
     @Autowired
     CountRatingService countRatingService;
+    @Autowired
+    private RatingRepository ratingRepository;
 
     @Override
     public double calculateGeneralRating(Artwork artwork) {
@@ -17,17 +19,12 @@ public class RatingAndCommentingServiceImpl implements RatingAndCommentService{
 
     @Override
     public Rating addRating(Rating rating, Artwork artwork) {
-        return null;
+        return ratingRepository.save(rating);
     }
 
     @Override
     public void deleteRating(Rating rating, Artwork artwork) {
-
-    }
-
-    @Override
-    public Rating updateRating(Rating rating, String newComment, double newRate) {
-        return null;
+        ratingRepository.delete(rating);
     }
 
 }
