@@ -1,7 +1,5 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.config.WebsiteConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
