@@ -13,8 +13,10 @@ public class Exhibition {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 @ManyToOne
+@Column(nullable = false)
     private User curator;
     private String name;
+    @Column(length = 2000)
     private String description;
     @OneToMany
     private List<Artwork> artworks;

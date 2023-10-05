@@ -1,11 +1,15 @@
 package com.system.artworkspace.user;
 
+import com.system.artworkspace.artwork.Artwork;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "user_id")
     private Long id;
     private String username;
     private String firstName;
@@ -14,6 +18,9 @@ public class User{
     private String password;
     @ManyToOne
     private Role role;
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Artwork> artworks;
 
     public User(String userId, String username, String firstName,String lastName, String email, String password) {
         this.username = username;

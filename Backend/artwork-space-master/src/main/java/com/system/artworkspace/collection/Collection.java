@@ -12,6 +12,7 @@ public class Collection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @Column(nullable = false)
     private User owner;
     private String name;
     @ManyToMany

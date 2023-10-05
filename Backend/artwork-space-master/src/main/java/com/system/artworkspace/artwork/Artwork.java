@@ -11,16 +11,20 @@ public class Artwork {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 50)
     private String title;
+
+    @Column(length = 2000)
     private String description;
     private String technique;
     private double width;
     private double height;
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User artist;
     private String imageURL;
     private double imageSize;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rating> ratings;
 
     public Artwork(Artist artist) {

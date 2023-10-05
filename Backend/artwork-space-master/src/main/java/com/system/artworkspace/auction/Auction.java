@@ -14,9 +14,11 @@ public class Auction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String auctionName;
+    @Column(length = 2000)
     private String auctionDescription;
     @OneToOne
     private Artwork artwork;
+    @Column(nullable = false)
     private double startingPrice;
     private double step;
     @Temporal(TemporalType.DATE)
