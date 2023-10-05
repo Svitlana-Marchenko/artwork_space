@@ -25,12 +25,6 @@ public class ArtworkServiceImpl implements ArtworkService{
         return artwork;
     }
 
-    //TODO чи робити саме таким способом
-    @Override
-    public Artwork updateArtwork(Artwork artwork) {
-        return null;
-    }
-
     @Override
     public void deleteArtwork(Long artworkId) {
 repository.deleteById(artworkId);

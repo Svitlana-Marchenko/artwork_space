@@ -5,7 +5,6 @@ import jakarta.persistence.ManyToOne;
 
 public interface ArtworkService {
     Artwork addArtwork(Artwork artwork);
-    Artwork updateArtwork(Artwork artwork);
     void deleteArtwork(Long artworkId);
     Artwork findArtworkById(Long id);
     void updateTitle(Artwork artwork, String title);
