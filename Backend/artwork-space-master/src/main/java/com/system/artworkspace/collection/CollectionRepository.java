@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CollectionRepository extends JpaRepository<Collection, Long> {
-    List<Collection> findCollectionByCollectioneer(User user);
+    List<Collection> findCollectionByOwner(User user);
     void deleteCollectionById(Long id);
 
 }

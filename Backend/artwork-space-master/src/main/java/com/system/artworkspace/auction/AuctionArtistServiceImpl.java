@@ -33,7 +33,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Override
     public List<Auction> getAllActiveAuctions() {
         Date currentDate = new Date();
-        return auctionRepository.findByEndDateAfter(currentDate);
+        return auctionRepository.findByClosingTime(currentDate);
     }
 
     @Override
