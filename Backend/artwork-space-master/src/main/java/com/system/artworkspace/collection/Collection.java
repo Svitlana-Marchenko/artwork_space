@@ -52,4 +52,12 @@ public class Collection {
     public List<Artwork> getArtworks() {
         return artworks;
     }
+
+    public void addNewArtwork(Artwork artwork){
+        artworks.add(artwork);
+    }
+
+    public void removeArtwork(Artwork artwork){
+        artworks.remove(artwork);
+    }
 }

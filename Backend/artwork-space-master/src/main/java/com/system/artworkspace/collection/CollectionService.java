@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface CollectionService {
 
-    Collection createCollection(String name, String description);
+    Collection createCollection(Collection collection);
 
     void addToCollection(Collection collection, Artwork artwork);
 
@@ -15,5 +15,4 @@ public interface CollectionService {
 
     void editName (Collection collection, String name);
 
-    void editDescription (Collection collection, String description);
 }
