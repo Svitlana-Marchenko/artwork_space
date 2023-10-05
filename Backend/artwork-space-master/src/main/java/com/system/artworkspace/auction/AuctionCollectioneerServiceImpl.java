@@ -1,28 +1,46 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerService {
-    @Override
-    public List<Auction> getAvailableAuctions() {
-        return null;
+
+    private AuctionRepository repository;
+
+    @Autowired
+    public AuctionCollectioneerServiceImpl(AuctionRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public void placeBid(Auction auction, double bidAmount) {
+    public List<Auction> getAvailableAuctions() {
+        return repository.findAll();
+    }
 
+    @Override
+    public void placeBid(Auction auction, double bidAmount, User user) {
+
+        if (bidAmount > auction.getCurrentBid()) {
+            auction.setCurrentBid(bidAmount);
+            auction.setCurrentBuyer(user);
+
+            repository.save(auction);
+        } else {
+            throw new RuntimeException("Bid amount is too low. Current highest bid: " + auction.getCurrentBid());
+        }
     }
 
     @Override
     public double getCurrentBid(Auction auction) {
-        return 0;
+        return auction.getCurrentBid();
     }
 
     @Override
     public Artwork getArtworkFromAuction(Auction auction) {
-        return null;
+        return auction.getArtwork();
     }
 }

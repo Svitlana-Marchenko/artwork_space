@@ -19,6 +19,7 @@ public class Auction {
     private Artwork artwork;
     private double startingPrice;
     private double step;
+    @Temporal(TemporalType.DATE)
     private Date closingTime;
     @ManyToOne
     private User currentBuyer;
