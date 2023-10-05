@@ -10,9 +10,10 @@ import java.util.Optional;
 
 public interface ArtworkRepository extends JpaRepository<Artwork, Long> {
     List<Artwork> findByArtist(User user);
-    List<Artwork> findByExhibition(Exhibition exhibition);
-    List<Artwork> findByCollection(Collection collection);
+    //List<Artwork> findByExhibition(Exhibition exhibition);
+   // List<Artwork> findByCollection(Collection collection);
     Optional<Artwork> findById(Long id);
     void deleteById(Long aLong);
     Artwork save(Artwork artwork);
+    List<Artwork> findByTitle(String title);
 }
