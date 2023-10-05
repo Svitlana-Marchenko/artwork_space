@@ -17,7 +17,7 @@ public class Config {
     @Bean
     public Artist artist(){
         return new Artist(
-                "11111",
+
                 "blapblap",
                 "Ihor",
                 "Semenko",

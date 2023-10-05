@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "\"user\"")
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +20,7 @@ public class User{
     @ManyToOne
     private Role role;
 
+    public User(String username, String firstName,String lastName, String email, String password) {
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Artwork> artworks;
 

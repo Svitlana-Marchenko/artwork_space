@@ -1,7 +1,6 @@
 package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.Repo;
 import com.system.artworkspace.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
