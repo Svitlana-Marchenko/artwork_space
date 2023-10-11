@@ -1,8 +1,11 @@
 package com.system.artworkspace.auction;
 
+import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.user.Collectioneer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,49 +16,61 @@ import java.util.List;
 
 @Service
 public class AuctionArtistServiceImpl implements AuctionArtistService {
+    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
     @Autowired
     private AuctionRepository auctionRepository;
     @Override
     public Auction createAuction(Artwork artwork, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         Auction auction = new Auction(artwork, rating, auctionName, auctionDescription, startingPrice, step);
-        return auctionRepository.save(auction);
+        auctionRepository.save(auction);
+        logger.info("Created auction with ID: {}", auction.getId());
+        return auction;
     }
 
     @Override
-    public double displayCurrenBid(Auction auction) {
+    public double displayCurrentBid(Auction auction) {
+        logger.info("Displaying current bid for auction with ID: {}", auction.getId());
         return auction.getCurrentBid();
     }
 
     @Override
-    public Collectioneer displayCurrenBuyer(Auction auction) {
+    public Collectioneer displayCurrentBuyer(Auction auction) {
+        logger.info("Displaying current buyer for auction with ID: {}", auction.getId());
         return (Collectioneer) auction.getCurrentBuyer();
     }
 
     @Override
     public List<Auction> getAllActiveAuctions() {
         Date currentDate = new Date();
-        //return auctionRepository.findByClosingTime(currentDate);
         Specification<Auction> closingTimeSpecification = (root, query, criteriaBuilder) ->
                 criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
-        return auctionRepository.findAll((Sort) closingTimeSpecification);
+        List<Auction> activeAuctions = auctionRepository.findAll((Sort) closingTimeSpecification);
+        logger.info("Retrieved {} active auctions.", activeAuctions.size());
+        return activeAuctions;
     }
 
     @Override
     public void closeAuction(Auction auction) {
+        // Update the auction as closed
         //auction.setClosed(true);
         auctionRepository.save(auction);
+        logger.info("Closed auction with ID: {}", auction.getId());
     }
 
     @Override
     public Auction updateName(Auction auction, String name) {
         auction.setAuctionName(name);
-        return auctionRepository.save(auction);
+        auctionRepository.save(auction);
+        logger.info("Updated auction name for auction with ID: {}", auction.getId());
+        return auction;
     }
 
     @Override
     public Auction updateDescription(Auction auction, String newDescription) {
         auction.setAuctionDescription(newDescription);
-        return auctionRepository.save(auction);
+        auctionRepository.save(auction);
+        logger.info("Updated auction description for auction with ID: {}", auction.getId());
+        return auction;
     }
 }

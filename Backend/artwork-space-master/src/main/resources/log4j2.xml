@@ -2,9 +2,9 @@
 <Configuration status="INFO">
     <Appenders>
         <!-- Appender 1: Запис логів у файл -->
-       <!-- <File name="CustomAppender" fileName="logs/myapp.log">
+        <File name="CustomAppender" fileName="logs/myapp.log">
             <MyLayout />
-        </File>-->
+        </File>
 
         <!-- Appender 2: Вивід логів на консоль -->
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
