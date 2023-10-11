@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <!-- Appender 1: Запис логів у файл -->
+       <!-- <File name="CustomAppender" fileName="logs/myapp.log">
+            <MyLayout />
+        </File>-->
+
+        <!-- Appender 2: Вивід логів на консоль -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <MyLayout />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <!-- <AppenderRef ref="CustomAppender" />-->
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
