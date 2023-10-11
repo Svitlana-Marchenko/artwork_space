@@ -1,4 +1,4 @@
-package com.system.artworkspace.artwork;
+package com.system.artworkspace.rating;
 
 import com.system.artworkspace.user.User;
 import jakarta.persistence.*;

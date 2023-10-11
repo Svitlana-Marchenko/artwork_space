@@ -1,53 +1,49 @@
 package com.system.artworkspace.auction;
 
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.Collectioneer;
-import com.system.artworkspace.user.User;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
-@Entity
-public class Auction {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class AuctionDto {
     private long id;
+    @NotNull
+    @Size(max = 50)
     private String auctionName;
-    @Column(length = 2000)
+
+    @Size(max = 2000)
     private String auctionDescription;
-    @OneToOne
-    private Artwork artwork;
-    @Column(nullable = false)
+
+    private long artworkId;
+
+    @DecimalMin(value = "0.0")
     private double startingPrice;
+
+    @DecimalMin(value = "0.0")
     private double step;
-    @Temporal(TemporalType.DATE)
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date closingTime;
-    @ManyToOne
-    private User currentBuyer;
+
+    private Long currentBuyerId;
+
     private double currentBid;
-    public Auction(){}
-    public Auction(Artwork artwork, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
-        this.auctionName = auctionName;
-        this.auctionDescription = auctionDescription;
-        this.artwork = artwork;
-        this.startingPrice = startingPrice;
-        this.step = step;
+
+    public AuctionDto() {
     }
 
-    @Override
-    public String toString() {
-        return "Auction{" +
-                ", auctionName='" + auctionName + '\'' +
-                ", auctionDescription='" + auctionDescription + '\'' +
-                ", artwork=" + artwork +
-                ", startingPrice=" + startingPrice +
-                ", step=" + step +
-                ", closingTime=" + closingTime +
-                ", currentBuyer=" + currentBuyer +
-                ", currentPrice=" + currentBid +
-                '}';
+    public AuctionDto(long id, String auctionName, String auctionDescription, long artworkId, double startingPrice, double step, Date closingTime, Long currentBuyerId, double currentBid) {
+        this.id = id;
+        this.auctionName = auctionName;
+        this.auctionDescription = auctionDescription;
+        this.artworkId = artworkId;
+        this.startingPrice = startingPrice;
+        this.step = step;
+        this.closingTime = closingTime;
+        this.currentBuyerId = currentBuyerId;
+        this.currentBid = currentBid;
     }
 
     public long getId() {
@@ -56,14 +52,6 @@ public class Auction {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public User getCurrentBuyer() {
-        return currentBuyer;
-    }
-
-    public void setCurrentBuyer(User currentBuyer) {
-        this.currentBuyer = currentBuyer;
     }
 
     public String getAuctionName() {
@@ -82,12 +70,12 @@ public class Auction {
         this.auctionDescription = auctionDescription;
     }
 
-    public Artwork getArtwork() {
-        return artwork;
+    public long getArtworkId() {
+        return artworkId;
     }
 
-    public void setArtwork(Artwork artwork) {
-        this.artwork = artwork;
+    public void setArtworkId(long artworkId) {
+        this.artworkId = artworkId;
     }
 
     public double getStartingPrice() {
@@ -114,9 +102,12 @@ public class Auction {
         this.closingTime = closingTime;
     }
 
+    public Long getCurrentBuyerId() {
+        return currentBuyerId;
+    }
 
-    public void setCurrentBuyer(Collectioneer currentBuyer) {
-        this.currentBuyer = currentBuyer;
+    public void setCurrentBuyerId(Long currentBuyerId) {
+        this.currentBuyerId = currentBuyerId;
     }
 
     public double getCurrentBid() {
@@ -127,3 +118,4 @@ public class Auction {
         this.currentBid = currentBid;
     }
 }
+

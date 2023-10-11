@@ -1,39 +1,35 @@
 package com.system.artworkspace.artwork;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.Artist;
-import com.system.artworkspace.user.User;
-import jakarta.persistence.*;
-
-import java.util.Set;
-
-@Entity
-public class Artwork {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+import javax.validation.constraints.Size;
+public class ArtworkDto {
     private Long id;
-    @Column(length = 50)
+    @Size(max = 50)
     private String title;
-
-    @Column(length = 2000)
+    @Size(max = 2000)
     private String description;
+    @Size(max = 100)
     private String technique;
     private double width;
     private double height;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User artist;
+    private Long artistId;
+    @JsonProperty("artist_id")
     private String imageURL;
     private double imageSize;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Rating> ratings;
 
-    public Artwork(Artist artist) {
-        this.artist = artist;
+    public ArtworkDto() {
     }
 
-    public Artwork() {
-
+    public ArtworkDto(Long id, String title, String description, String technique, double width, double height, Long artistId, String imageURL, double imageSize) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.technique = technique;
+        this.width = width;
+        this.height = height;
+        this.artistId = artistId;
+        this.imageURL = imageURL;
+        this.imageSize = imageSize;
     }
 
     public Long getId() {
@@ -42,14 +38,6 @@ public class Artwork {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public String getTitle() {
@@ -92,12 +80,12 @@ public class Artwork {
         this.height = height;
     }
 
-    public User getArtist() {
-        return artist;
+    public Long getArtistId() {
+        return artistId;
     }
 
-    public void setArtist(User artist) {
-        this.artist = artist;
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 
     public String getImageURL() {
@@ -108,7 +96,6 @@ public class Artwork {
         this.imageURL = imageURL;
     }
 
-
     public double getImageSize() {
         return imageSize;
     }
@@ -117,3 +104,4 @@ public class Artwork {
         this.imageSize = imageSize;
     }
 }
+

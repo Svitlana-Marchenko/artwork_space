@@ -1,4 +1,6 @@
-package com.system.artworkspace.artwork;
+package com.system.artworkspace.rating;
+
+import com.system.artworkspace.artwork.Artwork;
 
 public interface RatingAndCommentService {
     Rating addRating(Rating rating, Artwork artwork);

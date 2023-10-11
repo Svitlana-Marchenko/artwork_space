@@ -1,4 +1,4 @@
-package com.system.artworkspace.artwork;
+package com.system.artworkspace.rating;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.Rating;
+import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.user.Collectioneer;
 
 import java.util.List;

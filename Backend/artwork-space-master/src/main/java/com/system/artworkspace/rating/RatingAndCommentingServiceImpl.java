@@ -1,5 +1,6 @@
-package com.system.artworkspace.artwork;
+package com.system.artworkspace.rating;
 
+import com.system.artworkspace.artwork.Artwork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

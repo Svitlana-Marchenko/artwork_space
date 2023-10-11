@@ -1,9 +1,8 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.Rating;
+import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.user.Collectioneer;
-import org.rating.CountPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
