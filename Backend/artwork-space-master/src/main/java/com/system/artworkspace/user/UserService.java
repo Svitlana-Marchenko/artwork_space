@@ -1,9 +1,12 @@
 package com.system.artworkspace.user;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public interface UserService {
-    public void registerUser(User user);
-    public User getUserByEmail(String email);
+    User createUser(User user);
+
+    User updateUser(User user);
+
+    void deleteUser(Long userId);
+
+    User getUserById(Long userId);
 }
+

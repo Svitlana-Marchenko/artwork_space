@@ -70,7 +70,6 @@ public class CollectionServiceImpl implements CollectionService{
     @Override
     public void editName(Collection collection, String name) {
         Optional<Collection> optionalCollection = repository.findById(collection.getId());
-
         if (optionalCollection.isPresent()) {
             Collection existingCollection = optionalCollection.get();
             existingCollection.setName(name);

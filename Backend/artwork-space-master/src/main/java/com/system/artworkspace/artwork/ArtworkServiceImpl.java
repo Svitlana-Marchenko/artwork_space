@@ -1,8 +1,9 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.collection.Collection;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -128,7 +129,11 @@ repository.deleteById(artworkId);
     }
 
     public List<Artwork> getArtworksByTitle(String title) {
-        return repository.findByTitle(title);
+        Specification<Artwork> titleSpecification = (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("title"), title);
+
+        return repository.findAll((Sort) titleSpecification);
+        //return repository.findByTitle(title);
     }
 
 }

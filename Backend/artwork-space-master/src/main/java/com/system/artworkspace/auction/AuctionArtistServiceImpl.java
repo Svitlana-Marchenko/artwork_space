@@ -5,6 +5,8 @@ import com.system.artworkspace.artwork.Rating;
 import com.system.artworkspace.user.Collectioneer;
 import org.rating.CountPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,7 +35,11 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Override
     public List<Auction> getAllActiveAuctions() {
         Date currentDate = new Date();
-        return auctionRepository.findByClosingTime(currentDate);
+        //return auctionRepository.findByClosingTime(currentDate);
+        Specification<Auction> closingTimeSpecification = (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
+
+        return auctionRepository.findAll((Sort) closingTimeSpecification);
     }
 
     @Override
