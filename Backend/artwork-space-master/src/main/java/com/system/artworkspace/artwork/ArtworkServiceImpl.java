@@ -1,7 +1,9 @@
 package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.validation.ArtworkValidator;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.logging.log4j.ThreadContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class ArtworkServiceImpl implements ArtworkService{
     public Artwork addArtwork(Artwork artwork) {
         logger.info(ARTWORK_EVENTS,"Adding artwork with ID: {}", artwork.getId());
 
-        repository.save(artwork);
+        //repository.save(artwork);
         logger.info(ARTWORK_EVENTS,"Artwork added successfully.");
 
         return artwork;
@@ -58,16 +60,25 @@ public class ArtworkServiceImpl implements ArtworkService{
 
     @Override
     public void updateTitle(Artwork artwork, String title) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+        ThreadContext.put("artwork_id", artwork.getId().toString());
+        ArtworkValidator.validateTitle(title);
+        ThreadContext.clearAll();
+
+        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
             Artwork existingArtwork= optionalArtwork.get();
+
+            ThreadContext.put("artwork_id", artwork.getId().toString());
+            ArtworkValidator.validateTitle(title);
+            ThreadContext.clearAll();
+
             existingArtwork.setTitle(title);
             repository.save(existingArtwork);
             logger.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", artwork.getId());
         } else {
             throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }
+        }*/
     }
 
     @Override

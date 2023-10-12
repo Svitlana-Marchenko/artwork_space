@@ -32,6 +32,10 @@ public class Artwork {
         this.artist = artist;
     }
 
+    public Artwork(Long id) {
+        this.id=id;
+    }
+
     public Artwork() {
 
     }

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.core.filter.CompositeFilter;
 import org.apache.logging.log4j.core.filter.MarkerFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.core.Filter.Result;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.Serializable;
 import java.util.*;
@@ -37,8 +38,8 @@ public final class CustomAppender extends AbstractAppender {
         if (layout == null) {
             layout = PatternLayout.createDefaultLayout();
         }
-        MarkerFilter markerFilter1 = MarkerFilter.createFilter("EXHIBITION_EVENTS", Filter.Result.DENY, Filter.Result.NEUTRAL);
-        MarkerFilter markerFilter2 = MarkerFilter.createFilter("CONFIDENTIAL_USER_EVENTS", Filter.Result.DENY, Filter.Result.NEUTRAL);
+        MarkerFilter markerFilter1 = MarkerFilter.createFilter("EXHIBITION_EVENTS", Result.ACCEPT, Filter.Result.NEUTRAL);
+        MarkerFilter markerFilter2 = MarkerFilter.createFilter("CONFIDENTIAL_USER_EVENTS", Result.ACCEPT, Result.NEUTRAL);
 
         Filter[] filters = new Filter[] {markerFilter1, markerFilter2};
         Filter filter = CompositeFilter.createFilters(filters);
