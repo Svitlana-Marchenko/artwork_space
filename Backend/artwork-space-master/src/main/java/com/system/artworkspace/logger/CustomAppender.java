@@ -1,8 +1,8 @@
 package com.system.artworkspace.logger;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.*;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
-import org.apache.logging.log4j.core.appender.AppenderLoggingException;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
@@ -15,24 +15,23 @@ import java.util.*;
 @Plugin(name="CustomAppender", category= Core.CATEGORY_NAME, elementType= Appender.ELEMENT_TYPE)
 public final class CustomAppender extends AbstractAppender {
 
-    private final Queue<String> loggs;
+    private final List<String> loggs;
 
     private CustomAppender(String name, Filter filter,
-                           Layout<? extends Serializable> layout, final boolean ignoreExceptions) {
-        super(name, filter, layout, ignoreExceptions);
+                           Layout<? extends Serializable> layout) {
+        super(name, filter, layout);
         loggs = new LinkedList<>();
     }
 
     @Override
     public void append(LogEvent event) {
-        try {
-            loggs.add((String) getLayout().toSerializable(event));
-        } catch (Exception ex) {
-            if (!ignoreExceptions()) {
-                throw new AppenderLoggingException(ex);
-            }
+        if (event.getLevel().isLessSpecificThan(Level.INFO)) {
+            error("Unable to log less than WARN level.");
+            return;
         }
-        System.out.println("List: " + loggs.remove());
+            loggs.add((String) getLayout().toSerializable(event));
+
+        System.out.println(loggs.remove(0));
     }
 
     @PluginFactory
@@ -40,13 +39,11 @@ public final class CustomAppender extends AbstractAppender {
             @PluginAttribute("name") String name,
             @PluginElement("Layout") Layout<? extends Serializable> layout,
             @PluginElement("Filter") final Filter filter) {
-        if (name == null) {
-            LOGGER.error("No name provided for MyCustomAppenderImpl");
-            return null;
-        }
+
         if (layout == null) {
             layout = PatternLayout.createDefaultLayout();
         }
-        return new CustomAppender (name, filter, layout, true);
+        return new CustomAppender (name, filter, layout);
     }
 }
+

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration packages="com.system.artworkspace.logger">
     <Appenders>
-        <!-- Appender 1: Запис логів у файл -->
-        <File name="CustomAppender" fileName="logs/myapp.log">
-            <MyLayout />
-        </File>
 
-        <!-- Appender 2: Вивід логів на консоль -->
-        <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <MyLayout />
-        </Console>
+              <CustomAppender name="CustomAppender">
+                 <CustomLayout/>
+               </CustomAppender>
+
+       <File name="LogToFile" fileName="logs/app.log">
+          <PatternLayout>-->
+                   <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+                  </PatternLayout>
+            </File>
+
     </Appenders>
-
     <Loggers>
-        <Root level="info">
-            <!-- <AppenderRef ref="CustomAppender" />-->
-            <AppenderRef ref="ConsoleAppender" />
+
+        <Root level="INFO">
+            <AppenderRef ref="LogToFile"/>
+           <AppenderRef ref="CustomAppender"/>
         </Root>
     </Loggers>
+
 </Configuration>

@@ -13,7 +13,7 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 
-@Plugin(name = "MyLayout", category = Node.CATEGORY, elementType = Layout.ELEMENT_TYPE, printObject = true)
+@Plugin(name = "CustomLayout", category = Node.CATEGORY, elementType = Layout.ELEMENT_TYPE, printObject = true)
 public class CustomLayout extends AbstractStringLayout
 {
     protected CustomLayout(Charset charset ) {
@@ -30,8 +30,8 @@ public class CustomLayout extends AbstractStringLayout
             pw.close();
             throwable.append(sw.toString());
         }
-        String retValue = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:S").format(event.getTimeMillis()) + " " +
-                event.getLevel().toString() + " " + event.getLoggerName() + " " + event.getMessage().getFormattedMessage() + " " + throwable;
+        String retValue =event.getLevel().toString() + " "+ new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:S").format(event.getTimeMillis()) + " " +
+                  " " + event.getLoggerName() + " " + event.getMessage().getFormattedMessage() + " " + throwable;
 
         return retValue;
     }
