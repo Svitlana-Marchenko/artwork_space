@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
+
 @Service
 public class CollectionServiceImpl implements CollectionService{
     private final CollectionConfiguration collectionConfiguration;
@@ -27,7 +29,7 @@ public class CollectionServiceImpl implements CollectionService{
     public Collection createCollection(Collection collection) {
         if (collectionConfiguration.isEnabled()) {
             repository.save(collection);
-            logger.info("Created collection with ID: {}", collection.getId());
+            logger.info(COLLECTION_EVENTS,"Created collection with ID: {}", collection.getId());
         }
         return collection;
     }
@@ -41,9 +43,9 @@ public class CollectionServiceImpl implements CollectionService{
                 Collection existingCollection = optionalCollection.get();
                 existingCollection.addNewArtwork(artwork);
                 repository.save(existingCollection);
-                logger.info("Added artwork with ID {} to collection with ID: {}", artwork.getId(), collection.getId());
+                logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), collection.getId());
             } else {
-                logger.warn("Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), collection.getId());
+                logger.warn(COLLECTION_EVENTS,"Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), collection.getId());
                 throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
             }
         }
@@ -56,9 +58,9 @@ public class CollectionServiceImpl implements CollectionService{
         if (optionalCollection.isPresent()) {
             Collection existingCollection = optionalCollection.get();
             repository.delete(existingCollection);
-            logger.info("Deleted collection with ID: {}", collection.getId());
+            logger.info(COLLECTION_EVENTS,"Deleted collection with ID: {}", collection.getId());
         } else {
-            logger.warn("Collection not found for deletion with ID: {}", collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for deletion with ID: {}", collection.getId());
             throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
         }
     }
@@ -71,9 +73,9 @@ public class CollectionServiceImpl implements CollectionService{
             Collection existingCollection = optionalCollection.get();
             existingCollection.removeArtwork(artwork);
             repository.save(existingCollection);
-            logger.info("Removed artwork with ID {} from collection with ID: {}", artwork.getId(), collection.getId());
+            logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), collection.getId());
         } else {
-            logger.warn("Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), collection.getId());
             throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
         }
     }
@@ -85,9 +87,9 @@ public class CollectionServiceImpl implements CollectionService{
             Collection existingCollection = optionalCollection.get();
             existingCollection.setName(name);
             repository.save(existingCollection);
-            logger.info("Updated collection name for collection with ID: {}", collection.getId());
+            logger.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", collection.getId());
         } else {
-            logger.warn("Collection not found for updating name with ID: {}", collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", collection.getId());
             throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
         }
     }

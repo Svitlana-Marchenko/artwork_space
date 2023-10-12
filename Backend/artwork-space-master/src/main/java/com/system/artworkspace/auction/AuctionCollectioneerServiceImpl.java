@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
+
 @Service
 public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerService {
     @Autowired
@@ -25,20 +28,20 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
         Date currentDate = new Date();
         Example<Auction> example = Example.of(new Auction(), ExampleMatcher.matchingAll().withIgnorePaths("closingTime"));
         List<Auction> availableAuctions = auctionRepository.findAll(example);
-        logger.info("Retrieved {} available auctions.", availableAuctions.size());
+        logger.info(AUCTIONS_EVENTS,"Retrieved {} available auctions.", availableAuctions.size());
         return availableAuctions;
     }
 
     @Override
     public Auction placeBid(Auction auction, double bidAmount) {
         auctionRepository.save(auction);
-        logger.info("Placed bid for auction with ID: {}. Bid amount: {}", auction.getId(), bidAmount);
+        logger.info(AUCTIONS_EVENTS,"Placed bid for auction with ID: {}. Bid amount: {}", auction.getId(), bidAmount);
         return auction;
     }
 
     @Override
     public double getCurrentBid(Auction auction) {
-        logger.info("Retrieved current bid for auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Retrieved current bid for auction with ID: {}", auction.getId());
         return auction.getCurrentBid();
     }
 
@@ -47,9 +50,9 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
         Long artworkId = auction.getId();
         Artwork artwork = artworkRepository.findById(artworkId).orElse(null);
         if (artwork != null) {
-            logger.info("Retrieved artwork with ID: {} from auction with ID: {}", artwork.getId(), auction.getId());
+            logger.info(AUCTIONS_EVENTS,"Retrieved artwork with ID: {} from auction with ID: {}", artwork.getId(), auction.getId());
         } else {
-            logger.warn("Artwork not found for auction with ID: {}", auction.getId());
+            logger.warn(AUCTIONS_EVENTS,"Artwork not found for auction with ID: {}", auction.getId());
         }
         return artwork;
     }

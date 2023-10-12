@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
+import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_EVENTS;
 
 @Service
 public class AuctionArtistServiceImpl implements AuctionArtistService {
@@ -23,19 +25,19 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     public Auction createAuction(Artwork artwork, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         Auction auction = new Auction(artwork, rating, auctionName, auctionDescription, startingPrice, step);
         auctionRepository.save(auction);
-        logger.info("Created auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Created auction with ID: {}", auction.getId());
         return auction;
     }
 
     @Override
     public double displayCurrentBid(Auction auction) {
-        logger.info("Displaying current bid for auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Displaying current bid for auction with ID: {}", auction.getId());
         return auction.getCurrentBid();
     }
 
     @Override
     public Collectioneer displayCurrentBuyer(Auction auction) {
-        logger.info("Displaying current buyer for auction with ID: {}", auction.getId());
+        logger.info(CONFIDENTIAL_EVENTS,"Displaying current buyer for auction with ID: {}", auction.getId());
         return (Collectioneer) auction.getCurrentBuyer();
     }
 
@@ -46,7 +48,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
                 criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
         List<Auction> activeAuctions = auctionRepository.findAll((Sort) closingTimeSpecification);
-        logger.info("Retrieved {} active auctions.", activeAuctions.size());
+        logger.info(AUCTIONS_EVENTS,"Retrieved {} active auctions.", activeAuctions.size());
         return activeAuctions;
     }
 
@@ -55,14 +57,14 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         // Update the auction as closed
         //auction.setClosed(true);
         auctionRepository.save(auction);
-        logger.info("Closed auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Closed auction with ID: {}", auction.getId());
     }
 
     @Override
     public Auction updateName(Auction auction, String name) {
         auction.setAuctionName(name);
         auctionRepository.save(auction);
-        logger.info("Updated auction name for auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Updated auction name for auction with ID: {}", auction.getId());
         return auction;
     }
 
@@ -70,7 +72,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     public Auction updateDescription(Auction auction, String newDescription) {
         auction.setAuctionDescription(newDescription);
         auctionRepository.save(auction);
-        logger.info("Updated auction description for auction with ID: {}", auction.getId());
+        logger.info(AUCTIONS_EVENTS,"Updated auction description for auction with ID: {}", auction.getId());
         return auction;
     }
 }

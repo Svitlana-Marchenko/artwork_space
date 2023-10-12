@@ -1,13 +1,12 @@
 package com.system.artworkspace.logger;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.*;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
-import org.apache.logging.log4j.core.config.plugins.Plugin;
-import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
-import org.apache.logging.log4j.core.config.plugins.PluginElement;
-import org.apache.logging.log4j.core.config.plugins.PluginFactory;
+import org.apache.logging.log4j.core.config.plugins.*;
+import org.apache.logging.log4j.core.filter.CompositeFilter;
+import org.apache.logging.log4j.core.filter.MarkerFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.apache.logging.log4j.core.Filter.Result;
 
 import java.io.Serializable;
 import java.util.*;
@@ -25,10 +24,6 @@ public final class CustomAppender extends AbstractAppender {
 
     @Override
     public void append(LogEvent event) {
-        if (event.getLevel().isLessSpecificThan(Level.INFO)) {
-            error("Unable to log less than WARN level.");
-            return;
-        }
             loggs.add((String) getLayout().toSerializable(event));
 
         System.out.println(loggs.remove(0));
@@ -37,12 +32,17 @@ public final class CustomAppender extends AbstractAppender {
     @PluginFactory
     public static CustomAppender createAppender(
             @PluginAttribute("name") String name,
-            @PluginElement("Layout") Layout<? extends Serializable> layout,
-            @PluginElement("Filter") final Filter filter) {
+            @PluginElement("Layout") Layout<? extends Serializable> layout) {
 
         if (layout == null) {
             layout = PatternLayout.createDefaultLayout();
         }
+        MarkerFilter markerFilter1 = MarkerFilter.createFilter("EXHIBITION_EVENTS", Filter.Result.DENY, Filter.Result.NEUTRAL);
+        MarkerFilter markerFilter2 = MarkerFilter.createFilter("CONFIDENTIAL_USER_EVENTS", Filter.Result.DENY, Filter.Result.NEUTRAL);
+
+        Filter[] filters = new Filter[] {markerFilter1, markerFilter2};
+        Filter filter = CompositeFilter.createFilters(filters);
+
         return new CustomAppender (name, filter, layout);
     }
 }

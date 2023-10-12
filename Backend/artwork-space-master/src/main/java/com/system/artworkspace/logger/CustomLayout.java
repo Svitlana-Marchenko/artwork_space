@@ -31,7 +31,7 @@ public class CustomLayout extends AbstractStringLayout
             throwable.append(sw.toString());
         }
         String retValue =event.getLevel().toString() + " "+ new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:S").format(event.getTimeMillis()) + " " +
-                  " " + event.getLoggerName() + " " + event.getMessage().getFormattedMessage() + " " + throwable;
+                  " " + event.getMarker() + " " +  event.getLoggerName() + " "  + event.getMessage().getFormattedMessage() + " " + throwable;
 
         return retValue;
     }

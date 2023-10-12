@@ -3,7 +3,7 @@
     <Appenders>
 
               <CustomAppender name="CustomAppender">
-                 <CustomLayout/>
+                  <CustomLayout/>
                </CustomAppender>
 
        <File name="LogToFile" fileName="logs/app.log">
@@ -13,12 +13,11 @@
             </File>
 
     </Appenders>
-    <Loggers>
 
-        <Root level="INFO">
-            <AppenderRef ref="LogToFile"/>
-           <AppenderRef ref="CustomAppender"/>
+    <Loggers>
+        <Root level="info">
+             <AppenderRef ref="CustomAppender" />
+            <AppenderRef ref="LogToFile" />
         </Root>
     </Loggers>
-
 </Configuration>

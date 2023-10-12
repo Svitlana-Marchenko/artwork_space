@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static com.system.artworkspace.logger.LoggingMarkers.EXHIBITION_EVENTS;
+
 @Service
 public class ExhibitionServiceImpl implements ExhibitionService {
 
@@ -33,7 +35,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
         Exhibition exhibition = new Exhibition(user, name, description, artworks, startDate, endDate);
         exhibitionRepository.save(exhibition);
-        logger.info("Created exhibition with ID: {}", exhibition.getId());
+        logger.info(EXHIBITION_EVENTS,"Created exhibition with ID: {}", exhibition.getId());
         return exhibition;
     }
 
@@ -46,12 +48,12 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             if (existingExhibition.getArtworks().size() < maxSize) {
                 existingExhibition.getArtworks().add(artwork);
                 exhibitionRepository.save(existingExhibition);
-                logger.info("Added artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibition.getId());
+                logger.info(EXHIBITION_EVENTS,"Added artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibition.getId());
             } else {
                 throw new IllegalArgumentException("Exhibition size exceeds the maximum allowed.");
             }
         } else {
-            logger.warn("Exhibition not found for adding artwork with ID: {} to exhibition with ID: {}", artwork.getId(), exhibition.getId());
+            logger.warn(EXHIBITION_EVENTS,"Exhibition not found for adding artwork with ID: {} to exhibition with ID: {}", artwork.getId(), exhibition.getId());
             throw new IllegalArgumentException("Exhibition not found with ID: " + exhibition.getId());
         }
     }
@@ -65,9 +67,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             existingExhibition.setStartDate(startDate);
             existingExhibition.setEndDate(endDate);
             exhibitionRepository.save(existingExhibition);
-            logger.info("Changed exhibition dates for exhibition with ID: {}", exhibition.getId());
+            logger.info(EXHIBITION_EVENTS,"Changed exhibition dates for exhibition with ID: {}", exhibition.getId());
         } else {
-            logger.warn("Exhibition not found for changing dates with ID: {}", exhibition.getId());
+            logger.warn(EXHIBITION_EVENTS,"Exhibition not found for changing dates with ID: {}", exhibition.getId());
             throw new IllegalArgumentException("Exhibition not found with ID: " + exhibition.getId());
         }
     }
@@ -80,9 +82,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             Exhibition existingExhibition = optionalExhibition.get();
             existingExhibition.getArtworks().remove(artwork);
             exhibitionRepository.save(existingExhibition);
-            logger.info("Removed artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibition.getId());
+            logger.info(EXHIBITION_EVENTS,"Removed artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibition.getId());
         } else {
-            logger.warn("Exhibition not found for removing artwork with ID: {} from exhibition with ID: {}", artwork.getId(), exhibition.getId());
+            logger.warn(EXHIBITION_EVENTS,"Exhibition not found for removing artwork with ID: {} from exhibition with ID: {}", artwork.getId(), exhibition.getId());
             throw new IllegalArgumentException("Exhibition not found with ID: " + exhibition.getId());
         }
     }
@@ -95,9 +97,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             Exhibition existingExhibition = optionalExhibition.get();
             existingExhibition.setName(newName);
             exhibitionRepository.save(existingExhibition);
-            logger.info("Edited exhibition name for exhibition with ID: {}", exhibition.getId());
+            logger.info(EXHIBITION_EVENTS,"Edited exhibition name for exhibition with ID: {}", exhibition.getId());
         } else {
-            logger.warn("Exhibition not found for editing name with ID: {}", exhibition.getId());
+            logger.warn(EXHIBITION_EVENTS,"Exhibition not found for editing name with ID: {}", exhibition.getId());
             throw new IllegalArgumentException("Exhibition not found with ID: " + exhibition.getId());
         }
     }
@@ -110,9 +112,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             Exhibition existingExhibition = optionalExhibition.get();
             existingExhibition.setDescription(newDescription);
             exhibitionRepository.save(existingExhibition);
-            logger.info("Edited exhibition description for exhibition with ID: {}", exhibition.getId());
+            logger.info(EXHIBITION_EVENTS,"Edited exhibition description for exhibition with ID: {}", exhibition.getId());
         } else {
-            logger.warn("Exhibition not found for editing description with ID: {}", exhibition.getId());
+            logger.warn(EXHIBITION_EVENTS,"Exhibition not found for editing description with ID: {}", exhibition.getId());
             throw new IllegalArgumentException("Exhibition not found with ID: " + exhibition.getId());
         }
     }
@@ -126,6 +128,6 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     @Override
     public void deleteExhibition(Exhibition exhibition) {
         exhibitionRepository.delete(exhibition);
-        logger.info("Deleted exhibition with ID: {}", exhibition.getId());
+        logger.info(EXHIBITION_EVENTS,"Deleted exhibition with ID: {}", exhibition.getId());
     }
 }
