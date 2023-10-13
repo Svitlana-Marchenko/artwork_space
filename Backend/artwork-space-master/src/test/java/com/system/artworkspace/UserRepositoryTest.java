@@ -1,6 +1,7 @@
 package com.system.artworkspace;
 
 import com.system.artworkspace.user.User;
+import com.system.artworkspace.user.UserDto;
 import com.system.artworkspace.user.UserRepository;
 import com.system.artworkspace.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         UserServiceImpl userService = new UserServiceImpl();
-        userService.createUser(new User("aa","cc","dd","kk","kk"));
+        userService.createUser(new UserDto(12L,"aa","cc","dd","kk","kk",12L));
 
         //List<User> foundUser = userRepository.findAll();
         //assertThat(foundUser).isNotEmpty();

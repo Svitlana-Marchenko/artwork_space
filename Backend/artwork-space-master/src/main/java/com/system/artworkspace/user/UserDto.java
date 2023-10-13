@@ -37,7 +37,9 @@ public class UserDto {
         this.password = password;
         this.roleId = roleId;
     }
-
+    public User convertToUser(){
+        return new User();
+    }
     public Long getId() {
         return id;
     }

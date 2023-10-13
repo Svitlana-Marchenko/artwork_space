@@ -38,6 +38,10 @@ public class Exhibition {
 
     }
 
+    public ExhibitionDto convertToExhibitionDto(){
+        return new ExhibitionDto(id,curator.getId(),name,description,(List<Long>)artworks.stream().map(x-> x.getId()),startDate,endDate);
+    }
+
     public Long getId() {
         return id;
     }

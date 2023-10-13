@@ -32,6 +32,10 @@ public class ArtworkDto {
         this.imageSize = imageSize;
     }
 
+    public Artwork convertToArtwork(){
+        return new Artwork();
+    }
+
     public Long getId() {
         return id;
     }

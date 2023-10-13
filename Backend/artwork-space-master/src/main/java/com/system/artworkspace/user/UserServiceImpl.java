@@ -18,17 +18,17 @@ public class UserServiceImpl implements UserService {
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     @Override
-    public User createUser(User user) {
+    public UserDto createUser(UserDto user) {
         //User createdUser = userRepository.save(user);
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", user.getId());
         return user;
     }
 
     @Override
-    public User updateUser(User user) {
-        User updatedUser = userRepository.save(user);
+    public UserDto updateUser(UserDto user) {
+        User updatedUser = userRepository.save(user.convertToUser());
         logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
-        return updatedUser;
+        return updatedUser.convertToUserDto();
     }
 
     @Override
@@ -42,13 +42,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public UserDto getUserById(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             logger.info(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
         } else {
             logger.warn(USER_ACTIONS,"User not found with ID: {}", userId);
         }
-        return user;
+        return user.convertToUserDto();
     }
 }

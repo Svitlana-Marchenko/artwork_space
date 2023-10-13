@@ -32,6 +32,9 @@ public class Rating {
 
     }
 
+    public RatingDto convertToRatingDto(){
+        return new RatingDto(id,rate, curator.getId(), comment);
+    }
     public double getRate() {
         return rate;
     }

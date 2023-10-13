@@ -28,9 +28,17 @@ public class Artwork {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rating> ratings;
 
-    public Artwork(Artist artist) {
+    public Artwork(User artist, String title, String description, String technique,double width,double height,String imageURL,double imageSize) {
         this.artist = artist;
+        this.title=title;
+        this.width=width;
+        this.height=height;
+        this.imageURL=imageURL;
+        this.technique=technique;
+        this.description=description;
+        this.imageSize=imageSize;
     }
+
 
     public Artwork(Long id) {
         this.id=id;
@@ -38,6 +46,10 @@ public class Artwork {
 
     public Artwork() {
 
+    }
+
+    public ArtworkDto convertToArtworkDto(){
+        return new ArtworkDto(id,title,description,technique,width,height, artist.getId(), imageURL,imageSize);
     }
 
     public Long getId() {

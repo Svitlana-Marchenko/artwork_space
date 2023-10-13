@@ -39,6 +39,10 @@ public class ExhibitionDto {
         this.endDate = endDate;
     }
 
+    public Exhibition convertToExhibition(){
+        return new Exhibition();
+    }
+
     public Long getId() {
         return id;
     }

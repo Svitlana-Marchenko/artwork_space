@@ -4,16 +4,16 @@ import com.system.artworkspace.user.User;
 import jakarta.persistence.ManyToOne;
 
 public interface ArtworkService {
-    Artwork addArtwork(Artwork artwork);
+    ArtworkDto addArtwork(ArtworkDto artwork);
     void deleteArtwork(Long artworkId);
-    Artwork findArtworkById(Long id);
-    void updateTitle(Artwork artwork, String title);
-    void updateDescription (Artwork artwork, String description);
-    void updateTechnique (Artwork artwork, String technique);
-    void updateWidth (Artwork artwork, double width);
-    void updateHeight (Artwork artwork, double height);
-    void updateImgUrl (Artwork artwork, String url);
-    void updateImgSize (Artwork artwork, double size);
+    ArtworkDto findArtworkById(Long id);
+    void updateTitle(ArtworkDto artwork, String title);
+    void updateDescription (ArtworkDto artwork, String description);
+    void updateTechnique (ArtworkDto artwork, String technique);
+    void updateWidth (ArtworkDto artwork, double width);
+    void updateHeight (ArtworkDto artwork, double height);
+    void updateImgUrl (ArtworkDto artwork, String url);
+    void updateImgSize (ArtworkDto artwork, double size);
 
 
 }

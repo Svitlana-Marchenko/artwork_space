@@ -32,6 +32,10 @@ public class RatingDto {
         this.comment = comment;
     }
 
+    public Rating convertToRating(){
+        return new Rating();
+    }
+
     public Long getId() {
         return id;
     }

@@ -17,6 +17,11 @@ public class Collection {
     @ManyToMany
     private List<Artwork> artworks;
 
+    public Collection(){}
+
+    public CollectionDto convertToCollectionDto(){
+        return new CollectionDto(id, owner.getId(), name, (List<Long>)artworks.stream().map(x -> x.getId()));
+    }
     public Long getId() {
         return id;
     }

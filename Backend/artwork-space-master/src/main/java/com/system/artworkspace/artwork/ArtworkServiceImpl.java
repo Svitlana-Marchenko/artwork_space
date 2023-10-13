@@ -29,10 +29,10 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public Artwork addArtwork(Artwork artwork) {
+    public ArtworkDto addArtwork(ArtworkDto artwork) {
         logger.info(ARTWORK_EVENTS,"Adding artwork with ID: {}", artwork.getId());
 
-        //repository.save(artwork);
+        //repository.save(artwork.convertToArtwork());
         logger.info(ARTWORK_EVENTS,"Artwork added successfully.");
 
         return artwork;
@@ -53,13 +53,14 @@ public class ArtworkServiceImpl implements ArtworkService{
 
 
     @Override
-    public Artwork findArtworkById(Long id) {
+    public ArtworkDto findArtworkById(Long id) {
         Optional<Artwork> artwork = repository.findById(id);
-        return artwork.orElse(null);
+        Artwork art = artwork.orElse(null);
+        return art.convertToArtworkDto();
     }
 
     @Override
-    public void updateTitle(Artwork artwork, String title) {
+    public void updateTitle(ArtworkDto artwork, String title) {
         ThreadContext.put("artwork_id", artwork.getId().toString());
         ArtworkValidator.validateTitle(title);
         ThreadContext.clearAll();
@@ -82,7 +83,9 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public void updateDescription(Artwork artwork, String description) {
+    public void updateDescription(ArtworkDto artwork, String description) {
+
+
         Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
@@ -96,8 +99,13 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public void updateTechnique(Artwork artwork, String technique) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+    public void updateTechnique(ArtworkDto artwork, String technique) {
+
+        ThreadContext.put("artwork_id", artwork.getId().toString());
+        ArtworkValidator.validateTechnique(technique);
+        ThreadContext.clearAll();
+
+        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
             Artwork existingArtwork = optionalArtwork.get();
@@ -106,11 +114,11 @@ public class ArtworkServiceImpl implements ArtworkService{
             logger.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", artwork.getId());
         } else {
             throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }
+        }*/
     }
 
     @Override
-    public void updateWidth(Artwork artwork, double width) {
+    public void updateWidth(ArtworkDto artwork, double width) {
         Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
@@ -124,7 +132,7 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public void updateHeight(Artwork artwork, double height) {
+    public void updateHeight(ArtworkDto artwork, double height) {
         Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
@@ -138,8 +146,13 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public void updateImgUrl(Artwork artwork, String url) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+    public void updateImgUrl(ArtworkDto artwork, String url) {
+        ThreadContext.put("artwork_id", artwork.getId().toString());
+        ArtworkValidator.validateImageURL(url);
+        ThreadContext.clearAll();
+
+
+        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
             Artwork existingArtwork = optionalArtwork.get();
@@ -148,11 +161,11 @@ public class ArtworkServiceImpl implements ArtworkService{
             logger.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", artwork.getId());
         } else {
             throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }
+        }*/
     }
 
     @Override
-    public void updateImgSize(Artwork artwork, double size) {
+    public void updateImgSize(ArtworkDto artwork, double size) {
         Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
 
         if (optionalArtwork.isPresent()) {
@@ -166,11 +179,12 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
 
-    public List<Artwork> getArtworksByTitle(String title) {
+    public List<ArtworkDto> getArtworksByTitle(String title) {
         Specification<Artwork> titleSpecification = (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("title"), title);
 
-        return repository.findAll((Sort) titleSpecification);
+        List<Artwork> list = repository.findAll((Sort) titleSpecification);
+        return (List<ArtworkDto>)list.stream().map(x -> x.convertToArtworkDto());
         //return repository.findByTitle(title);
     }
 

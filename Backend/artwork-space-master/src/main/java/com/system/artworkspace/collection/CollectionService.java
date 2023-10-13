@@ -1,15 +1,17 @@
 package com.system.artworkspace.collection;
 
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkDto;
+
 public interface CollectionService {
-    Collection createCollection(Collection collection);
+    CollectionDto createCollection(CollectionDto collection);
 
-    void addToCollection(Collection collection, Artwork artwork);
+    void addToCollection(CollectionDto collection, ArtworkDto artwork);
 
-    void deleteCollection (Collection collection);
+    void deleteCollection (CollectionDto collection);
 
-    void deleteFromCollection(Collection collection, Artwork artwork);
+    void deleteFromCollection(CollectionDto collection, ArtworkDto artwork);
 
-    void editName (Collection collection, String name);
+    void editName (CollectionDto collection, String name);
 
 }

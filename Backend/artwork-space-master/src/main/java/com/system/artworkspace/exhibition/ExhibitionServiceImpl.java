@@ -2,6 +2,7 @@ package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,25 +29,25 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         this.exhibitionRepository = exhibitionRepository;
     }
     @Override
-    public Exhibition createExhibition(User user, String name, String description, Date startDate, Date endDate, List<Artwork> artworks) {
+    public ExhibitionDto createExhibition(User user, String name, String description, Date startDate, Date endDate, List<ArtworkDto> artworks) {
         if (artworks.size() > maxSize) {
             throw new IllegalArgumentException("Exhibition size exceeds the maximum allowed.");
         }
 
-        Exhibition exhibition = new Exhibition(user, name, description, artworks, startDate, endDate);
+        Exhibition exhibition = new Exhibition(user, name, description, (List<Artwork>)artworks.stream().map(x->x.convertToArtwork()), startDate, endDate);
         exhibitionRepository.save(exhibition);
         logger.info(EXHIBITION_EVENTS,"Created exhibition with ID: {}", exhibition.getId());
-        return exhibition;
+        return exhibition.convertToExhibitionDto();
     }
 
     @Override
-    public void addToExhibition(Exhibition exhibition, Artwork artwork) {
+    public void addToExhibition(ExhibitionDto exhibition, ArtworkDto artwork) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(exhibition.getId());
 
         if (optionalExhibition.isPresent()) {
             Exhibition existingExhibition = optionalExhibition.get();
             if (existingExhibition.getArtworks().size() < maxSize) {
-                existingExhibition.getArtworks().add(artwork);
+                existingExhibition.getArtworks().add(artwork.convertToArtwork());
                 exhibitionRepository.save(existingExhibition);
                 logger.info(EXHIBITION_EVENTS,"Added artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibition.getId());
             } else {
@@ -59,7 +60,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void changeDates(Exhibition exhibition, Date startDate, Date endDate) {
+    public void changeDates(ExhibitionDto exhibition, Date startDate, Date endDate) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(exhibition.getId());
 
         if (optionalExhibition.isPresent()) {
@@ -75,12 +76,12 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void deleteFromExhibition(Exhibition exhibition, Artwork artwork) {
+    public void deleteFromExhibition(ExhibitionDto exhibition, ArtworkDto artwork) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(exhibition.getId());
 
         if (optionalExhibition.isPresent()) {
             Exhibition existingExhibition = optionalExhibition.get();
-            existingExhibition.getArtworks().remove(artwork);
+            existingExhibition.getArtworks().remove(artwork.convertToArtwork());
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Removed artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibition.getId());
         } else {
@@ -90,7 +91,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void editName(Exhibition exhibition, String newName) {
+    public void editName(ExhibitionDto exhibition, String newName) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(exhibition.getId());
 
         if (optionalExhibition.isPresent()) {
@@ -105,7 +106,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void editDescription(Exhibition exhibition, String newDescription) {
+    public void editDescription(ExhibitionDto exhibition, String newDescription) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(exhibition.getId());
 
         if (optionalExhibition.isPresent()) {
@@ -120,14 +121,14 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public Exhibition findById(Long id) {
+    public ExhibitionDto findById(Long id) {
         Optional<Exhibition> optionalExhibition = exhibitionRepository.findById(id);
-        return optionalExhibition.orElse(null);
+        return optionalExhibition.orElse(null).convertToExhibitionDto();
     }
 
     @Override
-    public void deleteExhibition(Exhibition exhibition) {
-        exhibitionRepository.delete(exhibition);
+    public void deleteExhibition(ExhibitionDto exhibition) {
+        exhibitionRepository.delete(exhibition.convertToExhibition());
         logger.info(EXHIBITION_EVENTS,"Deleted exhibition with ID: {}", exhibition.getId());
     }
 }

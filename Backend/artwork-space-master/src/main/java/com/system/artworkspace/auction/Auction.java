@@ -50,6 +50,10 @@ public class Auction {
                 '}';
     }
 
+    public AuctionDto convertToAuctionDto(){
+        return new AuctionDto(id, auctionName,auctionDescription,artwork.getId(),startingPrice,step,closingTime, currentBuyer.getId(), currentBid);
+    }
+
     public long getId() {
         return id;
     }

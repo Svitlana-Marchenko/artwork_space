@@ -2,6 +2,7 @@ package com.system.artworkspace.collection;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,22 +27,23 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     @Override
-    public Collection createCollection(Collection collection) {
+    public CollectionDto createCollection(CollectionDto collection) {
         if (collectionConfiguration.isEnabled()) {
-            repository.save(collection);
+            repository.save(collection.convertToCollection());
             logger.info(COLLECTION_EVENTS,"Created collection with ID: {}", collection.getId());
         }
         return collection;
     }
 
     @Override
-    public void addToCollection(Collection collection, Artwork artwork) {
+    public void addToCollection(CollectionDto collectionDto, ArtworkDto artwork) {
+        Collection collection = collectionDto.convertToCollection();
         if (collection.getArtworks().size() < collectionConfiguration.getMaxSize()) {
             Optional<Collection> optionalCollection = repository.findById(collection.getId());
 
             if (optionalCollection.isPresent()) {
                 Collection existingCollection = optionalCollection.get();
-                existingCollection.addNewArtwork(artwork);
+                existingCollection.addNewArtwork(artwork.convertToArtwork());
                 repository.save(existingCollection);
                 logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), collection.getId());
             } else {
@@ -52,7 +54,7 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     @Override
-    public void deleteCollection(Collection collection) {
+    public void deleteCollection(CollectionDto collection) {
         Optional<Collection> optionalCollection = repository.findById(collection.getId());
 
         if (optionalCollection.isPresent()) {
@@ -66,12 +68,12 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     @Override
-    public void deleteFromCollection(Collection collection, Artwork artwork) {
+    public void deleteFromCollection(CollectionDto collection, ArtworkDto artwork) {
         Optional<Collection> optionalCollection = repository.findById(collection.getId());
 
         if (optionalCollection.isPresent()) {
             Collection existingCollection = optionalCollection.get();
-            existingCollection.removeArtwork(artwork);
+            existingCollection.removeArtwork(artwork.convertToArtwork());
             repository.save(existingCollection);
             logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), collection.getId());
         } else {
@@ -81,7 +83,7 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     @Override
-    public void editName(Collection collection, String name) {
+    public void editName(CollectionDto collection, String name) {
         Optional<Collection> optionalCollection = repository.findById(collection.getId());
         if (optionalCollection.isPresent()) {
             Collection existingCollection = optionalCollection.get();

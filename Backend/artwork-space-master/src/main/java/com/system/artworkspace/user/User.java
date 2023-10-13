@@ -30,6 +30,10 @@ public class User{
         this.password = password;
     }
 
+    public UserDto convertToUserDto(){
+        return new UserDto(id,username,firstName,lastName,email,password, role.getId());
+    }
+
     public Long getId() {
         return id;
     }

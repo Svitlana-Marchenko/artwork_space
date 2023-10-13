@@ -27,6 +27,10 @@ public class CollectionDto {
         this.artworkIds = artworkIds;
     }
 
+    public Collection convertToCollection(){
+        return new Collection();
+    }
+
     public Long getId() {
         return id;
     }

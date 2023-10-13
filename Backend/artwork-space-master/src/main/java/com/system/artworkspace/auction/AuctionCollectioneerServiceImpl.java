@@ -2,6 +2,7 @@ package com.system.artworkspace.auction;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,29 +25,29 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
 
     private static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
-    public List<Auction> getAvailableAuctions() {
+    public List<AuctionDto> getAvailableAuctions() {
         Date currentDate = new Date();
         Example<Auction> example = Example.of(new Auction(), ExampleMatcher.matchingAll().withIgnorePaths("closingTime"));
         List<Auction> availableAuctions = auctionRepository.findAll(example);
         logger.info(AUCTIONS_EVENTS,"Retrieved {} available auctions.", availableAuctions.size());
-        return availableAuctions;
+        return (List<AuctionDto>)availableAuctions.stream().map(x -> x.convertToAuctionDto());
     }
 
     @Override
-    public Auction placeBid(Auction auction, double bidAmount) {
-        auctionRepository.save(auction);
+    public AuctionDto placeBid(AuctionDto auction, double bidAmount) {
+        auctionRepository.save(auction.convertToAuction());
         logger.info(AUCTIONS_EVENTS,"Placed bid for auction with ID: {}. Bid amount: {}", auction.getId(), bidAmount);
         return auction;
     }
 
     @Override
-    public double getCurrentBid(Auction auction) {
+    public double getCurrentBid(AuctionDto auction) {
         logger.info(AUCTIONS_EVENTS,"Retrieved current bid for auction with ID: {}", auction.getId());
         return auction.getCurrentBid();
     }
 
     @Override
-    public Artwork getArtworkFromAuction(Auction auction) {
+    public ArtworkDto getArtworkFromAuction(AuctionDto auction) {
         Long artworkId = auction.getId();
         Artwork artwork = artworkRepository.findById(artworkId).orElse(null);
         if (artwork != null) {
@@ -54,6 +55,6 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
         } else {
             logger.warn(AUCTIONS_EVENTS,"Artwork not found for auction with ID: {}", auction.getId());
         }
-        return artwork;
+        return artwork.convertToArtworkDto();
     }
 }
