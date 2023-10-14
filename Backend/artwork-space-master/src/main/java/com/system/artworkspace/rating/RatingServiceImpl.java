@@ -1,7 +1,6 @@
 package com.system.artworkspace.rating;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RatingAndCommentingServiceImpl implements RatingAndCommentService{
+public class RatingServiceImpl implements RatingService {
     @Autowired
     private RatingRepository ratingRepository;
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);

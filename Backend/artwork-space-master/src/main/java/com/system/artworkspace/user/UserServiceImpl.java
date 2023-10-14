@@ -1,15 +1,13 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.logger.LoggingMarkers;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.system.artworkspace.logger.LoggingMarkers.*;
+import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_USER_EVENTS;
+import static com.system.artworkspace.logger.LoggingMarkers.USER_ACTIONS;
 
 @Service
 public class UserServiceImpl implements UserService {
