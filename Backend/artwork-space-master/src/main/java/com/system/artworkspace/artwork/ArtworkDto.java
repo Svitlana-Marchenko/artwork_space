@@ -1,18 +1,26 @@
 package com.system.artworkspace.artwork;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 public class ArtworkDto {
     private Long id;
-    @Size(max = 50)
+    @NotBlank(message = "title is blank")
+    @Size(max = 50, message = "title is longer than 50")
     private String title;
-    @Size(max = 2000)
+    @NotBlank(message = "description is blank")
+    @Size(max = 2000, message = "description is longer than 2000")
     private String description;
-    @Size(max = 100)
+    @NotBlank(message = "technique is blank")
+    @Size(max = 100, message = "technique is longer than 100")
     private String technique;
     private double width;
     private double height;
+    @NotNull(message = "artist id is null")
     private Long artistId;
+    @NotBlank(message = "image URL is blank")
     @JsonProperty("artist_id")
     private String imageURL;
     private double imageSize;

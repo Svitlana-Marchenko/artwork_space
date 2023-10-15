@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface ExhibitionService {
-    ExhibitionDto createExhibition(User owner, String name, String description, Date startDate, Date endDate, List<ArtworkDto> artworks);
+    ExhibitionDto createExhibition(ExhibitionDto exhibition);
     void addToExhibition(ExhibitionDto exhibition, ArtworkDto artwork);
     void changeDates(ExhibitionDto exhibition, Date startDate, Date endDate);
     void deleteFromExhibition(ExhibitionDto exhibition, ArtworkDto artwork);

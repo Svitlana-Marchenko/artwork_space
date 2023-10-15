@@ -29,15 +29,10 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         this.exhibitionRepository = exhibitionRepository;
     }
     @Override
-    public ExhibitionDto createExhibition(User user, String name, String description, Date startDate, Date endDate, List<ArtworkDto> artworks) {
-        if (artworks.size() > maxSize) {
-            throw new IllegalArgumentException("Exhibition size exceeds the maximum allowed.");
-        }
-
-        Exhibition exhibition = new Exhibition(user, name, description, (List<Artwork>)artworks.stream().map(x->x.convertToArtwork()), startDate, endDate);
-        exhibitionRepository.save(exhibition);
+    public ExhibitionDto createExhibition(ExhibitionDto exhibition) {
+        exhibitionRepository.save(exhibition.convertToExhibition());
         logger.info(EXHIBITION_EVENTS,"Created exhibition with ID: {}", exhibition.getId());
-        return exhibition.convertToExhibitionDto();
+        return exhibition;
     }
 
     @Override

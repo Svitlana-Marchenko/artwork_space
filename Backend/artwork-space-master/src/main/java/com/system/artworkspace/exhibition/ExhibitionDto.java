@@ -1,6 +1,7 @@
 package com.system.artworkspace.exhibition;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,16 +9,18 @@ import java.util.Date;
 import java.util.List;
 public class ExhibitionDto {
     private Long id;
-    @NotNull
+    @NotNull(message = "curator id is null")
     private Long curatorId;
 
-    @Size(max = 50)
+    @Size(max = 50, message = "name is longer than 50")
+    @NotBlank(message = "name is blank")
     private String name;
 
-    @Size(max = 2000)
+    @Size(max = 2000, message = "description is longer than 2000")
+    @NotBlank(message = "description is blank")
     private String description;
 
-    @NotEmpty
+    @NotEmpty(message = "list of artwork id is empty")
     private List<Long> artworkIds;
 
     @JsonFormat(pattern = "dd-MM-yyyy")

@@ -6,8 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +26,10 @@ public class ArtworkController {
     }
 
     @PostMapping
-    public ArtworkDto addArtwork(@RequestBody ArtworkDto artwork) {
+    public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
         logger.info("Adding artwork with ID: {}", artwork.getId());
         ArtworkDto addedArtwork = artworkService.addArtwork(artwork);
         logger.info("Artwork added successfully.");
@@ -44,34 +50,54 @@ public class ArtworkController {
     }
 
     @PutMapping("/{id}/title")
-    public void updateTitle(@PathVariable Long id, @RequestParam String title) {
+    public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
         logger.info("Updating title for artwork with ID: {}", id);
         //artworkService.updateTitle(id, title);
         logger.info("Title updated for artwork with ID: {}", id);
     }
 
     @PutMapping("/{id}/description")
-    public void updateDescription(@PathVariable Long id, @RequestParam String description) {
+    public void updateDescription(@PathVariable Long id, @RequestParam @Valid String description, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
         logger.info("Updating description for artwork with ID: {}", id);
         //artworkService.updateDescription(id, description);
         logger.info("Description updated for artwork with ID: {}", id);
     }
 
     @PutMapping("/{id}/technique")
-    public void updateTechnique(@PathVariable Long id, @RequestParam String technique) {
+    public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
         logger.info("Updating technique for artwork with ID: {}", id);
         //artworkService.updateTechnique(id, technique);
         logger.info("Technique updated for artwork with ID: {}", id);
     }
 
     @GetMapping("/byTitle")
-    public List<ArtworkDto> getArtworksByTitle(@RequestParam String title) {
+    public List<ArtworkDto> getArtworksByTitle(@RequestParam @Valid String title, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
         logger.info("Fetching artworks with title: {}", title);
         List<ArtworkDto> artworks = artworkService.getArtworksByTitle(title);
         return artworks;
     }
+
     @ExceptionHandler(NoSuchArtworkException.class)
     public ResponseEntity<String> handleNoSuchArtworkException(NoSuchArtworkException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Artwork not found: " + e.getMessage());
+    }
+
+    private void logErrors (BindingResult bindingResult) {
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
+        for (ObjectError o : allErrors){
+            logger.info("error -->  " + o.getDefaultMessage());
+        }
     }
 }
