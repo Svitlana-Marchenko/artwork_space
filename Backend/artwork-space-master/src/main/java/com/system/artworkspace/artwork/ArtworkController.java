@@ -1,8 +1,11 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,5 +69,9 @@ public class ArtworkController {
         logger.info("Fetching artworks with title: {}", title);
         List<ArtworkDto> artworks = artworkService.getArtworksByTitle(title);
         return artworks;
+    }
+    @ExceptionHandler(NoSuchArtworkException.class)
+    public ResponseEntity<String> handleNoSuchArtworkException(NoSuchArtworkException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Artwork not found: " + e.getMessage());
     }
 }

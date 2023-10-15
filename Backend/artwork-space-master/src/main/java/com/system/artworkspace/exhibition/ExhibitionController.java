@@ -1,10 +1,13 @@
 package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.artwork.ArtworkDto;
+import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import com.system.artworkspace.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -99,5 +102,10 @@ public class ExhibitionController {
         logger.info("Deleting exhibition with ID: {}", exhibitionId);
         //exhibitionService.deleteExhibition(exhibitionId);
         logger.info("Exhibition deleted with ID: {}", exhibitionId);
+    }
+
+    @ExceptionHandler(NoSuchExhibitionException.class)
+    public ResponseEntity<String> handleNoSuchExhibitionException(NoSuchExhibitionException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exhibition not found: " + e.getMessage());
     }
 }
