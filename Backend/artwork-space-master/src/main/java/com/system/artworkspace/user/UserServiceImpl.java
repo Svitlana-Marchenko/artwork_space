@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto user) {
         //User createdUser = userRepository.save(user);
+       // MDC.put("user_id", user.getId());
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", user.getId());
         return user;
     }

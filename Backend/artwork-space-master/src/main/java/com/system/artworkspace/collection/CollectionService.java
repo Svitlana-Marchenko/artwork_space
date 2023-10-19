@@ -4,14 +4,14 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 
 public interface CollectionService {
-    CollectionDto createCollection(CollectionDto collection);
+    Collection createCollection(Collection collection);
 
-    void addToCollection(CollectionDto collection, ArtworkDto artwork);
+    void addToCollection(Long id, Artwork artwork);
 
-    void deleteCollection (CollectionDto collection);
+    void deleteCollection (Long id);
 
-    void deleteFromCollection(CollectionDto collection, ArtworkDto artwork);
+    void deleteFromCollection(Long id, Artwork artwork);
 
-    void editName (CollectionDto collection, String name);
+    void editName (Long id, String name);
 
 }

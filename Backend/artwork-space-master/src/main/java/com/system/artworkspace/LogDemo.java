@@ -1,9 +1,7 @@
 package com.system.artworkspace;
 
-import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkServiceImpl;
-import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserDto;
 import com.system.artworkspace.user.UserServiceImpl;
 import org.slf4j.Logger;
@@ -18,10 +16,10 @@ public class LogDemo {
 
         ArtworkServiceImpl artworkService = new ArtworkServiceImpl(null);
         ArtworkDto artwork = new ArtworkDto(5050L,"t","desc","tech",100,200,3434L,"url",12);
-        artworkService.addArtwork(artwork);
-        artworkService.updateTitle(artwork,"kk");
-        artworkService.updateTechnique(artwork, "uuuuuuu");
-        artworkService.updateImgUrl(artwork,"test");
+        //artworkService.addArtwork(artwork);
+        //artworkService.updateTitle(artwork,"kk");
+        //artworkService.updateTechnique(artwork, "uuuuuuu");
+        //artworkService.updateImgUrl(artwork,"test");
     }
 }
 

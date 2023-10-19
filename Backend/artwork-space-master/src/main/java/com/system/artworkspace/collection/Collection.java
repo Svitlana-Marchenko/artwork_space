@@ -1,27 +1,36 @@
 package com.system.artworkspace.collection;
 
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.user.Collectioneer;
-import com.system.artworkspace.user.User;
-import jakarta.persistence.*;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
-@Entity
+
 public class Collection {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private User owner;
+
+    @NotNull
+    private Long ownerId;
+
+    @Size(max = 100)
     private String name;
-    @ManyToMany
-    private List<Artwork> artworks;
 
-    public Collection(){}
+    @NotEmpty
+    private List<Long> artworkIds;
 
-    public CollectionDto convertToCollectionDto(){
-        return new CollectionDto(id, owner.getId(), name, (List<Long>)artworks.stream().map(x -> x.getId()));
+    public Collection() {
     }
+
+    public Collection(Long id, Long ownerId, String name, List<Long> artworkIds) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.name = name;
+        this.artworkIds = artworkIds;
+    }
+
+    public CollectionEntity convertToCollection(){
+        return new CollectionEntity();
+    }
+
     public Long getId() {
         return id;
     }
@@ -30,20 +39,12 @@ public class Collection {
         this.id = id;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setArtworks(List<Artwork> artworks) {
-        this.artworks = artworks;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Collectioneer owner) {
-        this.owner = owner;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -54,15 +55,12 @@ public class Collection {
         this.name = name;
     }
 
-    public List<Artwork> getArtworks() {
-        return artworks;
+    public List<Long> getArtworkIds() {
+        return artworkIds;
     }
 
-    public void addNewArtwork(Artwork artwork){
-        artworks.add(artwork);
-    }
-
-    public void removeArtwork(Artwork artwork){
-        artworks.remove(artwork);
+    public void setArtworkIds(List<Long> artworkIds) {
+        this.artworkIds = artworkIds;
     }
 }
+

@@ -27,72 +27,72 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     @Override
-    public CollectionDto createCollection(CollectionDto collection) {
+    public Collection createCollection(Collection collection) {
         if (collectionConfiguration.isEnabled()) {
-            repository.save(collection.convertToCollection());
+            repository.save(CollectionMapper.INSTANCE.collectionToCollectionEntity(collection));
             logger.info(COLLECTION_EVENTS,"Created collection with ID: {}", collection.getId());
         }
         return collection;
     }
 
     @Override
-    public void addToCollection(CollectionDto collectionDto, ArtworkDto artwork) {
-        Collection collection = collectionDto.convertToCollection();
-        if (collection.getArtworks().size() < collectionConfiguration.getMaxSize()) {
-            Optional<Collection> optionalCollection = repository.findById(collection.getId());
+    public void addToCollection(Long id, Artwork artwork) {
+        Optional<CollectionEntity> collectionEntity = repository.findById(id);
+         if (collectionEntity.isPresent() && collectionEntity.get().getArtworks().size() < collectionConfiguration.getMaxSize()) {
+            Optional<CollectionEntity> optionalCollection = repository.findById(id);
 
             if (optionalCollection.isPresent()) {
-                Collection existingCollection = optionalCollection.get();
-                existingCollection.addNewArtwork(artwork.convertToArtwork());
-                repository.save(existingCollection);
-                logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), collection.getId());
+                CollectionEntity existingCollectionEntity = optionalCollection.get();
+                existingCollectionEntity.addNewArtwork(artwork.convertToArtwork());
+                repository.save(existingCollectionEntity);
+                logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), id);
             } else {
-                logger.warn(COLLECTION_EVENTS,"Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), collection.getId());
-                throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
+                logger.warn(COLLECTION_EVENTS,"Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), id);
+                throw new EntityNotFoundException("Collection not found with ID: " + id);
             }
         }
     }
 
     @Override
-    public void deleteCollection(CollectionDto collection) {
-        Optional<Collection> optionalCollection = repository.findById(collection.getId());
+    public void deleteCollection(Long id) {
+        Optional<CollectionEntity> optionalCollection = repository.findById(id);
 
         if (optionalCollection.isPresent()) {
-            Collection existingCollection = optionalCollection.get();
-            repository.delete(existingCollection);
-            logger.info(COLLECTION_EVENTS,"Deleted collection with ID: {}", collection.getId());
+            CollectionEntity existingCollectionEntity = optionalCollection.get();
+            repository.delete(existingCollectionEntity);
+            logger.info(COLLECTION_EVENTS,"Deleted collection with ID: {}", id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for deletion with ID: {}", collection.getId());
-            throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for deletion with ID: {}", id);
+            throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
 
     @Override
-    public void deleteFromCollection(CollectionDto collection, ArtworkDto artwork) {
-        Optional<Collection> optionalCollection = repository.findById(collection.getId());
+    public void deleteFromCollection(Long id, Artwork artwork) {
+        Optional<CollectionEntity> optionalCollection = repository.findById(id);
 
         if (optionalCollection.isPresent()) {
-            Collection existingCollection = optionalCollection.get();
-            existingCollection.removeArtwork(artwork.convertToArtwork());
-            repository.save(existingCollection);
-            logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), collection.getId());
+            CollectionEntity existingCollectionEntity = optionalCollection.get();
+            existingCollectionEntity.removeArtwork(artwork.convertToArtwork());
+            repository.save(existingCollectionEntity);
+            logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), collection.getId());
-            throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), id);
+            throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
 
     @Override
-    public void editName(CollectionDto collection, String name) {
-        Optional<Collection> optionalCollection = repository.findById(collection.getId());
+    public void editName(Long id, String name) {
+        Optional<CollectionEntity> optionalCollection = repository.findById(id);
         if (optionalCollection.isPresent()) {
-            Collection existingCollection = optionalCollection.get();
-            existingCollection.setName(name);
-            repository.save(existingCollection);
-            logger.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", collection.getId());
+            CollectionEntity existingCollectionEntity = optionalCollection.get();
+            existingCollectionEntity.setName(name);
+            repository.save(existingCollectionEntity);
+            logger.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", collection.getId());
-            throw new EntityNotFoundException("Collection not found with ID: " + collection.getId());
+            logger.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", id);
+            throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
 
