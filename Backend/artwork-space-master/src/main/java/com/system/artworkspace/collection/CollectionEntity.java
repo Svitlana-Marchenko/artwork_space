@@ -1,8 +1,7 @@
 package com.system.artworkspace.collection;
 
 import com.system.artworkspace.artwork.ArtworkEntity;
-import com.system.artworkspace.user.Collectioneer;
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,16 +11,13 @@ public class CollectionEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    private User owner;
+    private UserEntity owner;
     private String name;
     @ManyToMany
     private List<ArtworkEntity> artworkEntities;
 
     public CollectionEntity(){}
 
-    public CollectionDto convertToCollectionDto(){
-        return new CollectionDto(id, owner.getId(), name, (List<Long>) artworkEntities.stream().map(x -> x.getId()));
-    }
     public Long getId() {
         return id;
     }
@@ -30,7 +26,7 @@ public class CollectionEntity {
         this.id = id;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(UserEntity owner) {
         this.owner = owner;
     }
 
@@ -38,13 +34,10 @@ public class CollectionEntity {
         this.artworkEntities = artworkEntities;
     }
 
-    public User getOwner() {
+    public UserEntity getOwner() {
         return owner;
     }
 
-    public void setOwner(Collectioneer owner) {
-        this.owner = owner;
-    }
 
     public String getName() {
         return name;

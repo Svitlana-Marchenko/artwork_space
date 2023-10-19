@@ -22,34 +22,34 @@ public class UserController {
     @PostMapping
     public UserDto createUser(@RequestBody UserDto user) {
         logger.info("Creating a user with ID: {}", user.getId());
-        UserDto createdUser = userService.createUser(user);
+        User createdUser = userService.createUser(UserMapper.INSTANCE.userDtoToUser(user));
         logger.info("User created with ID: {}", createdUser.getId());
-        return createdUser;
+        return UserMapper.INSTANCE.userToUserDto(createdUser);
     }
 
     @PutMapping
     public UserDto updateUser(@RequestBody UserDto user) {
         logger.info("Updating user with ID: {}", user.getId());
-        UserDto updatedUser = userService.updateUser(user);
-        logger.info("User updated with ID: {}", updatedUser.getId());
-        return updatedUser;
+        User updatedUser = userService.updateUser(UserMapper.INSTANCE.userDtoToUser(user));
+        logger.info("UserEntity updated with ID: {}", updatedUser.getId());
+        return UserMapper.INSTANCE.userToUserDto(updatedUser);
     }
 
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         logger.info("Deleting user with ID: {}", userId);
         userService.deleteUser(userId);
-        logger.info("User deleted with ID: {}", userId);
+        logger.info("UserEntity deleted with ID: {}", userId);
     }
 
     @GetMapping("/{userId}")
     public UserDto getUserById(@PathVariable Long userId) {
         logger.info("Retrieving user with ID: {}", userId);
-        return userService.getUserById(userId);
+        return UserMapper.INSTANCE.userToUserDto(userService.getUserById(userId));
     }
 
     @ExceptionHandler(NoSuchUserException.class)
     public ResponseEntity<String> handleNoSuchUserException(NoSuchUserException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserEntity not found: " + e.getMessage());
     }
 }

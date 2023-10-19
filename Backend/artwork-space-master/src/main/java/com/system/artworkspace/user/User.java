@@ -1,39 +1,42 @@
 package com.system.artworkspace.user;
 
-import com.system.artworkspace.artwork.ArtworkEntity;
-import jakarta.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import java.util.List;
-
-@Entity
-@Table(name = "\"user\"")
-public class User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "user_id")
+public class User {
     private Long id;
+    @NotNull
+    @Size(max = 100)
     private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    @ManyToOne
-    private Role role;
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ArtworkEntity> artworkEntities;
 
-    public User(String username, String firstName,String lastName, String email, String password) {
+    @Size(max = 100)
+    private String firstName;
+
+    @Size(max = 100)
+    private String lastName;
+
+    @Email
+    @Size(max = 100)
+    private String email;
+
+    @Size(max = 100)
+    private String password;
+
+    private Long roleId;
+
+    public User() {
+    }
+
+    public User(Long id, String username, String firstName, String lastName, String email, String password, Long roleId) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.roleId = roleId;
     }
-
-    public UserDto convertToUserDto(){
-        return new UserDto(id,username,firstName,lastName,email,password, role.getId());
-    }
-
     public Long getId() {
         return id;
     }
@@ -42,16 +45,6 @@ public class User{
         this.id = id;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public User() {
-    }
     public String getUsername() {
         return username;
     }
@@ -90,5 +83,13 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }

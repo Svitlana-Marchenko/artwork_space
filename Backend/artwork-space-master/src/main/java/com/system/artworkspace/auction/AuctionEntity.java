@@ -1,9 +1,8 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.ArtworkEntity;
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.Collectioneer;
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -25,10 +24,10 @@ public class AuctionEntity {
     @Temporal(TemporalType.DATE)
     private Date closingTime;
     @ManyToOne
-    private User currentBuyer;
+    private UserEntity currentBuyer;
     private double currentBid;
     public AuctionEntity(){}
-    public AuctionEntity(ArtworkEntity artworkEntity, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
+    public AuctionEntity(ArtworkEntity artworkEntity, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         this.auctionName = auctionName;
         this.auctionDescription = auctionDescription;
         this.artworkEntity = artworkEntity;
@@ -50,9 +49,6 @@ public class AuctionEntity {
                 '}';
     }
 
-    public AuctionDto convertToAuctionDto(){
-        return new AuctionDto(id, auctionName,auctionDescription, artworkEntity.getId(),startingPrice,step,closingTime, currentBuyer.getId(), currentBid);
-    }
 
     public long getId() {
         return id;
@@ -62,11 +58,11 @@ public class AuctionEntity {
         this.id = id;
     }
 
-    public User getCurrentBuyer() {
+    public UserEntity getCurrentBuyer() {
         return currentBuyer;
     }
 
-    public void setCurrentBuyer(User currentBuyer) {
+    public void setCurrentBuyer(UserEntity currentBuyer) {
         this.currentBuyer = currentBuyer;
     }
 
@@ -118,10 +114,6 @@ public class AuctionEntity {
         this.closingTime = closingTime;
     }
 
-
-    public void setCurrentBuyer(Collectioneer currentBuyer) {
-        this.currentBuyer = currentBuyer;
-    }
 
     public double getCurrentBid() {
         return currentBid;

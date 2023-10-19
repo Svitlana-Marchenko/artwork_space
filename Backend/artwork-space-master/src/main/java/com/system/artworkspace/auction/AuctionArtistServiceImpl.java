@@ -3,8 +3,8 @@ package com.system.artworkspace.auction;
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     private AuctionRepository auctionRepository;
 
     @Override
-    public Auction createAuction(Artwork artwork, Rating rating, String auctionName, String auctionDescription, double startingPrice, double step) {
+    public Auction createAuction(Artwork artwork, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         AuctionEntity auctionEntity = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork), rating, auctionName, auctionDescription, startingPrice, step);
         auctionRepository.save(auctionEntity);
         logger.info(AUCTIONS_EVENTS,"Created auction with ID: {}", auctionEntity.getId());
@@ -42,9 +42,9 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
 
     //TODO after user mapper
     @Override
-    public User displayCurrentBuyer(Long id) {
+    public UserEntity displayCurrentBuyer(Long id) {
         logger.info(CONFIDENTIAL_EVENTS,"Displaying current buyer for auction with ID: {}", id);
-        //return (User) auction.convertToAuction().getCurrentBuyer();
+        //return (UserEntity) auction.convertToAuction().getCurrentBuyer();
         return null;
     }
 

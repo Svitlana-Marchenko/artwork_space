@@ -38,7 +38,7 @@ public final class CustomAppender extends AbstractAppender {
         if (layout == null) {
             layout = PatternLayout.createDefaultLayout();
         }
-        MarkerFilter markerFilter1 = MarkerFilter.createFilter("EXHIBITION_EVENTS", Result.ACCEPT, Filter.Result.NEUTRAL);
+        MarkerFilter markerFilter1 = MarkerFilter.createFilter("ARTWORK_EVENTS", Result.ACCEPT, Result.NEUTRAL);
         MarkerFilter markerFilter2 = MarkerFilter.createFilter("CONFIDENTIAL_USER_EVENTS", Result.ACCEPT, Result.NEUTRAL);
 
         Filter[] filters = new Filter[] {markerFilter1, markerFilter2};

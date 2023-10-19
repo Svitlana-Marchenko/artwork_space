@@ -1,46 +1,47 @@
 package com.system.artworkspace.exhibition;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import com.system.artworkspace.artwork.ArtworkEntity;
-import com.system.artworkspace.user.Curator;
-import com.system.artworkspace.user.User;
-import jakarta.persistence.*;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
-@Entity
 public class Exhibition {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-@ManyToOne
-    private User curator;
+    @NotNull(message = "curator id is null")
+    private Long curatorId;
+
+    @Size(max = 50, message = "name is longer than 50")
+    @NotBlank(message = "name is blank")
     private String name;
-    @Column(length = 2000)
+
+    @Size(max = 2000, message = "description is longer than 2000")
+    @NotBlank(message = "description is blank")
     private String description;
-    @OneToMany
-    private List<ArtworkEntity> artworkEntities;
-    @Temporal(TemporalType.DATE)
+
+    @NotEmpty(message = "list of artwork id is empty")
+    private List<Long> artworkIds;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startDate;
-    @Temporal(TemporalType.DATE)
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date endDate;
 
+    public Exhibition() {
+    }
 
-    public Exhibition(User curator, String name, String description, List<ArtworkEntity> artworkEntities, Date startDate, Date endDate) {
-        this.curator = curator;
+    public Exhibition(Long id, Long curatorId, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
+        this.id = id;
+        this.curatorId = curatorId;
         this.name = name;
         this.description = description;
-        this.artworkEntities = artworkEntities;
+        this.artworkIds = artworkIds;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Exhibition() {
-
-    }
-
-    public ExhibitionDto convertToExhibitionDto(){
-        return new ExhibitionDto(id,curator.getId(),name,description,(List<Long>) artworkEntities.stream().map(x-> x.getId()),startDate,endDate);
-    }
 
     public Long getId() {
         return id;
@@ -50,28 +51,12 @@ public class Exhibition {
         this.id = id;
     }
 
-    public void setCurator(User curator) {
-        this.curator = curator;
+    public Long getCuratorId() {
+        return curatorId;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setArtworks(List<ArtworkEntity> artworkEntities) {
-        this.artworkEntities = artworkEntities;
-    }
-
-    public User getCurator() {
-        return curator;
-    }
-
-    public void setCurator(Curator curator) {
-        this.curator = curator;
+    public void setCuratorId(Long curatorId) {
+        this.curatorId = curatorId;
     }
 
     public String getName() {
@@ -82,8 +67,20 @@ public class Exhibition {
         this.name = name;
     }
 
-    public List<ArtworkEntity> getArtworks() {
-        return artworkEntities;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Long> getArtworkIds() {
+        return artworkIds;
+    }
+
+    public void setArtworkIds(List<Long> artworkIds) {
+        this.artworkIds = artworkIds;
     }
 
     public Date getStartDate() {
@@ -101,5 +98,4 @@ public class Exhibition {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
 }

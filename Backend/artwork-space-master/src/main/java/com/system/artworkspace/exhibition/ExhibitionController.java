@@ -1,8 +1,8 @@
 package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.artwork.ArtworkDto;
+import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
-import com.system.artworkspace.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class ExhibitionController {
             logErrors(bindingResult);
         }
         logger.info("Creating an exhibition with name: {}", exhibition.getName());
-        ExhibitionDto createdExhibition = exhibitionService.createExhibition(exhibition);
+        ExhibitionDto createdExhibition = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionDtoToExhibition(exhibition)));
         logger.info("Exhibition created with ID: {}", createdExhibition.getId());
         return createdExhibition;
     }
@@ -52,7 +52,7 @@ public class ExhibitionController {
             logErrors(bindingResult);
         }
         logger.info("Adding artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibitionId);
-        //exhibitionService.addToExhibition(exhibitionId, artwork);
+        exhibitionService.addToExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
         logger.info("Artwork added to exhibition with ID: {}", exhibitionId);
     }
 
@@ -67,7 +67,7 @@ public class ExhibitionController {
             logErrors(bindingResult);
         }
         logger.info("Changing dates for exhibition with ID: {}", exhibitionId);
-        //exhibitionService.changeDates(exhibitionId, startDate, endDate);
+        exhibitionService.changeDates(exhibitionId, startDate, endDate);
         logger.info("Dates changed for exhibition with ID: {}", exhibitionId);
     }
 
@@ -77,7 +77,7 @@ public class ExhibitionController {
             @RequestBody ArtworkDto artwork
     ) {
         logger.info("Removing artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibitionId);
-        //exhibitionService.deleteFromExhibition(exhibitionId, artwork);
+        exhibitionService.deleteFromExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
         logger.info("Artwork removed from exhibition with ID: {}", exhibitionId);
     }
 
@@ -88,7 +88,7 @@ public class ExhibitionController {
     ) {
         logger.info("Updating exhibition name for exhibition with ID: {}", exhibitionId);
         //exhibitionService.editName(exhibitionId, name);
-        logger.info("Exhibition name updated for exhibition with ID: {}", exhibitionId);
+        logger.info("ExhibitionEntity name updated for exhibition with ID: {}", exhibitionId);
     }
 
     @PutMapping("/{exhibitionId}/editDescription")
@@ -97,26 +97,26 @@ public class ExhibitionController {
             @RequestParam String description
     ) {
         logger.info("Updating exhibition description for exhibition with ID: {}", exhibitionId);
-        //exhibitionService.editDescription(exhibitionId, description);
-        logger.info("Exhibition description updated for exhibition with ID: {}", exhibitionId);
+        exhibitionService.editDescription(exhibitionId, description);
+        logger.info("ExhibitionEntity description updated for exhibition with ID: {}", exhibitionId);
     }
 
     @GetMapping("/{exhibitionId}")
     public ExhibitionDto findById(@PathVariable @Valid Long exhibitionId) {
         logger.info("Retrieving exhibition with ID: {}", exhibitionId);
-        return exhibitionService.findById(exhibitionId);
+        return ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.findById(exhibitionId));
     }
 
     @DeleteMapping("/{exhibitionId}")
     public void deleteExhibition(@PathVariable Long exhibitionId) {
         logger.info("Deleting exhibition with ID: {}", exhibitionId);
-        //exhibitionService.deleteExhibition(exhibitionId);
-        logger.info("Exhibition deleted with ID: {}", exhibitionId);
+        exhibitionService.deleteExhibition(exhibitionId);
+        logger.info("ExhibitionEntity deleted with ID: {}", exhibitionId);
     }
 
     @ExceptionHandler(NoSuchExhibitionException.class)
     public ResponseEntity<String> handleNoSuchExhibitionException(NoSuchExhibitionException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exhibition not found: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ExhibitionEntity not found: " + e.getMessage());
     }
 
     private void logErrors (BindingResult bindingResult) {

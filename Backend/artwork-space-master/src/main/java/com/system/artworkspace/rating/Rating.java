@@ -1,18 +1,37 @@
 package com.system.artworkspace.rating;
 
-import com.system.artworkspace.user.User;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Rating {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
+
+    @NotNull
+    @Min(1)
+    @Max(10)
     private double rate;
-    @ManyToOne
-    private User curator;
-    @Column(length = 2000)
+
+    @JsonProperty("curator_id")
+    private Long curatorId;
+
+    @Size(max = 5000)
     private String comment;
+
+    public Rating() {
+    }
+
+    public Rating(Long id, double rate, Long curatorId, String comment) {
+        this.id = id;
+        this.rate = rate;
+        this.curatorId = curatorId;
+        this.comment = comment;
+    }
+
 
     public Long getId() {
         return id;
@@ -22,19 +41,6 @@ public class Rating {
         this.id = id;
     }
 
-    public Rating(double rate, User curator, String comment) {
-        this.rate = rate;
-        this.curator = curator;
-        this.comment = comment;
-    }
-
-    public Rating() {
-
-    }
-
-    public RatingDto convertToRatingDto(){
-        return new RatingDto(id,rate, curator.getId(), comment);
-    }
     public double getRate() {
         return rate;
     }
@@ -43,12 +49,12 @@ public class Rating {
         this.rate = rate;
     }
 
-    public User getCurator() {
-        return curator;
+    public Long getCuratorId() {
+        return curatorId;
     }
 
-    public void setCurator(User curator) {
-        this.curator = curator;
+    public void setCuratorId(Long curatorId) {
+        this.curatorId = curatorId;
     }
 
     public String getComment() {
@@ -58,5 +64,4 @@ public class Rating {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
 }

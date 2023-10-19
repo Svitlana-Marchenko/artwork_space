@@ -16,18 +16,17 @@ public class UserServiceImpl implements UserService {
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     @Override
-    public UserDto createUser(UserDto user) {
-        //User createdUser = userRepository.save(user);
-       // MDC.put("user_id", user.getId());
+    public User createUser(User user) {
+        UserEntity createdUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", user.getId());
         return user;
     }
 
     @Override
-    public UserDto updateUser(UserDto user) {
-        User updatedUser = userRepository.save(user.convertToUser());
+    public User updateUser(User user) {
+        UserEntity updatedUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
         logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
-        return updatedUser.convertToUserDto();
+        return UserMapper.INSTANCE.userEntityToUser(updatedUser);
     }
 
     @Override
@@ -36,18 +35,18 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteById(userId);
             logger.info(USER_ACTIONS,"Deleted user with ID: {}", userId);
         } else {
-            logger.warn(USER_ACTIONS,"User not found for deletion with ID: {}", userId);
+            logger.warn(USER_ACTIONS,"UserEntity not found for deletion with ID: {}", userId);
         }
     }
 
     @Override
-    public UserDto getUserById(Long userId) {
-        User user = userRepository.findById(userId).orElse(null);
+    public User getUserById(Long userId) {
+        UserEntity user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             logger.info(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
         } else {
-            logger.warn(USER_ACTIONS,"User not found with ID: {}", userId);
+            logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", userId);
         }
-        return user.convertToUserDto();
+        return UserMapper.INSTANCE.userEntityToUser(user);
     }
 }

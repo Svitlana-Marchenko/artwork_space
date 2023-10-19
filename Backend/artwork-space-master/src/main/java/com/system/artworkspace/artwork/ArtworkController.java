@@ -1,6 +1,9 @@
 package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
+import com.system.artworkspace.rating.Rating;
+import com.system.artworkspace.rating.RatingDto;
+import com.system.artworkspace.rating.RatingMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +104,18 @@ public class ArtworkController {
         for (ObjectError o : allErrors){
             logger.info("error -->  " + o.getDefaultMessage());
         }
+    }
+    @PostMapping("/{artworkId}/addRating")
+    public void addRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
+        logger.info("Adding rating with ID {} to artwork with ID: {}", ratingDto.getId(), artworkId);
+        artworkService.addRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
+        logger.info("Rating added to artwork with ID: {}", artworkId);
+    }
+
+    @DeleteMapping("/{artworkId}/deleteRating")
+    public void deleteRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
+        logger.info("Removing rating with ID {} from artwork with ID: {}", ratingDto.getId(), artworkId);
+        artworkService.deleteRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
+        logger.info("Rating removed from artwork with ID: {}", artworkId);
     }
 }

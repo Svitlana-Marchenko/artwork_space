@@ -32,10 +32,6 @@ public class Artwork {
         this.imageSize = imageSize;
     }
 
-    public ArtworkEntity convertToArtwork(){
-        return new ArtworkEntity();
-    }
-
     public Long getId() {
         return id;
     }

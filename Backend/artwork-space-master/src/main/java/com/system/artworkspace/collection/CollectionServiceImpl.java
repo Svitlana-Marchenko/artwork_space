@@ -3,6 +3,7 @@ package com.system.artworkspace.collection;
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
+import com.system.artworkspace.artwork.ArtworkMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class CollectionServiceImpl implements CollectionService{
 
             if (optionalCollection.isPresent()) {
                 CollectionEntity existingCollectionEntity = optionalCollection.get();
-                existingCollectionEntity.addNewArtwork(artwork.convertToArtwork());
+                existingCollectionEntity.addNewArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
                 repository.save(existingCollectionEntity);
                 logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), id);
             } else {
@@ -73,7 +74,7 @@ public class CollectionServiceImpl implements CollectionService{
 
         if (optionalCollection.isPresent()) {
             CollectionEntity existingCollectionEntity = optionalCollection.get();
-            existingCollectionEntity.removeArtwork(artwork.convertToArtwork());
+            existingCollectionEntity.removeArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
             repository.save(existingCollectionEntity);
             logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), id);
         } else {

@@ -1,7 +1,6 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.user.User;
-import jakarta.persistence.ManyToOne;
+import com.system.artworkspace.rating.Rating;
 
 import java.util.List;
 
@@ -17,4 +16,6 @@ public interface ArtworkService {
     void updateImgUrl (Long id, String url);
     void updateImgSize (Long id, double size);
      List<Artwork> getArtworksByTitle(String title);
+    void addRating(Long artworkId,Rating rating);
+    void deleteRating(Long artworkId,Rating rating);
 }

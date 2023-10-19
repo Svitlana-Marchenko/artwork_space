@@ -1,6 +1,6 @@
 package com.system.artworkspace.validation;
 
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.user.UserEntity;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -8,17 +8,17 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-@ConditionalOnClass(User.class)
+@ConditionalOnClass(UserEntity.class)
 public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return User.class.isAssignableFrom(clazz);
+        return UserEntity.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        User user = (User) target;
+        UserEntity user = (UserEntity) target;
 
         // Validation for the "email" field: Check for null and valid email format
         if (user.getEmail() == null || !user.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {

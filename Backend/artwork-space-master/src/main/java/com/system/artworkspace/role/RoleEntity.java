@@ -1,4 +1,4 @@
-package com.system.artworkspace.user;
+package com.system.artworkspace.role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,16 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Role {
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    public Role() { }
+    public RoleEntity() { }
 
-    public Role(String name) {
+    public RoleEntity(String name) {
         this.name = name;
     }
 

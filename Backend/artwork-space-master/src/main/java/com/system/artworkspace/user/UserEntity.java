@@ -1,42 +1,36 @@
 package com.system.artworkspace.user;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.system.artworkspace.artwork.ArtworkEntity;
+import com.system.artworkspace.role.RoleEntity;
+import jakarta.persistence.*;
 
-public class UserDto {
+import java.util.List;
+
+@Entity
+@Table(name = "\"user\"")
+public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "user_id")
     private Long id;
-    @NotNull
-    @Size(max = 100)
     private String username;
-
-    @Size(max = 100)
     private String firstName;
-
-    @Size(max = 100)
     private String lastName;
-
-    @Email
-    @Size(max = 100)
     private String email;
-
-    @Size(max = 100)
     private String password;
+    @ManyToOne
+    private RoleEntity role;
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArtworkEntity> artworkEntities;
 
-    private Long roleId;
-
-    public UserDto() {
-    }
-
-    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Long roleId) {
-        this.id = id;
+    public UserEntity(String username, String firstName, String lastName, String email, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roleId = roleId;
     }
+
     public Long getId() {
         return id;
     }
@@ -45,6 +39,16 @@ public class UserDto {
         this.id = id;
     }
 
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
+
+    public UserEntity() {
+    }
     public String getUsername() {
         return username;
     }
@@ -83,13 +87,5 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
 }

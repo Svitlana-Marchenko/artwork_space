@@ -1,12 +1,12 @@
 package com.system.artworkspace.user;
 
 public interface UserService {
-    UserDto createUser(UserDto user);
+    User createUser(User user);
 
-    UserDto updateUser(UserDto user);
+    User updateUser(User user);
 
     void deleteUser(Long userId);
 
-    UserDto getUserById(Long userId);
+    User getUserById(Long userId);
 }
 

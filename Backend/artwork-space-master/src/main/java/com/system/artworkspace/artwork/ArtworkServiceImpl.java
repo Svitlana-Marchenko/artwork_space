@@ -1,6 +1,10 @@
 package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.collection.CollectionEntity;
+import com.system.artworkspace.exhibition.ExhibitionEntity;
+import com.system.artworkspace.rating.Rating;
+import com.system.artworkspace.rating.RatingMapper;
 import com.system.artworkspace.validation.ArtworkValidator;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.logging.log4j.ThreadContext;
@@ -14,7 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.system.artworkspace.logger.LoggingMarkers.ARTWORK_EVENTS;
+import static com.system.artworkspace.logger.LoggingMarkers.*;
+import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
 
 
 @Service
@@ -185,5 +190,36 @@ public class ArtworkServiceImpl implements ArtworkService {
         List<ArtworkEntity> list = repository.findAll((Sort) titleSpecification);
         return (List<Artwork>) list.stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));
     }
+
+    @Override
+    public void addRating(Long artworkId,Rating rating) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
+
+        if (optionalArtwork.isPresent()) {
+            ArtworkEntity existingArtwork = optionalArtwork.get();
+            existingArtwork.getRatings().add(RatingMapper.INSTANCE.ratingToRatingEntity(rating));
+            repository.save(existingArtwork);
+            logger.info(ARTWORK_EVENTS,"Added ratting with ID {} to artwork with ID: {}", rating.getId(), artworkId);
+        } else {
+            logger.warn(ARTWORK_EVENTS,"ArtworkEntity not found for adding rating with ID: {} to artwork with ID: {}", rating.getId(), artworkId);
+            throw new IllegalArgumentException("ArtworkEntity not found with ID: " + artworkId);
+        }
+    }
+
+    @Override
+    public void deleteRating(Long artworkId,Rating rating) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
+
+        if (optionalArtwork.isPresent()) {
+            ArtworkEntity existingArtworkEntity = optionalArtwork.get();
+            existingArtworkEntity.getRatings().remove(RatingMapper.INSTANCE.ratingToRatingEntity(rating));
+            repository.save(existingArtworkEntity);
+            logger.info(ARTWORK_EVENTS,"Removed rating with ID {} from artwork with ID: {}", rating.getId(), artworkId);
+        } else {
+            logger.warn(ARTWORK_EVENTS,"Artwork not found for removing rating with ID: {} from artwork with ID: {}", rating.getId(), artworkId);
+            throw new EntityNotFoundException("Artwork not found with ID: " + artworkId);
+        }
+    }
+
 
 }

@@ -1,4 +1,5 @@
 package com.system.artworkspace.exhibition;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+
 public class ExhibitionDto {
     private Long id;
     @NotNull(message = "curator id is null")
@@ -42,9 +44,6 @@ public class ExhibitionDto {
         this.endDate = endDate;
     }
 
-    public Exhibition convertToExhibition(){
-        return new Exhibition();
-    }
 
     public Long getId() {
         return id;

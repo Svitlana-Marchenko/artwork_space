@@ -45,9 +45,6 @@ public class Auction {
         this.currentBid = currentBid;
     }
 
-    public AuctionEntity convertToAuction(){
-        return new AuctionEntity();
-    }
 
     public long getId() {
         return id;

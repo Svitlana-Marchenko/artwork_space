@@ -2,8 +2,8 @@ package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkMapper;
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AuctionArtistController {
     @PostMapping
     public AuctionDto createAuction(
             @RequestBody ArtworkDto artwork,
-            @RequestParam Rating rating,
+            @RequestParam RatingEntity rating,
             @RequestParam String auctionName,
             @RequestParam String auctionDescription,
             @RequestParam double startingPrice,
@@ -44,7 +44,7 @@ public class AuctionArtistController {
     }
 
     @GetMapping("/{id}/currentBuyer")
-    public User displayCurrentBuyer(@PathVariable Long id) {
+    public UserEntity displayCurrentBuyer(@PathVariable Long id) {
         logger.info("Displaying current buyer for auction with ID: {}", id);
         return auctionService.displayCurrentBuyer(id);
 

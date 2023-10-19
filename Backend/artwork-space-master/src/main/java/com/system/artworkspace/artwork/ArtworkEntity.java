@@ -1,7 +1,7 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.rating.Rating;
-import com.system.artworkspace.user.User;
+import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -20,13 +20,13 @@ public class ArtworkEntity {
     private double height;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User artist;
+    private UserEntity artist;
     private String imageURL;
     private double imageSize;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Rating> ratings;
+    private Set<RatingEntity> ratings;
 
-    public ArtworkEntity(User artist, String title, String description, String technique, double width, double height, String imageURL, double imageSize) {
+    public ArtworkEntity(UserEntity artist, String title, String description, String technique, double width, double height, String imageURL, double imageSize) {
         this.artist = artist;
         this.title=title;
         this.width=width;
@@ -46,10 +46,6 @@ public class ArtworkEntity {
 
     }
 
-    public ArtworkDto convertToArtworkDto(){
-        return new ArtworkDto(id,title,description,technique,width,height, artist.getId(), imageURL,imageSize);
-    }
-
     public Long getId() {
         return id;
     }
@@ -58,11 +54,11 @@ public class ArtworkEntity {
         this.id = id;
     }
 
-    public Set<Rating> getRatings() {
+    public Set<RatingEntity> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(Set<RatingEntity> ratings) {
         this.ratings = ratings;
     }
 
@@ -106,11 +102,11 @@ public class ArtworkEntity {
         this.height = height;
     }
 
-    public User getArtist() {
+    public UserEntity getArtist() {
         return artist;
     }
 
-    public void setArtist(User artist) {
+    public void setArtist(UserEntity artist) {
         this.artist = artist;
     }
 
