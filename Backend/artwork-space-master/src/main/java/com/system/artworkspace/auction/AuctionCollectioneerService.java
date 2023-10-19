@@ -6,11 +6,11 @@ import com.system.artworkspace.artwork.ArtworkDto;
 import java.util.List;
 
 public interface AuctionCollectioneerService {
-    List<AuctionDto> getAvailableAuctions();
+    List<Auction> getAvailableAuctions();
 
-    AuctionDto placeBid(AuctionDto auction, double bidAmount);
+    Auction placeBid(Long id, double bidAmount);
 
-    double getCurrentBid(AuctionDto auction);
+    double getCurrentBid(Long id);
 
-    ArtworkDto getArtworkFromAuction (AuctionDto auction);
+    Artwork getArtworkFromAuction (Long id);
 }

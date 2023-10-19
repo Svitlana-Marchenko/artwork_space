@@ -1,9 +1,8 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.ArtworkDto;
-import com.system.artworkspace.artwork.ArtworkRepository;
+import com.system.artworkspace.artwork.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
 
@@ -25,36 +25,41 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
 
     private static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
-    public List<AuctionDto> getAvailableAuctions() {
+    public List<Auction> getAvailableAuctions() {
         Date currentDate = new Date();
-        Example<Auction> example = Example.of(new Auction(), ExampleMatcher.matchingAll().withIgnorePaths("closingTime"));
-        List<Auction> availableAuctions = auctionRepository.findAll(example);
-        logger.info(AUCTIONS_EVENTS,"Retrieved {} available auctions.", availableAuctions.size());
-        return (List<AuctionDto>)availableAuctions.stream().map(x -> x.convertToAuctionDto());
+        Example<AuctionEntity> example = Example.of(new AuctionEntity(), ExampleMatcher.matchingAll().withIgnorePaths("closingTime"));
+        List<AuctionEntity> availableAuctionEntities = auctionRepository.findAll(example);
+        logger.info(AUCTIONS_EVENTS, "Retrieved {} available auctions.", availableAuctionEntities.size());
+        return (List<Auction>) availableAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x));
     }
 
     @Override
-    public AuctionDto placeBid(AuctionDto auction, double bidAmount) {
-        auctionRepository.save(auction.convertToAuction());
-        logger.info(AUCTIONS_EVENTS,"Placed bid for auction with ID: {}. Bid amount: {}", auction.getId(), bidAmount);
-        return auction;
+    public Auction placeBid(Long id, double bidAmount) {
+        AuctionEntity auction = auctionRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Auction not found with ID: " + id));
+        Auction auc = AuctionMapper.INSTANCE.auctionEntityToAuction(auction);
+        auc.setCurrentBid(bidAmount);
+        auction = AuctionMapper.INSTANCE.auctionToAuctionEntity(auc);
+        auctionRepository.save(auction);
+        logger.info(AUCTIONS_EVENTS, "Placed bid for auction with ID: {}. Bid amount: {}", id, bidAmount);
+        return auc;
     }
 
     @Override
-    public double getCurrentBid(AuctionDto auction) {
-        logger.info(AUCTIONS_EVENTS,"Retrieved current bid for auction with ID: {}", auction.getId());
-        return auction.getCurrentBid();
+    public double getCurrentBid(Long id) {
+        Optional<AuctionEntity> auction = auctionRepository.findById(id);
+        logger.info(AUCTIONS_EVENTS, "Retrieved current bid for auction with ID: {}", id);
+        return auction.map(AuctionEntity::getCurrentBid).orElse(0.0);
     }
 
     @Override
-    public ArtworkDto getArtworkFromAuction(AuctionDto auction) {
-        Long artworkId = auction.getId();
-        Artwork artwork = artworkRepository.findById(artworkId).orElse(null);
+    public Artwork getArtworkFromAuction(Long artworkId) {
+        ArtworkEntity artwork = artworkRepository.findById(artworkId).orElse(null);
         if (artwork != null) {
-            logger.info(AUCTIONS_EVENTS,"Retrieved artwork with ID: {} from auction with ID: {}", artwork.getId(), auction.getId());
+            logger.info(AUCTIONS_EVENTS, "Retrieved artwork with ID: {} from auction with ID: {}", artwork.getId(), artworkId);
         } else {
-            logger.warn(AUCTIONS_EVENTS,"Artwork not found for auction with ID: {}", auction.getId());
+            logger.warn(AUCTIONS_EVENTS, "Artwork not found for auction with ID: {}", artworkId);
         }
-        return artwork.convertToArtworkDto();
+        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(artwork);
     }
 }

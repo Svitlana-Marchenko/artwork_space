@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 )
 public class AuctionConfiguration {
 
-    @Bean
-    public AuctionArtistServiceImpl auctionArtistService(){
-        return new AuctionArtistServiceImpl();
-    }
+    //@Bean
+    //public AuctionArtistServiceImpl auctionArtistService(){
+        //return new AuctionArtistServiceImpl();
+   // }
 
 }
