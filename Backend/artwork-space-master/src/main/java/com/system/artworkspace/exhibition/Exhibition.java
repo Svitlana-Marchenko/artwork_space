@@ -1,6 +1,6 @@
 package com.system.artworkspace.exhibition;
 
-import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.user.Curator;
 import com.system.artworkspace.user.User;
 import jakarta.persistence.*;
@@ -18,18 +18,18 @@ public class Exhibition {
     @Column(length = 2000)
     private String description;
     @OneToMany
-    private List<Artwork> artworks;
+    private List<ArtworkEntity> artworkEntities;
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
 
-    public Exhibition(User curator, String name, String description, List<Artwork> artworks, Date startDate, Date endDate) {
+    public Exhibition(User curator, String name, String description, List<ArtworkEntity> artworkEntities, Date startDate, Date endDate) {
         this.curator = curator;
         this.name = name;
         this.description = description;
-        this.artworks = artworks;
+        this.artworkEntities = artworkEntities;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -39,7 +39,7 @@ public class Exhibition {
     }
 
     public ExhibitionDto convertToExhibitionDto(){
-        return new ExhibitionDto(id,curator.getId(),name,description,(List<Long>)artworks.stream().map(x-> x.getId()),startDate,endDate);
+        return new ExhibitionDto(id,curator.getId(),name,description,(List<Long>) artworkEntities.stream().map(x-> x.getId()),startDate,endDate);
     }
 
     public Long getId() {
@@ -62,8 +62,8 @@ public class Exhibition {
         this.description = description;
     }
 
-    public void setArtworks(List<Artwork> artworks) {
-        this.artworks = artworks;
+    public void setArtworks(List<ArtworkEntity> artworkEntities) {
+        this.artworkEntities = artworkEntities;
     }
 
     public User getCurator() {
@@ -82,8 +82,8 @@ public class Exhibition {
         this.name = name;
     }
 
-    public List<Artwork> getArtworks() {
-        return artworks;
+    public List<ArtworkEntity> getArtworks() {
+        return artworkEntities;
     }
 
     public Date getStartDate() {

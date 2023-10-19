@@ -18,7 +18,7 @@ import static com.system.artworkspace.logger.LoggingMarkers.ARTWORK_EVENTS;
 
 
 @Service
-public class ArtworkServiceImpl implements ArtworkService{
+public class ArtworkServiceImpl implements ArtworkService {
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     private final ArtworkRepository repository;
@@ -29,163 +29,161 @@ public class ArtworkServiceImpl implements ArtworkService{
     }
 
     @Override
-    public ArtworkDto addArtwork(ArtworkDto artwork) {
-        logger.info(ARTWORK_EVENTS,"Adding artwork with ID: {}", artwork.getId());
-
-        //repository.save(artwork.convertToArtwork());
-        logger.info(ARTWORK_EVENTS,"Artwork added successfully.");
+    public Artwork addArtwork(Artwork artwork) {
+        logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
+        repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
+        logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
 
         return artwork;
     }
 
     @Override
     public void deleteArtwork(Long artworkId) {
-        Optional<Artwork> optionalArtwork = repository.findById(artworkId);
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
 
         if (optionalArtwork.isPresent()) {
             repository.deleteById(artworkId);
-            logger.info(ARTWORK_EVENTS,"Artwork deleted with ID: {}", artworkId);
+            logger.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", artworkId);
         } else {
-            logger.warn(ARTWORK_EVENTS,"Artwork not found for deletion with ID: {}", artworkId);
+            logger.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", artworkId);
             throw new EntityNotFoundException("Artwork not found with ID: " + artworkId);
         }
     }
 
-
     @Override
-    public ArtworkDto findArtworkById(Long id) {
-        Optional<Artwork> artwork = repository.findById(id);
-        Artwork art = artwork.orElse(null);
-        return art.convertToArtworkDto();
+    public Artwork findArtworkById(Long id) {
+        Optional<ArtworkEntity> artwork = repository.findById(id);
+        if (artwork.isPresent())
+            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(artwork.get());
+        return null;
     }
 
     @Override
-    public void updateTitle(ArtworkDto artwork, String title) {
-        ThreadContext.put("artwork_id", artwork.getId().toString());
+    public void updateTitle(Long id, String title) {
+        ThreadContext.put("artwork_id", id.toString());
         ArtworkValidator.validateTitle(title);
         ThreadContext.clearAll();
 
-        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork= optionalArtwork.get();
+            ArtworkEntity existingArtwork= optionalArtwork.get();
 
-            ThreadContext.put("artwork_id", artwork.getId().toString());
+            ThreadContext.put("artwork_id", id.toString());
             ArtworkValidator.validateTitle(title);
             ThreadContext.clearAll();
 
             existingArtwork.setTitle(title);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }*/
-    }
-
-    @Override
-    public void updateDescription(ArtworkDto artwork, String description) {
-
-
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
-
-        if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
-            existingArtwork.setDescription(description);
-            repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Description updated for artwork with ID: {}", artwork.getId());
-        } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
         }
     }
 
     @Override
-    public void updateTechnique(ArtworkDto artwork, String technique) {
+    public void updateDescription(Long id, String description) {
 
-        ThreadContext.put("artwork_id", artwork.getId().toString());
+
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
+
+        if (optionalArtwork.isPresent()) {
+            ArtworkEntity existingArtwork = optionalArtwork.get();
+            existingArtwork.setDescription(description);
+            repository.save(existingArtwork);
+            logger.info(ARTWORK_EVENTS, "Description updated for artwork with ID: {}", id);
+        } else {
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+        }
+    }
+
+    @Override
+    public void updateTechnique(Long id, String technique) {
+
+        ThreadContext.put("artwork_id", id.toString());
         ArtworkValidator.validateTechnique(technique);
         ThreadContext.clearAll();
 
-        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
+            ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setTechnique(technique);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }*/
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+        }
     }
 
     @Override
-    public void updateWidth(ArtworkDto artwork, double width) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+    public void updateWidth(Long id, double width) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
+            ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setWidth(width);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Width updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS, "Width updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
         }
     }
 
     @Override
-    public void updateHeight(ArtworkDto artwork, double height) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+    public void updateHeight(Long id, double height) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
+            ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setHeight(height);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Height updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS, "Height updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
         }
     }
 
     @Override
-    public void updateImgUrl(ArtworkDto artwork, String url) {
-        ThreadContext.put("artwork_id", artwork.getId().toString());
+    public void updateImgUrl(Long id, String url) {
+        ThreadContext.put("artwork_id", id.toString());
         ArtworkValidator.validateImageURL(url);
         ThreadContext.clearAll();
 
 
-        /*Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
+            ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setImageURL(url);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
-        }*/
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+        }
     }
 
     @Override
-    public void updateImgSize(ArtworkDto artwork, double size) {
-        Optional<Artwork> optionalArtwork = repository.findById(artwork.getId());
+    public void updateImgSize(Long id, double size) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            Artwork existingArtwork = optionalArtwork.get();
+            ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setImageSize(size);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Image Size updated for artwork with ID: {}", artwork.getId());
+            logger.info(ARTWORK_EVENTS, "Image Size updated for artwork with ID: {}", id);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + artwork.getId());
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
         }
     }
 
 
-    public List<ArtworkDto> getArtworksByTitle(String title) {
-        Specification<Artwork> titleSpecification = (root, query, criteriaBuilder) ->
+    public List<Artwork> getArtworksByTitle(String title) {
+        Specification<ArtworkEntity> titleSpecification = (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("title"), title);
 
-        List<Artwork> list = repository.findAll((Sort) titleSpecification);
-        return (List<ArtworkDto>)list.stream().map(x -> x.convertToArtworkDto());
-        //return repository.findByTitle(title);
+        List<ArtworkEntity> list = repository.findAll((Sort) titleSpecification);
+        return (List<Artwork>) list.stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));
     }
 
 }

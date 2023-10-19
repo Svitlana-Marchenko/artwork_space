@@ -1,39 +1,53 @@
 package com.system.artworkspace.artwork;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.system.artworkspace.rating.Rating;
+import com.system.artworkspace.user.User;
+import jakarta.persistence.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-public class Artwork {
+import java.util.Set;
+
+@Entity
+public class ArtworkEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 50)
     private String title;
-
+    @Column(length = 2000)
     private String description;
     private String technique;
     private double width;
     private double height;
-    private Long artistId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User artist;
     private String imageURL;
     private double imageSize;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Rating> ratings;
 
-    public Artwork() {
+    public ArtworkEntity(User artist, String title, String description, String technique, double width, double height, String imageURL, double imageSize) {
+        this.artist = artist;
+        this.title=title;
+        this.width=width;
+        this.height=height;
+        this.imageURL=imageURL;
+        this.technique=technique;
+        this.description=description;
+        this.imageSize=imageSize;
     }
 
-    public Artwork(Long id, String title, String description, String technique, double width, double height, Long artistId, String imageURL, double imageSize) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.technique = technique;
-        this.width = width;
-        this.height = height;
-        this.artistId = artistId;
-        this.imageURL = imageURL;
-        this.imageSize = imageSize;
+
+    public ArtworkEntity(Long id) {
+        this.id=id;
     }
 
-    public ArtworkEntity convertToArtwork(){
-        return new ArtworkEntity();
+    public ArtworkEntity() {
+
+    }
+
+    public ArtworkDto convertToArtworkDto(){
+        return new ArtworkDto(id,title,description,technique,width,height, artist.getId(), imageURL,imageSize);
     }
 
     public Long getId() {
@@ -42,6 +56,14 @@ public class Artwork {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     public String getTitle() {
@@ -84,12 +106,12 @@ public class Artwork {
         this.height = height;
     }
 
-    public Long getArtistId() {
-        return artistId;
+    public User getArtist() {
+        return artist;
     }
 
-    public void setArtistId(Long artistId) {
-        this.artistId = artistId;
+    public void setArtist(User artist) {
+        this.artist = artist;
     }
 
     public String getImageURL() {
@@ -100,6 +122,7 @@ public class Artwork {
         this.imageURL = imageURL;
     }
 
+
     public double getImageSize() {
         return imageSize;
     }
@@ -108,4 +131,3 @@ public class Artwork {
         this.imageSize = imageSize;
     }
 }
-

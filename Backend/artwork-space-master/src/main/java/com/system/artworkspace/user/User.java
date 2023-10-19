@@ -1,6 +1,6 @@
 package com.system.artworkspace.user;
 
-import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class User{
     @ManyToOne
     private Role role;
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Artwork> artworks;
+    private List<ArtworkEntity> artworkEntities;
 
     public User(String username, String firstName,String lastName, String email, String password) {
         this.username = username;

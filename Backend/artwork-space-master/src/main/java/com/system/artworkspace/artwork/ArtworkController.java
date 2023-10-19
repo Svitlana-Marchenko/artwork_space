@@ -31,7 +31,7 @@ public class ArtworkController {
             logErrors(bindingResult);
         }
         logger.info("Adding artwork with ID: {}", artwork.getId());
-        ArtworkDto addedArtwork = artworkService.addArtwork(artwork);
+        ArtworkDto addedArtwork = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.addArtwork(ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork)));
         logger.info("Artwork added successfully.");
         return addedArtwork;
     }
@@ -39,7 +39,7 @@ public class ArtworkController {
     @GetMapping("/{id}")
     public ArtworkDto findArtworkById(@PathVariable Long id) {
         logger.info("Fetching artwork with ID: {}", id);
-        return artworkService.findArtworkById(id);
+        return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.findArtworkById(id));
     }
 
     @DeleteMapping("/{id}")
@@ -55,7 +55,7 @@ public class ArtworkController {
             logErrors(bindingResult);
         }
         logger.info("Updating title for artwork with ID: {}", id);
-        //artworkService.updateTitle(id, title);
+        artworkService.updateTitle(id, title);
         logger.info("Title updated for artwork with ID: {}", id);
     }
 
@@ -65,7 +65,7 @@ public class ArtworkController {
             logErrors(bindingResult);
         }
         logger.info("Updating description for artwork with ID: {}", id);
-        //artworkService.updateDescription(id, description);
+        artworkService.updateDescription(id, description);
         logger.info("Description updated for artwork with ID: {}", id);
     }
 
@@ -75,7 +75,7 @@ public class ArtworkController {
             logErrors(bindingResult);
         }
         logger.info("Updating technique for artwork with ID: {}", id);
-        //artworkService.updateTechnique(id, technique);
+        artworkService.updateTechnique(id, technique);
         logger.info("Technique updated for artwork with ID: {}", id);
     }
 
@@ -85,8 +85,10 @@ public class ArtworkController {
             logErrors(bindingResult);
         }
         logger.info("Fetching artworks with title: {}", title);
-        List<ArtworkDto> artworks = artworkService.getArtworksByTitle(title);
-        return artworks;
+        List<Artwork> artworks = (artworkService.getArtworksByTitle(title));
+
+        return (List<ArtworkDto>) artworks.stream().map(x -> ArtworkMapper.INSTANCE.artworkToArtworkDto(x));
+
     }
 
     @ExceptionHandler(NoSuchArtworkException.class)

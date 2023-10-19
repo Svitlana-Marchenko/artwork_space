@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArtworkRepository extends JpaRepository<Artwork, Long> {
+public interface ArtworkRepository extends JpaRepository<ArtworkEntity, Long> {
     //List<Artwork> findByTitle(String title);
 }

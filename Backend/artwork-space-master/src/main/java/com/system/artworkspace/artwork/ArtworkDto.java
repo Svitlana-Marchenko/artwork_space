@@ -40,8 +40,8 @@ public class ArtworkDto {
         this.imageSize = imageSize;
     }
 
-    public Artwork convertToArtwork(){
-        return new Artwork();
+    public ArtworkEntity convertToArtwork(){
+        return new ArtworkEntity();
     }
 
     public Long getId() {
