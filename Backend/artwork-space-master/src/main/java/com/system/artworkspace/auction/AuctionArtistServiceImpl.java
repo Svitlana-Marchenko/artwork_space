@@ -4,7 +4,9 @@ import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserEntity;
+import com.system.artworkspace.user.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     public Auction createAuction(Artwork artwork, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         AuctionEntity auctionEntity = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork), rating, auctionName, auctionDescription, startingPrice, step);
         auctionRepository.save(auctionEntity);
-        logger.info(AUCTIONS_EVENTS,"Created auction with ID: {}", auctionEntity.getId());
+        logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auctionEntity.getId());
         return AuctionMapper.INSTANCE.auctionEntityToAuction(auctionEntity);
     }
 
@@ -40,11 +42,11 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         return auction.map(AuctionEntity::getCurrentBid).orElse(0.0);
     }
 
-    //TODO after user mapper
     @Override
-    public UserEntity displayCurrentBuyer(Long id) {
-        logger.info(CONFIDENTIAL_EVENTS,"Displaying current buyer for auction with ID: {}", id);
-        //return (UserEntity) auction.convertToAuction().getCurrentBuyer();
+    public User displayCurrentBuyer(Long id) {
+        logger.info(CONFIDENTIAL_EVENTS, "Displaying current buyer for auction with ID: {}", id);
+        if (auctionRepository.findById(id).isPresent())
+            return UserMapper.INSTANCE.userEntityToUser(auctionRepository.findById(id).get().getCurrentBuyer());
         return null;
     }
 
@@ -55,7 +57,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
                 criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
         List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll((Sort) closingTimeSpecification);
-        logger.info(AUCTIONS_EVENTS,"Retrieved {} active auctions.", activeAuctionEntities.size());
+        logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", activeAuctionEntities.size());
         return (List<Auction>) activeAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x));
     }
 
@@ -65,13 +67,13 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         // Update the auction as closed
         //auction.setClosed(true);
         //auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
-        logger.info(AUCTIONS_EVENTS,"Closed auction with ID: {}", id);
+        logger.info(AUCTIONS_EVENTS, "Closed auction with ID: {}", id);
     }
 
     @Override
     public Auction updateName(Long id, String name) {
         Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
-        if(auctionE.isPresent()) {
+        if (auctionE.isPresent()) {
             Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
             auction.setAuctionName(name);
             auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
@@ -84,13 +86,13 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Override
     public Auction updateDescription(Long id, String newDescription) {
         Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
-        if(auctionE.isPresent()) {
+        if (auctionE.isPresent()) {
             Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
             auction.setAuctionDescription(newDescription);
             auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
             logger.info(AUCTIONS_EVENTS, "Updated auction name for auction with ID: {}", auction.getId());
             return auction;
         }
-      return null;
+        return null;
     }
 }
