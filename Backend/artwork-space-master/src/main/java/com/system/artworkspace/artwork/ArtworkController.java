@@ -28,6 +28,11 @@ public class ArtworkController {
         this.artworkService = artworkService;
     }
 
+    @GetMapping
+    public List<ArtworkDto> getAll(){
+        logger.info("Getting all artworks");
+        return (List<ArtworkDto>) artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x));
+    }
     @PostMapping
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

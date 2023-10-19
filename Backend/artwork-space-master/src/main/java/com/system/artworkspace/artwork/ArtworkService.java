@@ -5,6 +5,7 @@ import com.system.artworkspace.rating.Rating;
 import java.util.List;
 
 public interface ArtworkService {
+    List<Artwork> getAllArtwork();
     Artwork addArtwork(Artwork artwork);
     void deleteArtwork(Long artworkId);
     Artwork findArtworkById(Long id);
