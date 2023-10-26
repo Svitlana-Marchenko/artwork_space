@@ -25,12 +25,13 @@ public class UserEntity {
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArtworkEntity> artworkEntities;
 
-    public UserEntity(String username, String firstName, String lastName, String email, String password) {
+    public UserEntity(String username, String firstName, String lastName, String email, String password, Role role) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
