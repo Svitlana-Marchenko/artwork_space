@@ -190,11 +190,16 @@ public class ArtworkServiceImpl implements ArtworkService {
 
 
     public List<Artwork> getArtworksByTitle(String title) {
-        Specification<ArtworkEntity> titleSpecification = (root, query, criteriaBuilder) ->
+       /* Specification<ArtworkEntity> titleSpecification = (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("title"), title);
 
         List<ArtworkEntity> list = repository.findAll((Sort) titleSpecification);
-        return (List<Artwork>) list.stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));
+        return (List<Artwork>) list.stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));*/
+
+        Specification<Artwork> titleSpecification = (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("title"), title);
+return null;
+        //return repository.findAll(titleSpecification);
     }
 
     @Override

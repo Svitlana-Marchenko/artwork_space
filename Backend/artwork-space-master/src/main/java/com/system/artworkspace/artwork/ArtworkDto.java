@@ -21,7 +21,7 @@ public class ArtworkDto {
     @NotNull(message = "artist id is null")
     private Long artistId;
     @NotBlank(message = "image URL is blank")
-    @JsonProperty("artist_id")
+   // @JsonProperty("artist_id")
     private String imageURL;
     private double imageSize;
 
@@ -113,4 +113,3 @@ public class ArtworkDto {
         this.imageSize = imageSize;
     }
 }
-

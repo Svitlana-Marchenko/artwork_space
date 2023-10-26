@@ -32,7 +32,7 @@ public class ArtworkController {
     @GetMapping
     public List<ArtworkDto> getAll(){
         logger.info("Getting all artworks");
-        return (List<ArtworkDto>) artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
+        return artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
     }
     @PostMapping
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
@@ -59,40 +59,34 @@ public class ArtworkController {
     }
 
     @PutMapping("/{id}/title")
-    public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
-        }
+    public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title) {
+      //  if (bindingResult.hasErrors()) {
+        //    logErrors(bindingResult);
+       // }
         logger.info("Updating title for artwork with ID: {}", id);
         artworkService.updateTitle(id, title);
         logger.info("Title updated for artwork with ID: {}", id);
     }
 
     @PutMapping("/{id}/description")
-    public void updateDescription(@PathVariable Long id, @RequestParam @Valid String description, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
-        }
+    public void updateDescription(@PathVariable Long id, @RequestParam @Valid String description) {
+
         logger.info("Updating description for artwork with ID: {}", id);
         artworkService.updateDescription(id, description);
         logger.info("Description updated for artwork with ID: {}", id);
     }
 
     @PutMapping("/{id}/technique")
-    public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
-        }
+    public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique) {
+
         logger.info("Updating technique for artwork with ID: {}", id);
         artworkService.updateTechnique(id, technique);
         logger.info("Technique updated for artwork with ID: {}", id);
     }
 
     @GetMapping("/byTitle")
-    public List<ArtworkDto> getArtworksByTitle(@RequestParam @Valid String title, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
-        }
+    public List<ArtworkDto> getArtworksByTitle(@RequestParam @Valid String title) {
+
         logger.info("Fetching artworks with title: {}", title);
         List<Artwork> artworks = (artworkService.getArtworksByTitle(title));
 
