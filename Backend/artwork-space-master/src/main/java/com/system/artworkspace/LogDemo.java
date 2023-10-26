@@ -12,7 +12,7 @@ public class LogDemo {
         Logger logger = LoggerFactory.getLogger(LogDemo.class);
         logger.info("demo");
         UserServiceImpl userService = new UserServiceImpl();
-        userService.createUser(new User(123L,"aa","cc","dd","kk","kk",12L));
+       // userService.createUser(new User(123L,"aa","cc","dd","kk","kk",12L));
 
         ArtworkServiceImpl artworkService = new ArtworkServiceImpl(null);
         ArtworkDto artwork = new ArtworkDto(5050L,"t","desc","tech",100,200,3434L,"url",12);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/artworks")
@@ -31,7 +32,7 @@ public class ArtworkController {
     @GetMapping
     public List<ArtworkDto> getAll(){
         logger.info("Getting all artworks");
-        return (List<ArtworkDto>) artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x));
+        return (List<ArtworkDto>) artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
     }
     @PostMapping
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {

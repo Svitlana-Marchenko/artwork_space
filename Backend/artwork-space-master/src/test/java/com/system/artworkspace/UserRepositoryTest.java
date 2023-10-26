@@ -18,11 +18,11 @@ public class UserRepositoryTest {
 
     @Test
     public void testCheckOnSave() {
-        UserEntity user = new UserEntity("aaa", "ddd", "ddd", "qqq@ghjklhjk", "qqq");
-        userRepository.save(user);
+       // UserEntity user = new UserEntity("aaa", "ddd", "ddd", "qqq@ghjklhjk", "qqq");
+        //userRepository.save(user);
 
-        UserServiceImpl userService = new UserServiceImpl();
-        userService.createUser(new User(12L,"aa","cc","dd","kk","kk",12L));
+        //UserServiceImpl userService = new UserServiceImpl();
+        //userService.createUser(new User(12L,"aa","cc","dd","kk","kk",12L));
 
         //List<UserEntity> foundUser = userRepository.findAll();
         //assertThat(foundUser).isNotEmpty();

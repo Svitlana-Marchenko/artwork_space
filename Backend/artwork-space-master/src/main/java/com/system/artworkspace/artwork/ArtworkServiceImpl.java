@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.*;
 import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
@@ -35,7 +36,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public List<Artwork> getAllArtwork() {
-        return (List<Artwork>) repository.findAll().stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));
+        return (List<Artwork>) repository.findAll().stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
     }
 
     @Override

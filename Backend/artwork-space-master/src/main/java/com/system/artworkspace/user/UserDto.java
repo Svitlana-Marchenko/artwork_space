@@ -23,19 +23,21 @@ public class UserDto {
     @Size(max = 100)
     private String password;
 
-    private Long roleId;
+   // private Long roleId;
 
+    private Role role;
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Long roleId) {
+    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roleId = roleId;
+        //this.roleId = roleId;
+        this.role=role;
     }
     public Long getId() {
         return id;
@@ -85,11 +87,20 @@ public class UserDto {
         this.password = password;
     }
 
-    public Long getRoleId() {
-        return roleId;
+   // public Long getRoleId() {
+     //   return roleId;
+    //}
+
+   // public void setRoleId(Long roleId) {
+     //   this.roleId = roleId;
+    //}
+
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
 }
