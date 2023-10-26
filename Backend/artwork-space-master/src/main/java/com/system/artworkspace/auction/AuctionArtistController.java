@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auctions")
@@ -26,15 +27,10 @@ public class AuctionArtistController {
 
     @PostMapping
     public AuctionDto createAuction(
-            @RequestBody ArtworkDto artwork,
-            @RequestParam RatingEntity rating,
-            @RequestParam String auctionName,
-            @RequestParam String auctionDescription,
-            @RequestParam double startingPrice,
-            @RequestParam double step
+            @RequestBody AuctionDto auction
     ) {
-        logger.info("Creating an auction for artwork with ID: {}", artwork.getId());
-        AuctionDto createdAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork), rating, auctionName, auctionDescription, startingPrice, step));
+        logger.info("Creating an auction for artwork with ID: {}", auction.getArtworkId());
+        AuctionDto createdAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(AuctionMapper.INSTANCE.auctionDtoToAuction(auction)));
         logger.info("Auction created with ID: {}", createdAuction.getId());
         return createdAuction;
     }
@@ -55,7 +51,7 @@ public class AuctionArtistController {
     @GetMapping("/active")
     public List<AuctionDto> getAllActiveAuctions() {
         logger.info("Fetching all active auctions");
-        List<AuctionDto> activeAuctions = (List<AuctionDto>) auctionService.getAllActiveAuctions().stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x));
+        List<AuctionDto> activeAuctions = auctionService.getAllActiveAuctions().stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
         logger.info("Retrieved {} active auctions.", activeAuctions.size());
         return activeAuctions;
     }

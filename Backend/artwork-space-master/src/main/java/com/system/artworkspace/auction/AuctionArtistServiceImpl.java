@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
 import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_EVENTS;
@@ -27,12 +28,19 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Autowired
     private AuctionRepository auctionRepository;
 
-    @Override
+   /* @Override
     public Auction createAuction(Artwork artwork, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
         AuctionEntity auctionEntity = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork), rating, auctionName, auctionDescription, startingPrice, step);
         auctionRepository.save(auctionEntity);
         logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auctionEntity.getId());
         return AuctionMapper.INSTANCE.auctionEntityToAuction(auctionEntity);
+    }*/
+
+    @Override
+    public Auction createAuction(Auction auction) {
+        auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
+        logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auction.getId());
+        return auction;
     }
 
     @Override
@@ -56,9 +64,13 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         Specification<AuctionEntity> closingTimeSpecification = (root, query, criteriaBuilder) ->
                 criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
-        List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll((Sort) closingTimeSpecification);
+        Sort sort = Sort.by(Sort.Order.asc("closingTime"));
+        List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
+
+
+        //List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll((Sort) closingTimeSpecification);
         logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", activeAuctionEntities.size());
-        return (List<Auction>) activeAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x));
+        return activeAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x)).collect(Collectors.toList());
     }
 
     //TODO think about logic of method
