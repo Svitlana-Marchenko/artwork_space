@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public List<Artwork> getAllArtwork() {
-        return (List<Artwork>) repository.findAll().stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
+        return repository.findAll().stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
     }
 
     @Override
@@ -189,17 +190,16 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
 
+    @Override
     public List<Artwork> getArtworksByTitle(String title) {
-       /* Specification<ArtworkEntity> titleSpecification = (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("title"), title);
+        List<Artwork> allArt = getAllArtwork();
+        List<Artwork> answer = new ArrayList<>();
 
-        List<ArtworkEntity> list = repository.findAll((Sort) titleSpecification);
-        return (List<Artwork>) list.stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x));*/
-
-        Specification<Artwork> titleSpecification = (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("title"), title);
-return null;
-        //return repository.findAll(titleSpecification);
+        allArt.forEach(artwork -> {
+            if (artwork.getTitle().equals(title))
+                answer.add(artwork);
+        });
+        return answer;
     }
 
     @Override
