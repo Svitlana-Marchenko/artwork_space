@@ -67,10 +67,15 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         Sort sort = Sort.by(Sort.Order.asc("closingTime"));
         List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
 
+        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
+                .filter(entity -> entity.getClosingTime().after(currentDate))
+                .collect(Collectors.toList());
 
-        //List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll((Sort) closingTimeSpecification);
-        logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", activeAuctionEntities.size());
-        return activeAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x)).collect(Collectors.toList());
+        logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", validAuctionEntities.size());
+
+        return validAuctionEntities.stream()
+                .map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x))
+                .collect(Collectors.toList());
     }
 
     //TODO think about logic of method

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/collectioneer/auctions")
@@ -24,7 +25,7 @@ public class AuctionCollectioneerController {
     @GetMapping("/available")
     public List<AuctionDto> getAvailableAuctions() {
         logger.info("Fetching available auctions for collectioneer");
-        List<AuctionDto> availableAuctions = ( List<AuctionDto>) auctionCollectioneerService.getAvailableAuctions().stream().map(x-> AuctionMapper.INSTANCE.auctionToAuctionDto(x));
+        List<AuctionDto> availableAuctions = auctionCollectioneerService.getAvailableAuctions().stream().map(x-> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
         logger.info("Retrieved {} available auctions for collectioneer.", availableAuctions.size());
         return availableAuctions;
     }

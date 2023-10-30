@@ -1,6 +1,8 @@
 package com.system.artworkspace.auction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -9,39 +11,35 @@ import java.util.Date;
 
 public class Auction {
     private long id;
-    @NotNull
-    @Size(max = 50)
+
     private String auctionName;
-    @Size(max = 2000)
+
     private String auctionDescription;
 
-    private long artworkId;
+    private Artwork artwork;
 
-    @DecimalMin(value = "0.0")
     private double startingPrice;
 
-    @DecimalMin(value = "0.0")
     private double step;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date closingTime;
 
-    private Long currentBuyerId;
+    private User currentBuyer;
 
     private double currentBid;
 
     public Auction() {
     }
 
-    public Auction(long id, String auctionName, String auctionDescription, long artworkId, double startingPrice, double step, Date closingTime, Long currentBuyerId, double currentBid) {
+    public Auction(long id, String auctionName, String auctionDescription, Artwork artwork, double startingPrice, double step, Date closingTime, User currentBuyer, double currentBid) {
         this.id = id;
         this.auctionName = auctionName;
         this.auctionDescription = auctionDescription;
-        this.artworkId = artworkId;
+        this.artwork = artwork;
         this.startingPrice = startingPrice;
         this.step = step;
         this.closingTime = closingTime;
-        this.currentBuyerId = currentBuyerId;
+        this.currentBuyer = currentBuyer;
         this.currentBid = currentBid;
     }
 
@@ -70,12 +68,12 @@ public class Auction {
         this.auctionDescription = auctionDescription;
     }
 
-    public long getArtworkId() {
-        return artworkId;
+    public Artwork getArtwork() {
+        return artwork;
     }
 
-    public void setArtworkId(long artworkId) {
-        this.artworkId = artworkId;
+    public void setArtwork(Artwork artwork) {
+        this.artwork = artwork;
     }
 
     public double getStartingPrice() {
@@ -102,12 +100,12 @@ public class Auction {
         this.closingTime = closingTime;
     }
 
-    public Long getCurrentBuyerId() {
-        return currentBuyerId;
+    public User getCurrentBuyer() {
+        return currentBuyer;
     }
 
-    public void setCurrentBuyerId(Long currentBuyerId) {
-        this.currentBuyerId = currentBuyerId;
+    public void setCurrentBuyer(User currentBuyer) {
+        this.currentBuyer = currentBuyer;
     }
 
     public double getCurrentBid() {

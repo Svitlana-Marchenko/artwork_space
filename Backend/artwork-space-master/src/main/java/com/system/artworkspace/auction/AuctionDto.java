@@ -1,6 +1,8 @@
 package com.system.artworkspace.auction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.artwork.ArtworkDto;
+import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -16,7 +18,7 @@ public class AuctionDto {
     @Size(max = 2000)
     private String auctionDescription;
 
-    private long artworkId;
+    private ArtworkDto artwork;
 
     @DecimalMin(value = "0.0")
     private double startingPrice;
@@ -27,22 +29,22 @@ public class AuctionDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date closingTime;
 
-    private Long currentBuyerId;
+    private UserDto currentBuyer;
 
     private double currentBid;
 
     public AuctionDto() {
     }
 
-    public AuctionDto(long id, String auctionName, String auctionDescription, long artworkId, double startingPrice, double step, Date closingTime, Long currentBuyerId, double currentBid) {
+    public AuctionDto(long id, String auctionName, String auctionDescription, ArtworkDto artwork, double startingPrice, double step, Date closingTime, UserDto currentBuyer, double currentBid) {
         this.id = id;
         this.auctionName = auctionName;
         this.auctionDescription = auctionDescription;
-        this.artworkId = artworkId;
+        this.artwork = artwork;
         this.startingPrice = startingPrice;
         this.step = step;
         this.closingTime = closingTime;
-        this.currentBuyerId = currentBuyerId;
+        this.currentBuyer = currentBuyer;
         this.currentBid = currentBid;
     }
 
@@ -71,12 +73,12 @@ public class AuctionDto {
         this.auctionDescription = auctionDescription;
     }
 
-    public long getArtworkId() {
-        return artworkId;
+    public ArtworkDto getArtwork() {
+        return artwork;
     }
 
-    public void setArtworkId(long artworkId) {
-        this.artworkId = artworkId;
+    public void setArtwork(ArtworkDto artwork) {
+        this.artwork = artwork;
     }
 
     public double getStartingPrice() {
@@ -103,12 +105,12 @@ public class AuctionDto {
         this.closingTime = closingTime;
     }
 
-    public Long getCurrentBuyerId() {
-        return currentBuyerId;
+    public UserDto getCurrentBuyer() {
+        return currentBuyer;
     }
 
-    public void setCurrentBuyerId(Long currentBuyerId) {
-        this.currentBuyerId = currentBuyerId;
+    public void setCurrentBuyer(UserDto currentBuyer) {
+        this.currentBuyer = currentBuyer;
     }
 
     public double getCurrentBid() {

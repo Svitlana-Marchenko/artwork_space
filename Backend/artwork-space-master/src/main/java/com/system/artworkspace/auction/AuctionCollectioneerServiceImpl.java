@@ -8,11 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
 
@@ -27,10 +30,21 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
 
     public List<Auction> getAvailableAuctions() {
         Date currentDate = new Date();
-        Example<AuctionEntity> example = Example.of(new AuctionEntity(), ExampleMatcher.matchingAll().withIgnorePaths("closingTime"));
-        List<AuctionEntity> availableAuctionEntities = auctionRepository.findAll(example);
-        logger.info(AUCTIONS_EVENTS, "Retrieved {} available auctions.", availableAuctionEntities.size());
-        return (List<Auction>) availableAuctionEntities.stream().map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x));
+        Specification<AuctionEntity> closingTimeSpecification = (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
+
+        Sort sort = Sort.by(Sort.Order.asc("closingTime"));
+        List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
+
+        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
+                .filter(entity -> entity.getClosingTime().after(currentDate))
+                .collect(Collectors.toList());
+
+        logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", validAuctionEntities.size());
+
+        return validAuctionEntities.stream()
+                .map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x))
+                .collect(Collectors.toList());
     }
 
     @Override

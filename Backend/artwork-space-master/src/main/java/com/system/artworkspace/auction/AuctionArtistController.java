@@ -3,6 +3,7 @@ package com.system.artworkspace.auction;
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.rating.RatingEntity;
+import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserDto;
 import com.system.artworkspace.user.UserEntity;
 import com.system.artworkspace.user.UserMapper;
@@ -29,7 +30,7 @@ public class AuctionArtistController {
     public AuctionDto createAuction(
             @RequestBody AuctionDto auction
     ) {
-        logger.info("Creating an auction for artwork with ID: {}", auction.getArtworkId());
+        logger.info("Creating an auction for artwork with ID: {}", auction.getArtwork().getId());
         AuctionDto createdAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(AuctionMapper.INSTANCE.auctionDtoToAuction(auction)));
         logger.info("Auction created with ID: {}", createdAuction.getId());
         return createdAuction;
@@ -44,7 +45,8 @@ public class AuctionArtistController {
     @GetMapping("/{id}/currentBuyer")
     public UserDto displayCurrentBuyer(@PathVariable Long id) {
         logger.info("Displaying current buyer for auction with ID: {}", id);
-        return UserMapper.INSTANCE.userToUserDto(auctionService.displayCurrentBuyer(id));
+        User current = auctionService.displayCurrentBuyer(id);
+        return UserMapper.INSTANCE.userToUserDto(current);
 
     }
 
@@ -56,6 +58,7 @@ public class AuctionArtistController {
         return activeAuctions;
     }
 
+    //todo auction close
     @PutMapping("/{id}/close")
     public void closeAuction(@PathVariable Long id) {
         logger.info("Closing auction with ID: {}", id);
@@ -72,9 +75,9 @@ public class AuctionArtistController {
     }
 
     @PutMapping("/{id}/description")
-    public AuctionDto updateDescription(@PathVariable Long id, @RequestParam String newDescription) {
+    public AuctionDto updateDescription(@PathVariable Long id, @RequestParam String description) {
         logger.info("Updating auction description for auction with ID: {}", id);
-        AuctionDto updatedAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.updateDescription(id, newDescription));
+        AuctionDto updatedAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.updateDescription(id, description));
         logger.info("Auction description updated for auction with ID: {}", id);
         return updatedAuction;
     }
