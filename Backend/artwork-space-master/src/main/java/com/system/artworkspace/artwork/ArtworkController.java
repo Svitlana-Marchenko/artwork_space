@@ -90,7 +90,7 @@ public class ArtworkController {
         logger.info("Fetching artworks with title: {}", title);
         List<Artwork> artworks = (artworkService.getArtworksByTitle(title));
 
-        return (List<ArtworkDto>) artworks.stream().map(x -> ArtworkMapper.INSTANCE.artworkToArtworkDto(x));
+        return artworks.stream().map(x -> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
 
     }
 
@@ -112,10 +112,18 @@ public class ArtworkController {
         logger.info("Rating added to artwork with ID: {}", artworkId);
     }
 
+    //todo debug
     @DeleteMapping("/{artworkId}/deleteRating")
     public void deleteRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
         logger.info("Removing rating with ID {} from artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.deleteRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating removed from artwork with ID: {}", artworkId);
+    }
+
+    @GetMapping("/{artworkId}/rating")
+    public List <RatingDto> getAllRating (@PathVariable Long artworkId){
+        logger.info("Getting all rating for artwork with id "+artworkId);
+        return artworkService.getAllRating(artworkId).stream().map(x -> RatingMapper.INSTANCE.ratingToRatingDto(x)).collect(Collectors.toList());
+
     }
 }

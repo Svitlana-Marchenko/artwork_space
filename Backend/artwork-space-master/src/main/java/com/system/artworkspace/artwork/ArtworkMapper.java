@@ -2,22 +2,24 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.user.*;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
 public interface ArtworkMapper {
 
-   ArtworkMapper INSTANCE = Mappers.getMapper(ArtworkMapper.class);
+    ArtworkMapper INSTANCE = Mappers.getMapper(ArtworkMapper.class);
 
     ArtworkDto artworkToArtworkDto(Artwork artwork);
 
     Artwork artworkDtoToArtwork(ArtworkDto artworkDto);
 
-   // ArtworkEntity artworkToArtworkEntity(Artwork artwork);
+    ArtworkEntity artworkToArtworkEntity(Artwork artwork);
 
-    //Artwork artworkEntityToArtwork(ArtworkEntity artworkEntity);
+    Artwork artworkEntityToArtwork(ArtworkEntity artworkEntity);
 
+  /*
     default ArtworkEntity artworkToArtworkEntity(Artwork artwork) {
         if (artwork == null) {
             return null;
@@ -34,11 +36,14 @@ public interface ArtworkMapper {
         artworkEntity.setImageSize(artwork.getImageSize());
 
         User defUser = new User(1L, "username", "firstName", "lastName", "email", "password", Role.ARTIST);
+
+
+
         artworkEntity.setArtist(UserMapper.INSTANCE.userToUserEntity(defUser));
 
         return artworkEntity;
     }
-
+/*
     default Artwork artworkEntityToArtwork(ArtworkEntity artworkEntity) {
 
 
@@ -55,5 +60,5 @@ public interface ArtworkMapper {
 
         return artwork;
     }
-
+*/
 }

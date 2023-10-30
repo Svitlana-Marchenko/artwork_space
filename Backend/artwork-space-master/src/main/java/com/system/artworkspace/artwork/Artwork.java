@@ -1,6 +1,7 @@
 package com.system.artworkspace.artwork;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,23 +14,25 @@ public class Artwork {
     private String technique;
     private double width;
     private double height;
-    private Long artistId;
+    //private Long artistId;
+    private User artist;
     private String imageURL;
     private double imageSize;
 
     public Artwork() {
     }
 
-    public Artwork(Long id, String title, String description, String technique, double width, double height, Long artistId, String imageURL, double imageSize) {
+    public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.technique = technique;
         this.width = width;
         this.height = height;
-        this.artistId = artistId;
+        //this.artistId = artistId;
         this.imageURL = imageURL;
         this.imageSize = imageSize;
+        this.artist = artist;
     }
 
     public Long getId() {
@@ -80,12 +83,12 @@ public class Artwork {
         this.height = height;
     }
 
-    public Long getArtistId() {
-        return artistId;
+    public User getArtist() {
+        return artist;
     }
 
-    public void setArtistId(Long artistId) {
-        this.artistId = artistId;
+    public void setArtist(User artist) {
+        this.artist = artist;
     }
 
     public String getImageURL() {

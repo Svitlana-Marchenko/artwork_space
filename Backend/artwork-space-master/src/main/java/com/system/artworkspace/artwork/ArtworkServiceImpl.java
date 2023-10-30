@@ -4,6 +4,7 @@ import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.collection.CollectionEntity;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.rating.Rating;
+import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
 import com.system.artworkspace.validation.ArtworkValidator;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.*;
@@ -200,6 +202,22 @@ public class ArtworkServiceImpl implements ArtworkService {
                 answer.add(artwork);
         });
         return answer;
+    }
+
+    @Override
+    public List<Rating> getAllRating(Long id) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
+
+        if (optionalArtwork.isPresent()) {
+            ArtworkEntity existingArtwork = optionalArtwork.get();
+
+            List<RatingEntity> ratingEntities = existingArtwork.getRatings().stream().toList();
+
+            return ratingEntities.stream().map(x -> RatingMapper.INSTANCE.ratingEntityToRating(x)).collect(Collectors.toList());
+
+        } else {
+            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+        }
     }
 
     @Override
