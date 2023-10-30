@@ -3,6 +3,8 @@ package com.system.artworkspace.rating;
 import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class RatingEntity {
     @Id
@@ -56,4 +58,16 @@ public class RatingEntity {
         this.comment = comment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RatingEntity that = (RatingEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -1,11 +1,13 @@
 package com.system.artworkspace.rating;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class Rating {
     @NotNull
@@ -16,8 +18,7 @@ public class Rating {
     @Max(10)
     private double rate;
 
-    @JsonProperty("curator_id")
-    private Long curatorId;
+   private User curator;
 
     @Size(max = 5000)
     private String comment;
@@ -25,10 +26,10 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(Long id, double rate, Long curatorId, String comment) {
+    public Rating(Long id, double rate, User curator, String comment) {
         this.id = id;
         this.rate = rate;
-        this.curatorId = curatorId;
+        this.curator = curator;
         this.comment = comment;
     }
 
@@ -49,12 +50,12 @@ public class Rating {
         this.rate = rate;
     }
 
-    public Long getCuratorId() {
-        return curatorId;
+    public User getCurator() {
+        return curator;
     }
 
-    public void setCuratorId(Long curatorId) {
-        this.curatorId = curatorId;
+    public void setCurator(User curator) {
+        this.curator = curator;
     }
 
     public String getComment() {
@@ -63,5 +64,18 @@ public class Rating {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rating rating = (Rating) o;
+        return Objects.equals(id, rating.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
