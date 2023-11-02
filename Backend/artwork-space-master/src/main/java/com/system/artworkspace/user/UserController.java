@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public UserDto createUser(@RequestBody UserDto user) {
         logger.info("Creating a user with ID: {}", user.getId());
         User createdUser = userService.createUser(UserMapper.INSTANCE.userDtoToUser(user));
@@ -54,8 +54,4 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserEntity not found: " + e.getMessage());
     }
 
-    @PostMapping("/newrole")
-    public void addNewRole(@RequestBody RoleDto role){
-
-    }
 }
