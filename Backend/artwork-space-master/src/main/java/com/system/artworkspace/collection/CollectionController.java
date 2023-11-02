@@ -5,10 +5,12 @@ import com.system.artworkspace.artwork.ArtworkMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/collections")
+@PreAuthorize("hasAuthority('COLLECTIONEER')")
 public class CollectionController {
     private static final Logger logger = LoggerFactory.getLogger(CollectionController.class);
 

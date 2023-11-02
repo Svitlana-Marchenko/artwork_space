@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class ArtworkController {
         return artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
     }
     @PostMapping
+    @PreAuthorize("hasAuthority('ARTIST')")
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logErrors(bindingResult);
@@ -52,6 +54,7 @@ public class ArtworkController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ARTIST')")
     public void deleteArtwork(@PathVariable Long id) {
         logger.info("Deleting artwork with ID: {}", id);
         artworkService.deleteArtwork(id);
@@ -59,6 +62,7 @@ public class ArtworkController {
     }
 
     @PutMapping("/{id}/title")
+    @PreAuthorize("hasAuthority('ARTIST')")
     public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title) {
       //  if (bindingResult.hasErrors()) {
         //    logErrors(bindingResult);
@@ -69,6 +73,7 @@ public class ArtworkController {
     }
 
     @PutMapping("/{id}/description")
+    @PreAuthorize("hasAuthority('ARTIST')")
     public void updateDescription(@PathVariable Long id, @RequestParam @Valid String description) {
 
         logger.info("Updating description for artwork with ID: {}", id);
@@ -77,6 +82,7 @@ public class ArtworkController {
     }
 
     @PutMapping("/{id}/technique")
+    @PreAuthorize("hasAuthority('ARTIST')")
     public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique) {
 
         logger.info("Updating technique for artwork with ID: {}", id);
@@ -106,6 +112,7 @@ public class ArtworkController {
         }
     }
     @PostMapping("/{artworkId}/addRating")
+    @PreAuthorize("hasAuthority('CURATOR')")
     public void addRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
         logger.info("Adding rating with ID {} to artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.addRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
@@ -114,6 +121,7 @@ public class ArtworkController {
 
     //todo debug
     @DeleteMapping("/{artworkId}/deleteRating")
+    @PreAuthorize("hasAuthority('CURATOR')")
     public void deleteRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
         logger.info("Removing rating with ID {} from artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.deleteRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));

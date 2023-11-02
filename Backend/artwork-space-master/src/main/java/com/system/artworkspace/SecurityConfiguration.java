@@ -23,10 +23,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/users/**"))
+                        .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**"))
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/users/**").permitAll()
-                        //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        .requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")

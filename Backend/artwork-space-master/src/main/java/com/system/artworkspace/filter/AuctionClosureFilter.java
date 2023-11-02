@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-@WebFilter("/collectioneer/auctions/*")
+@WebFilter("/collectioneer/auctions/**")
 public class AuctionClosureFilter implements Filter {
     private AuctionCollectioneerServiceImpl auctionService;
     private final Logger logger = LoggerFactory.getLogger(AuctionClosureFilter.class);

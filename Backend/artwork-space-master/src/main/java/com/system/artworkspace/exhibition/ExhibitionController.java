@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class ExhibitionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CURATOR')")
     public ExhibitionDto createExhibition(
         @RequestBody @Valid ExhibitionDto exhibition,
         BindingResult bindingResult
@@ -43,6 +45,7 @@ public class ExhibitionController {
     }
 
     @PostMapping("/{exhibitionId}/addArtwork")
+    @PreAuthorize("hasAuthority('CURATOR')")
     public void addToExhibition(
             @PathVariable Long exhibitionId,
             @RequestBody @Valid ArtworkDto artwork,
@@ -57,6 +60,7 @@ public class ExhibitionController {
     }
 
     @PutMapping("/{exhibitionId}/changeDates")
+    @PreAuthorize("hasAuthority('CURATOR')")
     public void changeDates(
             @PathVariable Long exhibitionId,
             @RequestParam @Valid Date startDate,
@@ -72,6 +76,7 @@ public class ExhibitionController {
     }
 
     @DeleteMapping("/{exhibitionId}/removeArtwork")
+    @PreAuthorize("hasRole('CURATOR')")
     public void deleteFromExhibition(
             @PathVariable Long exhibitionId,
             @RequestBody ArtworkDto artwork
@@ -82,6 +87,7 @@ public class ExhibitionController {
     }
 
     @PutMapping("/{exhibitionId}/editName")
+    @PreAuthorize("hasRole('CURATOR')")
     public void editName(
             @PathVariable Long exhibitionId,
             @RequestParam String name
@@ -92,6 +98,7 @@ public class ExhibitionController {
     }
 
     @PutMapping("/{exhibitionId}/editDescription")
+    @PreAuthorize("hasRole('CURATOR')")
     public void editDescription(
             @PathVariable Long exhibitionId,
             @RequestParam String description
@@ -108,6 +115,7 @@ public class ExhibitionController {
     }
 
     @DeleteMapping("/{exhibitionId}")
+    @PreAuthorize("hasRole('CURATOR')")
     public void deleteExhibition(@PathVariable Long exhibitionId) {
         logger.info("Deleting exhibition with ID: {}", exhibitionId);
         exhibitionService.deleteExhibition(exhibitionId);
