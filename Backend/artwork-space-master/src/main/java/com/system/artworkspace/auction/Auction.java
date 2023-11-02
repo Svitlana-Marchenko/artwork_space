@@ -1,12 +1,8 @@
 package com.system.artworkspace.auction;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Auction {
@@ -114,6 +110,11 @@ public class Auction {
 
     public void setCurrentBid(double currentBid) {
         this.currentBid = currentBid;
+    }
+
+    public boolean isClosed() {
+        Date currentDate = new Date();
+        return closingTime != null && currentDate.after(closingTime);
     }
 }
 

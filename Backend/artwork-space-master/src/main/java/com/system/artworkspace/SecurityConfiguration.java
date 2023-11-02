@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                         .ignoringRequestMatchers("/users/**"))
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/users/**").permitAll()
-                        .requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")

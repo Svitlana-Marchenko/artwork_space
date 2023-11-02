@@ -13,4 +13,6 @@ public interface AuctionCollectioneerService {
     double getCurrentBid(Long id);
 
     Artwork getArtworkFromAuction (Long id);
+
+    Auction getAuctionByPaintingId(Long paintingId);
 }

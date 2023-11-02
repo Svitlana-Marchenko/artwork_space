@@ -1,13 +1,14 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.artwork.*;
+import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkEntity;
+import com.system.artworkspace.artwork.ArtworkMapper;
+import com.system.artworkspace.artwork.ArtworkRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -76,4 +77,26 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
         }
         return ArtworkMapper.INSTANCE.artworkEntityToArtwork(artwork);
     }
+
+    @Override
+    public Auction getAuctionByPaintingId(Long paintingId) {
+        ArtworkEntity artwork = artworkRepository.findById(paintingId).orElse(null);
+
+        if (artwork != null) {
+            Long auctionId = artwork.getId();
+
+            AuctionEntity auctionEntity = auctionRepository.findById(auctionId)
+                    .orElseThrow(() -> new EntityNotFoundException("Auction not found for painting with ID: " + paintingId));
+
+            Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionEntity);
+
+            logger.info(AUCTIONS_EVENTS, "Retrieved auction for painting with ID: {}", paintingId);
+
+            return auction;
+        } else {
+            logger.warn(AUCTIONS_EVENTS, "Artwork not found for painting with ID: {}", paintingId);
+            return null;
+        }
+    }
+
 }
