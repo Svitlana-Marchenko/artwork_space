@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Images</title>
+</head>
+<body>
+<h1>List of All Images</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Technique</th>
+        <!-- Додайте інші заголовки стовпців, які вам потрібні -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="image : ${images}">
+        <td th:text="${image.title}"></td>
+        <td th:text="${image.description}"></td>
+        <td th:text="${image.technique}"></td>
+        <!-- Додайте інші стовпці з відомостями про картини, які вам потрібні -->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
