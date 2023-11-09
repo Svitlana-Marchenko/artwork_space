@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <title>All Images</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -9,7 +11,9 @@
     <div>
         <img src="logo/logo.png" alt="logo" width="100" class="d-inline">
         <h1 class="mt-5 d-inline">Список картин</h1>
-
+        <div sec:authorize="hasAuthority('ARTIST')">
+            <a th:href="@{/image/new}" class="btn btn-primary">Додати нову картину</a>
+        </div>
     </div>
 
     <table class="table mt-3">
@@ -22,7 +26,9 @@
         <tbody>
         <tr th:each="image : ${images}">
             <td>
+                <a th:href="@{'/image/' + ${image.id}}">
                 <img th:src="${image.imageURL}" alt="Картинка" class="img-thumbnail" width="300"  />
+                </a>
             </td>
             <td>
                 <div>
