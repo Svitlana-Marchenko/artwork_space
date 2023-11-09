@@ -10,13 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserInfoUserDetails implements UserDetails {
-
+    private UserEntity user;
     private String name;
     private String password;
     private List<GrantedAuthority> authorities;
 
     public UserInfoUserDetails(UserEntity user) {
         name=user.getUsername();
+        this.user = user;
         password=user.getPassword();
         authorities= Collections.singletonList(new SimpleGrantedAuthority(user.getRole().toString()));
    System.out.println(authorities.get(0));
@@ -37,7 +38,6 @@ public class UserInfoUserDetails implements UserDetails {
     public String getUsername() {
         return name;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -56,5 +56,9 @@ public class UserInfoUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserEntity getUser() {
+        return user;
     }
 }
