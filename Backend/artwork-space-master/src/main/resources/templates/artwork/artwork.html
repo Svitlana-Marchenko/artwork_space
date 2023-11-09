@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${picture.title}">Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<h1 th:text="${picture.title}"></h1>
+<p th:text="${picture.description}"></p>
+<p th:text="${picture.technique}"></p>
+<p th:text="${picture.width + ' x ' + picture.height}"></p>
+<p th:text="${picture.artist.username}"></p>
+<img th:src="${picture.imageURL}" alt="Картинка" class="img-thumbnail" width="300"  />
+
+<p th:if="${#authorization.expression('isAuthenticated()')}">
+        <span th:if="${#authorization.expression('hasRole(''ARTIST'')')}">
+            <a th:href="@{/editPicture/{id}(id=${picture.id})}">Edit Picture</a>
+            <a th:href="@{/deletePicture/{id}(id=${picture.id})}">Delete Picture</a>
+        </span>
+    <span th:if="${#authorization.expression('hasRole(''CURATOR'')')}">
+            <a th:href="@{/addReview/{id}(id=${picture.id})}">Add Review</a>
+        </span>
+    <span th:if="${#authorization.expression('hasRole(''COLLECTIONEER'')')}">
+            <a th:href="@{/addToCollection/{id}(id=${picture.id})}">Add to Collection</a>
+            <a th:href="@{/placeBid/{id}(id=${picture.id})}">Place Bid</a>
+        </span>
+</p>
+</body>
+</html>
