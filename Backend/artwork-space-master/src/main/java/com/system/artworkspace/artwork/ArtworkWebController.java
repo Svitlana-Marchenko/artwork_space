@@ -82,7 +82,7 @@ public class ArtworkWebController {
 
             artworkService.addArtwork(artwork);
 
-            return "redirect:/pictures/success";
+            return "redirect:/all-images";
         } catch (IOException e) {
             model.addAttribute("error", "Error uploading image.");
             logger.error(e.getMessage());
