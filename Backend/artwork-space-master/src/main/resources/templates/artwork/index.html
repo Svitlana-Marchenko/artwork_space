@@ -2,26 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>All Images</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<h1>List of All Images</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Technique</th>
-        <!-- Додайте інші заголовки стовпців, які вам потрібні -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="image : ${images}">
-        <td th:text="${image.title}"></td>
-        <td th:text="${image.description}"></td>
-        <td th:text="${image.technique}"></td>
-        <!-- Додайте інші стовпці з відомостями про картини, які вам потрібні -->
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div>
+        <img src="logo/logo.png" alt="logo" width="100" class="d-inline">
+        <h1 class="mt-5 d-inline">Список картин</h1>
+
+    </div>
+
+    <table class="table mt-3">
+        <thead class="thead-dark">
+        <tr>
+            <th>Картина</th>
+            <th>Інформація</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="image : ${images}">
+            <td>
+                <img th:src="${image.imageURL}" alt="Картинка" class="img-thumbnail" width="300"  />
+            </td>
+            <td>
+                <div>
+                    <strong>Назва:</strong> <span th:text="${image.title}"></span>
+                </div>
+                <div>
+                    <strong>Автор:</strong> <span th:text="${image.artist.firstName + ' ' + image.artist.lastName}"></span>
+                </div>
+                <div>
+                    <strong>Опис:</strong> <span th:text="${image.description}"></span>
+                </div>
+                <div>
+                    <strong>Техніка:</strong> <span th:text="${image.technique}"></span>
+                </div>
+                <div>
+                    <strong>Розмір:</strong> <span th:text="${image.width + 'x' + image.height}"></span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
