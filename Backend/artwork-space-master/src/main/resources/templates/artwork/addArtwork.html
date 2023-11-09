@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add New Artwork</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Добавити нову картину</h1>
+
+    <form th:action="@{/image/new}" method="post" enctype="multipart/form-data" class="mt-4">
+        <!-- Title -->
+        <div class="form-group">
+            <label for="title">Назва:</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="${artworkForm.title}"  required>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Опис:</label>
+            <textarea class="form-control" id="description" name="description" rows="3" th:field="${artworkForm.description}" required></textarea>
+        </div>
+
+        <!-- Technique -->
+        <div class="form-group">
+            <label for="technique">Техніка виконання:</label>
+            <input type="text" class="form-control" id="technique" name="technique" th:field="${artworkForm.technique}" >
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="width">Ширина:</label>
+                <input type="text" class="form-control" id="width" name="width" th:field="${artworkForm.width}" required pattern="[0-9]+">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="height">Висота:</label>
+                <input type="text" class="form-control" id="height" name="height" th:field="${artworkForm.height}" required pattern="[0-9]+">
+            </div>
+        </div>
+        <!-- Image -->
+        <div class="form-group">
+            <label for="image">Зображення:</label>
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*" th:field="${artworkForm.imageFile}" required>
+        </div>
+
+        <!-- Width and Height -->
+
+
+
+        <button type="submit" class="btn btn-primary">Добавити</button>
+    </form>
+</div>
+
+</body>
+</html>
