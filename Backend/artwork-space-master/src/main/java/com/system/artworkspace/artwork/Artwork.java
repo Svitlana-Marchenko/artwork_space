@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class Artwork {
     private Long id;
     private String title;
-
+//for test
     private String description;
     private String technique;
     private double width;
