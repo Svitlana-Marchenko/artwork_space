@@ -77,7 +77,7 @@ public class ArtworkWebController {
             artwork.setTechnique(pictureForm.getTechnique());
             artwork.setWidth(Integer.parseInt(pictureForm.getWidth()));
             artwork.setHeight(Integer.parseInt(pictureForm.getHeight()));
-            artwork.setArtist(UserMapper.INSTANCE.userEntityToUser(user));
+            artwork.setUser(UserMapper.INSTANCE.userEntityToUser(user));
             artwork.setImageURL("images/" + imageFile.getOriginalFilename());
 
             artworkService.addArtwork(artwork);

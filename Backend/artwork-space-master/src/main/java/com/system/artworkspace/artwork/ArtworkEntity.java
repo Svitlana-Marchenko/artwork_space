@@ -20,14 +20,14 @@ public class ArtworkEntity {
     private double height;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity artist;
+    private UserEntity user;
     private String imageURL;
     private double imageSize;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RatingEntity> ratings;
 
     public ArtworkEntity(UserEntity artist, String title, String description, String technique, double width, double height, String imageURL, double imageSize) {
-        this.artist = artist;
+        this.user = artist;
         this.title=title;
         this.width=width;
         this.height=height;
@@ -102,12 +102,12 @@ public class ArtworkEntity {
         this.height = height;
     }
 
-    public UserEntity getArtist() {
-        return artist;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setArtist(UserEntity artist) {
-        this.artist = artist;
+    public void setUser(UserEntity artist) {
+        this.user = artist;
     }
 
     public String getImageURL() {
@@ -117,7 +117,6 @@ public class ArtworkEntity {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
 
     public double getImageSize() {
         return imageSize;

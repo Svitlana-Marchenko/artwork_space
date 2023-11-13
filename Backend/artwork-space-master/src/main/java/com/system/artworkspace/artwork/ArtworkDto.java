@@ -1,6 +1,5 @@
 package com.system.artworkspace.artwork;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.NotBlank;
@@ -20,10 +19,8 @@ public class ArtworkDto {
     private double width;
     private double height;
     @NotNull(message = "artist id is null")
-    private UserDto artist;
-    //private Long artistId;
+    private UserDto user;
     @NotBlank(message = "image URL is blank")
-   // @JsonProperty("artist_id")
     private String imageURL;
     private double imageSize;
 
@@ -37,8 +34,7 @@ public class ArtworkDto {
         this.technique = technique;
         this.width = width;
         this.height = height;
-        //this.artistId = artistId;
-        this.artist=artist;
+        this.user =artist;
         this.imageURL = imageURL;
         this.imageSize = imageSize;
     }
@@ -92,12 +88,12 @@ public class ArtworkDto {
         this.height = height;
     }
 
-    public UserDto getArtist() {
-        return artist;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setArtist(UserDto artist) {
-        this.artist = artist;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public String getImageURL() {
