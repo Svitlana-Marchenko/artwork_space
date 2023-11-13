@@ -1,6 +1,5 @@
 package com.system.artworkspace.rating;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.Max;
@@ -18,7 +17,7 @@ public class RatingDto {
     @Max(10)
     private double rate;
 
-    private UserDto curator;
+    private UserDto user;
 
     @Size(max = 5000)
     private String comment;
@@ -29,7 +28,7 @@ public class RatingDto {
     public RatingDto(Long id, double rate, UserDto curator, String comment) {
         this.id = id;
         this.rate = rate;
-        this.curator = curator;
+        this.user = curator;
         this.comment = comment;
     }
 
@@ -50,12 +49,12 @@ public class RatingDto {
         this.rate = rate;
     }
 
-    public UserDto getCurator() {
-        return curator;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setCurator(UserDto curator) {
-        this.curator = curator;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public String getComment() {

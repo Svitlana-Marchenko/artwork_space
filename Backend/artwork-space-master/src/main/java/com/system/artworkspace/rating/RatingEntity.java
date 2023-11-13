@@ -12,7 +12,7 @@ public class RatingEntity {
     private Long id;
     private double rate;
     @ManyToOne
-    private UserEntity curator;
+    private UserEntity user;
     @Column(length = 2000)
     private String comment;
 
@@ -26,7 +26,7 @@ public class RatingEntity {
 
     public RatingEntity(double rate, UserEntity curator, String comment) {
         this.rate = rate;
-        this.curator = curator;
+        this.user = curator;
         this.comment = comment;
     }
 
@@ -42,12 +42,12 @@ public class RatingEntity {
         this.rate = rate;
     }
 
-    public UserEntity getCurator() {
-        return curator;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setCurator(UserEntity curator) {
-        this.curator = curator;
+    public void setUser(UserEntity curator) {
+        this.user = curator;
     }
 
     public String getComment() {
