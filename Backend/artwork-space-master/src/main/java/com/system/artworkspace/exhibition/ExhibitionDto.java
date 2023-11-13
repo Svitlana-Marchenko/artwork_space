@@ -16,7 +16,7 @@ public class ExhibitionDto {
 
     @Size(max = 50, message = "name is longer than 50")
     @NotBlank(message = "name is blank")
-    private String name;
+    private String title;
 
     @Size(max = 2000, message = "description is longer than 2000")
     @NotBlank(message = "description is blank")
@@ -37,7 +37,7 @@ public class ExhibitionDto {
     public ExhibitionDto(Long id, Long curatorId, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
         this.id = id;
         this.curatorId = curatorId;
-        this.name = name;
+        this.title = name;
         this.description = description;
         this.artworkIds = artworkIds;
         this.startDate = startDate;
@@ -61,12 +61,12 @@ public class ExhibitionDto {
         this.curatorId = curatorId;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

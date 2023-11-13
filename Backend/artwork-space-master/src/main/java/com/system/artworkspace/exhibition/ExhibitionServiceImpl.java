@@ -93,7 +93,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
         if (optionalExhibition.isPresent()) {
             ExhibitionEntity existingExhibition = optionalExhibition.get();
-            existingExhibition.setName(newName);
+            existingExhibition.setTitle(newName);
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Edited exhibition name for exhibition with ID: {}", id);
         } else {

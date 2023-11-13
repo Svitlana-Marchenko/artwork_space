@@ -6,14 +6,15 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+
 @Entity
 public class ExhibitionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-@ManyToOne
+    @ManyToOne
     private UserEntity curator;
-    private String name;
+    private String title;
     @Column(length = 2000)
     private String description;
     @OneToMany
@@ -26,7 +27,7 @@ public class ExhibitionEntity {
 
     public ExhibitionEntity(UserEntity curator, String name, String description, List<ArtworkEntity> artworkEntities, Date startDate, Date endDate) {
         this.curator = curator;
-        this.name = name;
+        this.title = name;
         this.description = description;
         this.artworkEntities = artworkEntities;
         this.startDate = startDate;
@@ -36,7 +37,6 @@ public class ExhibitionEntity {
     public ExhibitionEntity() {
 
     }
-
 
     public Long getId() {
         return id;
@@ -66,13 +66,12 @@ public class ExhibitionEntity {
         return curator;
     }
 
-
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public List<ArtworkEntity> getArtworks() {

@@ -14,7 +14,7 @@ public class Exhibition {
 
     @Size(max = 50, message = "name is longer than 50")
     @NotBlank(message = "name is blank")
-    private String name;
+    private String title;
 
     @Size(max = 2000, message = "description is longer than 2000")
     @NotBlank(message = "description is blank")
@@ -35,7 +35,7 @@ public class Exhibition {
     public Exhibition(Long id, Long curatorId, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
         this.id = id;
         this.curatorId = curatorId;
-        this.name = name;
+        this.title = name;
         this.description = description;
         this.artworkIds = artworkIds;
         this.startDate = startDate;
@@ -60,11 +60,11 @@ public class Exhibition {
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.title = name;
     }
 
     public String getDescription() {
