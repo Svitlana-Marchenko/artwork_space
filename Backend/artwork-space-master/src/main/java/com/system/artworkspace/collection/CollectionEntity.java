@@ -12,7 +12,7 @@ public class CollectionEntity {
     private Long id;
     @ManyToOne
     private UserEntity owner;
-    private String name;
+    private String title;
     @ManyToMany
     private List<ArtworkEntity> artworkEntities;
 
@@ -38,13 +38,12 @@ public class CollectionEntity {
         return owner;
     }
 
-
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public List<ArtworkEntity> getArtworks() {

@@ -88,7 +88,7 @@ public class CollectionServiceImpl implements CollectionService{
         Optional<CollectionEntity> optionalCollection = repository.findById(id);
         if (optionalCollection.isPresent()) {
             CollectionEntity existingCollectionEntity = optionalCollection.get();
-            existingCollectionEntity.setName(name);
+            existingCollectionEntity.setTitle(name);
             repository.save(existingCollectionEntity);
             logger.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", id);
         } else {

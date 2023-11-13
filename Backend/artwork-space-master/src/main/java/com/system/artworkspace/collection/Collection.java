@@ -12,7 +12,7 @@ public class Collection {
     private Long ownerId;
 
     @Size(max = 100)
-    private String name;
+    private String title;
 
     @NotEmpty
     private List<Long> artworkIds;
@@ -23,7 +23,7 @@ public class Collection {
     public Collection(Long id, Long ownerId, String name, List<Long> artworkIds) {
         this.id = id;
         this.ownerId = ownerId;
-        this.name = name;
+        this.title = name;
         this.artworkIds = artworkIds;
     }
 
@@ -44,12 +44,12 @@ public class Collection {
         this.ownerId = ownerId;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<Long> getArtworkIds() {
