@@ -5,12 +5,16 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
+import com.system.artworkspace.user.User;
+import com.system.artworkspace.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -26,6 +30,8 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
     private AuctionRepository auctionRepository;
     @Autowired
     private ArtworkRepository artworkRepository;
+    @Autowired
+    private UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
@@ -54,6 +60,10 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
                 .orElseThrow(() -> new EntityNotFoundException("Auction not found with ID: " + id));
         Auction auc = AuctionMapper.INSTANCE.auctionEntityToAuction(auction);
         auc.setCurrentBid(bidAmount);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+        User user = userService.getUserByUsername(userId);
+        auc.setUser(user);
         auction = AuctionMapper.INSTANCE.auctionToAuctionEntity(auc);
         auctionRepository.save(auction);
         logger.info(AUCTIONS_EVENTS, "Placed bid for auction with ID: {}. Bid amount: {}", id, bidAmount);

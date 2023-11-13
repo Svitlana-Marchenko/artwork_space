@@ -8,9 +8,9 @@ import java.util.Date;
 public class Auction {
     private long id;
 
-    private String auctionName;
+    private String title;
 
-    private String auctionDescription;
+    private String description;
 
     private Artwork artwork;
 
@@ -27,10 +27,10 @@ public class Auction {
     public Auction() {
     }
 
-    public Auction(long id, String auctionName, String auctionDescription, Artwork artwork, double startingPrice, double step, Date closingTime, User currentBuyer, double currentBid) {
+    public Auction(long id, String title, String description, Artwork artwork, double startingPrice, double step, Date closingTime, User currentBuyer, double currentBid) {
         this.id = id;
-        this.auctionName = auctionName;
-        this.auctionDescription = auctionDescription;
+        this.title = title;
+        this.description = description;
         this.artwork = artwork;
         this.startingPrice = startingPrice;
         this.step = step;
@@ -48,20 +48,20 @@ public class Auction {
         this.id = id;
     }
 
-    public String getAuctionName() {
-        return auctionName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAuctionName(String auctionName) {
-        this.auctionName = auctionName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAuctionDescription() {
-        return auctionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuctionDescription(String auctionDescription) {
-        this.auctionDescription = auctionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Artwork getArtwork() {
@@ -96,11 +96,11 @@ public class Auction {
         this.closingTime = closingTime;
     }
 
-    public User getCurrentBuyer() {
+    public User getUser() {
         return currentBuyer;
     }
 
-    public void setCurrentBuyer(User currentBuyer) {
+    public void setUser(User currentBuyer) {
         this.currentBuyer = currentBuyer;
     }
 

@@ -1,11 +1,7 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.ArtworkMapper;
-import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.User;
-import com.system.artworkspace.user.UserEntity;
 import com.system.artworkspace.user.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +50,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     public User displayCurrentBuyer(Long id) {
         logger.info(CONFIDENTIAL_EVENTS, "Displaying current buyer for auction with ID: {}", id);
         if (auctionRepository.findById(id).isPresent())
-            return UserMapper.INSTANCE.userEntityToUser(auctionRepository.findById(id).get().getCurrentBuyer());
+            return UserMapper.INSTANCE.userEntityToUser(auctionRepository.findById(id).get().getUser());
         return null;
     }
 
@@ -92,7 +88,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
         if (auctionE.isPresent()) {
             Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
-            auction.setAuctionName(name);
+            auction.setTitle(name);
             auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
             logger.info(AUCTIONS_EVENTS, "Updated auction name for auction with ID: {}", auction.getId());
             return auction;
@@ -105,7 +101,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
         if (auctionE.isPresent()) {
             Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
-            auction.setAuctionDescription(newDescription);
+            auction.setDescription(newDescription);
             auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
             logger.info(AUCTIONS_EVENTS, "Updated auction name for auction with ID: {}", auction.getId());
             return auction;

@@ -67,10 +67,10 @@ public class AuctionArtistController {
         logger.info("Auction closed with ID: {}", id);
     }
 
-    @PutMapping("/{id}/name")
-    public AuctionDto updateName(@PathVariable Long id, @RequestParam String name) {
+    @PutMapping("/{id}/title")
+    public AuctionDto updateName(@PathVariable Long id, @RequestParam String title) {
         logger.info("Updating auction name for auction with ID: {}", id);
-        AuctionDto updatedAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.updateName(id, name));
+        AuctionDto updatedAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.updateName(id, title));
         logger.info("Auction name updated for auction with ID: {}", id);
         return updatedAuction;
     }

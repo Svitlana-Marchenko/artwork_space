@@ -13,7 +13,7 @@ public class AuctionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String auctionName;
+    private String title;
     @Column(length = 2000)
     private String auctionDescription;
     @OneToOne
@@ -24,11 +24,11 @@ public class AuctionEntity {
     @Temporal(TemporalType.DATE)
     private Date closingTime;
     @ManyToOne
-    private UserEntity currentBuyer;
+    private UserEntity user;
     private double currentBid;
     public AuctionEntity(){}
     public AuctionEntity(ArtworkEntity artworkEntity, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
-        this.auctionName = auctionName;
+        this.title = auctionName;
         this.auctionDescription = auctionDescription;
         this.artworkEntity = artworkEntity;
         this.startingPrice = startingPrice;
@@ -38,13 +38,13 @@ public class AuctionEntity {
     @Override
     public String toString() {
         return "Auction{" +
-                ", auctionName='" + auctionName + '\'' +
+                ", auctionName='" + title+ '\'' +
                 ", auctionDescription='" + auctionDescription + '\'' +
                 ", artwork=" + artworkEntity +
                 ", startingPrice=" + startingPrice +
                 ", step=" + step +
                 ", closingTime=" + closingTime +
-                ", currentBuyer=" + currentBuyer +
+                ", currentBuyer=" + user +
                 ", currentPrice=" + currentBid +
                 '}';
     }
@@ -58,20 +58,20 @@ public class AuctionEntity {
         this.id = id;
     }
 
-    public UserEntity getCurrentBuyer() {
-        return currentBuyer;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setCurrentBuyer(UserEntity currentBuyer) {
-        this.currentBuyer = currentBuyer;
+    public void setUser(UserEntity currentBuyer) {
+        this.user = currentBuyer;
     }
 
-    public String getAuctionName() {
-        return auctionName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAuctionName(String auctionName) {
-        this.auctionName = auctionName;
+    public void setTitle(String auctionName) {
+        this.title = auctionName;
     }
 
     public String getAuctionDescription() {

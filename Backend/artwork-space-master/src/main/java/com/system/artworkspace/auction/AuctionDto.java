@@ -13,10 +13,10 @@ public class AuctionDto {
     private long id;
     @NotNull
     @Size(max = 50)
-    private String auctionName;
+    private String title;
 
     @Size(max = 2000)
-    private String auctionDescription;
+    private String description;
 
     private ArtworkDto artwork;
 
@@ -29,7 +29,7 @@ public class AuctionDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date closingTime;
 
-    private UserDto currentBuyer;
+    private UserDto user;
 
     private double currentBid;
 
@@ -38,13 +38,13 @@ public class AuctionDto {
 
     public AuctionDto(long id, String auctionName, String auctionDescription, ArtworkDto artwork, double startingPrice, double step, Date closingTime, UserDto currentBuyer, double currentBid) {
         this.id = id;
-        this.auctionName = auctionName;
-        this.auctionDescription = auctionDescription;
+        this.title = auctionName;
+        this.description = auctionDescription;
         this.artwork = artwork;
         this.startingPrice = startingPrice;
         this.step = step;
         this.closingTime = closingTime;
-        this.currentBuyer = currentBuyer;
+        this.user = currentBuyer;
         this.currentBid = currentBid;
     }
 
@@ -57,20 +57,20 @@ public class AuctionDto {
         this.id = id;
     }
 
-    public String getAuctionName() {
-        return auctionName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAuctionName(String auctionName) {
-        this.auctionName = auctionName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAuctionDescription() {
-        return auctionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuctionDescription(String auctionDescription) {
-        this.auctionDescription = auctionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ArtworkDto getArtwork() {
@@ -105,12 +105,12 @@ public class AuctionDto {
         this.closingTime = closingTime;
     }
 
-    public UserDto getCurrentBuyer() {
-        return currentBuyer;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setCurrentBuyer(UserDto currentBuyer) {
-        this.currentBuyer = currentBuyer;
+    public void setUser(UserDto currentBuyer) {
+        this.user = currentBuyer;
     }
 
     public double getCurrentBid() {
