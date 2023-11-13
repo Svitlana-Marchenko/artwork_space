@@ -8,5 +8,7 @@ public interface UserService {
     void deleteUser(Long userId);
 
     User getUserById(Long userId);
+
+User getUserByUsername(String username);
 }
 

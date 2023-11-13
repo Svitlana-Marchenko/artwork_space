@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_USER_EVENTS;
 import static com.system.artworkspace.logger.LoggingMarkers.USER_ACTIONS;
 
@@ -54,5 +56,14 @@ public class UserServiceImpl implements UserService {
             logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", userId);
         }
         return UserMapper.INSTANCE.userEntityToUser(user);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        Optional<UserEntity> user = userRepository.findByUsername(username);
+        if(user.isPresent()){
+            return UserMapper.INSTANCE.userEntityToUser(user.get());
+        }
+        return null;
     }
 }

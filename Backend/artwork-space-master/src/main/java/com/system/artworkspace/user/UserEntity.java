@@ -22,7 +22,7 @@ public class UserEntity {
     //private RoleEntity role;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArtworkEntity> artworkEntities;
 
     public UserEntity(String username, String firstName, String lastName, String email, String password, Role role) {
