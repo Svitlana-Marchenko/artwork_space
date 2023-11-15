@@ -1,4 +1,4 @@
-package com.system.artworkspace;
+package com.system.artworkspace.security;
 
 import com.system.artworkspace.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;

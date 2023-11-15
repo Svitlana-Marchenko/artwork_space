@@ -1,9 +1,8 @@
-package com.system.artworkspace;
+package com.system.artworkspace.security;
 
 import com.system.artworkspace.user.UserEntity;
 import com.system.artworkspace.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
