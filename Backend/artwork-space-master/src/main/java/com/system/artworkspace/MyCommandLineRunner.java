@@ -8,6 +8,9 @@ import com.system.artworkspace.auction.Auction;
 import com.system.artworkspace.auction.AuctionArtistService;
 import com.system.artworkspace.auction.AuctionEntity;
 import com.system.artworkspace.auction.AuctionMapper;
+import com.system.artworkspace.collection.CollectionEntity;
+import com.system.artworkspace.collection.CollectionMapper;
+import com.system.artworkspace.collection.CollectionService;
 import com.system.artworkspace.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,6 +25,9 @@ public class MyCommandLineRunner implements CommandLineRunner {
     UserRepository repo;
     @Autowired
     UserService userService;
+    @Autowired
+    CollectionService collectionService;
+
     @Autowired
     ArtworkService artworkService;
     @Autowired
@@ -56,6 +62,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(1L)), "auction", "description", 0.0, 10);
 
         auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa1));
+
+        CollectionEntity collectionEntity1 = new CollectionEntity("Coll1",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+        CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
+        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
+
     }
 
 
