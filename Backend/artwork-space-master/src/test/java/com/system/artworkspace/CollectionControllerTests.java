@@ -16,19 +16,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Collections;
-
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(CollectionController.class)
 public class CollectionControllerTests {
 
@@ -40,11 +32,8 @@ public class CollectionControllerTests {
 
     @MockBean
     private CollectionService collectionService;
-    @Autowired
-    private WebApplicationContext context;
 
     @Test
-    @WithMockUser(username = "col", roles = "COLLECTIONEER")
     public void testAddToCollection() throws Exception {
         ArtworkDto artworkDto = new ArtworkDto();
         artworkDto.setDescription("Desc");
@@ -58,23 +47,26 @@ public class CollectionControllerTests {
         artworkDto.setImageSize(8);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/collections/{id}/addArtwork", 1)
-                .contentType(MediaType.APPLICATION_JSON)
+                        .with(SecurityMockMvcRequestPostProcessors.user("col").roles("COLLECTIONEER"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(artworkDto)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @WithMockUser(username = "col", authorities = "COLLECTIONEER")
     public void testDeleteCollection() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/collections/{id}", 1))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/collections/{id}", 1)
+                        .with(SecurityMockMvcRequestPostProcessors.user("col").roles("COLLECTIONEER"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().isOk());
     }
 
 
     @Test
-    @WithMockUser(username = "col", authorities = "COLLECTIONEER")
     public void testEditName() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/collections/{id}/editName", 1)
+                        .with(SecurityMockMvcRequestPostProcessors.user("col").roles("COLLECTIONEER"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf())
                 .param("name", "New Collection Name"))
                 .andExpect(status().isOk());
     }

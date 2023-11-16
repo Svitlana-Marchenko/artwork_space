@@ -45,7 +45,6 @@ public class CollectionController {
     }
 
     @DeleteMapping("/{collectionId}")
-    @PreAuthorize("hasAuthority('COLLECTIONEER')")
     public void deleteCollection(@PathVariable Long collectionId) {
         logger.info("Deleting collection with ID: {}", collectionId);
         collectionService.deleteCollection(collectionId);
