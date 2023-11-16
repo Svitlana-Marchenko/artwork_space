@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtworksList from "../components/lists/ArtworksList";
+import ArtworksList from "../../components/lists/ArtworksList";
 
 const Artworks = () => {
 

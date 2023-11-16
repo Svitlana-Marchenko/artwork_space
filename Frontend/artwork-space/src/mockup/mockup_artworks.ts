@@ -1,3 +1,5 @@
+import {User, users} from "./mockup_users";
+
 export type Artwork = {
     id:number;
     title: string;
@@ -5,18 +7,15 @@ export type Artwork = {
     imageURL: string;
     width: number;
     height: number;
-    firstName:string;
-    lastName: string;
-    username: string;
+    artist: User;
 };
+
 export const artworks: Artwork[] = [
     {
         id: 1,
         title: "Artwork 1",
         technique: "Oil on Canvas",
-        firstName: "John",
-        lastName: "Doe",
-        username: "johndoe",
+        artist: users[0],
         imageURL: "../images/flowers.jpg",
         width: 400,
         height: 600,
@@ -25,9 +24,7 @@ export const artworks: Artwork[] = [
         id:2,
         title: "Artwork 2",
         technique: "Watercolor",
-        firstName: "Jane",
-        lastName: "Smith",
-        username: "janesmith",
+        artist: users[1],
         imageURL: "../images/1.jpg",
         width: 216,
         height: 270,
@@ -36,9 +33,7 @@ export const artworks: Artwork[] = [
         id:3,
         title: "Artwork 3",
         technique: "Acrylic on Paper",
-        firstName: "Alice",
-        lastName: "Johnson",
-        username: "alicejohnson",
+        artist: users[2],
         imageURL: "../images/2.jpg",
         width: 400,
         height: 300,
@@ -47,9 +42,7 @@ export const artworks: Artwork[] = [
         id:4,
         title: "Artwork 4",
         technique: "Digital Art",
-        firstName: "Bryan",
-        lastName: "Jackson",
-        username: "jackieee",
+        artist: users[3],
         imageURL: "../images/3.jpg",
         width: 300,
         height: 400,
@@ -58,9 +51,7 @@ export const artworks: Artwork[] = [
         id:5,
         title: "Artwork 5",
         technique: "Sculpture",
-        firstName: "Robert",
-        lastName: "Brown",
-        username: "robertbrown",
+        artist: users[4],
         imageURL: "../images/4.jpg",
         width: 300,
         height: 170,
@@ -69,9 +60,7 @@ export const artworks: Artwork[] = [
         id:6,
         title: "Artwork 6",
         technique: "Mixed Media",
-        firstName: "Bryan",
-        lastName: "Jackson",
-        username: "jackieee",
+        artist: users[5],
         imageURL: "../images/flowers.jpg",
         width: 400,
         height: 600,
@@ -80,9 +69,7 @@ export const artworks: Artwork[] = [
         id:7,
         title: "Artwork 7",
         technique: "Pen and Ink",
-        firstName: "Sarah",
-        lastName: "Wilson",
-        username: "sarahwilson",
+        artist: users[6],
         imageURL: "../images/1.jpg",
         width: 216,
         height: 270,
@@ -92,9 +79,7 @@ export const artworks: Artwork[] = [
         title: "Artwork 8",
         technique: "Photography",
         imageURL: "../images/2.jpg",
-        firstName: "Bryan",
-        lastName: "Jackson",
-        username: "jackieee",
+        artist: users[7],
         width: 400,
         height: 300,
     },
@@ -102,9 +87,7 @@ export const artworks: Artwork[] = [
         id:9,
         title: "Artwork 9",
         technique: "Collage",
-        firstName: "Bryan",
-        lastName: "Jackson",
-        username: "jackieee",
+        artist: users[8],
         imageURL: "../images/3.jpg",
         width: 300,
         height: 400,
@@ -113,9 +96,7 @@ export const artworks: Artwork[] = [
         id:10,
         title: "Artwork 10",
         technique: "Encaustic",
-        firstName: "Michael",
-        lastName: "Davis",
-        username: "michaeldavis",
+        artist: users[9],
         imageURL: "../images/4.jpg",
         width: 300,
         height: 170,
