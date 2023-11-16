@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
 
@@ -95,6 +97,11 @@ public class CollectionServiceImpl implements CollectionService{
             logger.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", id);
             throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
+    }
+
+    @Override
+    public List<Collection> getAllCollections() {
+        return repository.findAll().stream().map(x -> CollectionMapper.INSTANCE.collectionEntityToCollection(x)).collect(Collectors.toList());
     }
 
 }

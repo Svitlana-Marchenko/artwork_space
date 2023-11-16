@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auctions")
-@PreAuthorize("hasAuthority('ARTIST')")
+//@PreAuthorize("hasAuthority('ARTIST')")
 public class AuctionArtistController {
     private static final Logger logger = LoggerFactory.getLogger(AuctionArtistController.class);
     private final AuctionArtistService auctionService;

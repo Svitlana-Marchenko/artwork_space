@@ -1,6 +1,6 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.UserInfoUserDetails;
+import com.system.artworkspace.security.UserInfoUserDetails;
 import com.system.artworkspace.user.UserEntity;
 import com.system.artworkspace.user.UserMapper;
 import org.slf4j.Logger;

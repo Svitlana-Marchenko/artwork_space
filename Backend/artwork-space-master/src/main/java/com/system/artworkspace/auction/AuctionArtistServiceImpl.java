@@ -63,9 +63,11 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         Sort sort = Sort.by(Sort.Order.asc("closingTime"));
         List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
 
-        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
-                .filter(entity -> entity.getClosingTime().after(currentDate))
-                .collect(Collectors.toList());
+        List<AuctionEntity> validAuctionEntities = activeAuctionEntities;
+
+//        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
+//                .filter(entity -> entity.getClosingTime().after(currentDate))
+//                .collect(Collectors.toList());
 
         logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", validAuctionEntities.size());
 

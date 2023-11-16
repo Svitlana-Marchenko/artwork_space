@@ -3,6 +3,8 @@ package com.system.artworkspace.collection;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 
+import java.util.List;
+
 public interface CollectionService {
     Collection createCollection(Collection collection);
 
@@ -14,4 +16,5 @@ public interface CollectionService {
 
     void editName (Long id, String name);
 
+    List<Collection> getAllCollections();
 }

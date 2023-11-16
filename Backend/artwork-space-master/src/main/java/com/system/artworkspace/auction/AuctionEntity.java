@@ -27,7 +27,7 @@ public class AuctionEntity {
     private UserEntity user;
     private double currentBid;
     public AuctionEntity(){}
-    public AuctionEntity(ArtworkEntity artworkEntity, RatingEntity rating, String auctionName, String auctionDescription, double startingPrice, double step) {
+    public AuctionEntity(ArtworkEntity artworkEntity, String auctionName, String auctionDescription, double startingPrice, double step) {
         this.title = auctionName;
         this.auctionDescription = auctionDescription;
         this.artworkEntity = artworkEntity;
