@@ -13,10 +13,16 @@ public class CollectionEntity {
     @ManyToOne
     private UserEntity owner;
     private String title;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ArtworkEntity> artworkEntities;
 
+
     public CollectionEntity(){}
+
+    public CollectionEntity(String title, UserEntity owner){
+        this.title=title;
+        this.owner=owner;
+    }
 
     public Long getId() {
         return id;
