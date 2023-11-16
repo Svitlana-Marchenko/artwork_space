@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
                 element:<Artworks/>
             },
             {
+                path: "/artworks/:id",
+                element:<Artworks/>
+            },
+            {
                 path: "/artwork/:id",
                 element: <Artwork/>
             },

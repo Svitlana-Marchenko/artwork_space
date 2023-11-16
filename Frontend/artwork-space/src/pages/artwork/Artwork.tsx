@@ -2,8 +2,8 @@ import React from 'react';
 import {useParams} from "react-router-dom";
 import {artworks} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
-import {convertToInt} from "../../functions";
-import ArtistLink from "../../components/ArtistLink";
+import {convertToInt} from "../../actions/functions";
+import UserLink from "../../components/UserLink";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 import BookmarkButton from "../../components/BookmarkButton";

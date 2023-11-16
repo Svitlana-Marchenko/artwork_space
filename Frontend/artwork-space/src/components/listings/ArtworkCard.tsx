@@ -1,7 +1,7 @@
 import React from 'react';
 import HeartButton from "../HeartButton";
 import {useNavigate} from "react-router-dom";
-import ArtistLink from "../ArtistLink";
+import UserLink from "../UserLink";
 
 interface ArtworkCardProps {
     id:number;
@@ -64,7 +64,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                 </div>
                 <div className="flex flex-row justify-between items-end">
                     <div>
-                        <ArtistLink id={artistId} username={username}/>
+                        <UserLink id={artistId} username={username}/>
                         <p>{firstName} {lastName}</p>
                     </div>
                     <p className="text-xs">{width} W &times; {height} H cm</p>

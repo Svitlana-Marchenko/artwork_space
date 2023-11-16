@@ -1,10 +1,10 @@
 import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {convertToInt} from "../../functions";
+import {convertToInt} from "../../actions/functions";
 import {Button} from "../../components/Button";
 import {auctions} from "../../mockup/mockup_auctions";
 import CountdownTimer from "../../components/countdown/CountdownTimer";
-import ArtistLink from "../../components/ArtistLink";
+import UserLink from "../../components/UserLink";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 

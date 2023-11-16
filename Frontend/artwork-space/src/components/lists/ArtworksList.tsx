@@ -4,8 +4,9 @@ import {Artwork, artworks} from "../../mockup/mockup_artworks";
 
 interface ArtworksListProps {
     exhibitionId?: string;
+    artistId?: string;
 }
-const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId}) => {
+const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
     const targetHeight = totalHeight / 3;
 

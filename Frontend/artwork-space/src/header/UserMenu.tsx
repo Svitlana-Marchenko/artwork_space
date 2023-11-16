@@ -1,12 +1,16 @@
 import React, {useCallback, useState} from 'react';
 import {AiOutlineMenu} from "react-icons/ai";
 import MenuItem from "./MenuItem";
+import {useNavigate} from "react-router-dom";
 
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(true);
+    const navigate = useNavigate();
+
     const currentUser = {
         role: "artist",
+        id: 1,
         // role: "curator",
         // role: "collectioneer",
     }
@@ -52,7 +56,7 @@ const UserMenu = () => {
                     <>
                         {currentUser.role === "artist" && (
                             <>
-                                <MenuItem label="My artworks" onClick={()=>{}}/>
+                                <MenuItem label="My artworks" onClick={()=>{navigate(`/artworks/${currentUser.id}`)}}/>
                                 <MenuItem label="Add new artwork" onClick={()=>{}}/>
                             </>
                         )}

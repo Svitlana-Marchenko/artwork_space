@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
 import {exhibitions} from "../../mockup/mockup_exhibitions";
-import {convertToInt} from "../../functions";
+import {convertToInt} from "../../actions/functions";
 import ArtworksList from "../../components/lists/ArtworksList";
 import {Button} from "../../components/Button";
 
