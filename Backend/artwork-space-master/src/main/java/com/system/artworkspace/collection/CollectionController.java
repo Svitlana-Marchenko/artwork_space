@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/collections")
 @PreAuthorize("hasAuthority('COLLECTIONEER')")
@@ -21,6 +24,11 @@ public class CollectionController {
         this.collectionService = collectionService;
     }
 
+    @GetMapping
+    public List<CollectionDto> getAll(){
+        logger.info("Getting all collections");
+        return collectionService.getAllCollections().stream().map(x-> CollectionMapper.INSTANCE.auctionToCollectionDto(x)).collect(Collectors.toList());
+    }
     @PostMapping
     public CollectionDto createCollection(@RequestBody CollectionDto collection) {
         logger.info("Creating a collection with ID: {}", collection.getId());
@@ -37,6 +45,7 @@ public class CollectionController {
     }
 
     @DeleteMapping("/{collectionId}")
+    @PreAuthorize("hasAuthority('COLLECTIONEER')")
     public void deleteCollection(@PathVariable Long collectionId) {
         logger.info("Deleting collection with ID: {}", collectionId);
         collectionService.deleteCollection(collectionId);
