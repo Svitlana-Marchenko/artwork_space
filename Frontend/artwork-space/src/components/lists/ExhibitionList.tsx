@@ -3,10 +3,12 @@ import {Artwork} from "../../mockup/mockup_artworks";
 import NavigationLink from "../../header/NavigationLink";
 import ScrollCarousel from 'scroll-carousel-react';
 import ArtworkCard from "../listings/ArtworkCard";
+import {useNavigate} from "react-router-dom";
+import {User} from "../../mockup/mockup_users";
 
 interface ExhibitionListProps {
     id: string;
-    curatorName: string;
+    curator: User;
     title: string;
     artworks: Artwork[];
     startDate: Date;
@@ -14,22 +16,29 @@ interface ExhibitionListProps {
 }
 const ExhibitionList:React.FC<ExhibitionListProps> = ({
                                                  id,
-                                                 curatorName,
+                                                 curator,
                                                  title,
                                                  artworks,
                                                  startDate,
                                                  endDate
 }) => {
-
+const navigate = useNavigate();
     return (
         <div>
-            <div className={"flex flex-row justify-between mt-8 mb-3"}>
+            <div className={"flex flex-row justify-between mt-6 mb-3"}>
                 <div>
-                    <p className={"text-3xl font-bold"}>{title.toUpperCase()}</p>
-                    <p className={"text-gray-400"}>Collected by {curatorName}</p>
+                    <p className={"text-2xl font-bold"}>{title.toUpperCase()}</p>
+                    <p className={"text-gray-400"}>Collected by
+                        <span
+                            className={'underline underline-offset-2 cursor-pointer ml-1'}
+                            onClick={()=>{navigate(`/exhibitions/${curator.id}`)}}
+                        >
+                            {curator.firstName} {curator.lastName}
+                        </span>
+                    </p>
                 </div>
                 <div className="text-right">
-                    <p className={"text-3xl font-bold text-gray-400"}>{startDate.toDateString().toUpperCase()} - {endDate.toDateString().toUpperCase()}</p>
+                    <p className={"text-2xl font-bold text-gray-400"}>{startDate.toDateString().toUpperCase()} - {endDate.toDateString().toUpperCase()}</p>
                     <NavigationLink title={"View all"} path={`/exhibition/${id}`}/>
                 </div>
             </div>

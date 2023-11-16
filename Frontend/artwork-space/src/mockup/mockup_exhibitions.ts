@@ -1,27 +1,20 @@
 import {Artwork, artworks} from "./mockup_artworks";
+import {User, users} from "./mockup_users";
 
 export type Exhibition = {
     id: number;
-    curatorName: string;
+    curator: User;
     title: string;
     description: string;
     artworks: Artwork[];
     startDate: Date;
     endDate: Date;
 }
-function generateCuratorFullName(): string {
-    const firstNames = ['John', 'Jane', 'Alice', 'Bob', 'Eva', 'David', 'Sophia', 'Michael', 'Olivia', 'Daniel'];
-    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
 
-    const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-
-    return `${randomFirstName} ${randomLastName}`;
-}
 export const exhibitions: Exhibition[] = [
     {
         id: 1,
-        curatorName: generateCuratorFullName(),
+        curator: users[0],
         title: 'Art Expo 2023',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -38,7 +31,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 2,
-        curatorName: generateCuratorFullName(),
+        curator: users[1],
         title: 'Modern Masters Showcase',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -55,7 +48,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 3,
-        curatorName: generateCuratorFullName(),
+        curator: users[2],
         title: 'Sculpture Symposium',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -72,7 +65,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 4,
-        curatorName: generateCuratorFullName(),
+        curator: users[3],
         title: 'Abstract Art Extravaganza',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -89,7 +82,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 5,
-        curatorName: generateCuratorFullName(),
+        curator: users[4],
         title: 'Impressionist Impressions',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -106,7 +99,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 6,
-        curatorName: generateCuratorFullName(),
+        curator: users[5],
         title: 'Photography Focus',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -123,7 +116,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 7,
-        curatorName: generateCuratorFullName(),
+        curator: users[6],
         title: 'Cultural Canvas',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -140,7 +133,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 8,
-        curatorName: generateCuratorFullName(),
+        curator: users[7],
         title: 'Futuristic Visions',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -157,7 +150,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 9,
-        curatorName: generateCuratorFullName(),
+        curator: users[8],
         title: 'Nature\'s Palette',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +
@@ -174,7 +167,7 @@ export const exhibitions: Exhibition[] = [
     },
     {
         id: 10,
-        curatorName: generateCuratorFullName(),
+        curator: users[9],
         title: 'Contemporary Creations',
         description: 'Founded in 1986, Swiss Institute (SI) is an independent non-profit space for international contemporary art located in New York City\'s East Village. Committed to the highest standards of curatorial and educational excellence, Swiss Institute serves as a platform for emerging artists, catalyzes new contexts for celebrated work, and fosters appreciation for under-recognized positions.\n' +
             '\n' +

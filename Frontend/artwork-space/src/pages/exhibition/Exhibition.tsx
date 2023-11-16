@@ -7,7 +7,7 @@ import {Button} from "../../components/Button";
 
 const Exhibition = () => {
     const { id } = useParams();
-    const {curatorName, title, description, artworks, startDate, endDate} = exhibitions[convertToInt(id)];
+    const {curator, title, description, artworks, startDate, endDate} = exhibitions[convertToInt(id)];
 
     const currentUser = {
          role: "artist",
@@ -17,7 +17,7 @@ const Exhibition = () => {
 
     return (
         <div className="mx-32">
-            <p className={"mb-2"}>Collected by {curatorName}</p>
+            <p className={"mb-2"}>Collected by {curator.firstName} {curator.lastName}</p>
             <div className={"flex flex-row justify-between align-top"}>
                 <article>
                     <h2 className={"text-3xl font-bold"}>{title.toUpperCase()}</h2>

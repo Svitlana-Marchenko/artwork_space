@@ -9,9 +9,9 @@ const UserMenu = () => {
     const navigate = useNavigate();
 
     const currentUser = {
-        role: "artist",
+        //role: "artist",
         id: 1,
-        // role: "curator",
+         role: "curator",
         // role: "collectioneer",
     }
 
@@ -63,7 +63,7 @@ const UserMenu = () => {
 
                         {currentUser.role === "curator" && (
                             <>
-                                <MenuItem label="My exhibitions" onClick={()=>{}}/>
+                                <MenuItem label="My exhibitions" onClick={()=>{navigate(`/exhibitions/${currentUser.id}`)}}/>
                                 <MenuItem label="Create exhibition" onClick={()=>{}}/>
                             </>
                         )}
