@@ -1,6 +1,6 @@
 import React from 'react';
-import {exhibitions} from "../mockup/mockup_exhibitions";
-import ExhibitionList from "../components/lists/ExhibitionList";
+import {exhibitions} from "../../mockup/mockup_exhibitions";
+import ExhibitionList from "../../components/lists/ExhibitionList";
 
 const Exhibitions = () => {
 

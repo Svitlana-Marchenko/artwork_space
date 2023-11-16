@@ -1,9 +1,9 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
-import {exhibitions} from "../mockup/mockup_exhibitions";
-import {convertToInt} from "../functions";
-import ArtworksList from "../components/lists/ArtworksList";
-import {Button} from "../components/Button";
+import {exhibitions} from "../../mockup/mockup_exhibitions";
+import {convertToInt} from "../../functions";
+import ArtworksList from "../../components/lists/ArtworksList";
+import {Button} from "../../components/Button";
 
 const Exhibition = () => {
     const { id } = useParams();
@@ -19,10 +19,10 @@ const Exhibition = () => {
         <div className="mx-32">
             <p className={"mb-2"}>Collected by {curatorName}</p>
             <div className={"flex flex-row justify-between align-top"}>
-                <div>
+                <article>
                     <h2 className={"text-3xl font-bold"}>{title.toUpperCase()}</h2>
                     <p className={"text-3xl font-bold text-gray-400"}>{startDate.toDateString().toUpperCase()} - {endDate.toDateString().toUpperCase()}</p>
-                </div>
+                </article>
                 {
                     currentUser.role === "curator"
                     ?

@@ -43,9 +43,10 @@ const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId}) => {
                             imageURL={artwork.imageURL}
                             width={artwork.width}
                             height={artwork.height}
-                            firstName={artwork.firstName}
-                            lastName={artwork.lastName}
-                            username={artwork.username}
+                            firstName={artwork.artist.firstName}
+                            lastName={artwork.artist.lastName}
+                            username={artwork.artist.username}
+                            artistId={artwork.artist.id}
                         />
                     ))}
                 </div>

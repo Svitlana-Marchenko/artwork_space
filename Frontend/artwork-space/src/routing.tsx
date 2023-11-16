@@ -1,13 +1,14 @@
 import {createBrowserRouter} from "react-router-dom";
-import Artworks from "./pages/Artworks";
-import Exhibitions from "./pages/Exhibitions";
-import Auctions from "./pages/Auctions";
+import Artworks from "./pages/artwork/Artworks";
+import Exhibitions from "./pages/exhibition/Exhibitions";
+import Auctions from "./pages/auction/Auctions";
 import Profile from "./pages/Profile";
 import Layout from "./layout";
 import Error from "./error";
 import App from "./pages/App";
-import Artwork from "./pages/Artwork";
-import Exhibition from "./pages/Exhibition";
+import Artwork from "./pages/artwork/Artwork";
+import Exhibition from "./pages/exhibition/Exhibition";
+import Auction from "./pages/auction/Auction";
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: "/auctions",
                 element: <Auctions/>
+            },
+            {
+                path: "/auction/:id",
+                element: <Auction/>
             },
             {
                 path: "/profile",

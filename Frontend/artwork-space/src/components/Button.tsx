@@ -27,12 +27,14 @@ export const Button: React.FC<ButtonProps> = ({
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-lg
-        hover:opacity-80
         transition
         w-full
         ${outline ? "bg-white" : "bg-[#a62c2a]"}
         ${outline ? "border-black" : "border-[#a62c2a]"}
         ${outline ? "text-black" : "text-white"}
+        ${outline ? "hover:bg-[#a62c2a]" : "hover:opacity-80"}
+        ${outline ? "hover:border-transparent" : null}
+        ${outline ? "hover:text-white" : null}
         ${small ? "text-sm" : "text-md"} 
         ${small ? "py-1" : "py-3"} 
         ${small ? "font-light" : "font-semibold"} 
