@@ -4,6 +4,7 @@ import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -57,7 +59,12 @@ public class ArtworkController {
     @PreAuthorize("hasAuthority('ARTIST')")
     public void deleteArtwork(@PathVariable Long id) {
         logger.info("Deleting artwork with ID: {}", id);
-        artworkService.deleteArtwork(id);
+        try {
+            artworkService.deleteArtwork(id);
+        } catch (EntityNotFoundException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Artwork not found", e);
+
+        }
         logger.info("Artwork deleted with ID: {}", id);
     }
 

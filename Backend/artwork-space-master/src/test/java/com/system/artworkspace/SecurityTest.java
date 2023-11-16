@@ -1,5 +1,6 @@
 package com.system.artworkspace;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -34,24 +36,6 @@ public class SecurityTest {
                 .apply(springSecurity())
                 .build();
     }
-
-
-
-
-//    @Test
-//    public void testAdminAccess() throws Exception {
-//        mockMvc.perform(get("/admin")
-//                        .with(user("admin").roles("ADMIN")))
-//                .andExpect(status().isOk());
-//    }
-//
-//    @Test
-//    public void testUserAccess() throws Exception {
-//        mockMvc.perform(get("/user")
-//                        .with(user("user").roles("USER")))
-//                .andExpect(status().isOk());
-//    }
-//
 
     @WithMockUser(username = "art1", password = "password", authorities = "ARTIST")
     @Test
