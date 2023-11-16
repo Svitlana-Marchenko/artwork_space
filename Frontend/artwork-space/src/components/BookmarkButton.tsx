@@ -1,5 +1,5 @@
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {useState} from "react";
+import {IoBookmark, IoBookmarkOutline} from "react-icons/io5";
 
 // import useFavorite from "@/app/hooks/useFavorite";
 // import { SafeUser } from "@/app/types";
@@ -9,7 +9,7 @@ import {useState} from "react";
 //     currentUser?: SafeUser | null
 // }
 
-const HeartButton = () => {
+const BookmarkButton = () => {
     // const { hasFavorite, toggleFavorite } = useFavorite({
     //     listingId,
     //     currentUser
@@ -30,7 +30,7 @@ const HeartButton = () => {
         cursor-pointer
       "
         >
-            <AiOutlineHeart
+            <IoBookmarkOutline
                 size={28}
                 className="
           fill-white
@@ -39,7 +39,7 @@ const HeartButton = () => {
           -right-[2px]
         "
             />
-            <AiFillHeart
+            <IoBookmark
                 size={24}
                 className={
                     hasFavorite ? 'fill-[#a62c2a]' : 'fill-transparent'
@@ -49,4 +49,4 @@ const HeartButton = () => {
     );
 }
 
-export default HeartButton;
+export default BookmarkButton;

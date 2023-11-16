@@ -6,6 +6,7 @@ import {convertToInt} from "../../functions";
 import ArtistLink from "../../components/ArtistLink";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
+import BookmarkButton from "../../components/BookmarkButton";
 
 const Artwork = () => {
     const { id } = useParams();
@@ -18,8 +19,8 @@ const Artwork = () => {
     } = artworks[convertToInt(id)];
     const artist = artworks[convertToInt(id)].artist;
     const currentUser = {
-        role: "artist",
-        // role: "curator",
+        //role: "artist",
+         role: "curator",
         // role: "collectioneer",
     }
 
@@ -27,13 +28,22 @@ const Artwork = () => {
         <div className="flex flex-row items-center justify-center gap-10">
             <img src={imageURL} alt={title} className="w-auto max-w-3xl h-[600px] object-cover"/>
             <section className="w-1/3">
-                <ArtworkHeading
-                    title={title}
-                    id={artist.id}
-                    username={artist.username}
-                    firstName={artist.firstName}
-                    lastName={artist.lastName}
-                />
+                <div className={'flex flex-row justify-between align-top'}>
+                    <ArtworkHeading
+                        title={title}
+                        id={artist.id}
+                        username={artist.username}
+                        firstName={artist.firstName}
+                        lastName={artist.lastName}
+                    />
+                    {
+                        currentUser.role === "curator"
+                            ?
+                            <BookmarkButton/>
+                            :
+                            null
+                    }
+                </div>
                 <ArtworkDescription
                     technique={technique}
                     width={width}

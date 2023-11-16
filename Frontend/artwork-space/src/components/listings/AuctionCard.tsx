@@ -30,7 +30,7 @@ const AuctionCard:React.FC<Auction> = ({
                 currentUser.role === "curator"
                 ?
                     <div className={"mt-3"}>
-                        <Button label={`Place bid ${bid+currentBid}$`} onClick={()=>{navigate(`/auction/${id}`)}} outline/>
+                        <Button label={`Place bid`} onClick={()=>{navigate(`/auction/${id}`)}} outline/>
                     </div>
                     :
                     null

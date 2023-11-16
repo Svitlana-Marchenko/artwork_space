@@ -40,14 +40,12 @@ const Auction = () => {
             <img src={imageURL} alt={title} className="w-auto max-w-3xl h-[600px] object-cover"/>
             <div className="w-1/3">
                 <div className={'flex flex-row justify-between'}>
-                    <div>
-                        <ArtworkHeading
-                            id={artist.id}
-                            username={artist.username}
-                            firstName={artist.firstName}
-                            lastName={artist.lastName}
-                            title={title}/>
-                    </div>
+                    <ArtworkHeading
+                        id={artist.id}
+                        username={artist.username}
+                        firstName={artist.firstName}
+                        lastName={artist.lastName}
+                        title={title}/>
                     <CountdownTimer targetDate={endDate}/>
                 </div>
                 <ArtworkDescription
