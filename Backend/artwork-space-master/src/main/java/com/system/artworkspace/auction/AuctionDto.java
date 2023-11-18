@@ -11,12 +11,6 @@ import java.util.Date;
 
 public class AuctionDto {
     private long id;
-    @NotNull
-    @Size(max = 50)
-    private String title;
-
-    @Size(max = 2000)
-    private String description;
 
     private ArtworkDto artwork;
 
@@ -24,7 +18,7 @@ public class AuctionDto {
     private double startingPrice;
 
     @DecimalMin(value = "0.0")
-    private double step;
+    private double bid;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date closingTime;
@@ -36,13 +30,11 @@ public class AuctionDto {
     public AuctionDto() {
     }
 
-    public AuctionDto(long id, String auctionName, String auctionDescription, ArtworkDto artwork, double startingPrice, double step, Date closingTime, UserDto currentBuyer, double currentBid) {
+    public AuctionDto(long id, ArtworkDto artwork, double startingPrice, double step, Date closingTime, UserDto currentBuyer, double currentBid) {
         this.id = id;
-        this.title = auctionName;
-        this.description = auctionDescription;
         this.artwork = artwork;
         this.startingPrice = startingPrice;
-        this.step = step;
+        this.bid= step;
         this.closingTime = closingTime;
         this.user = currentBuyer;
         this.currentBid = currentBid;
@@ -55,22 +47,6 @@ public class AuctionDto {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public ArtworkDto getArtwork() {
@@ -89,12 +65,12 @@ public class AuctionDto {
         this.startingPrice = startingPrice;
     }
 
-    public double getStep() {
-        return step;
+    public double getBid() {
+        return bid;
     }
 
-    public void setStep(double step) {
-        this.step = step;
+    public void setBid(double step) {
+        this.bid = step;
     }
 
     public Date getClosingTime() {

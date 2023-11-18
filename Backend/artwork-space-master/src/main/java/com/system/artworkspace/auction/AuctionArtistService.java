@@ -15,7 +15,4 @@ public interface AuctionArtistService {
     User displayCurrentBuyer(Long id);
     List<Auction> getAllActiveAuctions();
     void closeAuction(Long id);
-    Auction updateName (Long id, String name);
-    Auction updateDescription(Long id, String newDescription);
-
 }

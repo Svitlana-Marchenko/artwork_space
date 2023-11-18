@@ -61,11 +61,9 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
         Auction auc = AuctionMapper.INSTANCE.auctionEntityToAuction(auction);
         auc.setCurrentBid(bidAmount);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String userId = authentication.getName();
-//        User user = userService.getUserByUsername(userId);
-//        auc.setUser(user);
-        auc.setUser(null);
-        //todo uncomment above
+        String userId = authentication.getName();
+        User user = userService.getUserByUsername(userId);
+        auc.setUser(user);
         auction = AuctionMapper.INSTANCE.auctionToAuctionEntity(auc);
         auctionRepository.save(auction);
         logger.info(AUCTIONS_EVENTS, "Placed bid for auction with ID: {}. Bid amount: {}", id, bidAmount);

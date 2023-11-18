@@ -13,36 +13,32 @@ public class AuctionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String title;
-    @Column(length = 2000)
-    private String auctionDescription;
     @OneToOne
     private ArtworkEntity artworkEntity;
     @Column(nullable = false)
     private double startingPrice;
-    private double step;
+    private double bid;
     @Temporal(TemporalType.DATE)
     private Date closingTime;
     @ManyToOne
     private UserEntity user;
     private double currentBid;
     public AuctionEntity(){}
-    public AuctionEntity(ArtworkEntity artworkEntity, String auctionName, String auctionDescription, double startingPrice, double step) {
-        this.title = auctionName;
-        this.auctionDescription = auctionDescription;
-        this.artworkEntity = artworkEntity;
+    public AuctionEntity(ArtworkEntity artworkEntity, double startingPrice, double step, Date closingTime, UserEntity user, double currentBid) {
+         this.artworkEntity = artworkEntity;
         this.startingPrice = startingPrice;
-        this.step = step;
+        this.bid = step;
+        this.closingTime=closingTime;
+        this.user=user;
+        this.currentBid = currentBid;
     }
 
     @Override
     public String toString() {
         return "Auction{" +
-                ", auctionName='" + title+ '\'' +
-                ", auctionDescription='" + auctionDescription + '\'' +
-                ", artwork=" + artworkEntity +
+                "artwork=" + artworkEntity +
                 ", startingPrice=" + startingPrice +
-                ", step=" + step +
+                ", step=" + bid +
                 ", closingTime=" + closingTime +
                 ", currentBuyer=" + user +
                 ", currentPrice=" + currentBid +
@@ -66,22 +62,6 @@ public class AuctionEntity {
         this.user = currentBuyer;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String auctionName) {
-        this.title = auctionName;
-    }
-
-    public String getAuctionDescription() {
-        return auctionDescription;
-    }
-
-    public void setAuctionDescription(String auctionDescription) {
-        this.auctionDescription = auctionDescription;
-    }
-
     public ArtworkEntity getArtwork() {
         return artworkEntity;
     }
@@ -98,12 +78,12 @@ public class AuctionEntity {
         this.startingPrice = startingPrice;
     }
 
-    public double getStep() {
-        return step;
+    public double getBid() {
+        return bid;
     }
 
-    public void setStep(double step) {
-        this.step = step;
+    public void setBid(double step) {
+        this.bid = step;
     }
 
     public Date getClosingTime() {

@@ -4,38 +4,30 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
 
 import java.util.Date;
-
 public class Auction {
     private long id;
-
-    private String title;
-
-    private String description;
 
     private Artwork artwork;
 
     private double startingPrice;
 
-    private double step;
+    private double bid;
 
     private Date closingTime;
-
-    private User currentBuyer;
+    private User user;
 
     private double currentBid;
 
     public Auction() {
     }
 
-    public Auction(long id, String title, String description, Artwork artwork, double startingPrice, double step, Date closingTime, User currentBuyer, double currentBid) {
+    public Auction(long id, Artwork artwork, double startingPrice, double step, Date closingTime, User currentBuyer, double currentBid) {
         this.id = id;
-        this.title = title;
-        this.description = description;
         this.artwork = artwork;
         this.startingPrice = startingPrice;
-        this.step = step;
+        this.bid = step;
         this.closingTime = closingTime;
-        this.currentBuyer = currentBuyer;
+        this.user = currentBuyer;
         this.currentBid = currentBid;
     }
 
@@ -46,22 +38,6 @@ public class Auction {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Artwork getArtwork() {
@@ -80,12 +56,12 @@ public class Auction {
         this.startingPrice = startingPrice;
     }
 
-    public double getStep() {
-        return step;
+    public double getBid() {
+        return bid;
     }
 
-    public void setStep(double step) {
-        this.step = step;
+    public void setBid(double step) {
+        this.bid = step;
     }
 
     public Date getClosingTime() {
@@ -97,11 +73,11 @@ public class Auction {
     }
 
     public User getUser() {
-        return currentBuyer;
+        return user;
     }
 
     public void setUser(User currentBuyer) {
-        this.currentBuyer = currentBuyer;
+        this.user = currentBuyer;
     }
 
     public double getCurrentBid() {

@@ -34,6 +34,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
 
     @Override
     public Auction createAuction(Auction auction) {
+        auction.setCurrentBid(auction.getStartingPrice());
         auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
         logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auction.getId());
         return auction;
@@ -85,29 +86,5 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         logger.info(AUCTIONS_EVENTS, "Closed auction with ID: {}", id);
     }
 
-    @Override
-    public Auction updateName(Long id, String name) {
-        Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
-        if (auctionE.isPresent()) {
-            Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
-            auction.setTitle(name);
-            auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
-            logger.info(AUCTIONS_EVENTS, "Updated auction name for auction with ID: {}", auction.getId());
-            return auction;
-        }
-        return null;
-    }
 
-    @Override
-    public Auction updateDescription(Long id, String newDescription) {
-        Optional<AuctionEntity> auctionE = auctionRepository.findById(id);
-        if (auctionE.isPresent()) {
-            Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionE.get());
-            auction.setDescription(newDescription);
-            auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
-            logger.info(AUCTIONS_EVENTS, "Updated auction name for auction with ID: {}", auction.getId());
-            return auction;
-        }
-        return null;
-    }
 }
