@@ -1,6 +1,10 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.user.User;
+
+import java.util.List;
+import java.util.Set;
 
 public class Artwork {
     private Long id;
@@ -12,11 +16,12 @@ public class Artwork {
     private User user;
     private String imageURL;
     private double imageSize;
+    private List<Rating> ratings;
 
     public Artwork() {
     }
 
-    public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize) {
+    public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize, List<Rating> ratings) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -26,6 +31,7 @@ public class Artwork {
         this.imageURL = imageURL;
         this.imageSize = imageSize;
         this.user = artist;
+        this.ratings=ratings;
     }
 
     public Long getId() {
@@ -98,6 +104,14 @@ public class Artwork {
 
     public void setImageSize(double imageSize) {
         this.imageSize = imageSize;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }
 

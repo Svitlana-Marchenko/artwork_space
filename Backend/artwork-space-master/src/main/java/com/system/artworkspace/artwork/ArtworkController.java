@@ -126,7 +126,6 @@ public class ArtworkController {
         logger.info("Rating added to artwork with ID: {}", artworkId);
     }
 
-    //todo debug
     @DeleteMapping("/{artworkId}/deleteRating")
     @PreAuthorize("hasAuthority('CURATOR')")
     public void deleteRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {

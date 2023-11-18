@@ -1,10 +1,15 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.rating.RatingDto;
+import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
+
 public class ArtworkDto {
     private Long id;
     @NotBlank(message = "title is blank")
@@ -24,10 +29,11 @@ public class ArtworkDto {
     private String imageURL;
     private double imageSize;
 
+    private List<RatingDto> ratings;
     public ArtworkDto() {
     }
 
-    public ArtworkDto(Long id, String title, String description, String technique, double width, double height, UserDto artist, String imageURL, double imageSize) {
+    public ArtworkDto(Long id, String title, String description, String technique, double width, double height, UserDto artist, String imageURL, double imageSize,  List<RatingDto> ratings) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -37,8 +43,16 @@ public class ArtworkDto {
         this.user =artist;
         this.imageURL = imageURL;
         this.imageSize = imageSize;
+        this.ratings=ratings;
     }
 
+    public List<RatingDto> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<RatingDto> ratings) {
+        this.ratings = ratings;
+    }
 
     public Long getId() {
         return id;
