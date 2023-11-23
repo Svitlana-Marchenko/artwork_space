@@ -39,6 +39,7 @@ public class ArtworkController {
     }
     @PostMapping
     @PreAuthorize("hasAuthority('ARTIST')")
+    @RateLimit(maxCalls = 2)
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logErrors(bindingResult);
