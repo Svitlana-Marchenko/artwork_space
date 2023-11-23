@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ExceptionAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Pointcut("execution(* com.system.artworkspace.artwork.ArtworkController.*(..))")
+    @Pointcut("execution(* com.system.artworkspace.artwork.ArtworkServiceImpl.*(..))")
     public void serviceMethods() {}
 
     @AfterThrowing(pointcut = "serviceMethods()", throwing = "ex")

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -136,9 +137,20 @@ public class ArtworkController {
     }
 
     @GetMapping("/{artworkId}/rating")
-    public List <RatingDto> getAllRating (@PathVariable Long artworkId){
-        logger.info("Getting all rating for artwork with id "+artworkId);
-        return artworkService.getAllRating(artworkId).stream().map(x -> RatingMapper.INSTANCE.ratingToRatingDto(x)).collect(Collectors.toList());
+    public List<RatingDto> getAllRating(@PathVariable Long artworkId) {
+        logger.info("Getting all rating for artwork with id " + artworkId);
+        try {
+            return artworkService.getAllRating(artworkId)
+                    .stream()
+                    .map(x -> RatingMapper.INSTANCE.ratingToRatingDto(x))
+                    .collect(Collectors.toList());
+        } catch (EntityNotFoundException ex) {
+            // Log the exception if needed
+            logger.error("Entity not found: " + ex.getMessage());
+            // Return an appropriate response, for example, a 404 status with a custom message
+            return null;
 
+        }
     }
+
 }
