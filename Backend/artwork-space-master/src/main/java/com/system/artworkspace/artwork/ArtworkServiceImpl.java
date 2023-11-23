@@ -2,6 +2,7 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.collection.CollectionEntity;
+import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
@@ -69,7 +70,8 @@ public class ArtworkServiceImpl implements ArtworkService {
         Optional<ArtworkEntity> artwork = repository.findById(id);
         if (artwork.isPresent())
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(artwork.get());
-        return null;
+        else
+           throw new NoSuchArtworkException("Artwork with id " + id + " not found");
     }
 
     @Override
