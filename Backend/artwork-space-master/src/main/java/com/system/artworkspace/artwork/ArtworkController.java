@@ -61,21 +61,13 @@ public class ArtworkController {
     @PreAuthorize("hasAuthority('ARTIST')")
     public void deleteArtwork(@PathVariable Long id) {
         logger.info("Deleting artwork with ID: {}", id);
-        try {
-            artworkService.deleteArtwork(id);
-        } catch (EntityNotFoundException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Artwork not found", e);
-
-        }
+        artworkService.deleteArtwork(id);
         logger.info("Artwork deleted with ID: {}", id);
     }
 
     @PutMapping("/{id}/title")
     @PreAuthorize("hasAuthority('ARTIST')")
     public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title) {
-      //  if (bindingResult.hasErrors()) {
-        //    logErrors(bindingResult);
-       // }
         logger.info("Updating title for artwork with ID: {}", id);
         artworkService.updateTitle(id, title);
         logger.info("Title updated for artwork with ID: {}", id);
@@ -93,10 +85,10 @@ public class ArtworkController {
     @PutMapping("/{id}/technique")
     @PreAuthorize("hasAuthority('ARTIST')")
     public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique) {
-
         logger.info("Updating technique for artwork with ID: {}", id);
         artworkService.updateTechnique(id, technique);
         logger.info("Technique updated for artwork with ID: {}", id);
+
     }
 
     @GetMapping("/byTitle")
@@ -112,6 +104,12 @@ public class ArtworkController {
     @ExceptionHandler(NoSuchArtworkException.class)
     public ResponseEntity<String> handleNoSuchArtworkException(NoSuchArtworkException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Artwork not found: " + e.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleNoSuchArtworkException(Exception e) {
+        String errorMessage = "An unexpected error occurred: " + e.getMessage();
+        return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private void logErrors (BindingResult bindingResult) {
@@ -139,18 +137,10 @@ public class ArtworkController {
     @GetMapping("/{artworkId}/rating")
     public List<RatingDto> getAllRating(@PathVariable Long artworkId) {
         logger.info("Getting all rating for artwork with id " + artworkId);
-        try {
-            return artworkService.getAllRating(artworkId)
-                    .stream()
-                    .map(x -> RatingMapper.INSTANCE.ratingToRatingDto(x))
-                    .collect(Collectors.toList());
-        } catch (EntityNotFoundException ex) {
-            // Log the exception if needed
-            logger.error("Entity not found: " + ex.getMessage());
-            // Return an appropriate response, for example, a 404 status with a custom message
-            return null;
-
-        }
+        return artworkService.getAllRating(artworkId)
+                .stream()
+                .map(x -> RatingMapper.INSTANCE.ratingToRatingDto(x))
+                .collect(Collectors.toList());
     }
 
 }
