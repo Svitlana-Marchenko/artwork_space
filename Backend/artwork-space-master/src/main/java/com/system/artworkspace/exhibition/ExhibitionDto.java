@@ -1,6 +1,7 @@
 package com.system.artworkspace.exhibition;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -11,8 +12,8 @@ import java.util.List;
 
 public class ExhibitionDto {
     private Long id;
-    @NotNull(message = "curator id is null")
-    private Long curatorId;
+    @NotNull(message = "curator is null")
+    private UserDto curator;
 
     @Size(max = 50, message = "name is longer than 50")
     @NotBlank(message = "name is blank")
@@ -34,9 +35,9 @@ public class ExhibitionDto {
     public ExhibitionDto() {
     }
 
-    public ExhibitionDto(Long id, Long curatorId, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
+    public ExhibitionDto(Long id, UserDto curator, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
         this.id = id;
-        this.curatorId = curatorId;
+        this.curator = curator;
         this.title = name;
         this.description = description;
         this.artworkIds = artworkIds;
@@ -51,14 +52,6 @@ public class ExhibitionDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCuratorId() {
-        return curatorId;
-    }
-
-    public void setCuratorId(Long curatorId) {
-        this.curatorId = curatorId;
     }
 
     public String getTitle() {
@@ -99,5 +92,13 @@ public class ExhibitionDto {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public UserDto getCurator() {
+        return curator;
+    }
+
+    public void setCurator(UserDto curator) {
+        this.curator = curator;
     }
 }

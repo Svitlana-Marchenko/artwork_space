@@ -1,5 +1,7 @@
 package com.system.artworkspace.collection;
 
+import com.system.artworkspace.user.UserDto;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,7 +11,7 @@ public class CollectionDto {
     private Long id;
 
     @NotNull
-    private Long ownerId;
+    private UserDto owner;
 
     @Size(max = 100)
     private String title;
@@ -20,14 +22,12 @@ public class CollectionDto {
     public CollectionDto() {
     }
 
-    public CollectionDto(Long id, Long ownerId, String name, List<Long> artworkIds) {
+    public CollectionDto(Long id, UserDto owner, String name, List<Long> artworkIds) {
         this.id = id;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.title = name;
         this.artworkIds = artworkIds;
     }
-
-
 
     public Long getId() {
         return id;
@@ -37,13 +37,6 @@ public class CollectionDto {
         this.id = id;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
 
     public String getTitle() {
         return title;
@@ -59,6 +52,14 @@ public class CollectionDto {
 
     public void setArtworkIds(List<Long> artworkIds) {
         this.artworkIds = artworkIds;
+    }
+
+    public UserDto getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserDto owner) {
+        this.owner = owner;
     }
 }
 

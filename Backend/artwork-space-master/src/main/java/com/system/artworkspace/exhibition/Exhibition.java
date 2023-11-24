@@ -1,5 +1,6 @@
 package com.system.artworkspace.exhibition;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -9,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 public class Exhibition {
     private Long id;
-    @NotNull(message = "curator id is null")
-    private Long curatorId;
+    @NotNull(message = "curator is null")
+    private User curator;
 
     @Size(max = 50, message = "name is longer than 50")
     @NotBlank(message = "name is blank")
@@ -32,9 +33,9 @@ public class Exhibition {
     public Exhibition() {
     }
 
-    public Exhibition(Long id, Long curatorId, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
+    public Exhibition(Long id, User curator, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
         this.id = id;
-        this.curatorId = curatorId;
+        this.curator = curator;
         this.title = name;
         this.description = description;
         this.artworkIds = artworkIds;
@@ -49,14 +50,6 @@ public class Exhibition {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCuratorId() {
-        return curatorId;
-    }
-
-    public void setCuratorId(Long curatorId) {
-        this.curatorId = curatorId;
     }
 
     public String getName() {
@@ -97,5 +90,13 @@ public class Exhibition {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public User getCurator() {
+        return curator;
+    }
+
+    public void setCurator(User curator) {
+        this.curator = curator;
     }
 }
