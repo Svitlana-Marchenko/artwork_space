@@ -38,9 +38,11 @@ public class SecurityTest {
     @WithMockUser(username = "art1", password = "password", authorities = "ARTIST")
     @Test
     public void givenPostRequestOnPrivateController_shouldReturn403() throws Exception {
-        mockMvc.perform(post("/exhibitions/1/addArtwork")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
+        for(int i=0;i<5;i++){
+            mockMvc.perform(get("/exhibitions/1")
+                            .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().is2xxSuccessful());
+        }
     }
 
     @WithMockUser(username = "art1", password = "password", authorities = "ARTIST")

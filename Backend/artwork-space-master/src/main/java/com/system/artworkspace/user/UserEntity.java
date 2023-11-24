@@ -1,7 +1,6 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.artwork.ArtworkEntity;
-import com.system.artworkspace.role.RoleEntity;
 import jakarta.persistence.*;
 
 import java.util.List;

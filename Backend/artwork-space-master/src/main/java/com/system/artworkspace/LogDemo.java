@@ -11,7 +11,7 @@ public class LogDemo {
     public static void main(String[] args) {
         Logger logger = LoggerFactory.getLogger(LogDemo.class);
         logger.info("demo");
-        UserServiceImpl userService = new UserServiceImpl();
+        //UserServiceImpl userService = new UserServiceImpl();
        // userService.createUser(new User(123L,"aa","cc","dd","kk","kk",12L));
 
        // ArtworkServiceImpl artworkService = new ArtworkServiceImpl(null);

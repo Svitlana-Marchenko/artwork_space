@@ -107,7 +107,7 @@ public class ArtworkController {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleNoSuchArtworkException(Exception e) {
+    public ResponseEntity<String> handleException(Exception e) {
         String errorMessage = "An unexpected error occurred: " + e.getMessage();
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -1,6 +1,7 @@
 package com.system.artworkspace;
 
 import com.system.artworkspace.auction.*;
+import com.system.artworkspace.user.UserRepository;
 import com.system.artworkspace.user.UserService;
 import com.system.artworkspace.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,8 @@ public class TestWithCustomBeanSet {
         }
 
         @Bean
-        public UserService userService() {
-            return new UserServiceImpl();
+        public UserService userService(UserRepository userRepository) {
+            return new UserServiceImpl(userRepository);
         }
 
         @Bean

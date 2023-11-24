@@ -1,6 +1,7 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.exhibition.ExhibitionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
     private UserRepository userRepository;
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     @Override
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
