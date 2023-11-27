@@ -20,12 +20,10 @@ public class UserInfoUserDetails implements UserDetails {
         this.user = user;
         password=user.getPassword();
         authorities= Collections.singletonList(new SimpleGrantedAuthority(user.getRole().toString()));
-   System.out.println(authorities.get(0));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println(authorities);
         return authorities;
     }
 
