@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +49,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void addToExhibition(Long id, Artwork artwork) {
+    @CachePut(cacheNames="exhibition", key="#id")
+    public Exhibition addToExhibition(Long id, Artwork artwork) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
 
         if (optionalExhibition.isPresent()) {
@@ -55,6 +59,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
                 existingExhibition.getArtworks().add(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
                 exhibitionRepository.save(existingExhibition);
                 logger.info(EXHIBITION_EVENTS,"Added artwork with ID {} to exhibition with ID: {}", artwork.getId(), id);
+                return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(existingExhibition);
             } else {
                 throw new IllegalArgumentException("ExhibitionEntity size exceeds the maximum allowed.");
             }
@@ -65,7 +70,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void changeDates(Long id, Date startDate, Date endDate) {
+    @CachePut(cacheNames="exhibition", key="#id")
+    public Exhibition changeDates(Long id, Date startDate, Date endDate) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
 
         if (optionalExhibition.isPresent()) {
@@ -74,6 +80,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             existingExhibition.setEndDate(endDate);
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Changed exhibition dates for exhibition with ID: {}", id);
+            return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(existingExhibition);
         } else {
             logger.warn(EXHIBITION_EVENTS,"ExhibitionEntity not found for changing dates with ID: {}", id);
             throw new IllegalArgumentException("ExhibitionEntity not found with ID: " + id);
@@ -81,7 +88,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void deleteFromExhibition(Long id, Artwork artwork) {
+    @CachePut(cacheNames="exhibition", key="#id")
+    public Exhibition deleteFromExhibition(Long id, Artwork artwork) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
 
         if (optionalExhibition.isPresent()) {
@@ -89,6 +97,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             existingExhibition.getArtworks().remove(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Removed artwork with ID {} from exhibition with ID: {}", artwork.getId(), id);
+            return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(existingExhibition);
         } else {
             logger.warn(EXHIBITION_EVENTS,"ExhibitionEntity not found for removing artwork with ID: {} from exhibition with ID: {}", artwork.getId(), id);
             throw new IllegalArgumentException("ExhibitionEntity not found with ID: " + id);
@@ -96,7 +105,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void editName(Long id, String newName) {
+    @CachePut(cacheNames="exhibition", key="#id")
+    public Exhibition editName(Long id, String newName) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
 
         if (optionalExhibition.isPresent()) {
@@ -104,6 +114,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             existingExhibition.setTitle(newName);
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Edited exhibition name for exhibition with ID: {}", id);
+            return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(existingExhibition);
         } else {
             logger.warn(EXHIBITION_EVENTS,"ExhibitionEntity not found for editing name with ID: {}", id);
             throw new IllegalArgumentException("ExhibitionEntity not found with ID: " + id);
@@ -111,7 +122,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void editDescription(Long id, String newDescription) {
+    @CachePut(cacheNames="exhibition", key="#id")
+    public Exhibition editDescription(Long id, String newDescription) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
 
         if (optionalExhibition.isPresent()) {
@@ -119,6 +131,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             existingExhibition.setDescription(newDescription);
             exhibitionRepository.save(existingExhibition);
             logger.info(EXHIBITION_EVENTS,"Edited exhibition description for exhibition with ID: {}", id);
+            return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(existingExhibition);
         } else {
             logger.warn(EXHIBITION_EVENTS,"ExhibitionEntity not found for editing description with ID: {}", id);
             throw new IllegalArgumentException("ExhibitionEntity not found with ID: " + id);
@@ -126,12 +139,15 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
+    @Cacheable(cacheNames="exhibition", key="#id")
     public Exhibition findById(Long id) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
+        logger.info("Finding exhibition by id (without CACHE)");
         return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(optionalExhibition.orElse(null));
     }
 
     @Override
+    @CacheEvict(value = "exhibition", key = "#id")
     public void deleteExhibition(Long id) {
         Optional<ExhibitionEntity> optionalCollection = exhibitionRepository.findById(id);
 

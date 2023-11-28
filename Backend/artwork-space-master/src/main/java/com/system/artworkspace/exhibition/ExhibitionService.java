@@ -7,11 +7,11 @@ import java.util.Date;
 
 public interface ExhibitionService {
     Exhibition createExhibition(Exhibition exhibition);
-    void addToExhibition(Long id, Artwork artwork);
-    void changeDates(Long id, Date startDate, Date endDate);
-    void deleteFromExhibition(Long id, Artwork artwork);
-    void editName(Long id, String newName);
-    void editDescription(Long id, String newDescription);
+    Exhibition addToExhibition(Long id, Artwork artwork);
+    Exhibition changeDates(Long id, Date startDate, Date endDate);
+    Exhibition deleteFromExhibition(Long id, Artwork artwork);
+    Exhibition editName(Long id, String newName);
+    Exhibition editDescription(Long id, String newDescription);
     Exhibition findById(Long id);
     void deleteExhibition(Long id);
     void cleanupExpiredExhibitions();
