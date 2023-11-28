@@ -13,19 +13,19 @@ public interface ArtworkService {
 
     Artwork findArtworkById(Long id);
 
-    void updateTitle(Long id, String title);
+    Artwork updateTitle(Long id, String title);
 
-    void updateDescription(Long id, String description);
+    Artwork updateDescription(Long id, String description);
 
-    void updateTechnique(Long id, String technique);
+    Artwork updateTechnique(Long id, String technique);
 
-    void updateWidth(Long id, double width);
+    Artwork updateWidth(Long id, double width);
 
-    void updateHeight(Long id, double height);
+    Artwork updateHeight(Long id, double height);
 
-    void updateImgUrl(Long id, String url);
+    Artwork updateImgUrl(Long id, String url);
 
-    void updateImgSize(Long id, double size);
+    Artwork updateImgSize(Long id, double size);
 
     List<Artwork> getArtworksByTitle(String title);
 
