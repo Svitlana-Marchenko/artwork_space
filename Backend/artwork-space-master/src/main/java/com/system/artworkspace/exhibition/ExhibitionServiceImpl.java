@@ -2,17 +2,21 @@ package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkMapper;
-import com.system.artworkspace.collection.CollectionEntity;
 import jakarta.persistence.EntityNotFoundException;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
@@ -26,9 +30,13 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     @Value("${exhibition.max-size}")
     private int maxSize;
 
+    private final Scheduler scheduler;
+
     @Autowired
-    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository) {
+    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository, Scheduler scheduler) throws SchedulerException {
         this.exhibitionRepository = exhibitionRepository;
+        this.scheduler = scheduler;
+        this.scheduler.start();
     }
     @Override
     public Exhibition createExhibition(Exhibition exhibition) {
@@ -136,4 +144,27 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             throw new EntityNotFoundException("Exhibition not found with ID: " + id);
         }
     }
+    @Scheduled(cron = "0 0 2 1 * ?") // Execute on the 1st day of every month at 2:00 AM
+    public void cleanupExpiredExhibitionsMonthly() {
+        cleanupExpiredExhibitions();
+        logger.info("Cleanup Expired Exhibitions Monthly task executed");
+    }
+
+    @Override
+    public void cleanupExpiredExhibitions() {
+
+        boolean hasExhibitions = exhibitionRepository.count() > 0;
+        Date threeMonthsAgo = Date.from(LocalDateTime.now().minusMonths(3).atZone(ZoneId.systemDefault()).toInstant());
+        List<ExhibitionEntity> expiredExhibitions = exhibitionRepository.findByEndDateBefore(threeMonthsAgo);
+        List<ExhibitionEntity> exhibitions = exhibitionRepository.findAll();
+
+        for (ExhibitionEntity exhibition : expiredExhibitions) {
+            deleteExhibition(exhibition.getId());
+            logger.info("Cleaned up exhibition with ID: " + exhibition.getId());
+        }
+
+        logger.info("Cleanup Expired Exhibitions task executed...");
+    }
+
+
 }

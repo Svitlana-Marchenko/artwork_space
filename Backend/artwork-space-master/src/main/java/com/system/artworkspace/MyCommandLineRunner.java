@@ -11,6 +11,9 @@ import com.system.artworkspace.auction.AuctionMapper;
 import com.system.artworkspace.collection.CollectionEntity;
 import com.system.artworkspace.collection.CollectionMapper;
 import com.system.artworkspace.collection.CollectionService;
+import com.system.artworkspace.exhibition.ExhibitionEntity;
+import com.system.artworkspace.exhibition.ExhibitionMapper;
+import com.system.artworkspace.exhibition.ExhibitionService;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,9 @@ public class MyCommandLineRunner implements CommandLineRunner {
     CollectionService collectionService;
 
     @Autowired
+    ExhibitionService exhibitionService;
+
+    @Autowired
     ArtworkService artworkService;
     @Autowired
     AuctionArtistService auctionArtistService;
@@ -43,6 +49,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
     }
 
 
+    @SuppressWarnings("deprecation")
     private void createTestData() {
         UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST);
         UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER);
@@ -71,6 +78,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
         collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
         collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
+
+
+        ExhibitionEntity exhibition1 = new ExhibitionEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Ex1","Desc",new LinkedList<ArtworkEntity>(),new Date(120,1,23),new Date(120,2,23));
+        ExhibitionEntity exhibition2 = new ExhibitionEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Ex2","Desc",new LinkedList<ArtworkEntity>(),new Date(123,10,23),new Date(123,11,23));
+        exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition1));
+        exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition2));
 
     }
 

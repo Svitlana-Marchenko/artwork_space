@@ -14,4 +14,5 @@ public interface ExhibitionService {
     void editDescription(Long id, String newDescription);
     Exhibition findById(Long id);
     void deleteExhibition(Long id);
+    void cleanupExpiredExhibitions();
 }
