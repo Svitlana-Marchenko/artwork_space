@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ArtworkCard from "../listings/ArtworkCard";
-import {Artwork, artworks} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../mockup/mockup_artworks";
+import ArtworkService from "../../API/ArtworkService";
 
 interface ArtworksListProps {
     exhibitionId?: string;
     artistId?: string;
 }
+
+//todo think about import {Artwork} from "../../mockup/mockup_artworks";
+
 const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
+
+    const [artworks, setArtworks] = useState<Artwork[]>([]);
+
+    useEffect(() => {
+        ArtworkService.getAllArtworks()
+            .then(data => setArtworks(data))
+            .catch(error => console.error('Помилка при отриманні даних:', error));
+    }, []);
+
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
     const targetHeight = totalHeight / 3;
 
@@ -44,10 +57,10 @@ const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
                             imageURL={artwork.imageURL}
                             width={artwork.width}
                             height={artwork.height}
-                            firstName={artwork.artist.firstName}
-                            lastName={artwork.artist.lastName}
-                            username={artwork.artist.username}
-                            artistId={artwork.artist.id}
+                            firstName={artwork.user.firstName}
+                            lastName={artwork.user.lastName}
+                            username={artwork.user.username}
+                            artistId={artwork.user.id}
                         />
                     ))}
                 </div>

@@ -7,7 +7,7 @@ export type Artwork = {
     imageURL: string;
     width: number;
     height: number;
-    artist: User;
+    user: User;
 };
 
 export const artworks: Artwork[] = [
@@ -15,7 +15,7 @@ export const artworks: Artwork[] = [
         id: 1,
         title: "Artwork 1",
         technique: "Oil on Canvas",
-        artist: users[0],
+        user: users[0],
         imageURL: "../images/flowers.jpg",
         width: 400,
         height: 600,
@@ -24,7 +24,7 @@ export const artworks: Artwork[] = [
         id:2,
         title: "Artwork 2",
         technique: "Watercolor",
-        artist: users[1],
+        user: users[1],
         imageURL: "../images/1.jpg",
         width: 216,
         height: 270,
@@ -33,7 +33,7 @@ export const artworks: Artwork[] = [
         id:3,
         title: "Artwork 3",
         technique: "Acrylic on Paper",
-        artist: users[2],
+        user: users[2],
         imageURL: "../images/2.jpg",
         width: 400,
         height: 300,
@@ -42,7 +42,7 @@ export const artworks: Artwork[] = [
         id:4,
         title: "Artwork 4",
         technique: "Digital Art",
-        artist: users[3],
+        user: users[3],
         imageURL: "../images/3.jpg",
         width: 300,
         height: 400,
@@ -51,7 +51,7 @@ export const artworks: Artwork[] = [
         id:5,
         title: "Artwork 5",
         technique: "Sculpture",
-        artist: users[4],
+        user: users[4],
         imageURL: "../images/4.jpg",
         width: 300,
         height: 170,
@@ -60,7 +60,7 @@ export const artworks: Artwork[] = [
         id:6,
         title: "Artwork 6",
         technique: "Mixed Media",
-        artist: users[5],
+        user: users[5],
         imageURL: "../images/flowers.jpg",
         width: 400,
         height: 600,
@@ -69,7 +69,7 @@ export const artworks: Artwork[] = [
         id:7,
         title: "Artwork 7",
         technique: "Pen and Ink",
-        artist: users[6],
+        user: users[6],
         imageURL: "../images/1.jpg",
         width: 216,
         height: 270,
@@ -79,7 +79,7 @@ export const artworks: Artwork[] = [
         title: "Artwork 8",
         technique: "Photography",
         imageURL: "../images/2.jpg",
-        artist: users[7],
+        user: users[7],
         width: 400,
         height: 300,
     },
@@ -87,7 +87,7 @@ export const artworks: Artwork[] = [
         id:9,
         title: "Artwork 9",
         technique: "Collage",
-        artist: users[8],
+        user: users[8],
         imageURL: "../images/3.jpg",
         width: 300,
         height: 400,
@@ -96,7 +96,7 @@ export const artworks: Artwork[] = [
         id:10,
         title: "Artwork 10",
         technique: "Encaustic",
-        artist: users[9],
+        user: users[9],
         imageURL: "../images/4.jpg",
         width: 300,
         height: 170,
