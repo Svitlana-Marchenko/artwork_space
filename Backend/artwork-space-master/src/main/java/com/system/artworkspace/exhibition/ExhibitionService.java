@@ -5,7 +5,7 @@ import com.system.artworkspace.artwork.ArtworkDto;
 
 import java.util.Date;
 
-public interface ExhibitionService {
+public interface ExhibitionService{
     Exhibition createExhibition(Exhibition exhibition);
     Exhibition addToExhibition(Long id, Artwork artwork);
     Exhibition changeDates(Long id, Date startDate, Date endDate);

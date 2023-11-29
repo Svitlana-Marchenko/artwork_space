@@ -160,6 +160,13 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             throw new EntityNotFoundException("Exhibition not found with ID: " + id);
         }
     }
+
+    @Scheduled(fixedRate = 24 * 60 * 5 * 1000) // Execute every 24 hours
+    @CacheEvict(value = "exhibition",allEntries = true)
+    public void deleteCache(){
+        logger.info("Cache deleted for all exhibitions");
+    }
+
     @Scheduled(cron = "0 0 2 1 * ?") // Execute on the 1st day of every month at 2:00 AM
     public void cleanupExpiredExhibitionsMonthly() {
         cleanupExpiredExhibitions();
@@ -168,11 +175,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     @Override
     public void cleanupExpiredExhibitions() {
-
-        boolean hasExhibitions = exhibitionRepository.count() > 0;
         Date threeMonthsAgo = Date.from(LocalDateTime.now().minusMonths(3).atZone(ZoneId.systemDefault()).toInstant());
         List<ExhibitionEntity> expiredExhibitions = exhibitionRepository.findByEndDateBefore(threeMonthsAgo);
-        List<ExhibitionEntity> exhibitions = exhibitionRepository.findAll();
 
         for (ExhibitionEntity exhibition : expiredExhibitions) {
             deleteExhibition(exhibition.getId());
