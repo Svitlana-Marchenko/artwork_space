@@ -17,7 +17,7 @@ const Artwork = () => {
         width,
         height
     } = artworks[convertToInt(id)];
-    const artist = artworks[convertToInt(id)].artist;
+    const artist = artworks[convertToInt(id)].user;
     const currentUser = {
         //role: "artist",
          role: "curator",

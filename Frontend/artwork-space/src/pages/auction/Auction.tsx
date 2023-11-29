@@ -27,7 +27,7 @@ const Auction = () => {
         width,
         height
     } = artwork;
-    const artist = artwork.artist;
+    const artist = artwork.user;
 
     const currentUser = {
         //role: "artist",

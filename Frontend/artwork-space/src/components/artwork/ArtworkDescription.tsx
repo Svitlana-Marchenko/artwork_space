@@ -5,7 +5,7 @@ interface ArtworkDescription {
     width: number;
     height: number;
 }
-
+//todo think/add artwork description field
 const ArtworkDescription:React.FC<ArtworkDescription> = ({technique, width, height}) => {
     return (
         <div className="grid grid-cols-2 gap-x-8 my-6">
