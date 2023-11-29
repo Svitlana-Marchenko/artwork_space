@@ -12,4 +12,14 @@ export default class ArtworkService {
         }
     }
 
+    static async getArtworkById(id) {
+        try {
+            const response = await axios.get(`http://localhost:8080/artworks/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера:', error);
+            throw error;
+        }
+    }
+
 }
