@@ -13,25 +13,38 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Collections;
 
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfiguration {
-
+    //todo check security
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.cors(cors -> cors
+                        .configurationSource(request -> {
+                            CorsConfiguration config = new CorsConfiguration();
+                            config.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); // Дозвіл на доступ з локального хоста 3000
+                            config.setAllowedMethods(Collections.singletonList("*")); // Дозволені всі HTTP-методи
+                            config.setAllowedHeaders(Collections.singletonList("*")); // Дозволені всі заголовки
+                            return config;
+                        })
+                )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**"))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/users/**").permitAll()
+                        //.requestMatchers("/users/**").permitAll()
                         .requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
                         .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
                         .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
+                        //todo fix permitAll() for artwork
+                        .requestMatchers(HttpMethod.GET, "/artworks").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
