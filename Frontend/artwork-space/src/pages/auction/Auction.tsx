@@ -1,24 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {convertToInt} from "../../actions/functions";
 import {Button} from "../../components/Button";
-import {auctions} from "../../mockup/mockup_auctions";
 import CountdownTimer from "../../components/countdown/CountdownTimer";
-import UserLink from "../../components/UserLink";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
+import {Auction as AuctionType} from "../../mockup/mockup_auctions";
+import AuctionService from "../../API/AuctionService";
 
 const Auction = () => {
     const { id } = useParams();
+    const [auction, setAuction] = useState<AuctionType>();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        AuctionService.getAuctionById(id)
+            .then((data) => setAuction(data))
+            .catch((error) =>
+                console.error('Error fetching auction by ID:', error)
+            );
+    }, [id]);
+
+    //todo normal page for error
+    if (!auction) {
+        return <div>Loading...</div>;
+    }
+
+
     const {
         artwork,
         bid,
-        endDate,
+        closingTime,
         currentBid,
         startingPrice,
         currentBuyer
-    } = auctions[convertToInt(id)]
+    } = auction
 
     const {
         imageURL,
@@ -30,10 +45,12 @@ const Auction = () => {
     const artist = artwork.user;
 
     const currentUser = {
-        //role: "artist",
+       // role: "artist",
          role: "curator",
         // role: "collectioneer",
     }
+
+    //todo fix timer
 
     return (
         <div className="flex flex-row items-center justify-center gap-10">
@@ -46,7 +63,7 @@ const Auction = () => {
                         firstName={artist.firstName}
                         lastName={artist.lastName}
                         title={title}/>
-                    <CountdownTimer targetDate={endDate}/>
+                    <CountdownTimer targetDate={new Date(closingTime)}/>
                 </div>
                 <ArtworkDescription
                     technique={technique}

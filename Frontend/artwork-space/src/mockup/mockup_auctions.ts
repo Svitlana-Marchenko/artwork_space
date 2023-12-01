@@ -8,7 +8,7 @@ export type Auction = {
     artwork: Artwork;
     startingPrice: number;
     bid: number;
-    endDate: Date;
+    closingTime: Date;
     currentBuyer: User;
     currentBid: number;
 }
@@ -21,7 +21,7 @@ export const auctions: Auction[] = [
         artwork: artworks[0],
         startingPrice: 100,
         bid: 0,
-        endDate: new Date('2023-12-01'),
+        closingTime: new Date('2023-12-01'),
         currentBuyer: users[0],
         currentBid: 0,
     },
@@ -32,7 +32,7 @@ export const auctions: Auction[] = [
         artwork: artworks[1],
         startingPrice: 150,
         bid: 0,
-        endDate: new Date('2023-12-02'),
+        closingTime: new Date('2023-12-02'),
         currentBuyer: users[1],
         currentBid: 0,
     },
@@ -43,7 +43,7 @@ export const auctions: Auction[] = [
         artwork: artworks[2],
         startingPrice: 120,
         bid: 0,
-        endDate: new Date('2023-12-03'),
+        closingTime: new Date('2023-12-03'),
         currentBuyer: users[2],
         currentBid: 0,
     },
@@ -54,7 +54,7 @@ export const auctions: Auction[] = [
         artwork: artworks[3],
         startingPrice: 180,
         bid: 0,
-        endDate: new Date('2023-12-04'),
+        closingTime: new Date('2023-12-04'),
         currentBuyer: users[3],
         currentBid: 0,
     },
@@ -65,7 +65,7 @@ export const auctions: Auction[] = [
         artwork: artworks[4],
         startingPrice: 250,
         bid: 0,
-        endDate: new Date('2023-12-05'),
+        closingTime: new Date('2023-12-05'),
         currentBuyer: users[4],
         currentBid: 0,
     },
@@ -76,7 +76,7 @@ export const auctions: Auction[] = [
         artwork: artworks[5],
         startingPrice: 130,
         bid: 0,
-        endDate: new Date('2023-12-06'),
+        closingTime: new Date('2023-12-06'),
         currentBuyer: users[5],
         currentBid: 0,
     },
@@ -87,7 +87,7 @@ export const auctions: Auction[] = [
         artwork: artworks[6],
         startingPrice: 170,
         bid: 0,
-        endDate: new Date('2023-12-07'),
+        closingTime: new Date('2023-12-07'),
         currentBuyer: users[6],
         currentBid: 0,
     },
@@ -98,7 +98,7 @@ export const auctions: Auction[] = [
         artwork: artworks[7],
         startingPrice: 200,
         bid: 0,
-        endDate: new Date('2023-12-08'),
+        closingTime: new Date('2023-12-08'),
         currentBuyer: users[7],
         currentBid: 0,
     },
@@ -109,7 +109,7 @@ export const auctions: Auction[] = [
         artwork: artworks[8],
         startingPrice: 160,
         bid: 0,
-        endDate: new Date('2023-12-09'),
+        closingTime: new Date('2023-12-09'),
         currentBuyer: users[8],
         currentBid: 0,
     },
@@ -120,7 +120,7 @@ export const auctions: Auction[] = [
         artwork: artworks[9],
         startingPrice: 200,
         bid: 0,
-        endDate: new Date('2023-12-10'),
+        closingTime: new Date('2023-12-10'),
         currentBuyer: users[9],
         currentBid: 0,
     },

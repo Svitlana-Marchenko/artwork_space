@@ -8,7 +8,7 @@ const AuctionCard:React.FC<Auction> = ({
                                            id,
                                            artwork,
                                            bid,
-                                           endDate,
+                                           closingTime,
                                            currentBid}) => {
     const navigate = useNavigate();
     const currentUser = {
@@ -23,7 +23,7 @@ const AuctionCard:React.FC<Auction> = ({
                 <div className="flex flex-col">
                     <p className="text-sm font-bold mt-2">{artwork.technique}</p>
                     <p className={"text-3xl font-bold"}>{artwork.title.toUpperCase()}</p>
-                    <p className={"mt-1"}>{endDate.toDateString().toUpperCase()}</p>
+                    <p className={"mt-1"}>{new Date(closingTime).toDateString()}</p>
                 </div>
             </div>
             {
