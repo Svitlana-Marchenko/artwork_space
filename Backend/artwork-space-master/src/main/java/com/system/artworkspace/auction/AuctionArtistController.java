@@ -60,6 +60,7 @@ public class AuctionArtistController {
         return activeAuctions;
     }
 
+
     @PutMapping("/{id}/close")
     public void closeAuction(@PathVariable Long id) {
         logger.info("Closing auction with ID: {}", id);

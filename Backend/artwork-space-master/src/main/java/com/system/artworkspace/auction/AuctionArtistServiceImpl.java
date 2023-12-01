@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -58,17 +59,23 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Override
     public List<Auction> getAllActiveAuctions() {
         Date currentDate = new Date();
-        Specification<AuctionEntity> closingTimeSpecification = (root, query, criteriaBuilder) ->
-                criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
         Sort sort = Sort.by(Sort.Order.asc("closingTime"));
         List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
 
-        List<AuctionEntity> validAuctionEntities = activeAuctionEntities;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedCurrentDate = dateFormat.format(new Date());
 
-//        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
-//                .filter(entity -> entity.getClosingTime().after(currentDate))
-//                .collect(Collectors.toList());
+        List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
+                .filter(entity -> {
+                    try {
+                        Date closingTime = dateFormat.parse(entity.getClosingTime().toString());
+                        return !closingTime.before(dateFormat.parse(formattedCurrentDate));
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
+                .toList();
 
         logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", validAuctionEntities.size());
 
