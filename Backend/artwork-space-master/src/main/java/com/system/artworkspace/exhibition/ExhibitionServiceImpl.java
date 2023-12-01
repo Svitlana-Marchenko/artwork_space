@@ -32,14 +32,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
     @Value("${exhibition.max-size}")
     private int maxSize;
-
-    private final Scheduler scheduler;
-
     @Autowired
-    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository, Scheduler scheduler) throws SchedulerException {
+    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository) throws SchedulerException {
         this.exhibitionRepository = exhibitionRepository;
-        this.scheduler = scheduler;
-        this.scheduler.start();
     }
     @Override
     public Exhibition createExhibition(Exhibition exhibition) {
