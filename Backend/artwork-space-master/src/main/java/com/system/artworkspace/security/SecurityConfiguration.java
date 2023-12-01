@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**"))
                 .authorizeHttpRequests((authorize) -> authorize
                         //.requestMatchers("/users/**").permitAll()
-                        .requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
@@ -45,6 +45,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
                         //todo fix permitAll() for artwork
                         .requestMatchers(HttpMethod.GET, "/artworks/**").permitAll()
+                        //todo fix permitAll() for auction
+                        .requestMatchers(HttpMethod.GET, "/collectioneer/auctions/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
