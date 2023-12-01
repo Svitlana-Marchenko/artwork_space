@@ -156,7 +156,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         }
     }
 
-    @Scheduled(fixedRate = 24 * 60 * 5 * 1000) // Execute every 24 hours
+    @Scheduled(fixedRate = 24 * 60 * 60 * 1000) // Execute every 24 hours
     @CacheEvict(value = "exhibition",allEntries = true)
     public void deleteCache(){
         logger.info("Cache deleted for all exhibitions");
