@@ -5,6 +5,8 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
+import com.system.artworkspace.exceptions.NoSuchArtworkException;
+import com.system.artworkspace.exceptions.NoSuchAuctionException;
 import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,16 +39,23 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
     private static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     public List<Auction> getAvailableAuctions() {
-        Date currentDate = new Date();
-        Specification<AuctionEntity> closingTimeSpecification = (root, query, criteriaBuilder) ->
-                criteriaBuilder.greaterThan(root.get("closingTime"), currentDate);
 
         Sort sort = Sort.by(Sort.Order.asc("closingTime"));
         List<AuctionEntity> activeAuctionEntities = auctionRepository.findAll(sort);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedCurrentDate = dateFormat.format(new Date());
+
         List<AuctionEntity> validAuctionEntities = activeAuctionEntities.stream()
-                .filter(entity -> entity.getClosingTime().after(currentDate))
-                .collect(Collectors.toList());
+                .filter(entity -> {
+                    try {
+                        Date closingTime = dateFormat.parse(entity.getClosingTime().toString());
+                        return !closingTime.before(dateFormat.parse(formattedCurrentDate));
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
+                .toList();
 
         logger.info(AUCTIONS_EVENTS, "Retrieved {} active auctions.", validAuctionEntities.size());
 
@@ -107,6 +117,19 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
             logger.warn(AUCTIONS_EVENTS, "Artwork not found for painting with ID: {}", paintingId);
             return null;
         }
+    }
+
+    @Override
+    public Auction getAuctionById(Long id) {
+        Optional<AuctionEntity> auction = auctionRepository.findById(id);
+        logger.info(AUCTIONS_EVENTS, "Getting auction with ID: {}", id);
+
+        if (auction.isPresent())
+            return AuctionMapper.INSTANCE.auctionEntityToAuction(auction.get());
+        else
+            throw new NoSuchAuctionException("Auction with id " + id + " not found");
+
+
     }
 
 }

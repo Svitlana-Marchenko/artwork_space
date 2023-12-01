@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/collectioneer/auctions")
-@PreAuthorize("hasAuthority('COLLECTIONEER')")
+//@PreAuthorize("hasAuthority('COLLECTIONEER')")
 public class AuctionCollectioneerController {
     private static final Logger logger = LoggerFactory.getLogger(AuctionCollectioneerController.class);
 
@@ -56,5 +56,17 @@ public class AuctionCollectioneerController {
             logger.warn("Artwork not found for auction with ID: {}", id);
         }
         return artwork;
+    }
+
+    @GetMapping("/{id}")
+    public AuctionDto getAuctionById(@PathVariable Long id) {
+        logger.info("Fetching auction with ID: {}", id);
+        Auction auction = auctionCollectioneerService.getAuctionById(id);
+        if (auction != null) {
+            return AuctionMapper.INSTANCE.auctionToAuctionDto(auction);
+        } else {
+            logger.warn("Auction not found for auction with ID: {}", id);
+        }
+        return null;
     }
 }
