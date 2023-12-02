@@ -38,6 +38,12 @@ public class ArtworkController {
         logger.info("Getting all artworks");
         return artworkService.getAllArtwork().stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
     }
+    @GetMapping("/artist/{id}")
+    public List<ArtworkDto> getAllByUserId(@PathVariable Long id){
+        logger.info("Getting all artworks");
+        return artworkService.getAllArtworkByArtistId(id).stream().map(x-> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
+    }
+
     @PostMapping
     @PreAuthorize("hasAuthority('ARTIST')")
     @RateLimit(maxCalls = 2)

@@ -44,9 +44,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
                         .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
                         //todo fix permitAll() for artwork
-                        .requestMatchers(HttpMethod.GET, "/artworks/**").permitAll()
+                        .requestMatchers("/artworks/**").permitAll()
                         //todo fix permitAll() for auction
                         .requestMatchers(HttpMethod.GET, "/collectioneer/auctions/**").permitAll()
+                        //todo fix permitAll() for exhibition
+                        .requestMatchers("/exhibitions/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
