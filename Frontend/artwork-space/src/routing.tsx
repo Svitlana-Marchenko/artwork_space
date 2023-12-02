@@ -9,6 +9,7 @@ import App from "./pages/App";
 import Artwork from "./pages/artwork/Artwork";
 import Exhibition from "./pages/exhibition/Exhibition";
 import Auction from "./pages/auction/Auction";
+import {NewArtwork} from "./pages/artwork/NewArtwork";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: "/artwork/:id",
                 element: <Artwork/>
+            },
+            {
+                path: "/new-artwork",
+                element:<NewArtwork/>
             },
             {
                 path: "/exhibitions",

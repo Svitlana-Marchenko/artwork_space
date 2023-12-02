@@ -2,21 +2,28 @@ import React, {useCallback, useState} from 'react';
 import {AiOutlineMenu} from "react-icons/ai";
 import MenuItem from "./MenuItem";
 import {useNavigate} from "react-router-dom";
+import {User} from "../mockup/mockup_users"
+import {LoginModal} from "../components/modals/LoginModal";
+import {RegisterModal} from "../components/modals/RegisterModal";
 
-const UserMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
+interface UserMenuProps {
+    currentUser?: User | null
+}
+const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
+    const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
+    const [isOpenLogin, setIsOpenLogin] = useState(false);
+    const [isOpenRegister, setIsOpenRegister] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(true);
     const navigate = useNavigate();
 
-    const currentUser = {
-        //role: "artist",
-        id: 1,
-         role: "curator",
-        // role: "collectioneer",
-    }
-
     const toggleOpen = useCallback(() => {
-        setIsOpen((value) => !value);
+        setIsOpenUserMenu((value) => !value);
+    }, []);
+    const toggleOpenLogin = useCallback(() => {
+        setIsOpenLogin((value) => !value);
+    }, []);
+    const toggleOpenRegister = useCallback(() => {
+        setIsOpenRegister((value) => !value);
     }, []);
 
     return (
@@ -36,7 +43,7 @@ const UserMenu = () => {
                 <AiOutlineMenu size={20}/>
             </div>
         </div>
-    {isOpen && (
+    {isOpenUserMenu && (
         <div
             className="
             absolute
@@ -48,7 +55,7 @@ const UserMenu = () => {
             right-14
             top-20
             text-sm
-            z-50
+            z-30
           "
         >
             <div className="flex flex-col cursor-pointer">
@@ -57,7 +64,7 @@ const UserMenu = () => {
                         {currentUser.role === "artist" && (
                             <>
                                 <MenuItem label="My artworks" onClick={()=>{navigate(`/artworks/${currentUser.id}`)}}/>
-                                <MenuItem label="Add new artwork" onClick={()=>{}}/>
+                                <MenuItem label="Add new artwork" onClick={()=>{navigate('/new-artwork')}}/>
                             </>
                         )}
 
@@ -84,17 +91,19 @@ const UserMenu = () => {
                     <>
                         <MenuItem
                             label="Login"
-                            onClick={()=>{}}
+                            onClick={toggleOpenLogin}
                         />
                         <MenuItem
                             label="Sign up"
-                            onClick={()=>{}}
+                            onClick={toggleOpenRegister}
                         />
                     </>
                 )}
             </div>
         </div>
     )}
+            <LoginModal isOpen={isOpenLogin} toggle={toggleOpenLogin}/>
+            <RegisterModal isOpen={isOpenRegister} toggle={toggleOpenRegister}/>
     </>
     )
 };
