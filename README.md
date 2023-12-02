@@ -8,6 +8,7 @@
    npm install
    npm install -D tailwindcss
    npx tailwindcss init
+   npm install react-hot-toast
    npm start
 ```
 
