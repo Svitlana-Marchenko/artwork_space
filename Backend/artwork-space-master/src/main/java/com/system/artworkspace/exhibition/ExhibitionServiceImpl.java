@@ -3,6 +3,8 @@ package com.system.artworkspace.exhibition;
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
+import com.system.artworkspace.auction.AuctionEntity;
+import com.system.artworkspace.auction.AuctionMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -13,17 +15,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
-import static com.system.artworkspace.logger.LoggingMarkers.EXHIBITION_EVENTS;
+import static com.system.artworkspace.logger.LoggingMarkers.*;
 
 @Service
 public class ExhibitionServiceImpl implements ExhibitionService {
@@ -179,6 +183,33 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         }
 
         logger.info("Cleanup Expired Exhibitions task executed...");
+    }
+
+    @Override
+    public List<Exhibition> getAllActiveExhibition() {
+        Sort sort = Sort.by(Sort.Order.asc("startDate"));
+        List<ExhibitionEntity> activeExhibitionEntities = exhibitionRepository.findAll(sort);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedCurrentDate = dateFormat.format(new Date());
+
+        List<ExhibitionEntity> validExhibitionEntities = activeExhibitionEntities.stream()
+                .filter(entity -> {
+                    try {
+                        Date closingTime = dateFormat.parse(entity.getEndDate().toString());
+                        Date startTime = dateFormat.parse(entity.getStartDate().toString());
+                        return !closingTime.before(dateFormat.parse(formattedCurrentDate)) && ! startTime.after(dateFormat.parse(formattedCurrentDate));
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
+                .toList();
+
+        logger.info(AUCTIONS_EVENTS, "Retrieved {} active exhibitions.", validExhibitionEntities.size());
+
+        return validExhibitionEntities.stream()
+                .map(x -> ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(x))
+                .collect(Collectors.toList());
     }
 
 

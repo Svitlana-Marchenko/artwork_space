@@ -2,6 +2,8 @@ package com.system.artworkspace.exhibition;
 
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkMapper;
+import com.system.artworkspace.auction.AuctionDto;
+import com.system.artworkspace.auction.AuctionMapper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/exhibitions")
@@ -112,6 +115,14 @@ public class ExhibitionController {
     public ExhibitionDto findById(@PathVariable @Valid Long exhibitionId) {
         logger.info("Retrieving exhibition with ID: {}", exhibitionId);
         return ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.findById(exhibitionId));
+    }
+
+    @GetMapping("/active")
+    public List<ExhibitionDto> getAllActive() {
+        logger.info("Fetching all active auctions");
+        List<ExhibitionDto> activeExhibitions = exhibitionService.getAllActiveExhibition().stream().map(x -> ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(x)).collect(Collectors.toList());
+        logger.info("Retrieving info about active exhibitions ", activeExhibitions.size());
+        return activeExhibitions;
     }
 
     @DeleteMapping("/{exhibitionId}")

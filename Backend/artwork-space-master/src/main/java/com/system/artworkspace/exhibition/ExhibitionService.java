@@ -4,6 +4,7 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 
 import java.util.Date;
+import java.util.List;
 
 public interface ExhibitionService{
     Exhibition createExhibition(Exhibition exhibition);
@@ -15,4 +16,6 @@ public interface ExhibitionService{
     Exhibition findById(Long id);
     void deleteExhibition(Long id);
     void cleanupExpiredExhibitions();
+
+    List<Exhibition> getAllActiveExhibition();
 }
