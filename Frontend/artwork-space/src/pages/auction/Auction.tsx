@@ -13,11 +13,13 @@ const Auction = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        AuctionService.getAuctionById(id)
-            .then((data) => setAuction(data))
-            .catch((error) =>
-                console.error('Error fetching auction by ID:', error)
-            );
+        if (id) {
+            AuctionService.getAuctionById(id)
+                .then((data) => setAuction(data))
+                .catch((error) =>
+                    console.error('Error fetching auction by ID:', error)
+                );
+        }
     }, [id]);
 
     //todo normal page for error

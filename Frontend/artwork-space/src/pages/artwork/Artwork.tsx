@@ -20,13 +20,16 @@ const Artwork = () => {
     };
 
     useEffect(() => {
-        ArtworkService.getArtworkById(id)
-            .then((data) => setArtwork(data))
-            .catch((error) => {console.error('Помилка при отриманні даних з сервера:', error)
+        if (id) {
+            ArtworkService.getArtworkById(id)
+                .then((data) => setArtwork(data))
+                .catch((error) => {
+                    console.error('Помилка при отриманні даних з сервера:', error)
 
-                navigate(`/artworks`);
-                toast.error('Artwork not found');
-            });
+                    navigate(`/artworks`);
+                    toast.error('Artwork not found');
+                });
+        }
     }, [id]);
 
 

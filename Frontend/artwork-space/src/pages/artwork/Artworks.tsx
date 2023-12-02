@@ -12,8 +12,10 @@ const Artworks = () => {
         role: "artist",
         id: 1,
         // role: "curator",
-        // role: "collectioneer",
+         //role: "collectioneer",
     }
+
+    //todo check artistid role (like unable to see artwork of non-artist users)
 
     useEffect(() => {
         if (id) {
@@ -24,6 +26,7 @@ const Artworks = () => {
             fetchData();
         }
     }, [id]);
+
 
     return (
         <div className="mx-32">
