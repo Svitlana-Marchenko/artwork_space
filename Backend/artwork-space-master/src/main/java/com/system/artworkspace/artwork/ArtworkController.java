@@ -58,7 +58,7 @@ public class ArtworkController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ARTIST')")
+    //@PreAuthorize("hasAuthority('ARTIST')")
     public void deleteArtwork(@PathVariable Long id) {
         logger.info("Deleting artwork with ID: {}", id);
         artworkService.deleteArtwork(id);

@@ -1,36 +1,61 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 import BookmarkButton from "../../components/BookmarkButton";
 import ArtworkService from "../../API/ArtworkService";
+import toast from 'react-hot-toast';
 
 
 const Artwork = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [artwork, setArtwork] = useState<ArtworkType>();
     const currentUser = {
-        //role: "artist",
-        role: "curator",
+        role: "artist",
+       //role: "curator",
         // role: "collectioneer",
     };
 
     useEffect(() => {
         ArtworkService.getArtworkById(id)
             .then((data) => setArtwork(data))
-            .catch((error) => console.error('Помилка при отриманні даних з сервера:', error));
+            .catch((error) => {console.error('Помилка при отриманні даних з сервера:', error)
+
+                navigate(`/artworks`);
+                toast.error('Artwork not found');
+            });
     }, [id]);
 
 
-    //todo add normal error page (if artwork with given id is undefined)
-    if (!artwork) {
-        return <div>Loading...</div>; // або інша обробка завантаження
+    //todo change to custom window.confirm
+    //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
+    //todo add link to api folder
+    function handleDelete() {
+        if (window.confirm('Are you sure you want to delete this artwork?')) {
+            fetch(`http://localhost:8080/artworks/${id}`, {
+                method: 'DELETE',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        navigate(`/artworks`)
+                        toast.success('Artwork deleted successfully');
+                    } else {
+                        toast.error('Failed to delete artwork. This artwork may be used in exhibition or auction');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error while deleting artwork:', error);
+                });
+        }
     }
 
     return (
         <div className="flex flex-row items-center justify-center gap-10">
+            {artwork ? (
+                <>
             <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
             <section className="w-1/3">
                 <div className={'flex flex-row justify-between align-top'}>
@@ -60,7 +85,7 @@ const Artwork = () => {
                         ?
                           <>
                               <Button label={"Edit"} onClick={()=>{}}/>
-                              <Button label={"Delete"} onClick={()=>{}} outline/>
+                              <Button label={"Delete"} onClick={handleDelete} outline/>
                           </>
                             :
                             currentUser.role === "curator"
@@ -73,11 +98,15 @@ const Artwork = () => {
                                     <Button label={"Save"} onClick={()=>{}}/>
                                 </>
                     }
-
                 </div>
-            </section>
+            </section> </>
+            ) : (
+                <div>Loading</div>
+            )}
         </div>
     );
 };
+
+//todo normal loading page
 
 export default Artwork;

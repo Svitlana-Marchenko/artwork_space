@@ -17,7 +17,7 @@ const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
     useEffect(() => {
         ArtworkService.getAllArtworks()
             .then(data => setArtworks(data))
-            .catch(error => console.error('Помилка при отриманні даних:', error));
+            .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
     }, []);
 
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
