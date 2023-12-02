@@ -15,10 +15,19 @@ const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
     const [artworks, setArtworks] = useState<Artwork[]>([]);
 
     useEffect(() => {
-        ArtworkService.getAllArtworks()
-            .then(data => setArtworks(data))
-            .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
-    }, []);
+        if (artistId !== undefined) {
+            ArtworkService.getAllArtworksByArtistId(artistId)
+                .then(data => {setArtworks(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+
+        } else {
+            ArtworkService.getAllArtworks()
+                .then(data => {setArtworks(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+        }
+    }, [artistId]);
 
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
     const targetHeight = totalHeight / 3;

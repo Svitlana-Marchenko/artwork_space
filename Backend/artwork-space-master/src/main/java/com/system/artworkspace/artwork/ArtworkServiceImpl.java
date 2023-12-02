@@ -47,6 +47,12 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    public List<Artwork> getAllArtworkByArtistId(Long id) {
+        return repository.findAllByUserId(id).stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
+
+    }
+
+    @Override
     public Artwork addArtwork(Artwork artwork) {
         logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
         repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
