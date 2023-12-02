@@ -11,7 +11,7 @@ export default class AuctionService {
         }
     }
 
-    static async getAuctionById(id) {
+    static async getAuctionById(id:string) {
         try {
             const response = await axios.get(`http://localhost:8080/collectioneer/auctions/${id}`);
             return response.data;

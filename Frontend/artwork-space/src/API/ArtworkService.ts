@@ -12,7 +12,7 @@ export default class ArtworkService {
         }
     }
 
-    static async getAllArtworksByArtistId(id) {
+    static async getAllArtworksByArtistId(id:string) {
         try {
             const response = await axios.get(`http://localhost:8080/artworks/artist/${id}`);
             return response.data;
@@ -22,7 +22,7 @@ export default class ArtworkService {
         }
     }
 
-    static async getArtworkById(id) {
+    static async getArtworkById(id:string) {
         try {
             const response = await axios.get(`http://localhost:8080/artworks/${id}`);
             return response.data;
