@@ -39,11 +39,22 @@ const Profile = () => {
                 <>
                     <div className="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center">
                         <div className="card w-96 mx-auto bg-white shadow-xl hover:shadow">
-                            <img
-                                className="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                                src="/avatar/avatar1.jpg"
+                            {profile.role === 'ARTIST' && ( <img
+                                className="w-40 mx-auto rounded-full -mt-20 border-8 border-white"
+                                src="/avatar/av2.png"
                                 alt=""
-                            />
+                            />)}
+                            {profile.role === 'COLLECTIONEER' && ( <img
+                                className="w-40 mx-auto rounded-full -mt-20 border-8 border-white"
+                                src="/avatar/av3.png"
+                                alt=""
+                            />)}
+                            {profile.role === 'CURATOR' && ( <img
+                                className="w-40 mx-auto rounded-full -mt-20 border-8 border-white"
+                                src="/avatar/av1.png"
+                                alt=""
+                            />)}
+
                             <div
                                 className="text-center mt-2 text-3xl font-medium">{profile.firstName} {profile.lastName}</div>
                             <div className="text-center mt-2 font-normal text-lg">@{profile.username}</div>
