@@ -7,7 +7,7 @@ interface ArtistLinkProps {
 }
 const UserLink:React.FC<ArtistLinkProps> = ({id, username}) => {
     return (
-        <NavLink to={`/artworks/${id}`} className="underline underline-offset-1 text-sm">
+        <NavLink to={`/profile/${id}`} className="underline underline-offset-1 text-sm">
             @{username}
         </NavLink>
     );

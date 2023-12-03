@@ -36,7 +36,6 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**"))
                 .authorizeHttpRequests((authorize) -> authorize
-                        //.requestMatchers("/users/**").permitAll()
                         //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
@@ -49,6 +48,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/collectioneer/auctions/**").permitAll()
                         //todo fix permitAll() for exhibition
                         .requestMatchers("/exhibitions/**").permitAll()
+                        //todo fix permitall for user
+                        .requestMatchers("/users/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
