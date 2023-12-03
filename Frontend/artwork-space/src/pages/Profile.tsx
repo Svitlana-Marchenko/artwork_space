@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {NavLink} from "react-router-dom";
 import UserService from "../API/UserService";
+import toast from "react-hot-toast";
 
 interface UserProfile {
     id: number;
@@ -18,8 +19,7 @@ const Profile = () => {
     const navigate = useNavigate();
 
     //todo add toast error
-    //todo find normal avatar photo
-    //todo add edit/delete button if it is user profile
+    //todo add edit button if it is user profile
 
     useEffect(() => {
         if (id) {
@@ -32,6 +32,27 @@ const Profile = () => {
                 });
         }
     }, [id]);
+//todo normal link from api
+    //todo custom window confirm
+    function handleDelete() {
+        if (window.confirm('Are you sure you want to delete your profile?')) {
+            fetch(`http://localhost:8080/users/${id}`, {
+                method: 'DELETE',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        //todo add logout
+                        navigate("/")
+                        toast.success('Profile deleted successfully');
+                    } else {
+                        toast.error('Failed to delete profile');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error while deleting profile:', error);
+                });
+        }
+    }
 
     return (
         <div>
@@ -96,7 +117,7 @@ const Profile = () => {
                                         <div className="w-0 border border-gray-300"></div>
                                         <div className="w-1/2 text-center">
                                             <span
-                                                onClick={()=>{}}
+                                                onClick={handleDelete}
                                                 className="
               text-neutral-800
               cursor-pointer

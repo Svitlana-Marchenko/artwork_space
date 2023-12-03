@@ -43,7 +43,7 @@ const Artwork = () => {
             })
                 .then((response) => {
                     if (response.ok) {
-                        navigate(`/artworks`)
+                        navigate(-1)
                         toast.success('Artwork deleted successfully');
                     } else {
                         toast.error('Failed to delete artwork. This artwork may be used in exhibition or auction');
