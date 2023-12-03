@@ -1,6 +1,10 @@
 package com.system.artworkspace.user;
 
+import com.system.artworkspace.exceptions.InvalidOldPasswordException;
 import com.system.artworkspace.exceptions.NoSuchUserException;
+import com.system.artworkspace.exceptions.WrongPasswordFormat;
+import com.system.artworkspace.user.changePassword.ChangePasswordDTO;
+import com.system.artworkspace.user.changePassword.ChangePasswordMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +50,30 @@ public class UserController {
     public UserDto getUserById(@PathVariable Long userId) {
         logger.info("Retrieving user with ID: {}", userId);
         return UserMapper.INSTANCE.userToUserDto(userService.getUserById(userId));
+    }
+
+    @PutMapping("/password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO request) {
+        try {
+            userService.changePassword(ChangePasswordMapper.INSTANCE.changePasswordDTOToChangePassword(request));
+            return ResponseEntity.ok("Пароль був змінений успішно!");
+        } catch (NoSuchUserException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        } catch (InvalidOldPasswordException e) {
+            e.printStackTrace();
+            String errorCode = e.getErrorCode();
+            String errorMessage = e.getMessage();
+            return ResponseEntity.badRequest().body(errorCode + ": " + errorMessage);
+        } catch (WrongPasswordFormat e) {
+            e.printStackTrace();
+            String errorCode = e.getErrorCode();
+            String errorMessage = e.getMessage();
+            return ResponseEntity.badRequest().body(errorCode + ": " + errorMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Не вдалося змінити пароль.");
+        }
     }
 
     @ExceptionHandler(NoSuchUserException.class)

@@ -21,8 +21,8 @@ public class UserEntity {
     //private RoleEntity role;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ArtworkEntity> artworkEntities;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private List<ArtworkEntity> artworkEntities;
 
     public UserEntity(String username, String firstName, String lastName, String email, String password, Role role) {
         this.username = username;
@@ -40,14 +40,6 @@ public class UserEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
-    //public RoleEntity getRole() {
-      //  return role;
-    //}
-
-    //public void setRole(RoleEntity role) {
-      //  this.role = role;
-    //}
 
     public Role getRole() {
         return role;
