@@ -1,6 +1,7 @@
 package com.system.artworkspace.exhibition;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
 
 import javax.validation.constraints.NotBlank;
@@ -24,23 +25,23 @@ public class ExhibitionDto {
     private String description;
 
     @NotEmpty(message = "list of artwork id is empty")
-    private List<Long> artworkIds;
+    private List<ArtworkDto> artworks;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     public ExhibitionDto() {
     }
 
-    public ExhibitionDto(Long id, UserDto curator, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
+    public ExhibitionDto(Long id, UserDto curator, String title, String description, List<ArtworkDto> artworks, Date startDate, Date endDate) {
         this.id = id;
         this.curator = curator;
-        this.title = name;
+        this.title = title;
         this.description = description;
-        this.artworkIds = artworkIds;
+        this.artworks = artworks;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -70,12 +71,12 @@ public class ExhibitionDto {
         this.description = description;
     }
 
-    public List<Long> getArtworkIds() {
-        return artworkIds;
+    public List<ArtworkDto> getArtworks() {
+        return artworks;
     }
 
-    public void setArtworkIds(List<Long> artworkIds) {
-        this.artworkIds = artworkIds;
+    public void setArtworks(List<ArtworkDto> artworks) {
+        this.artworks = artworks;
     }
 
     public Date getStartDate() {

@@ -1,5 +1,6 @@
 package com.system.artworkspace.exhibition;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.NotBlank;
@@ -10,8 +11,6 @@ import java.util.Date;
 import java.util.List;
 public class Exhibition {
     private Long id;
-    @NotNull(message = "curator is null")
-    private User curator;
 
     @Size(max = 50, message = "name is longer than 50")
     @NotBlank(message = "name is blank")
@@ -21,24 +20,27 @@ public class Exhibition {
     @NotBlank(message = "description is blank")
     private String description;
 
-    @NotEmpty(message = "list of artwork id is empty")
-    private List<Long> artworkIds;
+    @NotNull(message = "curator is null")
+    private User curator;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @NotEmpty(message = "list of artwork id is empty")
+    private List<Artwork> artworks;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     public Exhibition() {
     }
 
-    public Exhibition(Long id, User curator, String name, String description, List<Long> artworkIds, Date startDate, Date endDate) {
+    public Exhibition(Long id, User curator, String title, String description, List<Artwork> artworks, Date startDate, Date endDate) {
         this.id = id;
+        this.title = title;
         this.curator = curator;
-        this.title = name;
         this.description = description;
-        this.artworkIds = artworkIds;
+        this.artworks = artworks;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -52,12 +54,12 @@ public class Exhibition {
         this.id = id;
     }
 
-    public String getName() {
+    public String getTitle() {
         return title;
     }
 
-    public void setName(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -68,12 +70,12 @@ public class Exhibition {
         this.description = description;
     }
 
-    public List<Long> getArtworkIds() {
-        return artworkIds;
+    public List<Artwork> getArtworks() {
+        return artworks;
     }
 
-    public void setArtworkIds(List<Long> artworkIds) {
-        this.artworkIds = artworkIds;
+    public void setArtworks(List<Artwork> artworks) {
+        this.artworks = artworks;
     }
 
     public Date getStartDate() {
