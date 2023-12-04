@@ -5,7 +5,7 @@ import {
 } from "react-hook-form";
 import React, {useEffect} from "react";
 
-interface InputProps {
+export interface InputProps {
     id: string;
     label: string;
     placeholder: string;

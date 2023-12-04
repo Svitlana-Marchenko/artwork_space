@@ -1,6 +1,6 @@
 import {Artwork} from "../../mockup/mockup_artworks";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import Input from "../../components/Input";
+import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
 import {User, users} from "../../mockup/mockup_users";
 import React, {useState} from "react";

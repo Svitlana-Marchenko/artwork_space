@@ -4,8 +4,10 @@ import {
     SubmitHandler,
     useForm
 } from "react-hook-form";
-import Input from "../Input";
+import Input from "../input/Input";
 import {Modal} from "./Modal";
+import {User} from "../../mockup/mockup_users";
+import Select from "../input/Select";
 
 interface RegisterModalProps {
     isOpen:boolean;
@@ -13,8 +15,6 @@ interface RegisterModalProps {
 }
 
 export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => {
-
-    const [isLoading, setIsLoading] = useState(false);
 
 const {
         register,
@@ -30,8 +30,16 @@ const {
         },
     });
 
-    // Define the form submission handler
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        const userData: User = {
+            id: 0,
+            username: data.name,
+            firstName: '',
+            lastName: '',
+            email: data.email,
+            role: 'user',
+            password: data.password
+        };
         // // Set isLoading to true to indicate that the form is being submitted
         // setIsLoading(true);
         //
@@ -65,58 +73,66 @@ const {
                     Create an account!
                 </div>
             </div>
-            <Input
-                id="email"
-                label="Email"
-                placeholder="Email"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-            <Input
-                id="name"
-                label="Name"
-                placeholder="Name"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-            <Input
-                id="password"
-                label="Password"
-                type="password"
-                placeholder="Password"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-        </div>
-    )
-// JSX content for the modal footer
-    const footerContent = (
-        <div className="flex flex-col gap-4 mt-3">
-            <hr />
-            <div
-                className="
-          text-neutral-500
-          text-center
-          mt-4
-          font-light
-        "
-            >
-                <p>Already have an account?
-                    <span
-                        onClick={()=>{}}
-                        className="
-              text-neutral-800
-              cursor-pointer
-              hover:underline
-            "
-                    > Log in</span>
-                </p>
+            <div className={"flex flex-row space-x-4"}>
+                <Input
+                    id="email"
+                    label="Email"
+                    placeholder="Email"
+                    type='email'
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                />
+                <Input
+                    id="username"
+                    label="Username"
+                    placeholder="Username"
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                />
+            </div>
+                <Input
+                    id="name"
+                    label="Name"
+                    placeholder="Name"
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                />
+                <Input
+                    id="lastName"
+                    label="Last name"
+                    placeholder="Last name"
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                />
+            <div className={"flex flex-row space-x-4 items-center"}>
+                <Select
+                    id="role"
+                    label="Role"
+                    placeholder="Role"
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                    options={["Artist", "Curator", "Collectioneer"]}
+                />
+                <Input
+                    id="password"
+                    label="Password"
+                    type="password"
+                    placeholder="Password"
+                    register={register}
+                    errors={errors}
+                    required
+                    setValue={()=>{}}
+                />
             </div>
         </div>
     )
@@ -125,10 +141,9 @@ const {
         <Modal
             isOpen={isOpen}
             title="Register"
-            actionLabel="Continue"
+            actionLabel="Sign up"
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
-            footer={footerContent}
             toggleModal={toggle}
         />
     )
