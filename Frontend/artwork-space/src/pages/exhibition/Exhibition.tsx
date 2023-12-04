@@ -34,9 +34,9 @@ const Exhibition = () => {
                 }
             </div>
             <p className={"mt-6 mb-12"}>{description}</p>
-            <ArtworksList exhibitionId={id}/>
+            <ArtworksList artworks={[]}/>
         </div>
     );
 };
-
+//todo add normal values into artworkList
 export default Exhibition;
