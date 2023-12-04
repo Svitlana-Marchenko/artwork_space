@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         UserEntity createdUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", createdUser.getId());
-        return user;
+        return UserMapper.INSTANCE.userEntityToUser(createdUser);
     }
 
     @Override
