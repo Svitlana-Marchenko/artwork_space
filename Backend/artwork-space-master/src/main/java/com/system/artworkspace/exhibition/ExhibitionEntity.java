@@ -17,7 +17,12 @@ public class ExhibitionEntity {
     private String title;
     @Column(length = 2000)
     private String description;
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "exhibition_artwork",
+            joinColumns = @JoinColumn(name = "exhibition_id"),
+            inverseJoinColumns = @JoinColumn(name = "artwork_id")
+    )
     private List<ArtworkEntity> artworks;
     @Temporal(TemporalType.DATE)
     private Date startDate;
