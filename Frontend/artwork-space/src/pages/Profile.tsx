@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {NavLink} from "react-router-dom";
 import UserService from "../API/UserService";
 import toast from "react-hot-toast";
+import {ChangePasswordModal} from "../components/modals/ChangePasswordModal";
+import {EditProfileInfoModal} from "../components/modals/EditProfileInfoModal";
 
 interface UserProfile {
     id: number;
@@ -17,6 +19,17 @@ const Profile = () => {
     const {id} = useParams();
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const navigate = useNavigate();
+
+    const [isOpenPassword, setIsOpenPassword] = useState(false);
+    const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+
+    const toggleOpenPassword = useCallback(() => {
+        setIsOpenPassword((value) => !value);
+    }, []);
+
+    const toggleOpenEditProfile = useCallback(() => {
+        setIsOpenEditProfile((value) => !value);
+    }, []);
 
     //todo add toast error
     //todo add edit button if it is user profile
@@ -101,31 +114,39 @@ const Profile = () => {
                             {profile.id === 1 && (
                                 <>
 
-                                    <div className="flex p-4">
-                                        <div className="w-1/2 text-center">
+                                    <div className="flex items-center justify-center h-full">
+                                        <div className="flex flex-col p-4">
+                                            <div className="w-full text-center">
+      <span
+          onClick={toggleOpenEditProfile}
+          className="text-neutral-800 cursor-pointer hover:underline"
+      >
+        Edit account
+      </span>
+                                            </div>
 
-                                    <span
-                                        onClick={()=>{}}
-                                        className="
-              text-neutral-800
-              cursor-pointer
-              hover:underline
-            "
-                                    > Edit account</span>
 
-                                        </div>
-                                        <div className="w-0 border border-gray-300"></div>
-                                        <div className="w-1/2 text-center">
-                                            <span
-                                                onClick={handleDelete}
-                                                className="
-              text-neutral-800
-              cursor-pointer
-              hover:underline
-            "
-                                            > Delete account</span>
+                                            <div className="w-full text-center">
+      <span
+          onClick={toggleOpenPassword}
+          className="text-neutral-800 cursor-pointer hover:underline"
+      >
+        Change password
+      </span>
+                                            </div>
+
+                                            <div className="w-full text-center">
+      <span
+          onClick={handleDelete}
+          className="text-neutral-800 cursor-pointer hover:underline"
+      >
+        Delete account
+      </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <ChangePasswordModal isOpen={isOpenPassword} toggle={toggleOpenPassword}/>
+                                    <EditProfileInfoModal isOpen={isOpenEditProfile} toggle={toggleOpenEditProfile}/>
                                 </>
                             )}
 
