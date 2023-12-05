@@ -41,7 +41,6 @@ public class ExhibitionController {
         if (bindingResult.hasErrors()) {
             logErrors(bindingResult);
         }
-        logger.info("Creating an exhibition with name: {}", exhibition.getTitle());
         ExhibitionDto createdExhibition = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionDtoToExhibition(exhibition)));
         logger.info("Exhibition created with ID: {}", createdExhibition.getId());
         return createdExhibition;

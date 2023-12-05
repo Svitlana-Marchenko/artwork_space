@@ -42,9 +42,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
     @Override
     public Exhibition createExhibition(Exhibition exhibition) {
-        exhibitionRepository.save(ExhibitionMapper.INSTANCE.exhibitionToExhibitionEntity(exhibition));
-        logger.info(EXHIBITION_EVENTS,"Created exhibition with ID: {}", exhibition.getId());
-        return exhibition;
+        ExhibitionEntity ex = exhibitionRepository.save(ExhibitionMapper.INSTANCE.exhibitionToExhibitionEntity(exhibition));
+        logger.info(EXHIBITION_EVENTS,"Created exhibition with ID: {}", ex.getId());
+        return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(ex);
     }
 
     @Override
