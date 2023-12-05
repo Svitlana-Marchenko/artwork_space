@@ -11,6 +11,11 @@ interface ArtworksListProps {
 
 const ArtworksList:React.FC<ArtworksListProps> = ({artworks}) => {
 
+    //todo normal empty page
+    if(artworks.length ===0){
+        return <div>Nothing</div>
+    }
+
     // const [artworks, setArtworks] = useState<Artwork[]>([]);
 
     // useEffect(() => {

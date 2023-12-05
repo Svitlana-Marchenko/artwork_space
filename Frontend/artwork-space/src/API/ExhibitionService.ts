@@ -20,4 +20,14 @@ export default class ExhibitionService {
             throw error;
         }
     }
+
+    static async getExhibitionByCuratorId(id:string) {
+        try {
+            const response = await axios.get(`http://localhost:8080/exhibitions/curator/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про виставки куратора:', error);
+            throw error;
+        }
+    }
 }
