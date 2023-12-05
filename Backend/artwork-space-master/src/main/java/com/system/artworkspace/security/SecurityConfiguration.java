@@ -1,5 +1,7 @@
 package com.system.artworkspace.security;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -22,6 +25,14 @@ import java.util.Collections;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     //todo check security
+
+//    @Autowired
+//    private JwtAuthenticationFilter jwtAuthFilter;
+//
+//    @Autowired
+//    private AuthenticationProvider authenticationProvider;
+//
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors
@@ -39,9 +50,9 @@ public class SecurityConfiguration {
                         //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
                         .requestMatchers("/auctions/**").hasAuthority("ARTIST")
-                        .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
-                        .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
-                        .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
+//                        .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
+//                        .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
                         //todo fix permitAll() for artwork
                         .requestMatchers("/artworks/**").permitAll()
                         //todo fix permitAll() for auction
