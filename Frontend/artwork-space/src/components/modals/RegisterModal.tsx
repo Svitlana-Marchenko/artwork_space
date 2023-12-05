@@ -6,8 +6,10 @@ import {
 } from "react-hook-form";
 import Input from "../input/Input";
 import {Modal} from "./Modal";
-import {User} from "../../mockup/mockup_users";
+import {NewUser, User, UserRole} from "../../mockup/mockup_users";
 import Select from "../input/Select";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
 
 interface RegisterModalProps {
     isOpen:boolean;
@@ -19,48 +21,44 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
 const {
         register,
         handleSubmit,
+        reset,
         formState: {
             errors,
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
+            username: '',
+            firstName: '',
+            lastName: '',
             email: '',
+            role: '',
             password: ''
         },
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const userData: User = {
-            id: 0,
-            username: data.name,
-            firstName: '',
-            lastName: '',
+        const userData: NewUser = {
+            username: data.username,
+            firstName: data.firstName,
+            lastName: data.lastName,
             email: data.email,
-            role: 'user',
+            role: data.role.toUpperCase(),
             password: data.password
         };
-        // // Set isLoading to true to indicate that the form is being submitted
-        // setIsLoading(true);
-        //
-        // // Send a POST request to the /api/register endpoint with the form data
-        // axios.post('/api/register', data)
-        //     .then(() => {
-        //         // Display a success message if registration is successful
-        //         toast.success('Registered!');
-        //
-        //         // Close the register modal and open the login modal
-        //         registerModal.onClose();
-        //         loginModal.onOpen();
-        //     })
-        //     .catch((error) => {
-        //         // Display an error message if there's an error
-        //         toast.error(error);
-        //     })
-        //     .finally(() => {
-        //         // Set isLoading back to false after the request is completed
-        //         setIsLoading(false);
-        //     })
+        UserService.createUser(userData)
+            .then((data) => {
+                toast.success("Successful registration")
+                reset();
+                toggle();
+                const currentUser = JSON.stringify(data);
+                localStorage.setItem("currentUser", currentUser);
+                console.log(data)
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to create your profile")
+                console.error('Error in creating your profile:', error);
+            });
     }
 
     const bodyContent = (
@@ -82,7 +80,6 @@ const {
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
                 />
                 <Input
                     id="username"
@@ -91,17 +88,15 @@ const {
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
                 />
             </div>
                 <Input
-                    id="name"
-                    label="Name"
-                    placeholder="Name"
+                    id="firstName"
+                    label="First name"
+                    placeholder="First name"
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
                 />
                 <Input
                     id="lastName"
@@ -110,7 +105,6 @@ const {
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
                 />
             <div className={"flex flex-row space-x-4 items-center"}>
                 <Select
@@ -120,8 +114,7 @@ const {
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
-                    options={["Artist", "Curator", "Collectioneer"]}
+                    options={Object.values(UserRole)}
                 />
                 <Input
                     id="password"
@@ -131,7 +124,6 @@ const {
                     register={register}
                     errors={errors}
                     required
-                    setValue={()=>{}}
                 />
             </div>
         </div>

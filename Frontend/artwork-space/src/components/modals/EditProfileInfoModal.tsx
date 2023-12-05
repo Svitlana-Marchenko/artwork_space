@@ -4,8 +4,8 @@ import {
     SubmitHandler,
     useForm
 } from "react-hook-form";
-import Input from "../Input";
 import {Modal} from "./Modal";
+import Input from "../input/Input";
 
 interface EditProfileInfoModalProps {
     isOpen:boolean;
@@ -53,7 +53,7 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
 
             <Input
@@ -63,7 +63,7 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
 
             <Input
@@ -73,14 +73,10 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
 
         </div>
-    )
-// JSX content for the modal footer
-    const footerContent = (
-        <></>
     )
 
     return(
@@ -90,7 +86,6 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
             actionLabel="Edit"
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
-            footer={footerContent}
             toggleModal={toggle}
         />
     )

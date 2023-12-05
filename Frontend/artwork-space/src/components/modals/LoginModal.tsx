@@ -70,7 +70,6 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
             />
 
             <Input
@@ -81,7 +80,6 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
             />
         </div>
     )

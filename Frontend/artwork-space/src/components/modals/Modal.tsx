@@ -8,7 +8,6 @@ interface ModalProps {
     onSubmit: () => void;
     title?: string;
     body?: React.ReactElement;
-    footer?: React.ReactElement;
     actionLabel: string;
     toggleModal: () => void;
 }
@@ -18,7 +17,6 @@ export const Modal: React.FC<ModalProps> = ({
                                                 onSubmit,
                                                 title,
                                                 body,
-                                                footer,
                                                 actionLabel,
                                                 toggleModal
                                             }) => {
@@ -27,11 +25,6 @@ export const Modal: React.FC<ModalProps> = ({
     useEffect(() => {
         setShowModal(isOpen);
     }, [isOpen]);
-
-
-    const handleSubmit = useCallback(() => {
-        onSubmit();
-    }, [onSubmit]);
 
     if (!isOpen){
         return null;
@@ -127,10 +120,9 @@ export const Modal: React.FC<ModalProps> = ({
                                 >
                                     <Button
                                         label={actionLabel}
-                                        onClick={handleSubmit}
+                                        onClick={onSubmit}
                                     />
                                 </div>
-                                {footer}
                             </div>
                         </div>
                     </div>

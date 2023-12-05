@@ -6,9 +6,9 @@ import {
 } from "react-hook-form";
 
 import {Modal} from "./Modal";
-import Input from "../Input";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Input from "../input/Input";
 interface ChangePasswordModalProps {
     isOpen:boolean;
     toggle: () => void;
@@ -48,7 +48,7 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
 
             <Input
@@ -59,7 +59,7 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
 
             <Input
@@ -70,7 +70,7 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
+                
             />
         </div>
     )
@@ -87,7 +87,6 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
             onSubmit={handleSubmit(onSubmit)}
             toggleModal={toggle}
             body={bodyContent}
-            footer={footerContent}
         />
     )
 

@@ -1,11 +1,18 @@
-export type User = {
-    id: number;
+export enum UserRole {
+    artist = "ARTIST",
+    curator = "CURATOR",
+    collectioneer = "COLLECTIONEER",
+}
+export interface NewUser {
     username: string;
     firstName: string;
     lastName: string;
     email: string;
-    role: string;
+    role: UserRole;
     password: string;
+}
+export interface User extends NewUser{
+    id: number;
 }
 export const users: User[] = [
     {
@@ -14,7 +21,7 @@ export const users: User[] = [
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@example.com',
-        role: 'user',
+        role: UserRole.artist,
         password: 'password1',
     },
     {
@@ -23,7 +30,7 @@ export const users: User[] = [
         firstName: 'Jane',
         lastName: 'Smith',
         email: 'jane.smith@example.com',
-        role: 'admin',
+        role: UserRole.collectioneer,
         password: 'password2',
     },
     {
@@ -32,7 +39,7 @@ export const users: User[] = [
         firstName: 'Alice',
         lastName: 'Johnson',
         email: 'alice.johnson@example.com',
-        role: 'user',
+        role: UserRole.curator,
         password: 'password3',
     },
     {
@@ -41,7 +48,7 @@ export const users: User[] = [
         firstName: 'Bob',
         lastName: 'Williams',
         email: 'bob.williams@example.com',
-        role: 'user',
+        role: UserRole.artist,
         password: 'password4',
     },
     {
@@ -50,7 +57,7 @@ export const users: User[] = [
         firstName: 'Eva',
         lastName: 'Brown',
         email: 'eva.brown@example.com',
-        role: 'admin',
+        role: UserRole.collectioneer,
         password: 'password5',
     },
     {
@@ -59,7 +66,7 @@ export const users: User[] = [
         firstName: 'David',
         lastName: 'Miller',
         email: 'david.miller@example.com',
-        role: 'user',
+        role: UserRole.curator,
         password: 'password6',
     },
     {
@@ -68,7 +75,7 @@ export const users: User[] = [
         firstName: 'Grace',
         lastName: 'Jones',
         email: 'grace.jones@example.com',
-        role: 'user',
+        role: UserRole.artist,
         password: 'password7',
     },
     {
@@ -77,7 +84,7 @@ export const users: User[] = [
         firstName: 'Sam',
         lastName: 'Wilson',
         email: 'sam.wilson@example.com',
-        role: 'admin',
+        role: UserRole.collectioneer,
         password: 'password8',
     },
     {
@@ -86,7 +93,7 @@ export const users: User[] = [
         firstName: 'Linda',
         lastName: 'Lee',
         email: 'linda.lee@example.com',
-        role: 'user',
+        role: UserRole.curator,
         password: 'password9',
     },
     {
@@ -95,7 +102,7 @@ export const users: User[] = [
         firstName: 'Michael',
         lastName: 'Clark',
         email: 'michael.clark@example.com',
-        role: 'user',
+        role: UserRole.artist,
         password: 'password10',
     },
 ];

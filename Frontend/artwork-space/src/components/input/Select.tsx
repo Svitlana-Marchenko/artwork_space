@@ -9,23 +9,17 @@ const Select: React.FC<SelectProps> = ({
                                            id,
                                            label,
                                            placeholder,
-                                           setValue,
                                            register,
                                            required,
                                            errors,
                                            options,
                                        }) => {
-    useEffect(() => {
-        register(id, {
-            required,
-        });
-    }, [id, register, required]);
 
     return (
         <div className="w-full relative">
             <select
                 id={id}
-                onChange={(e) => setValue(id, e.target.value)}
+                {...register(id, { required })}
                 className={`
                   peer
                   w-full
@@ -45,7 +39,7 @@ const Select: React.FC<SelectProps> = ({
                 </option>
                 {options.map((option) => (
                     <option key={option} value={option}>
-                        {option}
+                        {option.toLowerCase().charAt(0).toUpperCase() + option.toLowerCase().slice(1)}
                     </option>
                 ))}
             </select>
