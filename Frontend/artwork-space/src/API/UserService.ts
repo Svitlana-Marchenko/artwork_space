@@ -1,5 +1,5 @@
 import axios from "axios";
-import {LoginProps, NewUser} from "../mockup/mockup_users";
+import {NewUser} from "../mockup/mockup_users";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class UserService {
     static async getUserById(id:string) {
@@ -21,12 +21,12 @@ export default class UserService {
             throw error;
         }
     }
-    static async authorize(user:LoginProps) {
+
+    static async deleteUserById(id:string) {
         try {
-            const response = await axios.post('http://localhost:8080/users/new', user);
-            return response.data;
+            return await axios.delete(`http://localhost:8080/users/${id}`);
         } catch (error) {
-            console.error('Помилка при авторизації:', error);
+            console.error('Помилка при отриманні даних з сервера:', error);
             throw error;
         }
     }
