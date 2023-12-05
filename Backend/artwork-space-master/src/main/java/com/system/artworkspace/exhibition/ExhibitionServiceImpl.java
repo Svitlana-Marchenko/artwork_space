@@ -212,5 +212,13 @@ public class ExhibitionServiceImpl implements ExhibitionService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Exhibition> getAllExhibitionsByCuratorId(Long id) {
+        logger.info("Getting exhibition with curator ID: " + id);
+        return exhibitionRepository.findByCuratorId(id).stream()
+                .map(x -> ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(x))
+                .collect(Collectors.toList());
+    }
+
 
 }

@@ -21,6 +21,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -96,9 +98,41 @@ public class MyCommandLineRunner implements CommandLineRunner {
         collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
         collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        ExhibitionEntity exhibition1 = new ExhibitionEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Ex1","Desc",new LinkedList<ArtworkEntity>(),new Date(120,1,23),new Date(120,2,23));
-        ExhibitionEntity exhibition2 = new ExhibitionEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Ex2","Desc",new LinkedList<ArtworkEntity>(),new Date(123,10,23),new Date(123,11,23));
+        Date startDate1 = null;
+        Date endDate1 = null;
+        Date startDate2 = null;
+        Date endDate2 = null;
+
+        try {
+            startDate1 = dateFormat.parse("2023-01-23");
+            endDate1 = dateFormat.parse("2024-02-23");
+            startDate2 = dateFormat.parse("2023-10-23");
+            endDate2 = dateFormat.parse("2023-11-23");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        ExhibitionEntity exhibition1 = new ExhibitionEntity(
+                UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),
+                "Ex1",
+                "Description",
+                new LinkedList<ArtworkEntity>(),
+                startDate1,
+                endDate1
+        );
+
+        ExhibitionEntity exhibition2 = new ExhibitionEntity(
+                UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),
+                "Ex2",
+                "Description",
+                new LinkedList<ArtworkEntity>(),
+                startDate2,
+                endDate2
+        );
+
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition1));
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition2));
 

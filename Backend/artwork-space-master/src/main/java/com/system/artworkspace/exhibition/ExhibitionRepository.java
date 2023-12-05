@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ExhibitionRepository extends JpaRepository<ExhibitionEntity, Long> {
     List<ExhibitionEntity> findByEndDateBefore(Date date);
+
+    List <ExhibitionEntity> findByCuratorId(Long id);
 }
