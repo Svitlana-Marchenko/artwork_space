@@ -2,6 +2,8 @@ import React from 'react';
 import HeartButton from "../HeartButton";
 import {useNavigate} from "react-router-dom";
 import UserLink from "../UserLink";
+import {User} from "../../mockup/mockup_users";
+import MenuItem from "../../header/MenuItem";
 
 interface ArtworkCardProps {
     id:number;

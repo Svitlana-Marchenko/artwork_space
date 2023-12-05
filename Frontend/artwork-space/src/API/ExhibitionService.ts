@@ -30,4 +30,14 @@ export default class ExhibitionService {
             throw error;
         }
     }
+
+    static async deleteExhibition(id:string) {
+        try {
+            const response = await axios.delete(`http://localhost:8080/exhibitions/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про видалення виставки:', error);
+            throw error;
+        }
+    }
 }

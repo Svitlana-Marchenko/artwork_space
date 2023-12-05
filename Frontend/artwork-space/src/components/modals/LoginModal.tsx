@@ -36,20 +36,20 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
             email: data.email,
             password: data.password
         };
-        UserService.authorize(userData)
-            .then((data) => {
-                    toast.success("Successful login")
-                    reset();
-                    toggle();
-                    const currentUser = JSON.stringify(data);
-                    localStorage.setItem("currentUser", currentUser);
-                    console.log(data)
-                }
-            )
-            .catch((error) => {
-                toast.error("Failed to create your profile")
-                console.error('Error in creating your profile:', error);
-            });
+        // UserService.authorize(userData)
+        //     .then((data) => {
+        //             toast.success("Successful login")
+        //             reset();
+        //             toggle();
+        //             const currentUser = JSON.stringify(data);
+        //             localStorage.setItem("currentUser", currentUser);
+        //             console.log(data)
+        //         }
+        //     )
+        //     .catch((error) => {
+        //         toast.error("Failed to create your profile")
+        //         console.error('Error in creating your profile:', error);
+        //     });
     }
 
 

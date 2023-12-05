@@ -3,34 +3,15 @@ import {Exhibition} from "../../mockup/mockup_exhibitions";
 import ExhibitionList from "../../components/lists/ExhibitionList";
 import {useParams} from "react-router-dom";
 import {User} from "../../mockup/mockup_users";
-import {getUserByIdAsync} from "../../actions/getUserById";
-import {convertToInt} from "../../actions/functions";
-import ArtworkService from "../../API/ArtworkService";
 
 import ExhibitionService from "../../API/ExhibitionService";
+import toast from "react-hot-toast/headless";
 
 const Exhibitions = () => {
     const { id } = useParams();
-    const [curator, setCurator] = useState<User>();
     const [exhibitions, setExhibitions] = useState<Exhibition[]>([])
-    const currentUser = {
-        role: "artist",
-        id: 1,
-        // role: "curator",
-        // role: "collectioneer",
-    }
-
-
-    useEffect(() => {
-        if (id) {
-            const fetchData = async () => {
-                const user = await getUserByIdAsync(id);
-                setCurator(user);
-            };
-            fetchData();
-        }
-    }, [id]);
-
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
 
     useEffect(() => {
         if (id !== undefined) {
@@ -41,11 +22,12 @@ const Exhibitions = () => {
 
         } else {
             ExhibitionService.getAllActiveExhibitions()
-                .then(data => {setExhibitions(data);
+                .then(data => {
+                    setExhibitions(data);
                 })
-                .catch(error => console.error('Помилка при отриманні даних про список виставок:', error));
+                .catch(error => {toast.error("Shiiit")});
         }
-    }, [id]);
+    }, []);
 
     //todo normal empty page
 
@@ -54,14 +36,14 @@ const Exhibitions = () => {
             {
                 id
                     ?
-                    curator && (
+                    currentUser && (
                         <>
                             <p className={'text-3xl font-bold mt-8'}>
-                                {currentUser.id === convertToInt(id)
+                                {currentUser.role === "CURATOR"
                                     ?
                                     "MY EXHIBITIONS"
                                     :
-                                    `EXHIBITIONS BY ${curator.firstName.toUpperCase()} ${curator.lastName.toUpperCase()}`}
+                                    `EXHIBITIONS BY ${currentUser.firstName.toUpperCase()} ${currentUser.lastName.toUpperCase()}`}
                             </p>
                         </>
                     )

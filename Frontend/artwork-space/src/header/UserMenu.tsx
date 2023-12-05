@@ -15,6 +15,7 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
     const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
     const [isOpenLogin, setIsOpenLogin] = useState(false);
     const [isOpenRegister, setIsOpenRegister] = useState(false);
+    const [isOpenNewArtwork, setOpenNewArtwork] = useState(false);
     const navigate = useNavigate();
 
     const toggleOpen = useCallback(() => {
@@ -24,6 +25,9 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
         setIsOpenLogin((value) => !value);
     }, []);
     const toggleOpenRegister = useCallback(() => {
+        setIsOpenRegister((value) => !value);
+    }, []);
+    const toggleNewArtwork = useCallback(() => {
         setIsOpenRegister((value) => !value);
     }, []);
     const logout = () => {
