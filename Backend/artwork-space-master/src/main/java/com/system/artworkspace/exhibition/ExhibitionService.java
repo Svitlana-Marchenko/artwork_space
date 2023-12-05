@@ -16,6 +16,6 @@ public interface ExhibitionService{
     Exhibition findById(Long id);
     void deleteExhibition(Long id);
     void cleanupExpiredExhibitions();
-
     List<Exhibition> getAllActiveExhibition();
+    List<Exhibition> getAllExhibitionsByCuratorId(Long id);
 }

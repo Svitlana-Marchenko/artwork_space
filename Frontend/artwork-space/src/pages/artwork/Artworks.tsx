@@ -4,6 +4,8 @@ import {useParams} from "react-router-dom";
 import {User} from "../../mockup/mockup_users";
 import {getUserByIdAsync} from "../../actions/getUserById";
 import {convertToInt} from "../../actions/functions";
+import ArtworkService from "../../API/ArtworkService";
+import {Artwork} from "../../mockup/mockup_artworks";;
 
 const Artworks = () => {
     const { id } = useParams();
@@ -14,6 +16,8 @@ const Artworks = () => {
         // role: "curator",
          //role: "collectioneer",
     }
+
+    const [artworks, setArtworks] = useState<Artwork[]>([]);
 
     //todo check artistid role (like unable to see artwork of non-artist users)
 
@@ -27,6 +31,20 @@ const Artworks = () => {
         }
     }, [id]);
 
+    useEffect(() => {
+        if (id !== undefined) {
+            ArtworkService.getAllArtworksByArtistId(id)
+                .then(data => {setArtworks(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+
+        } else {
+            ArtworkService.getAllArtworks()
+                .then(data => {setArtworks(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+        }
+    }, [id]);
 
     return (
         <div className="mx-32">
@@ -47,7 +65,7 @@ const Artworks = () => {
                     :
                     null
             }
-            <ArtworksList artistId={id}/>
+            <ArtworksList artworks={artworks}/>
         </div>
     );
 };

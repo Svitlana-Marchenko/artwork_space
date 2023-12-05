@@ -4,30 +4,34 @@ import {Artwork} from "../../mockup/mockup_artworks";
 import ArtworkService from "../../API/ArtworkService";
 
 interface ArtworksListProps {
-    exhibitionId?: string;
-    artistId?: string;
+   artworks: Artwork[]
 }
 
 //todo think about import {Artwork} from "../../mockup/mockup_artworks";
 
-const ArtworksList:React.FC<ArtworksListProps> = ({exhibitionId, artistId}) => {
+const ArtworksList:React.FC<ArtworksListProps> = ({artworks}) => {
 
-    const [artworks, setArtworks] = useState<Artwork[]>([]);
+    //todo normal empty page
+    if(artworks.length ===0){
+        return <div>Nothing</div>
+    }
 
-    useEffect(() => {
-        if (artistId !== undefined) {
-            ArtworkService.getAllArtworksByArtistId(artistId)
-                .then(data => {setArtworks(data);
-                })
-                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+    // const [artworks, setArtworks] = useState<Artwork[]>([]);
 
-        } else {
-            ArtworkService.getAllArtworks()
-                .then(data => {setArtworks(data);
-                })
-                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
-        }
-    }, [artistId]);
+    // useEffect(() => {
+    //     if (artistId !== undefined) {
+    //         ArtworkService.getAllArtworksByArtistId(artistId)
+    //             .then(data => {setArtworks(data);
+    //             })
+    //             .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+    //
+    //     } else {
+    //         ArtworkService.getAllArtworks()
+    //             .then(data => {setArtworks(data);
+    //             })
+    //             .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+    //     }
+    // }, [artistId]);
 
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
     const targetHeight = totalHeight / 3;

@@ -22,7 +22,8 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                                                  startDate,
                                                  endDate
 }) => {
-const navigate = useNavigate();
+
+    const navigate = useNavigate();
     return (
         <div>
             <div className={"flex flex-row justify-between mt-6 mb-3"}>
@@ -31,14 +32,14 @@ const navigate = useNavigate();
                     <p className={"text-gray-400"}>Collected by
                         <span
                             className={'underline underline-offset-2 cursor-pointer ml-1'}
-                            onClick={()=>{navigate(`/exhibitions/${curator.id}`)}}
+                            onClick={()=>{navigate(`/profile/${curator.id}`)}}
                         >
                             {curator.firstName} {curator.lastName}
                         </span>
                     </p>
                 </div>
                 <div className="text-right">
-                    <p className={"text-2xl font-bold text-gray-400"}>{startDate.toDateString().toUpperCase()} - {endDate.toDateString().toUpperCase()}</p>
+                    <p className={"text-2xl font-bold text-gray-400"}>{new Date(startDate).toDateString()} - {new Date(endDate).toDateString()}</p>
                     <NavigationLink title={"View all"} path={`/exhibition/${id}`}/>
                 </div>
             </div>
@@ -54,6 +55,7 @@ const navigate = useNavigate();
                     artworks.map((artwork) => {
                         return (
                             <ArtworkCard
+                                key={artwork.id}
                                 id={artwork.id}
                                 title={artwork.title}
                                 technique={artwork.title}

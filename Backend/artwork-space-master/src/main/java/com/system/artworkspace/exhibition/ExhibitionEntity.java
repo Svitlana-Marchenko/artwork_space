@@ -17,19 +17,24 @@ public class ExhibitionEntity {
     private String title;
     @Column(length = 2000)
     private String description;
-    @OneToMany
-    private List<ArtworkEntity> artworkEntities;
+    @ManyToMany
+    @JoinTable(
+            name = "exhibition_artwork",
+            joinColumns = @JoinColumn(name = "exhibition_id"),
+            inverseJoinColumns = @JoinColumn(name = "artwork_id")
+    )
+    private List<ArtworkEntity> artworks;
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
 
-    public ExhibitionEntity(UserEntity curator, String name, String description, List<ArtworkEntity> artworkEntities, Date startDate, Date endDate) {
+    public ExhibitionEntity(UserEntity curator, String title, String description, List<ArtworkEntity> artworks, Date startDate, Date endDate) {
         this.curator = curator;
-        this.title = name;
+        this.title = title;
         this.description = description;
-        this.artworkEntities = artworkEntities;
+        this.artworks = artworks;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -58,8 +63,8 @@ public class ExhibitionEntity {
         this.description = description;
     }
 
-    public void setArtworks(List<ArtworkEntity> artworkEntities) {
-        this.artworkEntities = artworkEntities;
+    public void setArtworks(List<ArtworkEntity> artworks) {
+        this.artworks = artworks;
     }
 
     public UserEntity getCurator() {
@@ -70,12 +75,12 @@ public class ExhibitionEntity {
         return title;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<ArtworkEntity> getArtworks() {
-        return artworkEntities;
+        return artworks;
     }
 
     public Date getStartDate() {

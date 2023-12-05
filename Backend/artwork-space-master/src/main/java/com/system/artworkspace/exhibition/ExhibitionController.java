@@ -113,8 +113,14 @@ public class ExhibitionController {
 
     @GetMapping("/{exhibitionId}")
     public ExhibitionDto findById(@PathVariable @Valid Long exhibitionId) {
-        logger.info("Retrieving exhibition with ID: {}", exhibitionId);
+        logger.info("Retrieving exhibitions with curator ID: {}", exhibitionId);
         return ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.findById(exhibitionId));
+    }
+
+    @GetMapping("curator/{curatorId}")
+    public List<ExhibitionDto> findByCuratorId(@PathVariable @Valid Long curatorId) {
+        logger.info("Retrieving exhibition with ID: {}", curatorId);
+        return exhibitionService.getAllExhibitionsByCuratorId(curatorId).stream().map(x -> ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(x)).collect(Collectors.toList());
     }
 
     @GetMapping("/active")

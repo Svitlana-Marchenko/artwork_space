@@ -39,11 +39,11 @@ public class UserController {
         return UserMapper.INSTANCE.userToUserDto(updatedUser);
     }
 
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        logger.info("Deleting user with ID: {}", userId);
-        userService.deleteUser(userId);
-        logger.info("UserEntity deleted with ID: {}", userId);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        logger.info("Deleting user with ID: {}", id);
+        userService.deleteUser(id);
+        logger.info("UserEntity deleted with ID: {}", id);
     }
 
     @GetMapping("/{userId}")
