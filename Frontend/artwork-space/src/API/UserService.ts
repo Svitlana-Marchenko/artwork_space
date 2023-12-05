@@ -1,5 +1,5 @@
 import axios from "axios";
-import {NewUser} from "../mockup/mockup_users";
+import {LoginProps, NewUser} from "../mockup/mockup_users";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class UserService {
     static async getUserById(id:string) {
@@ -18,6 +18,15 @@ export default class UserService {
             return response.data;
         } catch (error) {
             console.error('Помилка при створенні користувача:', error);
+            throw error;
+        }
+    }
+    static async authorize(user:LoginProps) {
+        try {
+            const response = await axios.post('http://localhost:8080/users/new', user);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при авторизації:', error);
             throw error;
         }
     }

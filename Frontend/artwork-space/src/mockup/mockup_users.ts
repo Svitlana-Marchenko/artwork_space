@@ -11,6 +11,11 @@ export interface NewUser {
     role: UserRole;
     password: string;
 }
+
+export type LoginProps = {
+    email: string;
+    password: string;
+}
 export interface User extends NewUser{
     id: number;
 }

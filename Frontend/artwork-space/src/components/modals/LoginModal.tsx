@@ -7,15 +7,20 @@ import {
 
 import {Modal} from "./Modal";
 import Input from "../input/Input";
+import {LoginProps, NewUser} from "../../mockup/mockup_users";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
 interface LoginModalProps {
     isOpen:boolean;
     toggle: () => void;
 }
+
 export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: {
             errors,
         },
@@ -27,30 +32,25 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-
-        // signIn('credentials', {
-        //     ...data,
-        //     redirect: false,
-        // })
-        //     .then((callback) => {
-        //         setIsLoading(false);
-        //
-        //         if (callback?.ok) {
-        //             toast.success('Logged in');
-        //             router.refresh();
-        //             loginModal.onClose();
-        //         }
-        //
-        //         if (callback?.error) {
-        //             toast.error(callback.error);
-        //         }
-        //     });
+        const userData: LoginProps = {
+            email: data.email,
+            password: data.password
+        };
+        UserService.authorize(userData)
+            .then((data) => {
+                    toast.success("Successful login")
+                    reset();
+                    toggle();
+                    const currentUser = JSON.stringify(data);
+                    localStorage.setItem("currentUser", currentUser);
+                    console.log(data)
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to create your profile")
+                console.error('Error in creating your profile:', error);
+            });
     }
-
-    // const onToggle = useCallback(() => {
-    //     loginModal.onToggle();
-    //     registerModal.onOpen();
-    // }, [loginModal, registerModal]);
 
 
     const bodyContent = (
@@ -88,7 +88,7 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
         <Modal
             isOpen={isOpen}
             title="Login"
-            actionLabel="Continue"
+            actionLabel="Login"
             onSubmit={handleSubmit(onSubmit)}
             toggleModal={toggle}
             body={bodyContent}

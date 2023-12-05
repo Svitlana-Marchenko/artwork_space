@@ -9,11 +9,12 @@ import {RegisterModal} from "../components/modals/RegisterModal";
 interface UserMenuProps {
     currentUser?: User | null
 }
-const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
+const UserMenu:React.FC<UserMenuProps> = ({}) => {
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
     const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
     const [isOpenLogin, setIsOpenLogin] = useState(false);
     const [isOpenRegister, setIsOpenRegister] = useState(false);
-    const [isAuthorized, setIsAuthorized] = useState(true);
     const navigate = useNavigate();
 
     const toggleOpen = useCallback(() => {
@@ -25,6 +26,10 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
     const toggleOpenRegister = useCallback(() => {
         setIsOpenRegister((value) => !value);
     }, []);
+    const logout = () => {
+        localStorage.removeItem("currentUser");
+        setIsOpenUserMenu(false);
+    }
 
     return (
         <>
@@ -84,7 +89,7 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
                         <hr />
                         <MenuItem
                             label="Logout"
-                            onClick={()=>{}}
+                            onClick={logout}
                         />
                     </>
                 ) : (

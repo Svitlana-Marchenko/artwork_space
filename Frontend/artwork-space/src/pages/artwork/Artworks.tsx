@@ -5,17 +5,13 @@ import {User} from "../../mockup/mockup_users";
 import {getUserByIdAsync} from "../../actions/getUserById";
 import {convertToInt} from "../../actions/functions";
 import ArtworkService from "../../API/ArtworkService";
-import {Artwork} from "../../mockup/mockup_artworks";;
+import {Artwork} from "../../mockup/mockup_artworks";
 
 const Artworks = () => {
     const { id } = useParams();
     const [artist, setArtist] = useState<User>();
-    const currentUser = {
-        role: "artist",
-        id: 1,
-        // role: "curator",
-         //role: "collectioneer",
-    }
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
 
     const [artworks, setArtworks] = useState<Artwork[]>([]);
 
@@ -54,7 +50,7 @@ const Artworks = () => {
                     artist && (
                         <>
                             <p className={'text-3xl font-bold my-8'}>
-                                {currentUser.id === convertToInt(id)
+                                {currentUser?.id === convertToInt(id)
                                     ?
                                     "MY"
                                     :
