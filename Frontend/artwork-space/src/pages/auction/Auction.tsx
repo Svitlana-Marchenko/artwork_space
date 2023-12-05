@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {Button} from "../../components/Button";
 import CountdownTimer from "../../components/countdown/CountdownTimer";
@@ -6,11 +6,20 @@ import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 import {Auction as AuctionType} from "../../mockup/mockup_auctions";
 import AuctionService from "../../API/AuctionService";
+import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
+import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
 
 const Auction = () => {
     const { id } = useParams();
     const [auction, setAuction] = useState<AuctionType>();
     const navigate = useNavigate();
+
+    const [isOpenPlaceBid, setIsOpenPlaceBid] = useState(false);
+
+    const toggleOpenPlaceBid = useCallback(() => {
+        setIsOpenPlaceBid((value) => !value);
+    }, []);
+
 
     useEffect(() => {
         if (id) {
@@ -84,12 +93,14 @@ const Auction = () => {
                 {
                     currentUser.role === 'curator'
                         ?
-                        <Button label={'Place bid'} onClick={()=>{navigate(`/auction/${id}`)}}/>
+                        <Button label={'Place bid'} onClick={toggleOpenPlaceBid}/>
                         :
                         null
                 }
+                <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={auction.id} minVal={auction.currentBid+auction.bid}/>
+
             </div>
-        </div>
+            </div>
     );
 };
 

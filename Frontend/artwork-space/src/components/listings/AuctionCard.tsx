@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {Auction} from "../../mockup/mockup_auctions";
 import {useNavigate} from "react-router-dom";
 import HeartButton from "../HeartButton";
 import {Button} from "../Button";
+import {PlaceBidModal} from "../modals/PlaceBidModal";
+import auction from "../../pages/auction/Auction";
 
 const AuctionCard:React.FC<Auction> = ({
                                            id,
@@ -16,6 +18,13 @@ const AuctionCard:React.FC<Auction> = ({
          role: "curator",
         // role: "collectioneer",
     }
+
+    const [isOpenPlaceBid, setIsOpenPlaceBid] = useState(false);
+
+    const toggleOpenPlaceBid = useCallback(() => {
+        setIsOpenPlaceBid((value) => !value);
+    }, []);
+
     return (
         <div className="">
             <div className={"cursor-pointer"} onClick={()=>{navigate(`/auction/${id}`)}}>
@@ -30,11 +39,12 @@ const AuctionCard:React.FC<Auction> = ({
                 currentUser.role === "curator"
                 ?
                     <div className={"mt-3"}>
-                        <Button label={`Place bid`} onClick={()=>{navigate(`/auction/${id}`)}} outline/>
+                        <Button label={`Place bid`} onClick={toggleOpenPlaceBid} outline/>
                     </div>
                     :
                     null
             }
+            <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={id} minVal={currentBid+bid}/>
 
         </div>
     );
