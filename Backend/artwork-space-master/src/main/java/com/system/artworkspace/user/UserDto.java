@@ -1,8 +1,11 @@
 package com.system.artworkspace.user;
 
+import com.system.artworkspace.artwork.ArtworkDto;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public class UserDto {
     private Long id;
@@ -23,21 +26,21 @@ public class UserDto {
     @Size(max = 100)
     private String password;
 
-   // private Long roleId;
-
     private Role role;
+
+    private List<ArtworkDto> collection;
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Role role) {
+    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Role role, List<ArtworkDto> collection) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        //this.roleId = roleId;
         this.role=role;
+        this.collection=collection;
     }
     public Long getId() {
         return id;
@@ -87,14 +90,6 @@ public class UserDto {
         this.password = password;
     }
 
-   // public Long getRoleId() {
-     //   return roleId;
-    //}
-
-   // public void setRoleId(Long roleId) {
-     //   this.roleId = roleId;
-    //}
-
     public Role getRole() {
         return role;
     }
@@ -103,4 +98,11 @@ public class UserDto {
         this.role = role;
     }
 
+    public List<ArtworkDto> getCollection() {
+        return collection;
+    }
+
+    public void setCollection(List<ArtworkDto> collection) {
+        this.collection = collection;
+    }
 }

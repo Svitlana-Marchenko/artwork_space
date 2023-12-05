@@ -24,13 +24,22 @@ public class UserEntity {
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
 //    private List<ArtworkEntity> artworkEntities;
 
-    public UserEntity(String username, String firstName, String lastName, String email, String password, Role role) {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_artwork",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "artwork_id")
+    )
+    private List<ArtworkEntity> collection;
+
+    public UserEntity(String username, String firstName, String lastName, String email, String password, Role role, List <ArtworkEntity> collection)  {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.collection=collection;
     }
 
     public Long getId() {
@@ -89,5 +98,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<ArtworkEntity> getCollection() {
+        return collection;
+    }
+
+    public void setCollection(List<ArtworkEntity> collection) {
+        this.collection = collection;
     }
 }

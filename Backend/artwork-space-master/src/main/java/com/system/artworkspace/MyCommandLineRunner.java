@@ -53,9 +53,9 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @SuppressWarnings("deprecation")
     private void createTestData() {
-        UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST);
-        UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER);
-        UserEntity u3 = new UserEntity("cur", "Alex", "Doe", "alex.doe@example.com", "password", Role.CURATOR);
+        UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>());
+        UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>());
+        UserEntity u3 = new UserEntity("cur", "Alex", "Doe", "alex.doe@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>());
 
         userService.createUser(UserMapper.INSTANCE.userEntityToUser(u1));
         userService.createUser(UserMapper.INSTANCE.userEntityToUser(u2));
@@ -93,10 +93,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa1));
 
-        CollectionEntity collectionEntity1 = new CollectionEntity("Coll1",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
-        CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
-        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
-        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
+//        CollectionEntity collectionEntity1 = new CollectionEntity("Coll1",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+//        CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+//        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
+//        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
