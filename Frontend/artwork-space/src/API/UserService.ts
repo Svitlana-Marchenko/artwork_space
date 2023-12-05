@@ -11,4 +11,13 @@ export default class UserService {
             throw error;
         }
     }
+
+    static async deleteUserById(id:string) {
+        try {
+            return await axios.delete(`http://localhost:8080/users/${id}`);
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера:', error);
+            throw error;
+        }
+    }
 }
