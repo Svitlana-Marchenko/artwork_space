@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 
 import {Modal} from "./Modal";
-import Input from "../Input";
+import Input from "../input/Input";
 interface LoginModalProps {
     isOpen:boolean;
     toggle: () => void;
@@ -70,7 +70,6 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
             />
 
             <Input
@@ -81,27 +80,7 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 register={register}
                 errors={errors}
                 required
-                setValue={()=>{}}
             />
-        </div>
-    )
-
-    const footerContent = (
-        <div className="flex flex-col gap-4 mt-3">
-            <hr />
-            <div className="
-      text-neutral-500 text-center mt-4 font-light">
-                <p>First time using ExhibitPro?
-                    <span
-                        onClick={()=>{}}
-                        className="
-              text-neutral-800
-              cursor-pointer
-              hover:underline
-            "
-                    > Create an account</span>
-                </p>
-            </div>
         </div>
     )
 
@@ -113,7 +92,6 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
             onSubmit={handleSubmit(onSubmit)}
             toggleModal={toggle}
             body={bodyContent}
-            footer={footerContent}
         />
     )
 

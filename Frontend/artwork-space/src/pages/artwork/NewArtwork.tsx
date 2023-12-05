@@ -1,6 +1,6 @@
 import {Artwork} from "../../mockup/mockup_artworks";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import Input from "../../components/Input";
+import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
 import {User, users} from "../../mockup/mockup_users";
 import React, {useState} from "react";
@@ -67,7 +67,6 @@ export const NewArtwork = () => {
                 <Input
                     id={'title'}
                     label={'Title'}
-                    setValue={setValue}
                     placeholder={'Title'}
                     register={register}
                     errors={errors}
@@ -76,7 +75,6 @@ export const NewArtwork = () => {
                 <Input
                     id={'technique'}
                     label={'Technique'}
-                    setValue={setValue}
                     placeholder={'Technique'}
                     register={register}
                     errors={errors}
@@ -87,7 +85,6 @@ export const NewArtwork = () => {
                     label={'Width'}
                     placeholder={'Width'}
                     type={'number'}
-                    setValue={setValue}
                     register={register}
                     errors={errors}
                     required
@@ -96,7 +93,6 @@ export const NewArtwork = () => {
                     id={'height'}
                     label={'Height'}
                     placeholder={'Height'}
-                    setValue={setValue}
                     type={'number'}
                     register={register}
                     errors={errors}
@@ -106,7 +102,6 @@ export const NewArtwork = () => {
                     id={'artwork'}
                     label={'Artwork'}
                     placeholder={'Artwork'}
-                    setValue={setValue}
                     type={'file'}
                     register={register}
                     errors={errors}

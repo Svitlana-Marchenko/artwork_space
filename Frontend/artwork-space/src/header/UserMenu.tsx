@@ -61,21 +61,21 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
             <div className="flex flex-col cursor-pointer">
                 {currentUser ? (
                     <>
-                        {currentUser.role === "artist" && (
+                        {currentUser.role === "ARTIST" && (
                             <>
                                 <MenuItem label="My artworks" onClick={()=>{navigate(`/artworks/${currentUser.id}`)}}/>
                                 <MenuItem label="Add new artwork" onClick={()=>{navigate('/new-artwork')}}/>
                             </>
                         )}
 
-                        {currentUser.role === "curator" && (
+                        {currentUser.role === "CURATOR" && (
                             <>
                                 <MenuItem label="My exhibitions" onClick={()=>{navigate(`/exhibitions/${currentUser.id}`)}}/>
                                 <MenuItem label="Create exhibition" onClick={()=>{}}/>
                             </>
                         )}
 
-                        {currentUser.role === "collectioneer" && (
+                        {currentUser.role === "COLLECTIONEER" && (
                             <>
                                 <MenuItem label="My collections" onClick={()=>{}}/>
                                 <MenuItem label="Create collection" onClick={()=>{}}/>

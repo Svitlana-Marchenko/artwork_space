@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 
 interface ArtistLinkProps {
-    id: number|string;
+    id: number;
     username: string;
 }
 const UserLink:React.FC<ArtistLinkProps> = ({id, username}) => {

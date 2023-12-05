@@ -4,8 +4,12 @@ import {
     SubmitHandler,
     useForm
 } from "react-hook-form";
-import Input from "../Input";
+import Input from "../input/Input";
 import {Modal} from "./Modal";
+import {NewUser, User, UserRole} from "../../mockup/mockup_users";
+import Select from "../input/Select";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
 
 interface RegisterModalProps {
     isOpen:boolean;
@@ -14,45 +18,47 @@ interface RegisterModalProps {
 
 export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => {
 
-    const [isLoading, setIsLoading] = useState(false);
-
 const {
         register,
         handleSubmit,
+        reset,
         formState: {
             errors,
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
+            username: '',
+            firstName: '',
+            lastName: '',
             email: '',
+            role: '',
             password: ''
         },
     });
 
-    // Define the form submission handler
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        // // Set isLoading to true to indicate that the form is being submitted
-        // setIsLoading(true);
-        //
-        // // Send a POST request to the /api/register endpoint with the form data
-        // axios.post('/api/register', data)
-        //     .then(() => {
-        //         // Display a success message if registration is successful
-        //         toast.success('Registered!');
-        //
-        //         // Close the register modal and open the login modal
-        //         registerModal.onClose();
-        //         loginModal.onOpen();
-        //     })
-        //     .catch((error) => {
-        //         // Display an error message if there's an error
-        //         toast.error(error);
-        //     })
-        //     .finally(() => {
-        //         // Set isLoading back to false after the request is completed
-        //         setIsLoading(false);
-        //     })
+        const userData: NewUser = {
+            username: data.username,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            role: data.role.toUpperCase(),
+            password: data.password
+        };
+        UserService.createUser(userData)
+            .then((data) => {
+                toast.success("Successful registration")
+                reset();
+                toggle();
+                const currentUser = JSON.stringify(data);
+                localStorage.setItem("currentUser", currentUser);
+                console.log(data)
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to create your profile")
+                console.error('Error in creating your profile:', error);
+            });
     }
 
     const bodyContent = (
@@ -65,58 +71,60 @@ const {
                     Create an account!
                 </div>
             </div>
-            <Input
-                id="email"
-                label="Email"
-                placeholder="Email"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-            <Input
-                id="name"
-                label="Name"
-                placeholder="Name"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-            <Input
-                id="password"
-                label="Password"
-                type="password"
-                placeholder="Password"
-                register={register}
-                errors={errors}
-                required
-                setValue={()=>{}}
-            />
-        </div>
-    )
-// JSX content for the modal footer
-    const footerContent = (
-        <div className="flex flex-col gap-4 mt-3">
-            <hr />
-            <div
-                className="
-          text-neutral-500
-          text-center
-          mt-4
-          font-light
-        "
-            >
-                <p>Already have an account?
-                    <span
-                        onClick={()=>{}}
-                        className="
-              text-neutral-800
-              cursor-pointer
-              hover:underline
-            "
-                    > Log in</span>
-                </p>
+            <div className={"flex flex-row space-x-4"}>
+                <Input
+                    id="email"
+                    label="Email"
+                    placeholder="Email"
+                    type='email'
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input
+                    id="username"
+                    label="Username"
+                    placeholder="Username"
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </div>
+                <Input
+                    id="firstName"
+                    label="First name"
+                    placeholder="First name"
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input
+                    id="lastName"
+                    label="Last name"
+                    placeholder="Last name"
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            <div className={"flex flex-row space-x-4 items-center"}>
+                <Select
+                    id="role"
+                    label="Role"
+                    placeholder="Role"
+                    register={register}
+                    errors={errors}
+                    required
+                    options={Object.values(UserRole)}
+                />
+                <Input
+                    id="password"
+                    label="Password"
+                    type="password"
+                    placeholder="Password"
+                    register={register}
+                    errors={errors}
+                    required
+                />
             </div>
         </div>
     )
@@ -125,10 +133,9 @@ const {
         <Modal
             isOpen={isOpen}
             title="Register"
-            actionLabel="Continue"
+            actionLabel="Sign up"
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
-            footer={footerContent}
             toggleModal={toggle}
         />
     )

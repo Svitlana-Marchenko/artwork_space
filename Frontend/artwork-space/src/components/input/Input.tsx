@@ -1,18 +1,17 @@
 import {
     FieldErrors,
     FieldValues,
-    UseFormRegister, UseFormSetValue
+    UseFormRegister
 } from "react-hook-form";
-import React, {useEffect} from "react";
+import React from "react";
 
-interface InputProps {
+export interface InputProps {
     id: string;
     label: string;
     placeholder: string;
     type?: string;
     required?: boolean;
     register: UseFormRegister<FieldValues>;
-    setValue: UseFormSetValue<FieldValues>;
     errors: FieldErrors;
 }
 
@@ -21,23 +20,17 @@ const Input: React.FC<InputProps> = ({
                                          label,
                                          type = "text",
                                          placeholder,
-                                         setValue,
                                          register,
                                          required,
                                          errors,
                                      }) => {
-    useEffect(() => {
-        register(id, {
-            required,
-            validate: (value) => parseFloat(value) > 0,
-        });
-    }, [id, register, required]);
+
 
     return (
         <div className="w-full relative">
             <input
                 id={id}
-                onChange={(e) => setValue(id, e.target.value)}
+                {...register(id, { required })}
                 placeholder={placeholder}
                 type={type}
                 className={`
