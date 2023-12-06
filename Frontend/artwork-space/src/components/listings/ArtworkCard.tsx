@@ -19,6 +19,8 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                                     onAddToExhibition
                                                 }) => {
     const navigate = useNavigate();
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
     const imageStyle = sm
         ? "object-cover h-[360px] w-auto"
         : "object-cover w-full h-auto";
@@ -53,7 +55,17 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                         ?
                             <PlusButton artwork={artwork} onAddToExhibition={onAddToExhibition}/>
                             :
-                            <HeartButton/>
+                            currentUser && (
+                                <>
+                                {
+                                    currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER"
+                                    ?
+                                        <HeartButton/>
+                                        :
+                                        null
+                                }
+                                </>
+                            )
                     }
 
                 </div>

@@ -58,7 +58,6 @@ const ExhibitionForm = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         if (currentUser && selectedArtworks) {
-            console.log(data.startDate)
 
             const exhibitionData:NewExhibition = {
                 curator: currentUser,
