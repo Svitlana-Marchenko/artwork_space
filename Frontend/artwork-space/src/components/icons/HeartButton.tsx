@@ -1,6 +1,6 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {useState} from "react";
-import {User} from "../mockup/mockup_users";
+import {User} from "../../mockup/mockup_users";
 
 // import useFavorite from "@/app/hooks/useFavorite";
 // import { SafeUser } from "@/app/types";

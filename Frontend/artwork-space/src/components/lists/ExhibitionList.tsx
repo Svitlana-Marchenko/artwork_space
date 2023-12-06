@@ -56,16 +56,8 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                         return (
                             <ArtworkCard
                                 key={artwork.id}
-                                id={artwork.id}
-                                title={artwork.title}
-                                technique={artwork.title}
-                                firstName={artwork.user.firstName}
-                                lastName={artwork.user.lastName}
-                                username={artwork.user.username}
-                                artistId={artwork.user.id}
-                                imageURL={artwork.imageURL}
-                                width={artwork.width}
-                                height={artwork.height} sm
+                                artwork={artwork}
+                                sm
                             />
                         )
                     })
