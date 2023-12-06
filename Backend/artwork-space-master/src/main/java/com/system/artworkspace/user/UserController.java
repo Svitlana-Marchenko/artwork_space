@@ -1,5 +1,8 @@
 package com.system.artworkspace.user;
 
+import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkDto;
+import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.exceptions.InvalidOldPasswordException;
 import com.system.artworkspace.exceptions.NoSuchUserException;
 import com.system.artworkspace.exceptions.WrongPasswordFormat;
@@ -11,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -74,6 +80,25 @@ public class UserController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Не вдалося змінити пароль.");
         }
+    }
+
+    @GetMapping("/{id}/collection")
+    public List<ArtworkDto> getCollectionByUserId(@PathVariable Long id) {
+        logger.info("Getting collection of user with ID {}", id);
+        List<Artwork> artworks = userService.getCollectionByUserId(id);
+        return artworks.stream().map(x -> ArtworkMapper.INSTANCE.artworkToArtworkDto(x)).collect(Collectors.toList());
+    }
+
+    @PutMapping("/{id}/collection/remove")
+    public void removeArtworkFromCollection(@PathVariable Long id, @RequestBody Long artworkId) {
+        logger.info("Deleting artwork with Id {} from collection of user with id {}", artworkId, id);
+        userService.removeArtworkFromCollection(id, artworkId);
+    }
+
+    @PutMapping("/{id}/collection/add")
+    public void addArtworkFromCollection(@PathVariable Long id, @RequestBody Long artworkId) {
+        logger.info("Add artwork with Id {} from collection of user with id {}", artworkId, id);
+        userService.addArtworkToCollection(id, artworkId);
     }
 
     @ExceptionHandler(NoSuchUserException.class)

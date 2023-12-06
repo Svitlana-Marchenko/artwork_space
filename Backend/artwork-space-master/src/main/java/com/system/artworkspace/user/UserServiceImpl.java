@@ -1,6 +1,10 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.artwork.ArtworkEntity;
+import com.system.artworkspace.artwork.ArtworkMapper;
+import com.system.artworkspace.artwork.ArtworkRepository;
 import com.system.artworkspace.exceptions.InvalidOldPasswordException;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.exceptions.NoSuchUserException;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_USER_EVENTS;
@@ -26,10 +31,13 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
+    private ArtworkRepository artworkRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           ArtworkRepository artworkRepository) {
         this.userRepository = userRepository;
+        this.artworkRepository = artworkRepository;
     }
     @Override
     public User createUser(User user) {
@@ -89,6 +97,64 @@ public class UserServiceImpl implements UserService {
             logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", changePassword.getId());
             throw new NoSuchUserException("User with id " + changePassword.getId() + " not found");
         }
+    }
+
+    @Override
+    public List<Artwork> getCollectionByUserId(Long id) {
+        logger.info("Getting user with id "+id);
+        Optional<UserEntity> userO = userRepository.findById(id);
+        if(!userO.isPresent()){
+            throw new NoSuchUserException("UserEntity not found with ID: "+id);
+        }
+
+        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
+        if(user.getRole()==Role.ARTIST){
+            throw new RuntimeException("Artist cant have collection");
+        }
+        return user.getCollection();
+    }
+
+    @Override
+    public void addArtworkToCollection(Long id, Long artworkId) {
+        logger.info("Getting user with id "+id);
+        Optional<UserEntity> userO = userRepository.findById(id);
+        if(!userO.isPresent()){
+            throw new NoSuchUserException("UserEntity not found with ID: "+id);
+        }
+        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
+        if(user.getRole()==Role.ARTIST){
+            throw new RuntimeException("Artist cant have collection");
+        }
+        logger.info("Adding artwork with id "+artworkId+" from user`s with id "+ id+" collection");
+
+        Optional<ArtworkEntity> artworkO = artworkRepository.findById(id);
+        if(!artworkO.isPresent()){
+            throw new NoSuchUserException("ArtworkEntity not found with ID: "+id);
+        }
+        Artwork artwork = ArtworkMapper.INSTANCE.artworkEntityToArtwork(artworkO.get());
+
+        if(user.getCollection().contains(artwork)){
+            return;
+        }
+        user.getCollection().add(artwork);
+        userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
+    }
+    //todo normal error
+    @Override
+    public void removeArtworkFromCollection(Long id, Long artworkId) {
+        logger.info("Getting user with id "+id);
+        Optional<UserEntity> userO = userRepository.findById(id);
+        if(!userO.isPresent()){
+            throw new NoSuchUserException("UserEntity not found with ID: "+id);
+        }
+        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
+        if(user.getRole()==Role.ARTIST){
+            throw new RuntimeException("Artist cant have collection");
+        }
+        logger.info("Removing artwork with id "+artworkId+" from user`s with id "+ id+" collection");
+
+        user.getCollection().removeIf((x) -> x.getId().equals(artworkId));
+        userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
     }
 
     private void checkOldPassword(String oldPassword, String passwordInDb) {
