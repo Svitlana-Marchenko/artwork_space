@@ -58,7 +58,6 @@ const ExhibitionForm = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         if (currentUser && selectedArtworks) {
-            console.log(data.startDate)
 
             const exhibitionData:NewExhibition = {
                 curator: currentUser,
@@ -66,7 +65,7 @@ const ExhibitionForm = () => {
                 description: data.description,
                 artworks: selectedArtworks,
                 startDate: new Date(data.startDate),
-                endDate: new Date(data.startDate),
+                endDate: new Date(data.endDate),
             };
 
             ExhibitionService.createExhibition(exhibitionData)
