@@ -1,4 +1,4 @@
-package com.system.artworkspace.artwork;
+package com.system.artworkspace.helpers;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
