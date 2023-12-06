@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 public interface CollectionMapper {
     CollectionMapper INSTANCE = Mappers.getMapper(CollectionMapper.class);
 
-    CollectionDto auctionToCollectionDto(Collection auction);
+    CollectionDto collectionToCollectionDto(Collection auction);
 
     Collection collectionDtoToCollection(CollectionDto auctionDto);
 

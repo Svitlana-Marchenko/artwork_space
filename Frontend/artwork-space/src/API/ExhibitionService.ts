@@ -1,6 +1,5 @@
 import axios from "axios";
-import {NewUser} from "../mockup/mockup_users";
-import {NewExhibition} from "../mockup/mockup_exhibitions";
+import { NewExhibition} from "../mockup/mockup_exhibitions";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class ExhibitionService {
     static async getAllActiveExhibitions() {

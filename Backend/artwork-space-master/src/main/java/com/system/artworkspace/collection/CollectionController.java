@@ -27,12 +27,12 @@ public class CollectionController {
     @GetMapping
     public List<CollectionDto> getAll(){
         logger.info("Getting all collections");
-        return collectionService.getAllCollections().stream().map(x-> CollectionMapper.INSTANCE.auctionToCollectionDto(x)).collect(Collectors.toList());
+        return collectionService.getAllCollections().stream().map(x-> CollectionMapper.INSTANCE.collectionToCollectionDto(x)).collect(Collectors.toList());
     }
     @PostMapping
     public CollectionDto createCollection(@RequestBody CollectionDto collection) {
         logger.info("Creating a collection with ID: {}", collection.getId());
-        CollectionDto createdCollection = CollectionMapper.INSTANCE.auctionToCollectionDto(collectionService.createCollection(CollectionMapper.INSTANCE.collectionDtoToCollection(collection)));
+        CollectionDto createdCollection = CollectionMapper.INSTANCE.collectionToCollectionDto(collectionService.createCollection(CollectionMapper.INSTANCE.collectionDtoToCollection(collection)));
         logger.info("Collection created with ID: {}", createdCollection.getId());
         return createdCollection;
     }

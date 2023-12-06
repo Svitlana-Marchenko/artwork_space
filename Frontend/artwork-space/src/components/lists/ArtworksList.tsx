@@ -4,16 +4,15 @@ import {Artwork} from "../../mockup/mockup_artworks";
 import ArtworkService from "../../API/ArtworkService";
 
 interface ArtworksListProps {
-   artworks: Artwork[]
+   artworks: Artwork[];
+   onAddToExhibition?: (artwork: Artwork) => void;
 }
 
-//todo think about import {Artwork} from "../../mockup/mockup_artworks";
-
-const ArtworksList:React.FC<ArtworksListProps> = ({artworks}) => {
+const ArtworksList:React.FC<ArtworksListProps> = ({artworks, onAddToExhibition}) => {
 
     //todo normal empty page
     if(artworks.length ===0){
-        return <div>Nothing</div>
+        return <div>No artworks</div>
     }
 
     // const [artworks, setArtworks] = useState<Artwork[]>([]);
@@ -64,16 +63,8 @@ const ArtworksList:React.FC<ArtworksListProps> = ({artworks}) => {
                     {column.map((artwork, index) => (
                         <ArtworkCard
                             key={index}
-                            id={artwork.id}
-                            title={artwork.title}
-                            technique={artwork.technique}
-                            imageURL={artwork.imageURL}
-                            width={artwork.width}
-                            height={artwork.height}
-                            firstName={artwork.user.firstName}
-                            lastName={artwork.user.lastName}
-                            username={artwork.user.username}
-                            artistId={artwork.user.id}
+                            artwork={artwork}
+                            onAddToExhibition={onAddToExhibition}
                         />
                     ))}
                 </div>
