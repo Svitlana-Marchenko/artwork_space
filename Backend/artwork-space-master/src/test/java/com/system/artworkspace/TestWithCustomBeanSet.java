@@ -1,5 +1,6 @@
 package com.system.artworkspace;
 
+import com.system.artworkspace.artwork.ArtworkRepository;
 import com.system.artworkspace.auction.*;
 import com.system.artworkspace.user.UserRepository;
 import com.system.artworkspace.user.UserService;
@@ -28,8 +29,8 @@ public class TestWithCustomBeanSet {
         }
 
         @Bean
-        public UserService userService(UserRepository userRepository) {
-            return new UserServiceImpl(userRepository);
+        public UserService userService(UserRepository userRepository, ArtworkRepository artworkRepository) {
+            return new UserServiceImpl(userRepository,artworkRepository);
         }
 
         @Bean

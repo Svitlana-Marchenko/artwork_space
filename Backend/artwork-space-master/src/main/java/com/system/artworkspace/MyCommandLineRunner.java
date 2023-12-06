@@ -90,8 +90,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
         }
 
         AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(1L)),  0.0, 10, new Date(), null, 0);
+        AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(2L)),  0.0, 10, new Date(), null, 0);
 
         auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa1));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa2));
 
 //        CollectionEntity collectionEntity1 = new CollectionEntity("Coll1",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
 //        CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
