@@ -66,7 +66,7 @@ const ExhibitionForm = () => {
                 description: data.description,
                 artworks: selectedArtworks,
                 startDate: new Date(data.startDate),
-                endDate: new Date(data.startDate),
+                endDate: new Date(data.endDate),
             };
 
             ExhibitionService.createExhibition(exhibitionData)

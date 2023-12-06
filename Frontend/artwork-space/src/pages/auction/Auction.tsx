@@ -61,7 +61,6 @@ const Auction = () => {
         // role: "collectioneer",
     }
 
-    //todo fix timer
 
     return (
         <div className="flex flex-row items-center justify-center gap-10">
