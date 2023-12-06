@@ -1,10 +1,16 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
+import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
+import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
-import com.system.artworkspace.rating.Rating;
+import com.system.artworkspace.exhibition.ExhibitionDto;
+import com.system.artworkspace.exhibition.ExhibitionMapper;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMapper;
+import com.system.artworkspace.helpers.RateLimit;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
-import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +20,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +65,21 @@ public class ArtworkController {
     public ArtworkDto findArtworkById(@PathVariable Long id) {
         logger.info("Fetching artwork with ID: {}", id);
         return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.findArtworkById(id));
+    }
+
+    @PutMapping("/{id}")
+    //@PreAuthorize("hasAuthority('ARTIST')")
+    public ArtworkDto updateArtwork(
+            @PathVariable Long id,
+            @RequestBody @Valid ArtworkUpdateDto artworkUpdateDto,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
+        ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(id, ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
+        logger.info("Artwork updated with ID: {}", artworkN.getId());
+        return artworkN;
     }
 
     @DeleteMapping("/{id}")

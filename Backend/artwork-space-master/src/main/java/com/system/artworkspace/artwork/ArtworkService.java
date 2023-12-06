@@ -1,5 +1,6 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.rating.Rating;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface ArtworkService {
     Artwork addArtwork(Artwork artwork);
 
     void deleteArtwork(Long artworkId);
+
+    Artwork updateArtwork (Long artworkId, ArtworkUpdate artworkUpdate);
 
     Artwork findArtworkById(Long id);
 

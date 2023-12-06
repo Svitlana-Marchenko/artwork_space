@@ -1,9 +1,12 @@
 package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.collection.CollectionEntity;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
+import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
+import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
@@ -73,6 +76,25 @@ public class ArtworkServiceImpl implements ArtworkService {
             logger.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", id);
             throw new EntityNotFoundException("Artwork not found with ID: " + id);
         }
+    }
+
+    @Override
+    public Artwork updateArtwork(Long artworkId, ArtworkUpdate artworkUpdate) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
+        if(optionalArtwork.isPresent()){
+            ArtworkEntity artwork = optionalArtwork.get();
+            artwork.setTitle(artworkUpdate.getTitle());
+            artwork.setDescription(artworkUpdate.getDescription());
+            artwork.setTechnique(artworkUpdate.getTechnique());
+            artwork.setWidth(artworkUpdate.getWidth());
+            artwork.setHeight(artworkUpdate.getHeight());
+            repository.save(artwork);
+            logger.info("Updating exhibition with id "+artworkId);
+        }else{
+            throw new NoSuchArtworkException("No artwork with id "+artworkId+" to update");
+        }
+        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(repository.findById(artworkId).get());
+
     }
 
     @Override
