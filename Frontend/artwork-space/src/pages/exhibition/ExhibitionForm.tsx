@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
-import { format, parse } from 'date-fns';
 import ArtworksList from "../../components/lists/ArtworksList";
 import ArtworkService from "../../API/ArtworkService";
 import {Artwork} from "../../mockup/mockup_artworks";
@@ -23,6 +22,7 @@ const ExhibitionForm = () => {
     const handleAddToExhibition = (artwork: Artwork) => {
         setSelectedArtworks((prevArtworks) => [...prevArtworks, artwork]);
     };
+
     useEffect(()=>{
         ArtworkService.getAllArtworks()
             .then((data) => {
@@ -86,7 +86,7 @@ const ExhibitionForm = () => {
         }
 
     }
-    //todo dont let to create exhibition if theres no artworks to add
+
     if(!artworks) {
         return <div>
             No artworks

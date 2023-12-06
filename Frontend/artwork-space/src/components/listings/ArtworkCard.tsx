@@ -10,7 +10,7 @@ import PlusButton from "../icons/PlusButton";
 interface ArtworkCardProps {
     artwork: Artwork;
     sm?:boolean;
-    onAddToExhibition?: () => void;
+    onAddToExhibition?:  (artwork: Artwork) => void;
 }
 
 const ArtworkCard:React.FC<ArtworkCardProps> = ({

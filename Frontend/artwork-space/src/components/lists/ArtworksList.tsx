@@ -64,7 +64,7 @@ const ArtworksList:React.FC<ArtworksListProps> = ({artworks, onAddToExhibition})
                         <ArtworkCard
                             key={index}
                             artwork={artwork}
-                            onAddToExhibition={() => onAddToExhibition ? onAddToExhibition(artwork) : null}
+                            onAddToExhibition={onAddToExhibition}
                         />
                     ))}
                 </div>
