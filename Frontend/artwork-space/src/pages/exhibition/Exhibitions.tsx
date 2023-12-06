@@ -48,7 +48,7 @@ const Exhibitions = () => {
                         </>
                     )
                     :
-                    null
+                    <p className={'text-3xl font-bold mt-8'}>ACTIVE EXHIBITIONS</p>
             }
             {exhibitions.length === 0 &&
             <div>No exhibition</div>

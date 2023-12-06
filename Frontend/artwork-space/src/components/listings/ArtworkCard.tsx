@@ -1,36 +1,22 @@
 import React from 'react';
-import HeartButton from "../HeartButton";
+import HeartButton from "../icons/HeartButton";
 import {useNavigate} from "react-router-dom";
 import UserLink from "../UserLink";
 import {User} from "../../mockup/mockup_users";
 import MenuItem from "../../header/MenuItem";
+import {Artwork} from "../../mockup/mockup_artworks";
+import PlusButton from "../icons/PlusButton";
 
 interface ArtworkCardProps {
-    id:number;
-    title: string;
-    technique: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    artistId: number;
-    imageURL: string;
-    width:number;
-    height: number;
-    sm?:boolean
+    artwork: Artwork;
+    sm?:boolean;
+    onAddToExhibition?: () => void;
 }
 
 const ArtworkCard:React.FC<ArtworkCardProps> = ({
-                                                    id,
-                                                    title,
-                                                    technique,
-                                                    firstName,
-                                                    lastName,
-                                                    username,
-                                                    artistId,
-                                                    imageURL,
-                                                    width,
-                                                    height,
-                                                    sm
+                                                    artwork,
+                                                    sm,
+                                                    onAddToExhibition
                                                 }) => {
     const navigate = useNavigate();
     const imageStyle = sm
@@ -58,21 +44,28 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                 text-white"
             >
                 <div className="flex flex-row justify-between items-center" >
-                    <div onClick={()=>{navigate(`/artwork/${id}`)}} className={"cursor-pointer"}>
-                        <p className="text-2xl font-bold">{title}</p>
-                        <p className="text-xs">{technique}</p>
+                    <div onClick={()=>{navigate(`/artwork/${artwork.id}`)}} className={"cursor-pointer"}>
+                        <p className="text-2xl font-bold">{artwork.title}</p>
+                        <p className="text-xs">{artwork.technique}</p>
                     </div>
-                    <HeartButton/>
+                    {
+                        onAddToExhibition
+                        ?
+                            <PlusButton artwork={artwork} onAddToExhibition={onAddToExhibition}/>
+                            :
+                            <HeartButton/>
+                    }
+
                 </div>
                 <div className="flex flex-row justify-between items-end">
                     <div>
-                        <UserLink id={artistId} username={username}/>
-                        <p>{firstName} {lastName}</p>
+                        <UserLink id={artwork.user.id} username={artwork.user.username}/>
+                        <p>{artwork.user.firstName} {artwork.user.lastName}</p>
                     </div>
-                    <p className="text-xs">{width} W &times; {height} H cm</p>
+                    <p className="text-xs">{artwork.width} W &times; {artwork.height} H cm</p>
                 </div>
             </div>
-            <img src={imageURL} alt={title} className={imageStyle}/>
+            <img src={artwork.imageURL} alt={artwork.title} className={imageStyle}/>
         </div>
     );
 };

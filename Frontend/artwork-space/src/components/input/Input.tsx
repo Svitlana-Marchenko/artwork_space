@@ -13,6 +13,7 @@ export interface InputProps {
     required?: boolean;
     register: UseFormRegister<FieldValues>;
     errors: FieldErrors;
+    isTextArea?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,30 +24,42 @@ const Input: React.FC<InputProps> = ({
                                          register,
                                          required,
                                          errors,
+                                         isTextArea=false
                                      }) => {
 
-
+    const inputClasses = `
+    peer
+    w-full
+    p-2
+    font-light 
+    bg-white 
+    border-2
+    rounded-md
+    outline-none
+    transition
+    ${errors[id] ? 'border-black' : 'border-gray-200'}
+    ${errors[id] ? 'focus:border-black' : 'focus:border-[#a62c2a]'}
+    ${isTextArea ? 'h-48' : null}
+  `;
     return (
         <div className="w-full relative">
-            <input
-                id={id}
-                {...register(id, { required })}
-                placeholder={placeholder}
-                type={type}
-                className={`
-                      peer
-                      w-full
-                      p-2
-                      font-light 
-                      bg-white 
-                      border-2
-                      rounded-md
-                      outline-none
-                      transition
-                      ${errors[id] ? 'border-black' : 'border-gray-200'}
-                      ${errors[id] ? 'focus:border-black' : 'focus:border-[#a62c2a]'}
-                    `}
-            />
+            {isTextArea ? (
+                <textarea
+                    id={id}
+                    {...register(id, { required })}
+                    placeholder={placeholder}
+                    className={inputClasses}
+                    rows={4} // Змініть це значення за потреби
+                />
+            ) : (
+                <input
+                    id={id}
+                    {...register(id, { required })}
+                    placeholder={placeholder}
+                    type={type}
+                    className={inputClasses}
+                />
+            )}
             <label
                 className={`
                       absolute

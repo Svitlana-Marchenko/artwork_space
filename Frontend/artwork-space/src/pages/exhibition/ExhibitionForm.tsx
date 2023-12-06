@@ -2,48 +2,43 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
+import { format, parse } from 'date-fns';
 import ArtworksList from "../../components/lists/ArtworksList";
 import ArtworkService from "../../API/ArtworkService";
 import {Artwork} from "../../mockup/mockup_artworks";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {NewUser} from "../../mockup/mockup_users";
-import UserService from "../../API/UserService";
+import {User} from "../../mockup/mockup_users";
 import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
+import {Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
 
-/*
-export type Exhibition = {
-    title: string;
-    description: string;
-    artworks: Artwork[];
-    startDate: Date;
-    endDate: Date;
-}
- */
 const ExhibitionForm = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [artworks, setArtworks] = useState<Artwork[]>();
-
+    const [exhibition, setExhibition] = useState<Exhibition>();
+    const [selectedArtworks, setSelectedArtworks] = useState<Artwork[]>([]);
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
+    const handleAddToExhibition = (artwork: Artwork) => {
+        setSelectedArtworks((prevArtworks) => [...prevArtworks, artwork]);
+    };
     useEffect(()=>{
         ArtworkService.getAllArtworks()
             .then((data) => {
                 setArtworks(data);
             })
-    }, [])
-    function handleCreateExhibition() {
-        if (id) {
-            ExhibitionService.deleteExhibition(id)
-                .then(() => {
-                    navigate(-1)
-                    toast.success('Exhibition was deleted');
+        if(id) {
+            ExhibitionService.getExhibitionById(id)
+                .then((data)=>{
+                    setExhibition(data);
                 })
-                .catch((error) => {
-                    toast.error('Failed to delete exhibition.');
-                    console.log(error)
-                });
+                .catch(() => {
+                    toast.error('Failed to edit exhibition.');
+                    navigate(-1)
+                })
         }
-    }
+    }, [])
 
     const {
         register,
@@ -54,38 +49,42 @@ const ExhibitionForm = () => {
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            username: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            role: '',
-            password: ''
+            title: '',
+            description: '',
+            startDate: new Date(),
+            endDate: new Date()
         },
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const userData: NewUser = {
-            username: data.username,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            role: data.role.toUpperCase(),
-            password: data.password
-        };
-        UserService.createUser(userData)
-            .then((data) => {
-                    toast.success("Successful registration")
-                    reset();
-                    navigate(-1)
-                    const currentUser = JSON.stringify(data);
-                    localStorage.setItem("currentUser", currentUser);
-                    console.log(data)
-                }
-            )
-            .catch((error) => {
-                toast.error("Failed to create your profile")
-                console.error('Error in creating your profile:', error);
-            });
+        if (currentUser && selectedArtworks) {
+            console.log(data.startDate)
+
+            const exhibitionData:NewExhibition = {
+                curator: currentUser,
+                title: data.title,
+                description: data.description,
+                artworks: selectedArtworks,
+                startDate: new Date(data.startDate),
+                endDate: new Date(data.startDate),
+            };
+
+            ExhibitionService.createExhibition(exhibitionData)
+                .then((data) => {
+                        toast.success("Exhibition was created")
+                        reset();
+                        navigate(-1)
+                        console.log(data)
+                    }
+                )
+                .catch((error) => {
+                    toast.error("Failed to create exhibition")
+                    console.error('Error in creating exhibition:', error);
+                });
+        } else {
+            toast.error("Exhibition has no artworks")
+        }
+
     }
     //todo dont let to create exhibition if theres no artworks to add
     if(!artworks) {
@@ -93,11 +92,10 @@ const ExhibitionForm = () => {
             No artworks
         </div>;
     }
-    //todo input for description should be bigger
-    //todo edit page, save values in input
+    //todo edit page, save values in input,
 
-    //todo like on artworks should add to exhibition to painting change like
-    // or do smth else for it and change artwork list structure
+
+    //TODO fix login page when create exhibition
     return (
         <div className='mx-32'>
             <div className='flex flex-col space-y-4 my-8'>
@@ -114,41 +112,49 @@ const ExhibitionForm = () => {
                     </div>
                     <div className='w-1/4'>
                         <Button
-                            label='Create exhibition'
+                            label={id ? 'Save exhibition' :'Create exhibition'}
                             onClick={handleSubmit(onSubmit)}
                         />
                     </div>
                 </div>
-                <div className='flex flex-row space-x-4 w-1/2'>
-                    <Input
-                        id="startDate"
-                        label="Start date"
-                        placeholder="Start date"
-                        type='date'
-                        register={register}
-                        errors={errors}
-                        required
-                    />
-                    <Input
-                        id="endDate"
-                        label="End date"
-                        placeholder="End date"
-                        type='date'
-                        register={register}
-                        errors={errors}
-                        required
-                    />
-                </div>
+                {
+                   !id && (
+                        <div className='flex flex-row space-x-4 w-1/2'>
+                            <Input
+                                id="startDate"
+                                label="Start date"
+                                placeholder="Start date"
+                                type='date'
+                                register={register}
+                                errors={errors}
+                                required
+                            />
+                            <Input
+                                id="endDate"
+                                label="End date"
+                                placeholder="End date"
+                                type='date'
+                                register={register}
+                                errors={errors}
+                                required
+                            />
+                        </div>
+                    )
+                }
                 <Input
                     id="description"
                     label="Description"
                     placeholder="Description"
                     register={register}
                     errors={errors}
+                    isTextArea
                     required
                 />
             </div>
-            <ArtworksList artworks={artworks}/>
+            <ArtworksList
+                artworks={artworks}
+                onAddToExhibition={handleAddToExhibition}
+            />
         </div>
     );
 };
