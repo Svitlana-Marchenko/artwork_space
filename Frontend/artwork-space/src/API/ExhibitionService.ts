@@ -1,4 +1,6 @@
 import axios from "axios";
+import {NewUser} from "../mockup/mockup_users";
+import {NewExhibition} from "../mockup/mockup_exhibitions";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class ExhibitionService {
     static async getAllActiveExhibitions() {
@@ -37,6 +39,16 @@ export default class ExhibitionService {
             return response.data;
         } catch (error) {
             console.error('Помилка при отриманні даних з сервера про видалення виставки:', error);
+            throw error;
+        }
+    }
+
+    static async createExhibition(exhibition:NewExhibition) {
+        try {
+            const response = await axios.post('http://localhost:8080/exhibitions', exhibition);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про створення виставки:', error);
             throw error;
         }
     }

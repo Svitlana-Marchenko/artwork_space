@@ -45,7 +45,14 @@ const Exhibition = () => {
 
     return (
         <div className="mx-32">
-            <p className={"mb-2"}>Collected by {exhibition.curator.firstName} {exhibition.curator.lastName}</p>
+            <p className={"mb-2"}>Collected by
+                <span
+                    className={'underline underline-offset-2 cursor-pointer ml-1'}
+                    onClick={()=>{navigate(`/profile/${exhibition.curator.id}`)}}
+                >
+                   {exhibition.curator.firstName} {exhibition.curator.lastName}
+                </span>
+            </p>
             <div className={"flex flex-row justify-between align-top"}>
                 <article>
                     <h2 className={"text-3xl font-bold"}>{exhibition.title.toUpperCase()}</h2>

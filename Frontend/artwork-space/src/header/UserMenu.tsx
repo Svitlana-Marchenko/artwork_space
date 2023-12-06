@@ -80,7 +80,7 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                         {currentUser.role === "CURATOR" && (
                             <>
                                 <MenuItem label="My exhibitions" onClick={()=>{navigate(`/exhibitions/${currentUser.id}`)}}/>
-                                <MenuItem label="Create exhibition" onClick={()=>{}}/>
+                                <MenuItem label="Create exhibition" onClick={()=>{navigate('/new-exhibition')}}/>
                             </>
                         )}
 

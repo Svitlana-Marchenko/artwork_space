@@ -10,6 +10,7 @@ import Artwork from "./pages/artwork/Artwork";
 import Exhibition from "./pages/exhibition/Exhibition";
 import Auction from "./pages/auction/Auction";
 import {NewArtwork} from "./pages/artwork/NewArtwork";
+import ExhibitionForm from "./pages/exhibition/ExhibitionForm";
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
             {
                 path: "/exhibition/:id",
                 element: <Exhibition/>
+            },
+            {
+                path: "/new-exhibition",
+                element: <ExhibitionForm/>
+            },
+            {
+                path: "/edit-exhibition/:id",
+                element: <ExhibitionForm/>
             },
             {
                 path: "/auctions",
