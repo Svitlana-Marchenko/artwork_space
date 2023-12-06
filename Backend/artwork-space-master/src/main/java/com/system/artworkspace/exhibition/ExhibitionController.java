@@ -5,6 +5,9 @@ import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.auction.AuctionDto;
 import com.system.artworkspace.auction.AuctionMapper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdate;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,21 @@ public class ExhibitionController {
         ExhibitionDto createdExhibition = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionDtoToExhibition(exhibition)));
         logger.info("Exhibition created with ID: {}", createdExhibition.getId());
         return createdExhibition;
+    }
+
+    @PutMapping("/{id}")
+    //@PreAuthorize("hasAuthority('CURATOR')")
+    public ExhibitionDto updateExhibition(
+            @PathVariable Long id,
+            @RequestBody @Valid ExhibitionUpdateDto exhibitionUpdate,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            logErrors(bindingResult);
+        }
+        ExhibitionDto exhibitionN = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.updateExhibition(id, ExhibitionUpdateMapper.INSTANCE.exhibitionUpdateDtoToExhibitionUpdate(exhibitionUpdate)));
+        logger.info("Exhibition updated with ID: {}", exhibitionN.getId());
+        return exhibitionN;
     }
 
     @PostMapping("/{exhibitionId}/addArtwork")

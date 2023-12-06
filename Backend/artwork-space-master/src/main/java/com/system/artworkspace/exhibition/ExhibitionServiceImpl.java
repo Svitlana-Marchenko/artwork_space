@@ -5,6 +5,8 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.auction.AuctionEntity;
 import com.system.artworkspace.auction.AuctionMapper;
+import com.system.artworkspace.exceptions.NoSuchExhibitionException;
+import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdate;
 import jakarta.persistence.EntityNotFoundException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -84,6 +86,21 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             logger.warn(EXHIBITION_EVENTS,"ExhibitionEntity not found for changing dates with ID: {}", id);
             throw new IllegalArgumentException("ExhibitionEntity not found with ID: " + id);
         }
+    }
+
+    @Override
+    public Exhibition updateExhibition(Long id, ExhibitionUpdate exhibitionUpdate) {
+        Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
+        if(optionalExhibition.isPresent()){
+            ExhibitionEntity exhibition = optionalExhibition.get();
+            exhibition.setTitle(exhibitionUpdate.getTitle());
+            exhibition.setDescription(exhibitionUpdate.getDescription());
+            exhibitionRepository.save(exhibition);
+            logger.info("Updating exhibition with id "+id);
+        }else{
+            throw new NoSuchExhibitionException("No exhibition with id "+id+" to update");
+        }
+        return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibitionRepository.findById(id).get());
     }
 
     @Override
