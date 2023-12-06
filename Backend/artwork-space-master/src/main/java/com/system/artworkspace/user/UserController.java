@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public UserDto createUser(@RequestBody UserDto user) {
+    public UserDto createUser(@RequestBody @Valid UserDto user) {
         logger.info("Creating a user with ID: {}", user.getId());
         User createdUser = userService.createUser(UserMapper.INSTANCE.userDtoToUser(user));
         logger.info("User created with ID: {}", createdUser.getId());
