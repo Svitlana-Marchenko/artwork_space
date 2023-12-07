@@ -1,3 +1,8 @@
+export type Password = {
+    id: number;
+    oldPassword: string;
+    newPassword: string;
+}
 export enum UserRole {
     artist = "ARTIST",
     curator = "CURATOR",

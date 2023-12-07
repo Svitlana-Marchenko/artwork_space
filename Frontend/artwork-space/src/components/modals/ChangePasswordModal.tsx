@@ -4,44 +4,64 @@ import {
     SubmitHandler,
     useForm
 } from "react-hook-form";
-
 import {Modal} from "./Modal";
-import toast from "react-hot-toast";
-import axios from "axios";
 import Input from "../input/Input";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
+import {Password, User} from "../../mockup/mockup_users";
 interface ChangePasswordModalProps {
     isOpen:boolean;
     toggle: () => void;
 }
 export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, toggle}) => {
-
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const {
         register,
+        reset,
         handleSubmit,
         formState: {
             errors,
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            prevPassword: '',
+            oldPassword: '',
             newPassword: '',
             newRepeatPassword: ''
         },
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-//todo implement changing password
+        const passwordData:Password = {
+            id: currentUser.id,
+            oldPassword: data.oldPassword,
+            newPassword: data.newPassword
+        };
+        UserService.changePassword(passwordData)
+            .then((data) => {
+                    toast.success("The password was changed successfully")
+                    reset();
+                    toggle();
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to change your password")
+                console.error('Error in creating your profile:', error);
+            });
     }
-
+//todo validation for password length 8
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <div className={'text-center'}>
+                <div className="text-2xl font-bold">
+                    Password settings
+                </div>
                 <div className="font-light text-neutral-500 mt-2">
-                    Use these fields to change password!
+                    Change it right here
                 </div>
             </div>
             <Input
-                id="prevPassword"
+                id="oldPassword"
                 label="Previous password"
                 placeholder="Previous password"
                 type="password"
@@ -50,7 +70,6 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 required
                 
             />
-
             <Input
                 id="newPassword"
                 label="New password"
@@ -61,7 +80,6 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 required
                 
             />
-
             <Input
                 id="newRepeatPassword"
                 label="Repeat new password"
@@ -75,15 +93,11 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
         </div>
     )
 
-    const footerContent = (
-        <></>
-    )
-
     return(
         <Modal
             isOpen={isOpen}
             title="Change password"
-            actionLabel="Change"
+            actionLabel="Submit"
             onSubmit={handleSubmit(onSubmit)}
             toggleModal={toggle}
             body={bodyContent}
