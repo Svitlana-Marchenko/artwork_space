@@ -1,32 +1,31 @@
 package com.system.artworkspace.collection;
 
+import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 public class CollectionDto {
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Owner cant be null")
     private UserDto owner;
 
-    @Size(max = 100)
+    @Size(max = 100, message = "Title cant be longer than 100 symbols")
     private String title;
-
-    @NotEmpty
-    private List<Long> artworkIds;
+    private List<ArtworkDto> artworks;
 
     public CollectionDto() {
     }
 
-    public CollectionDto(Long id, UserDto owner, String name, List<Long> artworkIds) {
+    public CollectionDto(Long id, UserDto owner, String name, List<ArtworkDto> artworks) {
         this.id = id;
         this.owner = owner;
         this.title = name;
-        this.artworkIds = artworkIds;
+        this.artworks = artworks;
     }
 
     public Long getId() {
@@ -46,20 +45,20 @@ public class CollectionDto {
         this.title = title;
     }
 
-    public List<Long> getArtworkIds() {
-        return artworkIds;
-    }
-
-    public void setArtworkIds(List<Long> artworkIds) {
-        this.artworkIds = artworkIds;
-    }
-
-    public UserDto getOwner() {
+   public UserDto getOwner() {
         return owner;
     }
 
     public void setOwner(UserDto owner) {
         this.owner = owner;
+    }
+
+    public List<ArtworkDto> getArtworks() {
+        return artworks;
+    }
+
+    public void setArtworks(List<ArtworkDto> artworks) {
+        this.artworks = artworks;
     }
 }
 

@@ -14,7 +14,7 @@ public class CollectionEntity {
     private UserEntity owner;
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<ArtworkEntity> artworkEntities;
+    private List<ArtworkEntity> artworks;
 
 
     public CollectionEntity(){}
@@ -37,7 +37,7 @@ public class CollectionEntity {
     }
 
     public void setArtworks(List<ArtworkEntity> artworkEntities) {
-        this.artworkEntities = artworkEntities;
+        this.artworks = artworkEntities;
     }
 
     public UserEntity getOwner() {
@@ -53,14 +53,14 @@ public class CollectionEntity {
     }
 
     public List<ArtworkEntity> getArtworks() {
-        return artworkEntities;
+        return artworks;
     }
 
     public void addNewArtwork(ArtworkEntity artworkEntity){
-        artworkEntities.add(artworkEntity);
+        artworks.add(artworkEntity);
     }
 
     public void removeArtwork(ArtworkEntity artworkEntity){
-        artworkEntities.remove(artworkEntity);
+        artworks.remove(artworkEntity);
     }
 }

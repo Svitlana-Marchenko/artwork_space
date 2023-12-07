@@ -1,5 +1,6 @@
 package com.system.artworkspace.collection;
 
+import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
 
 import javax.validation.constraints.NotEmpty;
@@ -17,16 +18,16 @@ public class Collection {
     private String title;
 
     @NotEmpty
-    private List<Long> artworkIds;
+    private List<Artwork> artworks;
 
     public Collection() {
     }
 
-    public Collection(Long id, User owner, String name, List<Long> artworkIds) {
+    public Collection(Long id, User owner, String name, List<Artwork> artworks) {
         this.id = id;
         this.owner = owner;
         this.title = name;
-        this.artworkIds = artworkIds;
+        this.artworks = artworks;
     }
 
 
@@ -46,20 +47,20 @@ public class Collection {
         this.title = title;
     }
 
-    public List<Long> getArtworkIds() {
-        return artworkIds;
-    }
-
-    public void setArtworkIds(List<Long> artworkIds) {
-        this.artworkIds = artworkIds;
-    }
-
     public User getOwner() {
         return owner;
     }
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public List<Artwork> getArtworks() {
+        return artworks;
+    }
+
+    public void setArtworks(List<Artwork> artworks) {
+        this.artworks = artworks;
     }
 }
 
