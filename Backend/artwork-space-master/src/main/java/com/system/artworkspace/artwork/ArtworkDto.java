@@ -3,10 +3,10 @@ package com.system.artworkspace.artwork;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.UserDto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 

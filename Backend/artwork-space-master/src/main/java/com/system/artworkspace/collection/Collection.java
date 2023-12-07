@@ -2,10 +2,11 @@ package com.system.artworkspace.collection;
 
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 public class Collection {
@@ -15,6 +16,7 @@ public class Collection {
     private User owner;
 
     @Size(max = 100)
+    @NotBlank(message = "Title cant be blank")
     private String title;
 
     @NotEmpty

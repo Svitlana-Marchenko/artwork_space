@@ -1,29 +1,31 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.artwork.ArtworkDto;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import java.util.List;
 
 public class UserDto {
     private Long id;
-    @NotNull
-    @Size(max = 100)
+    @NotBlank(message = "Username name cant be blank")
+    @Size(max = 100, message = "Username cant be longer than 100 symbols")
     private String username;
 
-    @Size(max = 100)
+    @Size(max = 100, message = "Firstname cant be longer than 100 symbols")
     private String firstName;
 
-    @Size(max = 100)
+    @Size(max = 100, message = "Lastname cant be longer than 100 symbols")
     private String lastName;
 
-    @Email
-    @Size(max = 100)
+    @Email(message = "Email is not valid")
+    @Size(max = 100, message = "Email cant be longer than 100 symbols")
     private String email;
 
-    @Size(max = 100)
+    @Size(max = 100, message = "Password cant be longer than 100 symbols")
     private String password;
 
     private Role role;

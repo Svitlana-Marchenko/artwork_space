@@ -4,10 +4,13 @@ import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.auction.AuctionDto;
 import com.system.artworkspace.auction.AuctionMapper;
+import com.system.artworkspace.exceptions.ExceptionHelper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
+import com.system.artworkspace.exceptions.ValidationException;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdate;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMapper;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,7 +45,8 @@ public class ExhibitionController {
         BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         ExhibitionDto createdExhibition = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionDtoToExhibition(exhibition)));
         logger.info("Exhibition created with ID: {}", createdExhibition.getId());
@@ -57,7 +61,8 @@ public class ExhibitionController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         ExhibitionDto exhibitionN = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.updateExhibition(id, ExhibitionUpdateMapper.INSTANCE.exhibitionUpdateDtoToExhibitionUpdate(exhibitionUpdate)));
         logger.info("Exhibition updated with ID: {}", exhibitionN.getId());
@@ -72,7 +77,8 @@ public class ExhibitionController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         logger.info("Adding artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibitionId);
         exhibitionService.addToExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
@@ -88,7 +94,8 @@ public class ExhibitionController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         logger.info("Changing dates for exhibition with ID: {}", exhibitionId);
         exhibitionService.changeDates(exhibitionId, startDate, endDate);
@@ -99,8 +106,12 @@ public class ExhibitionController {
     //@PreAuthorize("hasRole('CURATOR')")
     public void deleteFromExhibition(
             @PathVariable Long exhibitionId,
-            @RequestBody ArtworkDto artwork
+            @RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()) {
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
+        }
         logger.info("Removing artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibitionId);
         exhibitionService.deleteFromExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
         logger.info("Artwork removed from exhibition with ID: {}", exhibitionId);
@@ -158,13 +169,14 @@ public class ExhibitionController {
 
     @ExceptionHandler(NoSuchExhibitionException.class)
     public ResponseEntity<String> handleNoSuchExhibitionException(NoSuchExhibitionException e) {
+        String errorMessage = "ERROR: " + e.getMessage();
+        logger.error(errorMessage);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ExhibitionEntity not found: " + e.getMessage());
     }
-
-    private void logErrors (BindingResult bindingResult) {
-        List<ObjectError> allErrors = bindingResult.getAllErrors();
-        for (ObjectError o : allErrors){
-            logger.info("error -->  " + o.getDefaultMessage());
-        }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        String errorMessage = "ERROR: " + e.getMessage();
+        logger.error(errorMessage);
+        return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

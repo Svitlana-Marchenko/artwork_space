@@ -3,7 +3,9 @@ package com.system.artworkspace.artwork;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
+import com.system.artworkspace.exceptions.ExceptionHelper;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
+import com.system.artworkspace.exceptions.ValidationException;
 import com.system.artworkspace.exhibition.ExhibitionDto;
 import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
@@ -11,6 +13,7 @@ import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMappe
 import com.system.artworkspace.helpers.RateLimit;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +55,8 @@ public class ArtworkController {
     @RateLimit(maxCalls = 2)
     public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         logger.info("Adding artwork with ID: {}", artwork.getId());
         ArtworkDto addedArtwork = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.addArtwork(ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork)));
@@ -75,7 +78,8 @@ public class ArtworkController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            logErrors(bindingResult);
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
         }
         ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(id, ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
         logger.info("Artwork updated with ID: {}", artworkN.getId());
@@ -128,24 +132,20 @@ public class ArtworkController {
 
     @ExceptionHandler(NoSuchArtworkException.class)
     public ResponseEntity<String> handleNoSuchArtworkException(NoSuchArtworkException e) {
+        String errorMessage = "ERROR: " + e.getMessage();
+        logger.error(errorMessage);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Artwork not found: " + e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
-        String errorMessage = "An unexpected error occurred: " + e.getMessage();
+        String errorMessage = "ERROR: " + e.getMessage();
+        logger.error(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    private void logErrors (BindingResult bindingResult) {
-        List<ObjectError> allErrors = bindingResult.getAllErrors();
-        for (ObjectError o : allErrors){
-            logger.info("error -->  " + o.getDefaultMessage());
-        }
     }
     @PostMapping("/{artworkId}/addRating")
     @PreAuthorize("hasAuthority('CURATOR')")
-    public void addRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
+    public void addRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto) {
         logger.info("Adding rating with ID {} to artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.addRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating added to artwork with ID: {}", artworkId);
@@ -153,7 +153,7 @@ public class ArtworkController {
 
     @DeleteMapping("/{artworkId}/deleteRating")
     @PreAuthorize("hasAuthority('CURATOR')")
-    public void deleteRating(@PathVariable Long artworkId, @RequestBody RatingDto ratingDto) {
+    public void deleteRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto) {
         logger.info("Removing rating with ID {} from artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.deleteRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating removed from artwork with ID: {}", artworkId);

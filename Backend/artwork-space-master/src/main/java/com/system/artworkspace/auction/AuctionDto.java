@@ -3,10 +3,9 @@ package com.system.artworkspace.auction;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Future;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class AuctionDto {
@@ -14,13 +13,14 @@ public class AuctionDto {
 
     private ArtworkDto artwork;
 
-    @DecimalMin(value = "0.0")
+    @DecimalMin(value = "0.0", message = "Value must be in decimal format")
     private double startingPrice;
 
-    @DecimalMin(value = "0.0")
+    @DecimalMin(value = "0.0", message = "Value must be in decimal format")
     private double bid;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Future(message = "Date must be in the future")
     private Date closingTime;
 
     private UserDto user;

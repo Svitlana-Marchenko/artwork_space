@@ -1,25 +1,23 @@
 package com.system.artworkspace.rating;
 
 import com.system.artworkspace.user.UserDto;
+import jakarta.validation.constraints.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class RatingDto {
-    @NotNull
+
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Rating cant be blank")
     @Min(1)
     @Max(10)
     private double rate;
 
     private UserDto user;
 
-    @Size(max = 5000)
+    @Size(max = 5000, message = "Comment cant be longer than 5000 symbols")
     private String comment;
 
     public RatingDto() {

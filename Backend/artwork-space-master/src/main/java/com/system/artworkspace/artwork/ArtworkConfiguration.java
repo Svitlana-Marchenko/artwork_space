@@ -1,5 +1,6 @@
 package com.system.artworkspace.artwork;
 
+import com.system.artworkspace.helpers.CustomCacheManager;
 import com.system.artworkspace.validation.ArtworkValidator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.cache.CacheManager;

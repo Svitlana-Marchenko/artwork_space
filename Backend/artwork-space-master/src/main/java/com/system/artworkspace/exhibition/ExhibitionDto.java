@@ -3,11 +3,12 @@ package com.system.artworkspace.exhibition;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import java.util.Date;
 import java.util.List;
 
