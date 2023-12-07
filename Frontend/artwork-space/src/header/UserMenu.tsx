@@ -97,7 +97,7 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                         )}
                         <MenuItem
                             label="My profile"
-                            onClick={()=>{nav(`/profile`)}}
+                            onClick={()=>{nav(`/my`)}}
                         />
                         <hr />
                         <MenuItem

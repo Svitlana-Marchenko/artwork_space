@@ -1,27 +1,30 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {NavLink} from "react-router-dom";
 import toast from "react-hot-toast";
 import {ChangePasswordModal} from "../components/modals/ChangePasswordModal";
 import {EditProfileInfoModal} from "../components/modals/EditProfileInfoModal";
 import {User} from "../mockup/mockup_users";
-import ArtworkService from "../API/ArtworkService";
 import {Artwork} from "../mockup/mockup_artworks";
 import Collection from "../components/Collection";
 import {Button} from "../components/Button";
-import useFavorite from "../hooks/useFavorite";
 import CollectionService from "../API/CollectionService";
 import UserService from "../API/UserService";
+import MenuItem from "../header/MenuItem";
+import ArtworksList from "../components/lists/ArtworksList";
+import ExhibitionList from "../components/lists/ExhibitionList";
+import ArtworkService from "../API/ArtworkService";
+import {Exhibition} from "../mockup/mockup_exhibitions";
+import ExhibitionService from "../API/ExhibitionService";
 
 const Profile = () => {
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
-    // const { hasFavorite, toggleFavorite } = useFavorite({
-    //     artworkId,
-    //     currentUser
-    // });
     const navigate = useNavigate();
+    const {id} = useParams();
+    const [likedArtworks, setLikedArtworks] = useState<Artwork[]>([]);
     const [artworks, setArtworks] = useState<Artwork[]>([]);
+    const [exhibitions, setExhibitions] = useState<Exhibition[]>([]);
+    const [profile, setProfile] = useState<User>();
 
     const [isOpenPassword, setIsOpenPassword] = useState(false);
     const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
@@ -34,7 +37,6 @@ const Profile = () => {
         setIsOpenEditProfile((value) => !value);
     }, []);
 
-    //todo add edit button if it is user currentUser
     function handleDelete() {
         if (currentUser) {
             UserService.deleteUserById(currentUser.id)
@@ -50,36 +52,97 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        if (currentUser) {
+        if (id) {
+            UserService.getUserById(id)
+                .then((data) => {
+                    setProfile(data);
+                })
+            ArtworkService.getAllArtworksByArtistId(id)
+                .then(data => {
+                    console.log(data)
+                    setArtworks(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+        }
+        if (currentUser&&(!id)) {
             CollectionService.getArtworksFromCollection(currentUser.id)
                 .then(data => {
-                    setArtworks(data);
+                    console.log(data)
+                    setLikedArtworks(data);
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
 
         }
     }, []);
+    useEffect(()=>{
+        if (id) {
+            ExhibitionService.getExhibitionByCuratorId(id)
+                .then((data) => {
+                    setExhibitions(data);
+                })
+        }
+    }, [profile])
+    const profileContent = (user: User) => {
+        return (
+            <>
+                <div className={"flex flex-row justify-between align-top"}>
+                    <div>
+                        <p className={"text-gray-400"}>@{user.username}</p>
+                        <p className={"text-3xl font-bold mt-2 mb-4"}>{user.firstName.toUpperCase()} {user.lastName.toUpperCase()}</p>
+                    </div>
+                    {
+                        currentUser&&(!id)&&(
+                            <div className={"flex flex-row space-x-4 w-1/4 h-1/2"}>
+                                <Button label={"Edit profile"} onClick={()=>{}}/>
+                                <Button label={"Delete"} onClick={handleDelete} outline/>
+                            </div>
+                        )
+                    }
+                </div>
+                <hr className={'mb-8'}/>
+                {
+                    currentUser&&(!id)&&(
+                        <Collection artworks={likedArtworks}/>
+                    )
+                }
+                {profile ? (
+                    <>
+                        {profile.role === "ARTIST" && (
+                            <ArtworksList artworks={artworks}/>
+                        )}
 
+                        {profile.role === "CURATOR" && (
+                            <>
+                            {exhibitions.length > 0 && exhibitions.map((exhibition) => {
+                                    return (
+                                        <ExhibitionList
+                                            key={exhibition.id.toString()}
+                                            id={exhibition.id.toString()}
+                                            curator={exhibition.curator}
+                                            title={exhibition.title}
+                                            artworks={exhibition.artworks}
+                                            startDate={exhibition.startDate}
+                                            endDate={exhibition.endDate}
+                                        />
+                                    )
+                                })}
+                            </>
+                        )}
+                    </>
+                ) : currentUser&&(
+                    <Collection artworks={artworks}/>
+                )}
+            </>
+        )}
     return (
         <div className="mx-32 mt-16">
-            {currentUser ? (
-                <>
-                    <div className={"flex flex-row justify-between align-top"}>
-                        <div>
-                            <p className={"text-gray-400"}>@{currentUser.username}</p>
-                            <p className={"text-3xl font-bold mt-2 mb-4"}>{currentUser.firstName.toUpperCase()} {currentUser.lastName.toUpperCase()}</p>
-                        </div>
-                        <div className={"flex flex-row space-x-4 w-1/4 h-1/2"}>
-                            <Button label={"Edit profile"} onClick={()=>{}}/>
-                            <Button label={"Delete"} onClick={handleDelete} outline/>
-                        </div>
-                    </div>
-                    <hr className={'mb-8'}/>
-                    <Collection artworks={artworks}/>
-                </>
-            ) : (
-                <p>Smth went wrong</p>
-            )}
+            {
+                id
+                    ?
+                    profile && profileContent(profile)
+                    :
+                    currentUser && profileContent(currentUser)
+            }
             <ChangePasswordModal isOpen={isOpenPassword} toggle={toggleOpenPassword}/>
             <EditProfileInfoModal isOpen={isOpenEditProfile} toggle={toggleOpenEditProfile}/>
         </div>

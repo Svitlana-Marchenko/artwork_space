@@ -67,7 +67,11 @@ export const router = createBrowserRouter([
                 element: <Auction/>
             },
             {
-                path: "/profile",
+                path: "/my",
+                element: <Profile/>
+            },
+            {
+                path: "/profile/:id",
                 element: <Profile/>
             }
         ]
