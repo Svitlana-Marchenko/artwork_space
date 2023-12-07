@@ -188,7 +188,6 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         cleanupExpiredExhibitions();
         logger.info("Cleanup Expired Exhibitions Monthly task executed");
     }
-
     @Override
     public void cleanupExpiredExhibitions() {
         Date threeMonthsAgo = Date.from(LocalDateTime.now().minusMonths(3).atZone(ZoneId.systemDefault()).toInstant());

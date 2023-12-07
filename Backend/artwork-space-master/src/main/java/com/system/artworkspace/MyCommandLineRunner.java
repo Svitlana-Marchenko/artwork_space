@@ -4,10 +4,7 @@ import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkService;
-import com.system.artworkspace.auction.Auction;
-import com.system.artworkspace.auction.AuctionArtistService;
-import com.system.artworkspace.auction.AuctionEntity;
-import com.system.artworkspace.auction.AuctionMapper;
+import com.system.artworkspace.auction.*;
 import com.system.artworkspace.collection.CollectionEntity;
 import com.system.artworkspace.collection.CollectionMapper;
 import com.system.artworkspace.collection.CollectionService;
@@ -16,6 +13,14 @@ import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.ExhibitionService;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.*;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersInvalidException;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -45,9 +50,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @Autowired
     AuctionArtistService auctionArtistService;
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         createTestData();
-
     }
 
 
