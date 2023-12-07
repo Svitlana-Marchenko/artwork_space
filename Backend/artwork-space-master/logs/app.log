@@ -2385,3 +2385,437 @@ This generated password is for development use only. Your security configuration
 2023-12-05 23:03:04,358 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown initiated...
 2023-12-05 23:03:04,360 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown completed.
 2023-12-05 23:03:04,362 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:22,012 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ArtworkControllerTest]: ArtworkControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:22,134 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ArtworkControllerTest
+2023-12-07 11:25:22,557 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2023-12-07 11:25:22,574 INFO c.s.a.ArtworkControllerTest [main] Starting ArtworkControllerTest using Java 17.0.1 with PID 8176 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-07 11:25:22,578 INFO c.s.a.ArtworkControllerTest [main] The following 1 profile is active: "dev"
+2023-12-07 11:25:23,372 INFO o.s.b.c.c.a.BatchRegistrar [main] Finished Spring Batch infrastructure beans configuration in 4 ms.
+2023-12-07 11:25:23,723 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-07 11:25:23,830 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 98 ms. Found 6 JPA repository interfaces.
+2023-12-07 11:25:24,595 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2023-12-07 11:25:24,815 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-07 11:25:24,816 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-12-07 11:25:24,882 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-07 11:25:24,962 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-12-07 11:25:24,967 INFO o.h.c.Environment [main] HHH000406: Using bytecode reflection optimizer
+2023-12-07 11:25:25,159 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:25,313 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-07 11:25:25,777 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:26,522 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-07 11:25:26,589 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:27,114 INFO o.s.b.c.r.s.JobRepositoryFactoryBean [main] No database type set, using meta data indicating: H2
+2023-12-07 11:25:27,136 INFO o.s.b.c.l.s.SimpleJobLauncher [main] No TaskExecutor has been set, defaulting to synchronous executor.
+2023-12-07 11:25:27,177 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-07 11:25:27,545 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-07 11:25:27,570 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:27,580 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:27,939 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-07 11:25:28,150 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4bb747c1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18b12df9, org.springframework.security.web.context.SecurityContextHolderFilter@78181f7f, org.springframework.security.web.header.HeaderWriterFilter@75ad7531, org.springframework.web.filter.CorsFilter@3ef8de39, org.springframework.security.web.csrf.CsrfFilter@453d2a55, org.springframework.security.web.authentication.logout.LogoutFilter@7c4a7770, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1a927db2, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5269aa68, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@370e5bb9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2c5157c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27f7db5a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6245303e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@46769bd6, org.springframework.security.web.access.ExceptionTranslationFilter@509d0d21, org.springframework.security.web.access.intercept.AuthorizationFilter@7cb9295f]
+2023-12-07 11:25:28,957 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-07 11:25:28,973 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-07 11:25:28,973 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-07 11:25:28,975 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-07 11:25:28,976 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-07 11:25:28,976 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-07 11:25:28,976 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-07 11:25:28,977 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@3da068e8
+2023-12-07 11:25:29,048 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-07 11:25:29,049 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-07 11:25:29,063 INFO c.s.a.ArtworkControllerTest [main] Started ArtworkControllerTest in 6.748 seconds (process running for 8.156)
+2023-12-07 11:25:29,066 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-07 11:25:29,256 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-07 11:25:29,326 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-07 11:25:29,393 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-07 11:25:29,452 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,453 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,455 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,456 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,457 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,457 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,459 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,459 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,460 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,461 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,462 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,463 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,464 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,465 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,466 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,467 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,468 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:29,469 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,473 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,474 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,475 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,476 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,477 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,477 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,479 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,479 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,480 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,480 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,481 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,482 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,483 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,483 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,484 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,485 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,486 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,486 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,487 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,488 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,489 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,489 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,491 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,491 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,494 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,494 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,496 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,496 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,498 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,498 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,500 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,500 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:29,502 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:29,515 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:29,517 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:29,521 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:29,523 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:29,526 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:29,527 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:29,530 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-07 11:25:29,531 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-07 11:25:30,028 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:30,028 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:30,030 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:30,076 INFO c.s.a.a.ArtworkController [main] Fetching artwork with ID: 1
+2023-12-07 11:25:30,153 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:30,154 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:30,155 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:30,158 INFO c.s.a.a.ArtworkController [main] Deleting artwork with ID: 2
+2023-12-07 11:25:30,176 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 23503, SQLState: 23503
+2023-12-07 11:25:30,176 ERROR o.h.e.j.s.SqlExceptionHelper [main] Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]
+2023-12-07 11:25:30,188 ERROR c.s.a.a.ExceptionAspect [main] Error in deleteArtwork with text: could not execute statement [Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]] [delete from artwork_entity where id=?]; SQL [delete from artwork_entity where id=?]; constraint ["FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]]
+2023-12-07 11:25:30,190 ERROR c.s.a.a.ArtworkController [main] ERROR: could not execute statement [Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]] [delete from artwork_entity where id=?]; SQL [delete from artwork_entity where id=?]; constraint ["FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]]
+2023-12-07 11:25:30,205 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:30,205 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:30,206 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:30,208 INFO c.s.a.a.ArtworkController [main] Deleting artwork with ID: 256
+2023-12-07 11:25:30,209 WARN c.s.a.ArtworkSpaceApplication [main] Artwork not found for deletion with ID: 256
+2023-12-07 11:25:30,210 ERROR c.s.a.a.ExceptionAspect [main] Error in deleteArtwork with text: Artwork not found with ID: 256
+2023-12-07 11:25:30,210 ERROR c.s.a.a.ArtworkController [main] ERROR: Artwork not found with ID: 256
+2023-12-07 11:25:30,221 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ArtworkSpaceApplicationTests]: ArtworkSpaceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:30,224 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ArtworkSpaceApplicationTests
+2023-12-07 11:25:30,251 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.CollectionControllerTests]: CollectionControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:30,276 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.CollectionControllerTests
+2023-12-07 11:25:30,313 INFO c.s.a.CollectionControllerTests [main] Starting CollectionControllerTests using Java 17.0.1 with PID 8176 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-07 11:25:30,314 INFO c.s.a.CollectionControllerTests [main] The following 1 profile is active: "dev"
+2023-12-07 11:25:31,042 WARN o.s.b.a.s.s.UserDetailsServiceAutoConfiguration [main] 
+
+Using generated security password: b1121bbc-f943-4cf4-a314-d0d78baef8f7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-12-07 11:25:31,065 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34b846a1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@690506b0, org.springframework.security.web.context.SecurityContextHolderFilter@24e82f43, org.springframework.security.web.header.HeaderWriterFilter@16e1a441, org.springframework.security.web.csrf.CsrfFilter@7d1647d5, org.springframework.security.web.authentication.logout.LogoutFilter@2c6c67e0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4a5d8ae4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5d676a02, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4f29bbde, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5c1a728, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b0fece4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46bf0d38, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@47d9bdf4, org.springframework.security.web.access.ExceptionTranslationFilter@1517015c, org.springframework.security.web.access.intercept.AuthorizationFilter@745526a0]
+2023-12-07 11:25:31,091 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:31,092 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:31,094 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-07 11:25:31,107 INFO c.s.a.CollectionControllerTests [main] Started CollectionControllerTests in 0.824 seconds (process running for 10.2)
+2023-12-07 11:25:31,139 INFO c.s.a.c.CollectionController [main] Updating collection name for collection with ID: 1
+2023-12-07 11:25:31,162 INFO c.s.a.c.CollectionController [main] Collection name updated for collection with ID: 1
+2023-12-07 11:25:31,303 INFO c.s.a.c.CollectionController [main] Adding artwork with ID 99 to collection with ID: 1
+2023-12-07 11:25:31,304 INFO c.s.a.c.CollectionController [main] Artwork added to collection with ID: 1
+2023-12-07 11:25:31,320 INFO c.s.a.c.CollectionController [main] Deleting collection with ID: 1
+2023-12-07 11:25:31,321 INFO c.s.a.c.CollectionController [main] Collection deleted with ID: 1
+2023-12-07 11:25:31,337 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ExhibitionServiceIntegrationTest]: ExhibitionServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:31,344 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ExhibitionServiceIntegrationTest
+2023-12-07 11:25:31,400 INFO c.s.a.ExhibitionServiceIntegrationTest [main] Starting ExhibitionServiceIntegrationTest using Java 17.0.1 with PID 8176 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-07 11:25:31,401 INFO c.s.a.ExhibitionServiceIntegrationTest [main] The following 1 profile is active: "dev"
+2023-12-07 11:25:31,753 INFO o.s.b.c.c.a.BatchRegistrar [main] Finished Spring Batch infrastructure beans configuration in 0 ms.
+2023-12-07 11:25:31,824 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-07 11:25:31,871 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 45 ms. Found 6 JPA repository interfaces.
+2023-12-07 11:25:32,288 INFO c.z.h.HikariDataSource [main] HikariPool-2 - Starting...
+2023-12-07 11:25:32,289 INFO c.z.h.p.HikariPool [main] HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2023-12-07 11:25:32,290 INFO c.z.h.HikariDataSource [main] HikariPool-2 - Start completed.
+2023-12-07 11:25:32,294 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-07 11:25:32,306 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:32,306 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-07 11:25:32,424 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:32,575 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-07 11:25:32,612 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:32,808 INFO o.s.b.c.r.s.JobRepositoryFactoryBean [main] No database type set, using meta data indicating: H2
+2023-12-07 11:25:32,816 INFO o.s.b.c.l.s.SimpleJobLauncher [main] No TaskExecutor has been set, defaulting to synchronous executor.
+2023-12-07 11:25:32,875 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-07 11:25:32,883 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:32,889 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:33,204 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-07 11:25:33,299 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@730b8cfa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@453ea7f6, org.springframework.security.web.context.SecurityContextHolderFilter@7c80c68f, org.springframework.security.web.header.HeaderWriterFilter@24ac4cf4, org.springframework.web.filter.CorsFilter@48a26095, org.springframework.security.web.csrf.CsrfFilter@3f169051, org.springframework.security.web.authentication.logout.LogoutFilter@1248ac5d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7618e4bf, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@653e6996, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@79ae4822, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@21e58e9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@771f4556, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23b34af8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@56ed77b1, org.springframework.security.web.access.ExceptionTranslationFilter@7e3559b4, org.springframework.security.web.access.intercept.AuthorizationFilter@3df17e4b]
+2023-12-07 11:25:33,788 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-07 11:25:33,790 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-07 11:25:33,790 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-07 11:25:33,790 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-07 11:25:33,790 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-07 11:25:33,790 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-07 11:25:33,791 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-07 11:25:33,791 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@7ee0a60a
+2023-12-07 11:25:33,844 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-07 11:25:33,845 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-07 11:25:33,849 INFO c.s.a.ExhibitionServiceIntegrationTest [main] Started ExhibitionServiceIntegrationTest in 2.495 seconds (process running for 12.943)
+2023-12-07 11:25:33,849 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-07 11:25:33,939 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-07 11:25:34,011 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-07 11:25:34,085 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-07 11:25:34,089 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,092 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,094 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,097 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,099 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,101 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,104 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,106 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,109 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,111 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,113 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,115 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,116 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,117 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,121 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,123 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,124 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:34,125 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,130 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,130 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,132 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,133 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,135 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,136 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,138 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,138 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,140 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,141 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,143 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,144 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,146 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,146 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,148 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,149 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,151 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,151 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,153 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,153 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,155 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,156 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,159 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,160 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,163 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,163 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,165 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,166 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,168 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,169 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,171 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,172 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:34,173 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:34,178 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:34,180 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:34,183 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:34,184 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:34,185 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:34,186 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:34,189 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-07 11:25:34,190 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-07 11:25:34,336 INFO c.s.a.ArtworkSpaceApplication [main] Cleanup Expired Exhibitions task executed...
+2023-12-07 11:25:34,349 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.SecurityTest]: SecurityTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:34,356 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.SecurityTest
+2023-12-07 11:25:34,407 INFO c.s.a.SecurityTest [main] Starting SecurityTest using Java 17.0.1 with PID 8176 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-07 11:25:34,408 INFO c.s.a.SecurityTest [main] The following 1 profile is active: "dev"
+2023-12-07 11:25:34,721 INFO o.s.b.c.c.a.BatchRegistrar [main] Finished Spring Batch infrastructure beans configuration in 0 ms.
+2023-12-07 11:25:34,789 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-07 11:25:34,829 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 40 ms. Found 6 JPA repository interfaces.
+2023-12-07 11:25:34,976 INFO c.z.h.HikariDataSource [main] HikariPool-3 - Starting...
+2023-12-07 11:25:34,977 INFO c.z.h.p.HikariPool [main] HikariPool-3 - Added connection conn20: url=jdbc:h2:mem:testdb user=SA
+2023-12-07 11:25:34,977 INFO c.z.h.HikariDataSource [main] HikariPool-3 - Start completed.
+2023-12-07 11:25:34,980 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-07 11:25:34,989 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:34,989 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-07 11:25:35,015 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:35,097 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-07 11:25:35,121 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:35,214 INFO o.s.b.c.r.s.JobRepositoryFactoryBean [main] No database type set, using meta data indicating: H2
+2023-12-07 11:25:35,220 INFO o.s.b.c.l.s.SimpleJobLauncher [main] No TaskExecutor has been set, defaulting to synchronous executor.
+2023-12-07 11:25:35,268 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-07 11:25:35,271 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:35,274 INFO o.s.b.c.c.a.BatchObservabilityBeanPostProcessor [main] No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2023-12-07 11:25:35,492 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-07 11:25:35,552 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6d6cd631, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4ad177f3, org.springframework.security.web.context.SecurityContextHolderFilter@525cb986, org.springframework.security.web.header.HeaderWriterFilter@e56c524, org.springframework.web.filter.CorsFilter@55cb75bf, org.springframework.security.web.csrf.CsrfFilter@57b57ffe, org.springframework.security.web.authentication.logout.LogoutFilter@64ebcabf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@bf154bb, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@2e6e0c7e, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@549ea731, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3175ce18, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2eea76bc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1629947a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f482ecd, org.springframework.security.web.access.ExceptionTranslationFilter@41df3497, org.springframework.security.web.access.intercept.AuthorizationFilter@6068fe59]
+2023-12-07 11:25:35,904 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-07 11:25:35,905 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-07 11:25:35,906 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-07 11:25:35,906 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-07 11:25:35,906 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-07 11:25:35,906 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-07 11:25:35,906 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-07 11:25:35,906 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@15f436d7
+2023-12-07 11:25:35,944 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:35,944 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:35,946 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-07 11:25:35,954 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-07 11:25:35,954 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-07 11:25:35,959 INFO c.s.a.SecurityTest [main] Started SecurityTest in 1.594 seconds (process running for 15.052)
+2023-12-07 11:25:35,959 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-07 11:25:36,038 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-07 11:25:36,109 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-07 11:25:36,179 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-07 11:25:36,182 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,183 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,184 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,185 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,186 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,186 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,187 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,188 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,188 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,189 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,190 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,191 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,192 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,193 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,195 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,195 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,197 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-07 11:25:36,197 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,199 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,200 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,202 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,202 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,205 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,205 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,207 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,207 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,210 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,210 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,212 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,212 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,214 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,214 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,216 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,216 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,218 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,218 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,220 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,220 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,222 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,222 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,225 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,225 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,227 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,228 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,229 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,230 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,232 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,232 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,234 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,234 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-07 11:25:36,236 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-07 11:25:36,241 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:36,244 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-07 11:25:36,247 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:36,249 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-07 11:25:36,251 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:36,252 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-07 11:25:36,255 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-07 11:25:36,257 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-07 11:25:36,279 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:36,280 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:36,281 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:36,287 INFO c.s.a.a.ArtworkController [main] Getting all artworks
+2023-12-07 11:25:36,320 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:36,321 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:36,321 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 0 ms
+2023-12-07 11:25:36,323 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,327 INFO c.s.a.ArtworkSpaceApplication [main] Finding exhibition by id (without CACHE)
+2023-12-07 11:25:36,341 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:36,342 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:36,343 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:36,345 INFO c.s.a.a.AuctionArtistController [main] Fetching all active auctions
+2023-12-07 11:25:36,356 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved 2 active auctions.
+2023-12-07 11:25:36,357 INFO c.s.a.a.AuctionArtistController [main] Retrieved 2 active auctions.
+2023-12-07 11:25:36,367 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:36,367 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:36,368 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:36,370 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,372 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,375 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,378 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,380 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-07 11:25:36,386 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-07 11:25:36,386 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-07 11:25:36,387 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-07 11:25:36,388 INFO c.s.a.a.ArtworkController [main] Getting all artworks
+2023-12-07 11:25:36,413 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-07 11:25:36,422 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.UserRepositoryTest
+2023-12-07 11:25:36,450 INFO c.s.a.UserRepositoryTest [main] Starting UserRepositoryTest using Java 17.0.1 with PID 8176 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-07 11:25:36,451 INFO c.s.a.UserRepositoryTest [main] The following 1 profile is active: "dev"
+2023-12-07 11:25:36,577 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-07 11:25:36,622 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 44 ms. Found 6 JPA repository interfaces.
+2023-12-07 11:25:36,635 INFO o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor [main] Replacing 'dataSource' DataSource bean with embedded version
+2023-12-07 11:25:36,657 INFO o.s.j.d.e.EmbeddedDatabaseFactory [main] Starting embedded database: url='jdbc:h2:mem:63178353-2957-4056-9b05-94e8ef9d7cf8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2023-12-07 11:25:36,678 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-07 11:25:36,686 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:36,687 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-07 11:25:36,715 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-07 11:25:36,785 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-07 11:25:36,803 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:36,970 INFO c.s.a.UserRepositoryTest [main] Started UserRepositoryTest in 0.543 seconds (process running for 16.064)
+2023-12-07 11:25:36,996 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:36,998 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-07 11:25:36,998 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-07 11:25:36,998 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:36,998 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-07 11:25:37,002 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:37,010 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-12-07 11:25:37,013 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-12-07 11:25:37,017 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:37,018 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-07 11:25:37,018 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-07 11:25:37,018 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:37,018 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-07 11:25:37,020 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:37,021 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown initiated...
+2023-12-07 11:25:37,022 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown completed.
+2023-12-07 11:25:37,023 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:37,024 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-07 11:25:37,024 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-07 11:25:37,024 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-07 11:25:37,025 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-07 11:25:37,026 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-07 11:25:37,027 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown initiated...
+2023-12-07 11:25:37,029 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown completed.
+2023-12-07 11:25:37,030 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'

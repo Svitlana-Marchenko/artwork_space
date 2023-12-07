@@ -60,7 +60,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                 {
                                     currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER"
                                     ?
-                                        <HeartButton/>
+                                        <HeartButton artworkId={artwork.id}/>
                                         :
                                         null
                                 }

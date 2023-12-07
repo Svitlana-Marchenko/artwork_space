@@ -90,6 +90,10 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                                 <MenuItem label="Create collection" onClick={()=>{}}/>
                             </>
                         )}
+                        <MenuItem
+                            label="My profile"
+                            onClick={()=>{navigate(`/profile/${currentUser.id}`)}}
+                        />
                         <hr />
                         <MenuItem
                             label="Logout"
