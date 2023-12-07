@@ -3,7 +3,6 @@ import HeartButton from "../icons/HeartButton";
 import {useNavigate} from "react-router-dom";
 import UserLink from "../UserLink";
 import {User} from "../../mockup/mockup_users";
-import MenuItem from "../../header/MenuItem";
 import {Artwork} from "../../mockup/mockup_artworks";
 import PlusButton from "../icons/PlusButton";
 

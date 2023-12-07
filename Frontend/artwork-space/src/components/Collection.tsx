@@ -8,7 +8,13 @@ const Collection:React.FC<CollectionProps> = ({artworks}) => {
     return (
         <div>
             <p className={"text-2xl font-bold pb-4"}>My Collection</p>
-            <ArtworksList artworks={artworks}/>
+            {
+                artworks.length==0
+                ?
+                    <p className={"text-gray-400"}>You added no artworks to your collection</p>
+                    :
+                    <ArtworksList artworks={artworks}/>
+            }
         </div>
     );
 };

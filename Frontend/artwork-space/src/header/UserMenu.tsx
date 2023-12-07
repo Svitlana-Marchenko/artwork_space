@@ -32,9 +32,14 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
     }, []);
     const logout = () => {
         localStorage.removeItem("currentUser");
+        navigate("/");
         setIsOpenUserMenu(false);
     }
 
+    const nav = (path: string) => {
+        navigate(path);
+        setIsOpenUserMenu(false);
+    }
     return (
         <>
         <div>
@@ -72,15 +77,15 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                     <>
                         {currentUser.role === "ARTIST" && (
                             <>
-                                <MenuItem label="My artworks" onClick={()=>{navigate(`/artworks/${currentUser.id}`)}}/>
-                                <MenuItem label="Add new artwork" onClick={()=>{navigate('/new-artwork')}}/>
+                                <MenuItem label="My artworks" onClick={()=>{nav(`/artworks/${currentUser.id}`)}}/>
+                                <MenuItem label="Add new artwork" onClick={()=>{nav('/new-artwork')}}/>
                             </>
                         )}
 
                         {currentUser.role === "CURATOR" && (
                             <>
-                                <MenuItem label="My exhibitions" onClick={()=>{navigate(`/exhibitions/${currentUser.id}`)}}/>
-                                <MenuItem label="Create exhibition" onClick={()=>{navigate('/new-exhibition')}}/>
+                                <MenuItem label="My exhibitions" onClick={()=>{nav(`/exhibitions/${currentUser.id}`)}}/>
+                                <MenuItem label="Create exhibition" onClick={()=>{nav('/new-exhibition')}}/>
                             </>
                         )}
 
@@ -92,7 +97,7 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                         )}
                         <MenuItem
                             label="My profile"
-                            onClick={()=>{navigate(`/profile/${currentUser.id}`)}}
+                            onClick={()=>{nav(`/profile`)}}
                         />
                         <hr />
                         <MenuItem
