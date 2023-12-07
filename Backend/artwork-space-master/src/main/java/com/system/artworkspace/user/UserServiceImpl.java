@@ -127,9 +127,9 @@ public class UserServiceImpl implements UserService {
         }
         logger.info("Adding artwork with id "+artworkId+" from user`s with id "+ id+" collection");
 
-        Optional<ArtworkEntity> artworkO = artworkRepository.findById(id);
+        Optional<ArtworkEntity> artworkO = artworkRepository.findById(artworkId);
         if(!artworkO.isPresent()){
-            throw new NoSuchUserException("ArtworkEntity not found with ID: "+id);
+            throw new NoSuchUserException("ArtworkEntity not found with ID: "+artworkId);
         }
         Artwork artwork = ArtworkMapper.INSTANCE.artworkEntityToArtwork(artworkO.get());
 
