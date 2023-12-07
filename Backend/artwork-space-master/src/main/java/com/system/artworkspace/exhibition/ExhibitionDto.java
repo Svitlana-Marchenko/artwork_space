@@ -3,6 +3,7 @@ package com.system.artworkspace.exhibition;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
+import com.system.artworkspace.validation.exhibition.ValidExhibitionDates;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +12,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.List;
-
+@ValidExhibitionDates
 public class ExhibitionDto {
     private Long id;
     @NotNull(message = "curator is null")

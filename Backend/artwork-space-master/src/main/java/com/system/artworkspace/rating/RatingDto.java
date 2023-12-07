@@ -15,6 +15,7 @@ public class RatingDto {
     @Max(10)
     private double rate;
 
+    @NotNull(message = "curator can`t be null")
     private UserDto user;
 
     @Size(max = 5000, message = "Comment cant be longer than 5000 symbols")
