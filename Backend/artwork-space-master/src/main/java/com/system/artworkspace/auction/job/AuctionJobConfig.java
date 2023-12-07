@@ -1,8 +1,12 @@
-package com.system.artworkspace.auction;
+package com.system.artworkspace.auction.job;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.auction.Auction;
 import com.system.artworkspace.auction.AuctionEntity;
+import com.system.artworkspace.auction.AuctionMapper;
 import com.system.artworkspace.auction.AuctionRepository;
+import com.system.artworkspace.auction.Sale.Sale;
+import com.system.artworkspace.auction.Sale.SaleService;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,53 +52,15 @@ import java.util.stream.Collectors;
 @Configuration
 public class AuctionJobConfig {
 
-    @Autowired
-    private AuctionRepository auctionRepository;
-    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
-
     @Bean(name = "auctionClosingJob")
-    public Job auctionClosingJob(JobRepository jobRepository, Step deleteClosingAuctionsStep) {
+    public Job auctionClosingJob(JobRepository jobRepository,
+                                 @Qualifier("deleteClosingAuctions") Step deleteClosingAuctionsStep,
+                                 @Qualifier("formSale") Step formSaleStep) {
         return new JobBuilder("auctionClosingJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .start(deleteClosingAuctionsStep)
+                .next(formSaleStep)
                 .build();
     }
-
-    @Bean(name = "deleteClosingAuctions")
-    protected Step deleteClosingAuctions(JobRepository jobRepository, PlatformTransactionManager transactionManager, ItemReader<AuctionEntity> reader, ItemProcessor<AuctionEntity, AuctionEntity> processor, ItemWriter<AuctionEntity> writer) {
-        return new StepBuilder("deleteClosingAuctions", jobRepository).<AuctionEntity,AuctionEntity> chunk(2, transactionManager)
-                .reader(reader)
-                .processor(processor)
-                .writer(writer)
-                .build();
-    }
-    @Bean(name = "closingAuctionsReader")
-    @StepScope
-    public ItemReader<AuctionEntity> closingAuctionsReader() {
-        Date currentDate = new Date();
-
-        List<AuctionEntity> closingAuctions = auctionRepository.findClosingTodayWithNoBuyer(currentDate, PageRequest.of(0, 10));
-
-        return new ListItemReader<>(closingAuctions);
-    }
-
-
-    @Bean(name = "closingAuctionsProcessor")
-    public ItemProcessor<AuctionEntity, AuctionEntity> closingAuctionsProcessor() {
-        return auctionEntity -> {
-            auctionRepository.deleteById(auctionEntity.getId());
-            return auctionEntity;
-        };
-    }
-
-    @Bean(name = "closingAuctionsWriter")
-    public ItemWriter<AuctionEntity> closingAuctionsWriter() {
-        return items -> {
-            for (AuctionEntity auction : items) {
-                logger.info("Deleted auction with ID: {}", auction.getId());
-            }
-        };
-    }
-
 
 }

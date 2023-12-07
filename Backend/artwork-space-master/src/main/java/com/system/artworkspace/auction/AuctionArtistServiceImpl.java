@@ -120,7 +120,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         logger.info("Auction deleted with ID: {}", id);
     }
 
-    //@Scheduled(fixedRate = 5000) //for testing
+    //@Scheduled(fixedRate = 7000) //for testing
     @Scheduled(cron = "0 59 23 * * *") // Execute every day at 23:59
     public void performAuctionClosingJob() {
         try {

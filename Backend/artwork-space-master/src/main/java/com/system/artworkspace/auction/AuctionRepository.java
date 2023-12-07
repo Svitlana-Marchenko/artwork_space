@@ -12,6 +12,10 @@ import java.util.List;
 
 @Repository
 public interface AuctionRepository extends JpaRepository<AuctionEntity,Long> {
-    @Query("SELECT a FROM AuctionEntity a WHERE a.closingTime = :closingDate AND a.user IS NULL")
+     @Query("SELECT a FROM AuctionEntity a WHERE a.closingTime = :closingDate AND a.user IS NULL")
     List<AuctionEntity> findClosingTodayWithNoBuyer(@Param("closingDate") Date closingDate, Pageable pageable);
+
+    @Query("SELECT a FROM AuctionEntity a WHERE a.closingTime = :closingDate")
+    List<AuctionEntity> findClosingToday(@Param("closingDate") Date closingDate, Pageable pageable);
+
 }
