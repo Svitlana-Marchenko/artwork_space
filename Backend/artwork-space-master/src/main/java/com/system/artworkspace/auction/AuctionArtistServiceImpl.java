@@ -1,8 +1,11 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
+import com.system.artworkspace.artwork.ArtworkService;
+import com.system.artworkspace.auction.Sale.*;
 import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -30,6 +33,10 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Autowired
     private AuctionRepository auctionRepository;
     @Autowired
+    private ArtworkService artworkService;
+    @Autowired
+    private SaleService saleService;
+    @Autowired
     JobLauncher jobLauncher;
 
     @Autowired
@@ -41,6 +48,17 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
         auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
         logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auction.getId());
         return auction;
+    }
+
+    @Override
+    public Auction getAuctionById(Long id) {
+        Optional<AuctionEntity> auction = auctionRepository.findById(id);
+        logger.info("Finding auction by id ");
+        if (auction.isPresent())
+            return AuctionMapper.INSTANCE.auctionEntityToAuction(auction.get());
+        else
+            throw new EntityNotFoundException("Auction with id " + id + " not found");
+
     }
 
     @Override
@@ -86,16 +104,24 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
                 .collect(Collectors.toList());
     }
 
-    //TODO think about logic of method
+
     @Override
     public void closeAuction(Long id) {
-        // Update the auction as closed
-        //auction.setClosed(true);
-        //auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
+        Auction auction = getAuctionById(id);
+        saleService.createSale(new Sale(auction.getArtwork(),auction.getUser(),auction.getArtwork().getUser(),auction.getCurrentBid(),auction.getClosingTime()));
+        deleteAuctionById(id);
         logger.info(AUCTIONS_EVENTS, "Closed auction with ID: {}", id);
     }
-    @Scheduled(fixedRate = 5000) //for testing
-    //@Scheduled(cron = "0 59 23 * * *") // Execute every day at 23:59
+
+    @Override
+    public void deleteAuctionById(Long id) {
+        logger.info("Deleting auction with ID: {}", id);
+        auctionRepository.deleteById(id);
+        logger.info("Auction deleted with ID: {}", id);
+    }
+
+    //@Scheduled(fixedRate = 5000) //for testing
+    @Scheduled(cron = "0 59 23 * * *") // Execute every day at 23:59
     public void performAuctionClosingJob() {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
