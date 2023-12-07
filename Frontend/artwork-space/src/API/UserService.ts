@@ -1,5 +1,5 @@
 import axios from "axios";
-import {NewUser} from "../mockup/mockup_users";
+import {NewUser, Password} from "../mockup/mockup_users";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class UserService {
     static async getUserById(id:string) {
@@ -22,7 +22,17 @@ export default class UserService {
         }
     }
 
-    static async deleteUserById(id:string) {
+    static async changePassword(password: Password) {
+        try {
+            const response = await axios.put('http://localhost:8080/users/password', password)
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при зміні пароля:', error);
+            throw error;
+        }
+    }
+
+    static async deleteUserById(id:number) {
         try {
             return await axios.delete(`http://localhost:8080/users/${id}`);
         } catch (error) {

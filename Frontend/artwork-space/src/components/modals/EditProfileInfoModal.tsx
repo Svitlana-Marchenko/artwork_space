@@ -14,8 +14,6 @@ interface EditProfileInfoModalProps {
 
 export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen, toggle}) => {
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const {
         register,
         handleSubmit,
@@ -41,11 +39,13 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <div className={'text-center'}>
+                <div className="text-2xl font-bold">
+                    Profile settings
+                </div>
                 <div className="font-light text-neutral-500 mt-2">
-                    Use these fields to edit profile!
+                    You can change your bio here
                 </div>
             </div>
-
             <Input
                 id="username"
                 label="Username"
@@ -83,7 +83,7 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
         <Modal
             isOpen={isOpen}
             title="Edit profile"
-            actionLabel="Edit"
+            actionLabel="Submit"
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
             toggleModal={toggle}

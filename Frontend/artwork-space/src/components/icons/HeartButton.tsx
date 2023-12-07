@@ -1,27 +1,20 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {User} from "../../mockup/mockup_users";
+import useFavorite from "../../hooks/useFavorite";
 
-// import useFavorite from "@/app/hooks/useFavorite";
-// import { SafeUser } from "@/app/types";
+interface HeartButtonProps {
+    artworkId: number;
+}
 
-// interface HeartButtonProps {
-//     listingId: string
-//     currentUser?: SafeUser | null
-// }
-
-const HeartButton = () => {
-    // const { hasFavorite, toggleFavorite } = useFavorite({
-    //     listingId,
-    //     currentUser
-    // });
+const HeartButton:React.FC<HeartButtonProps> = ({artworkId}) => {
     const storedUserString = localStorage.getItem("currentUser");
-    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
-    const [hasFavorite, setHasFavorite] = useState(false);
+    const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
+    const { hasFavorite, toggleFavorite } = useFavorite({
+        artworkId,
+        currentUser
+    });
 
-    function toggleFavorite() {
-        setHasFavorite(!hasFavorite)
-    }
 
     return (
         <div

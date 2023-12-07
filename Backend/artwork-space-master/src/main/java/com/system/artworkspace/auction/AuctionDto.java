@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
+//TODO add validation if there is already auction for this artwork
 public class AuctionDto {
     private long id;
 
