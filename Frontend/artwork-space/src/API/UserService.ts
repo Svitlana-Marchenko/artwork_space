@@ -22,7 +22,7 @@ export default class UserService {
         }
     }
 
-    static async deleteUserById(id:string) {
+    static async deleteUserById(id:number) {
         try {
             return await axios.delete(`http://localhost:8080/users/${id}`);
         } catch (error) {
