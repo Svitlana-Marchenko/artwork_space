@@ -153,7 +153,7 @@ const Profile = () => {
                     currentUser && profileContent(currentUser)
             }
             <ChangePasswordModal isOpen={isOpenPassword} toggle={toggleOpenPassword}/>
-            <EditProfileInfoModal isOpen={isOpenEditProfile} toggle={toggleOpenEditProfile}/>
+            <EditProfileInfoModal isOpen={isOpenEditProfile} toggle={toggleOpenEditProfile} currentUser={currentUser}/>
         </div>
     );
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {
     FieldValues,
     SubmitHandler,
@@ -6,31 +6,61 @@ import {
 } from "react-hook-form";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
+import {EditUser, Password, User} from "../../mockup/mockup_users";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
 
 interface EditProfileInfoModalProps {
     isOpen:boolean;
     toggle: () => void;
+    currentUser: User;
 }
 
-export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen, toggle}) => {
+export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen, toggle, currentUser}) => {
 
     const {
         register,
         handleSubmit,
+        setValue,
+        reset,
         formState: {
             errors,
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
-            email: '',
-            password: ''
+            username: '',
+            firstname: '',
+            lastname: ''
         },
     });
 
-    // Define the form submission handler
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    useEffect(() => {
+        if (currentUser) {
+            setValue('username', currentUser.username);
+            setValue('firstname', currentUser.firstName);
+            setValue('lastname', currentUser.lastName);
+        }
+    }, [currentUser, setValue]);
 
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        console.log(data)
+        const userData:EditUser = {
+            id: currentUser.id,
+            username: data.username,
+            firstName: data.firstname,
+            lastName: data.lastname
+        };
+        console.log(userData)
+        UserService.changeProfile(userData)
+            .then(() => {
+                    toast.success("The profile was changed successfully")
+                    reset();
+                    toggle();
+                }
+            )
+            .catch(() => {
+                toast.error("Failed to change your profile")
+            });
     }
 
     //todo edit email + server checking
@@ -53,7 +83,6 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                
             />
 
             <Input
@@ -63,7 +92,6 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                
             />
 
             <Input
@@ -73,7 +101,6 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 register={register}
                 errors={errors}
                 required
-                
             />
 
         </div>
@@ -90,4 +117,8 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
         />
     )
 
+}
+
+function setValue(arg0: string, firstname: any) {
+    throw new Error("Function not implemented.");
 }

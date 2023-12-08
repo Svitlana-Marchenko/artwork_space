@@ -1,3 +1,5 @@
+import {Artwork} from "./mockup_artworks";
+
 export type Password = {
     id: number;
     oldPassword: string;
@@ -7,6 +9,13 @@ export enum UserRole {
     artist = "ARTIST",
     curator = "CURATOR",
     collectioneer = "COLLECTIONEER",
+}
+
+export type EditUser = {
+    id: number;
+    username: string;
+    firstName: string;
+    lastName: string;
 }
 export interface NewUser {
     username: string;
@@ -23,6 +32,7 @@ export type LoginProps = {
 }
 export interface User extends NewUser{
     id: number;
+    collection?: Artwork[]
 }
 export const users: User[] = [
     {
