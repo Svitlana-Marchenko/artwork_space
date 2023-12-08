@@ -7,6 +7,10 @@ import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.user.changePassword.ChangePasswordDTO;
 import com.system.artworkspace.user.changePassword.ChangePasswordMapper;
 import javax.validation.Valid;
+
+import com.system.artworkspace.user.userUpdate.UserUpdate;
+import com.system.artworkspace.user.userUpdate.UserUpdateDto;
+import com.system.artworkspace.user.userUpdate.UserUpdateMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +47,13 @@ public class UserController {
     }
 
     @PutMapping
-    public UserDto updateUser(@RequestBody @Valid UserDto user, BindingResult bindingResult) {
+    public UserDto updateUser(@RequestBody @Valid UserUpdateDto user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
         logger.info("Updating user with ID: {}", user.getId());
-        User updatedUser = userService.updateUser(UserMapper.INSTANCE.userDtoToUser(user));
+        User updatedUser = userService.updateUser(UserUpdateMapper.INSTANCE.userUpdateDtoToUserUpdate(user));
         logger.info("UserEntity updated with ID: {}", updatedUser.getId());
         return UserMapper.INSTANCE.userToUserDto(updatedUser);
     }

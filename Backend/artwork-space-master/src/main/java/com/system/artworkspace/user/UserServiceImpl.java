@@ -11,6 +11,8 @@ import com.system.artworkspace.exceptions.NoSuchUserException;
 import com.system.artworkspace.exceptions.WrongPasswordFormat;
 import com.system.artworkspace.exhibition.ExhibitionRepository;
 import com.system.artworkspace.user.changePassword.ChangePassword;
+import com.system.artworkspace.user.userUpdate.UserUpdate;
+import com.system.artworkspace.user.userUpdate.UserUpdateMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +50,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        UserEntity updatedUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
-        logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
-        return UserMapper.INSTANCE.userEntityToUser(updatedUser);
+    public User updateUser(UserUpdate user) {
+        Optional<UserEntity> userO = userRepository.findById(user.getId());
+        if(userO.isPresent()){
+            User u = UserMapper.INSTANCE.userEntityToUser(userO.get());
+            u.setFirstName(user.getFirstName());
+            u.setLastName(user.getLastName());
+            u.setUsername(user.getUsername());
+            //todo check username on unique
+            UserEntity updatedUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(u));
+            logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
+            return UserMapper.INSTANCE.userEntityToUser(updatedUser);
+        }
+        else{
+            throw new NoSuchUserException("User with id " + user.getId() + " not found");
+        }
     }
 
     @Override
