@@ -5,6 +5,7 @@ import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.user.UserDto;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 public class AuctionDto {
     private long id;
 
+    @NotNull(message = "Artwork is null")
     private ArtworkDto artwork;
 
     @DecimalMin(value = "0.0", message = "Value must be in decimal format")

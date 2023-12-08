@@ -9,7 +9,6 @@ import Collection from "../components/Collection";
 import {Button} from "../components/Button";
 import CollectionService from "../API/CollectionService";
 import UserService from "../API/UserService";
-import MenuItem from "../header/MenuItem";
 import ArtworksList from "../components/lists/ArtworksList";
 import ExhibitionList from "../components/lists/ExhibitionList";
 import ArtworkService from "../API/ArtworkService";
@@ -88,24 +87,36 @@ const Profile = () => {
                 <div className={"flex flex-row justify-between align-top"}>
                     <div>
                         <p className={"text-gray-400"}>@{user.username}</p>
-                        <p className={"text-3xl font-bold mt-2 mb-4"}>{user.firstName.toUpperCase()} {user.lastName.toUpperCase()}</p>
+                        <p className={"text-3xl font-bold my-2"}>{user.firstName.toUpperCase()} {user.lastName.toUpperCase()}</p>
                     </div>
                     {
                         currentUser&&(!id)&&(
                             <div className={"flex flex-row space-x-4 w-1/4 h-1/2"}>
-                                <Button label={"Edit profile"} onClick={()=>{}}/>
+                                <Button label={"Edit profile"} onClick={toggleOpenEditProfile}/>
                                 <Button label={"Delete"} onClick={handleDelete} outline/>
                             </div>
                         )
                     }
                 </div>
-                <hr className={'mb-8'}/>
                 {
                     currentUser&&(!id)&&(
-                        <Collection artworks={likedArtworks}/>
+                        <span
+                            className="font-bold hover:border-b-2 hover:border-black cursor-pointer"
+                            onClick={toggleOpenPassword}
+                        >Change password</span>
                     )
                 }
-                {profile ? (
+                <hr className={'my-8'}/>
+                {
+                    currentUser&&(!id)&&(
+                        currentUser.role === "CURATOR" || "COLLECTIONEER"
+                            ?
+                            <Collection artworks={likedArtworks}/>
+                            :
+                            null
+                    )
+                }
+                {profile && (
                     <>
                         {profile.role === "ARTIST" && (
                             <ArtworksList artworks={artworks}/>
@@ -129,8 +140,6 @@ const Profile = () => {
                             </>
                         )}
                     </>
-                ) : currentUser&&(
-                    <Collection artworks={artworks}/>
                 )}
             </>
         )}
