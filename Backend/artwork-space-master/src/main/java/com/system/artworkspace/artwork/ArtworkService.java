@@ -2,6 +2,7 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.rating.Rating;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public interface ArtworkService {
     List<Artwork> getAllArtworkByArtistId(Long id);
 
     Artwork addArtwork(Artwork artwork);
+    String saveImage(MultipartFile file);
 
     void deleteArtwork(Long artworkId);
 

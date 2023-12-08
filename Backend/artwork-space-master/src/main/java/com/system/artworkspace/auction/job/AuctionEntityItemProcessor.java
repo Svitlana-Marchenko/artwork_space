@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AuctionEntityItemProcessor {
     @Autowired
-    private AuctionRepository auctionRepository;
-    @Autowired
     private SaleService saleService;
 
     @Bean(name = "formingSaleProcessor")
@@ -23,14 +21,6 @@ public class AuctionEntityItemProcessor {
         return auctionEntity -> {
             Auction auction = AuctionMapper.INSTANCE.auctionEntityToAuction(auctionEntity);
             saleService.createSale(new Sale(auction.getArtwork(),auction.getUser(),auction.getArtwork().getUser(),auction.getCurrentBid(),auction.getClosingTime()));
-            return auctionEntity;
-        };
-    }
-
-    @Bean(name = "closingAuctionsProcessor")
-    public ItemProcessor<AuctionEntity, AuctionEntity> closingAuctionsProcessor() {
-        return auctionEntity -> {
-            auctionRepository.deleteById(auctionEntity.getId());
             return auctionEntity;
         };
     }

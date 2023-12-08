@@ -17,17 +17,6 @@ import java.util.List;
 public class AuctionEntityItemReader {
     @Autowired
     private AuctionRepository auctionRepository;
-
-    @Bean(name = "closingAuctionsReader")
-    @StepScope
-    public ItemReader<AuctionEntity> closingAuctionsReader() {
-        Date currentDate = new Date();
-
-        List<AuctionEntity> closingAuctions = auctionRepository.findClosingTodayWithNoBuyer(currentDate, PageRequest.of(0, 10));
-
-        return new ListItemReader<>(closingAuctions);
-    }
-
     @Bean(name = "formingSaleReader")
     @StepScope
     public ItemReader<AuctionEntity> formingSaleReader() {

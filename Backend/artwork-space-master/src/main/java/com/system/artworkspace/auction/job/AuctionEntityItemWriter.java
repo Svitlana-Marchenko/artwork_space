@@ -28,13 +28,4 @@ public class AuctionEntityItemWriter {
             }
         };
     }
-
-    @Bean(name = "closingAuctionsWriter")
-    public ItemWriter<AuctionEntity> closingAuctionsWriter() {
-        return items -> {
-            for (AuctionEntity auction : items) {
-                logger.info("Deleted auction with ID: {}", auction.getId());
-            }
-        };
-    }
 }

@@ -22,6 +22,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,11 @@ public class ArtworkServiceImpl implements ArtworkService {
         logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
 
         return artwork;
+    }
+
+    @Override
+    public String saveImage(MultipartFile file) {
+        return null;
     }
 
     @Override

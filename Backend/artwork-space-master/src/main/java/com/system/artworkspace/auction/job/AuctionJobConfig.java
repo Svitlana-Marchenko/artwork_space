@@ -23,12 +23,15 @@ import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.support.ListItemReader;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,10 +54,13 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class AuctionJobConfig {
+    @Autowired
+    private AuctionRepository auctionRepository;
+    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     @Bean(name = "auctionClosingJob")
     public Job auctionClosingJob(JobRepository jobRepository,
-                                 @Qualifier("deleteClosingAuctions") Step deleteClosingAuctionsStep,
+                                 Step deleteClosingAuctionsStep,
                                  @Qualifier("formSale") Step formSaleStep) {
         return new JobBuilder("auctionClosingJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
@@ -63,4 +69,32 @@ public class AuctionJobConfig {
                 .build();
     }
 
+    //Step 1
+    @Bean(name = "deleteClosingAuctionsTasklet")
+    protected Tasklet deleteClosingAuctionsTasklet() {
+        return (contribution, chunkContext) -> {
+            List<AuctionEntity> closingAuctions = auctionRepository.findClosingTodayWithNoBuyer(new Date(), PageRequest.of(0, 10));
+            auctionRepository.deleteAllById(closingAuctions.stream().map(AuctionEntity::getId).collect(Collectors.toList()));
+            for (AuctionEntity auction : closingAuctions) {
+                logger.info("Deleted auction with ID: {}", auction.getId());
+            }
+            return RepeatStatus.FINISHED;
+        };
+    }
+    @Bean("deleteClosingAuctionsStep")
+    public Step deleteClosingAuctionsStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("deleteClosingAuctionsStep", jobRepository)
+                .tasklet(deleteClosingAuctionsTasklet(), transactionManager)
+                .build();
+    }
+
+    //Step 2
+    @Bean(name = "formSale")
+    protected Step formSale(JobRepository jobRepository, PlatformTransactionManager transactionManager, @Qualifier("formingSaleReader") ItemReader<AuctionEntity> reader, @Qualifier("formingSaleProcessor") ItemProcessor<AuctionEntity, AuctionEntity> processor, @Qualifier("formingSaleWriter") ItemWriter<AuctionEntity> writer) {
+        return new StepBuilder("formSale", jobRepository).<AuctionEntity,AuctionEntity> chunk(2, transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .build();
+    }
 }
