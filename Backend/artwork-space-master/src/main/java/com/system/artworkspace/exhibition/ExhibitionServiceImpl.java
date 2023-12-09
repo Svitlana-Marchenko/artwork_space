@@ -89,6 +89,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
+    @CachePut(cacheNames="exhibition", key="#exhibitionUpdate.id")
     public Exhibition updateExhibition(ExhibitionUpdate exhibitionUpdate) {
         Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(exhibitionUpdate.getId());
         if(optionalExhibition.isPresent()){

@@ -85,6 +85,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    @CachePut(cacheNames="artwork", key="#id")
     public Artwork updateArtwork(Long artworkId, ArtworkUpdate artworkUpdate) {
         Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
         if(optionalArtwork.isPresent()){
