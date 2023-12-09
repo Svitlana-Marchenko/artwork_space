@@ -89,18 +89,18 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public Exhibition updateExhibition(Long id, ExhibitionUpdate exhibitionUpdate) {
-        Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(id);
+    public Exhibition updateExhibition(ExhibitionUpdate exhibitionUpdate) {
+        Optional<ExhibitionEntity> optionalExhibition = exhibitionRepository.findById(exhibitionUpdate.getId());
         if(optionalExhibition.isPresent()){
             ExhibitionEntity exhibition = optionalExhibition.get();
             exhibition.setTitle(exhibitionUpdate.getTitle());
             exhibition.setDescription(exhibitionUpdate.getDescription());
             exhibitionRepository.save(exhibition);
-            logger.info("Updating exhibition with id "+id);
+            logger.info("Updating exhibition with id "+exhibitionUpdate.getId());
         }else{
-            throw new NoSuchExhibitionException("No exhibition with id "+id+" to update");
+            throw new NoSuchExhibitionException("No exhibition with id "+exhibitionUpdate.getId()+" to update");
         }
-        return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibitionRepository.findById(id).get());
+        return ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibitionRepository.findById(exhibitionUpdate.getId()).get());
     }
 
     @Override

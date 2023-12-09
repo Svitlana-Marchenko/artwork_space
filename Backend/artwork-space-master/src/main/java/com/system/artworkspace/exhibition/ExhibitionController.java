@@ -53,10 +53,9 @@ public class ExhibitionController {
         return createdExhibition;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     //@PreAuthorize("hasAuthority('CURATOR')")
     public ExhibitionDto updateExhibition(
-            @PathVariable Long id,
             @RequestBody @Valid ExhibitionUpdateDto exhibitionUpdate,
             BindingResult bindingResult
     ) {
@@ -64,7 +63,7 @@ public class ExhibitionController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        ExhibitionDto exhibitionN = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.updateExhibition(id, ExhibitionUpdateMapper.INSTANCE.exhibitionUpdateDtoToExhibitionUpdate(exhibitionUpdate)));
+        ExhibitionDto exhibitionN = ExhibitionMapper.INSTANCE.exhibitionToExhibitionDto(exhibitionService.updateExhibition(ExhibitionUpdateMapper.INSTANCE.exhibitionUpdateDtoToExhibitionUpdate(exhibitionUpdate)));
         logger.info("Exhibition updated with ID: {}", exhibitionN.getId());
         return exhibitionN;
     }
