@@ -15,7 +15,7 @@ interface ArtworkCardProps {
 const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                                     artwork,
                                                     sm,
-                                                    onAddToExhibition
+                                                    onAddToExhibition,
                                                 }) => {
     const navigate = useNavigate();
     const storedUserString = localStorage.getItem("currentUser");

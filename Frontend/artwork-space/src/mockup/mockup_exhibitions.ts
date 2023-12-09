@@ -1,6 +1,11 @@
 import {Artwork} from "./mockup_artworks";
-import {User, users} from "./mockup_users";
+import {User} from "./mockup_users";
 
+export type EditExhibition = {
+    id: number;
+    title: string;
+    description: string;
+}
 export interface NewExhibition {
     curator: User;
     title: string;

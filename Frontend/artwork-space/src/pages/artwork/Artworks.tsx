@@ -27,7 +27,6 @@ const Artworks = () => {
             ArtworkService.getAllArtworks()
                 .then(data => {
                     setArtworks(data);
-                    console.log(data)
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
         }
