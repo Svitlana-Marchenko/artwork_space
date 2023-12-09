@@ -48,7 +48,8 @@ const ArtworkModal:React.FC<ArtworkModalProps> = ({isOpen, toggle, artwork}) => 
                 width: 0,
                 height: 0,
                 imageURL: '',
-                user: currentUser
+                user: currentUser,
+                ratings:[]
             };
         }
         // UserService.createUser(userData)
