@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {IoAddCircleOutline, IoCheckmarkCircle} from "react-icons/io5";
 import {Artwork} from "../../mockup/mockup_artworks";
 interface PlusButtonProps {
-    artwork: Artwork
+    artwork: Artwork;
     onAddToExhibition: (artwork: Artwork) => void;
 }
 
@@ -17,13 +17,13 @@ const PlusButton:React.FC<PlusButtonProps> = ({onAddToExhibition, artwork}) => {
     return (
         <div
             onClick={togglePlus}
-    className="
-    relative
-    hover:opacity-80
-    transition
-    cursor-pointer
-    "
-    >
+            className="
+            relative
+            hover:opacity-80
+            transition
+            cursor-pointer
+            "
+            >
             {
                 isAdded
                 ?

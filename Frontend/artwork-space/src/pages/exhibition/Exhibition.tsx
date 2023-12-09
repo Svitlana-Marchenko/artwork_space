@@ -67,7 +67,7 @@ const Exhibition = () => {
                                     <>
                                         <div className={"flex flex-row space-x-4 w-1/4 h-1/2"}>
                                             <>
-                                                <Button label={"Edit"} onClick={()=>{}}/>
+                                                <Button label={"Edit"} onClick={()=>{navigate(`/edit-exhibition/${exhibition?.id}`)}}/>
                                                 <Button label={"Delete"} onClick={handleDelete} outline/>
                                             </>
                                         </div>

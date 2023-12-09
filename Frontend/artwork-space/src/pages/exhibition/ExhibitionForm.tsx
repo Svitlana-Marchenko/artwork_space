@@ -9,7 +9,7 @@ import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {User} from "../../mockup/mockup_users";
 import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
-import {Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
+import {EditExhibition, Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
 
 const ExhibitionForm = () => {
     const {id} = useParams();
@@ -39,11 +39,20 @@ const ExhibitionForm = () => {
                 })
         }
     }, [])
-
+    useEffect(()=>{
+        if (exhibition) {
+            setValue('title', exhibition.title);
+            setValue('description', exhibition.description);
+            setValue('startDate', exhibition.startDate);
+            setValue('endDate', exhibition.endDate);
+            setSelectedArtworks(exhibition.artworks);
+        }
+    }, [exhibition]);
     const {
         register,
         handleSubmit,
         reset,
+        setValue,
         formState: {
             errors,
         },
@@ -68,18 +77,38 @@ const ExhibitionForm = () => {
                 endDate: new Date(data.endDate),
             };
 
-            ExhibitionService.createExhibition(exhibitionData)
-                .then((data) => {
-                        toast.success("Exhibition was created")
-                        reset();
-                        navigate(-1)
-                        console.log(data)
-                    }
-                )
-                .catch((error) => {
-                    toast.error("Failed to create exhibition")
-                    console.error('Error in creating exhibition:', error);
-                });
+            if (exhibition) {
+                const editExhibitionData:EditExhibition = {
+                    id: exhibition?.id,
+                    title: data.title,
+                    description: data.description,
+                };
+                ExhibitionService.editExhibition(editExhibitionData)
+                    .then((data) => {
+                            toast.success("Exhibition was edited")
+                            reset();
+                            navigate(-1)
+                            console.log(data)
+                        }
+                    )
+                    .catch((error) => {
+                        toast.error("Failed to edit exhibition")
+                        console.error('Error in editing exhibition:', error);
+                    });
+            }else {
+                ExhibitionService.createExhibition(exhibitionData)
+                    .then((data) => {
+                            toast.success("Exhibition was created")
+                            reset();
+                            navigate(-1)
+                            console.log(data)
+                        }
+                    )
+                    .catch((error) => {
+                        toast.error("Failed to create exhibition")
+                        console.error('Error in creating exhibition:', error);
+                    });
+            }
         } else {
             toast.error("Exhibition has no artworks")
         }
@@ -92,8 +121,6 @@ const ExhibitionForm = () => {
         </div>;
     }
     //todo edit page, save values in input,
-
-
     //TODO fix login page when create exhibition
     return (
         <div className='mx-32'>
@@ -150,10 +177,14 @@ const ExhibitionForm = () => {
                     required
                 />
             </div>
-            <ArtworksList
-                artworks={artworks}
-                onAddToExhibition={handleAddToExhibition}
-            />
+            {
+                !exhibition&&(
+                    <ArtworksList
+                        artworks={artworks}
+                        onAddToExhibition={handleAddToExhibition}
+                    />
+                )
+            }
         </div>
     );
 };

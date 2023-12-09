@@ -88,13 +88,6 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
                                 <MenuItem label="Create exhibition" onClick={()=>{nav('/new-exhibition')}}/>
                             </>
                         )}
-
-                        {currentUser.role === "COLLECTIONEER" && (
-                            <>
-                                <MenuItem label="My collections" onClick={()=>{}}/>
-                                <MenuItem label="Create collection" onClick={()=>{}}/>
-                            </>
-                        )}
                         <MenuItem
                             label="My profile"
                             onClick={()=>{nav(`/my`)}}

@@ -2819,3 +2819,1350 @@ This generated password is for development use only. Your security configuration
 2023-12-07 11:25:37,027 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown initiated...
 2023-12-07 11:25:37,029 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown completed.
 2023-12-07 11:25:37,030 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:12,556 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ArtworkControllerTest]: ArtworkControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:12,780 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ArtworkControllerTest
+2023-12-09 12:43:13,363 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2023-12-09 12:43:13,410 INFO c.s.a.ArtworkControllerTest [main] Starting ArtworkControllerTest using Java 17.0.1 with PID 5028 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-09 12:43:13,415 INFO c.s.a.ArtworkControllerTest [main] The following 1 profile is active: "dev"
+2023-12-09 12:43:15,399 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-09 12:43:15,631 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 213 ms. Found 7 JPA repository interfaces.
+2023-12-09 12:43:17,069 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2023-12-09 12:43:17,512 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-09 12:43:17,517 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-12-09 12:43:17,881 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-09 12:43:18,029 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-12-09 12:43:18,034 INFO o.h.c.Environment [main] HHH000406: Using bytecode reflection optimizer
+2023-12-09 12:43:18,403 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:18,617 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-09 12:43:19,255 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:20,708 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-09 12:43:20,798 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:21,913 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-09 12:43:22,822 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-09 12:43:23,720 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-09 12:43:24,227 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b2fb8f1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@632d8166, org.springframework.security.web.context.SecurityContextHolderFilter@5074893, org.springframework.security.web.header.HeaderWriterFilter@136dc728, org.springframework.web.filter.CorsFilter@151ce559, org.springframework.security.web.csrf.CsrfFilter@32a37d12, org.springframework.security.web.authentication.logout.LogoutFilter@18cdacd, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@352b4cf, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5f27d271, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@37ecff9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@36f807f5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d9576a0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@418f3cde, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5901757, org.springframework.security.web.access.ExceptionTranslationFilter@5da13494, org.springframework.security.web.access.intercept.AuthorizationFilter@1a5e19fe]
+2023-12-09 12:43:25,616 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-09 12:43:25,638 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-09 12:43:25,639 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-09 12:43:25,641 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-09 12:43:25,642 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-09 12:43:25,643 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-09 12:43:25,643 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-09 12:43:25,643 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@357f7e2d
+2023-12-09 12:43:25,742 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-09 12:43:25,742 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-09 12:43:25,769 INFO c.s.a.ArtworkControllerTest [main] Started ArtworkControllerTest in 12.736 seconds (process running for 15.331)
+2023-12-09 12:43:25,778 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-09 12:43:26,029 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-09 12:43:26,134 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-09 12:43:26,227 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-09 12:43:26,306 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,308 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,309 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,311 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,312 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,313 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,314 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,316 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,317 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,320 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,322 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,323 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,325 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,326 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,328 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,330 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,332 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:26,332 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,343 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,343 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,345 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,346 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,347 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,347 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,348 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,349 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,350 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,350 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,352 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,353 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,355 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,355 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,357 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,357 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,359 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,359 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,361 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,361 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,363 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,363 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,364 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,365 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,367 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,368 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,371 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,372 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,373 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,374 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,376 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,376 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:26,378 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:26,392 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:26,394 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:26,396 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:26,401 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:26,403 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:26,405 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:26,408 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:26,410 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:26,412 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-09 12:43:26,414 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-09 12:43:27,112 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,112 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,114 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,174 INFO c.s.a.a.ArtworkController [main] Fetching artwork with ID: 1
+2023-12-09 12:43:27,276 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,277 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,278 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,281 INFO c.s.a.a.ArtworkController [main] Deleting artwork with ID: 2
+2023-12-09 12:43:27,302 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 23503, SQLState: 23503
+2023-12-09 12:43:27,303 ERROR o.h.e.j.s.SqlExceptionHelper [main] Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]
+2023-12-09 12:43:27,315 ERROR c.s.a.a.ExceptionAspect [main] Error in deleteArtwork with text: could not execute statement [Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]] [delete from artwork_entity where id=?]; SQL [delete from artwork_entity where id=?]; constraint ["FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]]
+2023-12-09 12:43:27,317 ERROR c.s.a.a.ArtworkController [main] ERROR: could not execute statement [Referential integrity constraint violation: "FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]] [delete from artwork_entity where id=?]; SQL [delete from artwork_entity where id=?]; constraint ["FKTPB89RKGO64JNXTAWDDS8F7Y0: PUBLIC.AUCTION_ENTITY FOREIGN KEY(ARTWORK_ENTITY_ID) REFERENCES PUBLIC.ARTWORK_ENTITY(ID) (CAST(2 AS BIGINT))"; SQL statement:
+delete from artwork_entity where id=? [23503-214]]
+2023-12-09 12:43:27,337 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,339 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,341 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,344 INFO c.s.a.a.ArtworkController [main] Deleting artwork with ID: 256
+2023-12-09 12:43:27,346 WARN c.s.a.ArtworkSpaceApplication [main] Artwork not found for deletion with ID: 256
+2023-12-09 12:43:27,347 ERROR c.s.a.a.ExceptionAspect [main] Error in deleteArtwork with text: Artwork not found with ID: 256
+2023-12-09 12:43:27,348 ERROR c.s.a.a.ArtworkController [main] ERROR: Artwork not found with ID: 256
+2023-12-09 12:43:27,362 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ArtworkSpaceApplicationTests]: ArtworkSpaceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:27,365 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ArtworkSpaceApplicationTests
+2023-12-09 12:43:27,385 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.AuctionArtistControllerTest]: AuctionArtistControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:27,388 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.AuctionArtistControllerTest
+2023-12-09 12:43:27,397 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,398 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,400 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,403 INFO c.s.a.a.AuctionArtistController [main] Closing auction with ID: 1
+2023-12-09 12:43:27,409 INFO c.s.a.ArtworkSpaceApplication [main] Finding auction by id 
+2023-12-09 12:43:27,410 INFO c.s.a.ArtworkSpaceApplication [main] Adding sale with ID: null
+2023-12-09 12:43:27,419 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 23502, SQLState: 23502
+2023-12-09 12:43:27,420 ERROR o.h.e.j.s.SqlExceptionHelper [main] NULL not allowed for column "buyer_user_id"; SQL statement:
+insert into sale_entity (artwork_id,"buyer_user_id",date_of_buying,price,"seller_user_id",id) values (?,?,?,?,?,?) [23502-214]
+2023-12-09 12:43:27,423 ERROR c.s.a.a.AuctionArtistController [main] ERROR: could not execute statement [NULL not allowed for column "buyer_user_id"; SQL statement:
+insert into sale_entity (artwork_id,"buyer_user_id",date_of_buying,price,"seller_user_id",id) values (?,?,?,?,?,?) [23502-214]] [insert into sale_entity (artwork_id,"buyer_user_id",date_of_buying,price,"seller_user_id",id) values (?,?,?,?,?,?)]; SQL [insert into sale_entity (artwork_id,"buyer_user_id",date_of_buying,price,"seller_user_id",id) values (?,?,?,?,?,?)]; constraint [null]
+2023-12-09 12:43:27,437 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,437 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,439 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,441 INFO c.s.a.a.AuctionArtistController [main] Displaying current bid for auction with ID: 1
+2023-12-09 12:43:27,447 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved current bid for auction with ID: 1
+2023-12-09 12:43:27,509 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,510 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,511 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,663 INFO c.s.a.a.AuctionArtistController [main] Creating an auction for artwork with ID: 1
+2023-12-09 12:43:27,666 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 23505, SQLState: 23505
+2023-12-09 12:43:27,667 ERROR o.h.e.j.s.SqlExceptionHelper [main] Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_9 ON PUBLIC.AUCTION_ENTITY(ARTWORK_ENTITY_ID NULLS FIRST) VALUES ( /* 1 */ CAST(1 AS BIGINT) )"; SQL statement:
+insert into auction_entity (artwork_entity_id,bid,closing_time,current_bid,starting_price,"user_user_id",id) values (?,?,?,?,?,?,?) [23505-214]
+2023-12-09 12:43:27,669 ERROR c.s.a.a.AuctionArtistController [main] ERROR: could not execute statement [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_9 ON PUBLIC.AUCTION_ENTITY(ARTWORK_ENTITY_ID NULLS FIRST) VALUES ( /* 1 */ CAST(1 AS BIGINT) )"; SQL statement:
+insert into auction_entity (artwork_entity_id,bid,closing_time,current_bid,starting_price,"user_user_id",id) values (?,?,?,?,?,?,?) [23505-214]] [insert into auction_entity (artwork_entity_id,bid,closing_time,current_bid,starting_price,"user_user_id",id) values (?,?,?,?,?,?,?)]; SQL [insert into auction_entity (artwork_entity_id,bid,closing_time,current_bid,starting_price,"user_user_id",id) values (?,?,?,?,?,?,?)]; constraint ["PUBLIC.CONSTRAINT_INDEX_9 ON PUBLIC.AUCTION_ENTITY(ARTWORK_ENTITY_ID NULLS FIRST) VALUES ( /* 1 */ CAST(1 AS BIGINT) )"; SQL statement:
+insert into auction_entity (artwork_entity_id,bid,closing_time,current_bid,starting_price,"user_user_id",id) values (?,?,?,?,?,?,?) [23505-214]]
+2023-12-09 12:43:27,680 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,681 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,682 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,684 INFO c.s.a.a.AuctionArtistController [main] Fetching all active auctions
+2023-12-09 12:43:27,792 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved 3 active auctions.
+2023-12-09 12:43:27,795 INFO c.s.a.a.AuctionArtistController [main] Retrieved 3 active auctions.
+2023-12-09 12:43:27,815 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,815 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,817 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 0 ms
+2023-12-09 12:43:27,819 INFO c.s.a.a.AuctionArtistController [main] Displaying current buyer for auction with ID: 1
+2023-12-09 12:43:27,820 INFO c.s.a.ArtworkSpaceApplication [main] Displaying current buyer for auction with ID: 1
+2023-12-09 12:43:27,841 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.AuctionCollectioneerControllerTest]: AuctionCollectioneerControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:27,844 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.AuctionCollectioneerControllerTest
+2023-12-09 12:43:27,853 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,854 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,857 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,859 INFO c.s.a.a.AuctionCollectioneerController [main] Fetching available auctions for collectioneer
+2023-12-09 12:43:27,879 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved 3 active auctions.
+2023-12-09 12:43:27,881 INFO c.s.a.a.AuctionCollectioneerController [main] Retrieved 3 available auctions for collectioneer.
+2023-12-09 12:43:27,896 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,897 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,899 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,906 ERROR c.s.a.a.AuctionCollectioneerController [main] ERROR: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "invalid"
+2023-12-09 12:43:27,926 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,926 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,928 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,933 INFO c.s.a.a.AuctionCollectioneerController [main] Placing a bid for auction with ID: 1. Bid amount: 150.0
+2023-12-09 12:43:27,939 ERROR c.s.a.a.AuctionCollectioneerController [main] ERROR: Cannot invoke "org.springframework.security.core.Authentication.getName()" because "authentication" is null
+2023-12-09 12:43:27,949 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,949 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,951 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,954 INFO c.s.a.a.AuctionCollectioneerController [main] Fetching artwork from auction with ID: 1
+2023-12-09 12:43:27,959 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved artwork with ID: 1 from auction with ID: 1
+2023-12-09 12:43:27,959 INFO c.s.a.a.AuctionCollectioneerController [main] Retrieved artwork with ID: 1 from auction with ID: 1
+2023-12-09 12:43:27,973 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,973 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,975 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:27,977 INFO c.s.a.a.AuctionCollectioneerController [main] Retrieving current bid for auction with ID: 1
+2023-12-09 12:43:27,980 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved current bid for auction with ID: 1
+2023-12-09 12:43:27,989 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:27,990 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:27,991 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:27,993 INFO c.s.a.a.AuctionCollectioneerController [main] Fetching auction with ID: 1
+2023-12-09 12:43:27,997 INFO c.s.a.ArtworkSpaceApplication [main] Getting auction with ID: 1
+2023-12-09 12:43:28,009 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.CollectionControllerTest]: CollectionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:28,013 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.CollectionControllerTest
+2023-12-09 12:43:28,024 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,024 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,026 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:28,048 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testGetAllCollections(CollectionControllerTest.java:34) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,074 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,075 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,076 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:28,091 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:112) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testEditCollectionName(CollectionControllerTest.java:88) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,104 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,104 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,106 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:28,127 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:112) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testCreateCollection(CollectionControllerTest.java:45) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,138 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,139 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,140 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:28,156 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:112) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testAddArtworkToCollection(CollectionControllerTest.java:57) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,169 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,170 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,171 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:28,175 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:112) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testDeleteCollection(CollectionControllerTest.java:68) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,185 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:28,185 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:28,187 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:28,191 WARN o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [main] Failure in @ExceptionHandler com.system.artworkspace.collection.CollectionController#handleException(Exception)
+org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.lambda$getAuthentication$3(AuthorizationManagerBeforeMethodInterceptor.java:266) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.lambda$new$1(SecurityExpressionRoot.java:91) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.util.function.SingletonSupplier.get(SingletonSupplier.java:97) ~[spring-core-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthentication(SecurityExpressionRoot.java:130) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.getAuthoritySet(SecurityExpressionRoot.java:200) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthorityName(SecurityExpressionRoot.java:118) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAnyAuthority(SecurityExpressionRoot.java:104) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.access.expression.SecurityExpressionRoot.hasAuthority(SecurityExpressionRoot.java:99) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.expression.spel.support.ReflectiveMethodExecutor.execute(ReflectiveMethodExecutor.java:139) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:112) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.MethodReference.getValueInternal(MethodReference.java:95) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getTypedValue(SpelNodeImpl.java:119) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:309) ~[spring-expression-6.0.11.jar:6.0.11]
+	at org.springframework.security.access.expression.ExpressionUtils.evaluateAsBoolean(ExpressionUtils.java:30) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:68) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.PreAuthorizeAuthorizationManager.check(PreAuthorizeAuthorizationManager.java:40) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager.check(DeferringObservationAuthorizationManager.java:47) ~[spring-security-config-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:252) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.1.3.jar:6.1.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:756) ~[spring-aop-6.0.11.jar:6.0.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.collection.CollectionController$$SpringCGLIB$$0.handleException(<generated>) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1341) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.processHandlerException(TestDispatcherServlet.java:144) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1152) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.0.11.jar:6.0.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.12.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.0.11.jar:6.0.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.0.11.jar:6.0.11]
+	at com.system.artworkspace.CollectionControllerTest.testDeleteFromCollection(CollectionControllerTest.java:77) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727) ~[junit-platform-commons-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.3.jar:5.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55) ~[junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.9.3.jar:1.9.3]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:50) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) [surefire-junit-platform-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) [surefire-booter-3.0.0.jar:3.0.0]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.0.0.jar:3.0.0]
+2023-12-09 12:43:28,205 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.CollectionControllerTests]: CollectionControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:28,233 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.CollectionControllerTests
+2023-12-09 12:43:28,283 INFO c.s.a.CollectionControllerTests [main] Starting CollectionControllerTests using Java 17.0.1 with PID 5028 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-09 12:43:28,284 INFO c.s.a.CollectionControllerTests [main] The following 1 profile is active: "dev"
+2023-12-09 12:43:29,593 WARN o.s.b.a.s.s.UserDetailsServiceAutoConfiguration [main] 
+
+Using generated security password: 6cd4adfb-fd3e-438c-8277-bc0cc191085b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-12-09 12:43:29,616 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14443c86, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7eb03024, org.springframework.security.web.context.SecurityContextHolderFilter@52c14891, org.springframework.security.web.header.HeaderWriterFilter@29260ef6, org.springframework.security.web.csrf.CsrfFilter@66041d36, org.springframework.security.web.authentication.logout.LogoutFilter@4abc179d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1df2b230, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@56ddb317, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@76db7ef0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@37d85eec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@14ea1252, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f1545bd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38171f9, org.springframework.security.web.access.ExceptionTranslationFilter@386c6903, org.springframework.security.web.access.intercept.AuthorizationFilter@141fc03a]
+2023-12-09 12:43:29,645 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:29,645 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:29,646 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 0 ms
+2023-12-09 12:43:29,674 INFO c.s.a.CollectionControllerTests [main] Started CollectionControllerTests in 1.434 seconds (process running for 19.236)
+2023-12-09 12:43:29,710 INFO c.s.a.c.CollectionController [main] Updating collection name for collection with ID: 1
+2023-12-09 12:43:29,745 INFO c.s.a.c.CollectionController [main] Collection name updated for collection with ID: 1
+2023-12-09 12:43:29,843 INFO c.s.a.c.CollectionController [main] Adding artwork with ID 99 to collection with ID: 1
+2023-12-09 12:43:29,844 INFO c.s.a.c.CollectionController [main] Artwork added to collection with ID: 1
+2023-12-09 12:43:29,859 INFO c.s.a.c.CollectionController [main] Deleting collection with ID: 1
+2023-12-09 12:43:29,860 INFO c.s.a.c.CollectionController [main] Collection deleted with ID: 1
+2023-12-09 12:43:29,876 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ExhibitionControllerTest]: ExhibitionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:29,884 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ExhibitionControllerTest
+2023-12-09 12:43:29,904 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:29,905 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:29,908 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 3 ms
+2023-12-09 12:43:29,912 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibition with ID: 1
+2023-12-09 12:43:29,912 INFO c.s.a.ArtworkSpaceApplication [main] Getting exhibition with curator ID: 1
+2023-12-09 12:43:29,974 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:29,974 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:29,976 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:29,978 INFO c.s.a.e.ExhibitionController [main] Fetching all active auctions
+2023-12-09 12:43:29,990 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved 1 active exhibitions.
+2023-12-09 12:43:29,995 INFO c.s.a.e.ExhibitionController [main] Retrieving info about active exhibitions 
+2023-12-09 12:43:30,015 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:30,016 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:30,019 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:30,021 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:30,025 INFO c.s.a.ArtworkSpaceApplication [main] Finding exhibition by id (without CACHE)
+2023-12-09 12:43:30,041 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:30,041 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:30,043 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:30,045 INFO c.s.a.e.ExhibitionController [main] Deleting exhibition with ID: 1
+2023-12-09 12:43:30,056 INFO c.s.a.ArtworkSpaceApplication [main] Deleted exhibition with ID: 1
+2023-12-09 12:43:30,057 INFO c.s.a.e.ExhibitionController [main] ExhibitionEntity deleted with ID: 1
+2023-12-09 12:43:30,069 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.ExhibitionServiceIntegrationTest]: ExhibitionServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:30,073 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.ExhibitionServiceIntegrationTest
+2023-12-09 12:43:30,138 INFO c.s.a.ExhibitionServiceIntegrationTest [main] Starting ExhibitionServiceIntegrationTest using Java 17.0.1 with PID 5028 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-09 12:43:30,139 INFO c.s.a.ExhibitionServiceIntegrationTest [main] The following 1 profile is active: "dev"
+2023-12-09 12:43:30,757 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-09 12:43:30,850 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 92 ms. Found 7 JPA repository interfaces.
+2023-12-09 12:43:31,416 INFO c.z.h.HikariDataSource [main] HikariPool-2 - Starting...
+2023-12-09 12:43:31,419 INFO c.z.h.p.HikariPool [main] HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2023-12-09 12:43:31,420 INFO c.z.h.HikariDataSource [main] HikariPool-2 - Start completed.
+2023-12-09 12:43:31,535 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-09 12:43:31,565 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:31,566 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-09 12:43:31,645 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:31,908 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-09 12:43:31,970 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:32,449 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-09 12:43:32,916 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-09 12:43:33,130 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@256f298e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@8bbd0c7, org.springframework.security.web.context.SecurityContextHolderFilter@456af3a3, org.springframework.security.web.header.HeaderWriterFilter@39c76fc8, org.springframework.web.filter.CorsFilter@22406e9b, org.springframework.security.web.csrf.CsrfFilter@7488db31, org.springframework.security.web.authentication.logout.LogoutFilter@23031a56, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@130a38c5, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@91cdfb7, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@60ceb606, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@28e04625, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7789f96c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b274834, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c31c0c8, org.springframework.security.web.access.ExceptionTranslationFilter@3eb85d54, org.springframework.security.web.access.intercept.AuthorizationFilter@7dda1470]
+2023-12-09 12:43:34,006 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-09 12:43:34,008 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-09 12:43:34,008 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-09 12:43:34,008 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-09 12:43:34,009 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-09 12:43:34,009 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-09 12:43:34,009 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-09 12:43:34,009 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5a0c7024
+2023-12-09 12:43:34,099 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-09 12:43:34,099 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-09 12:43:34,107 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-09 12:43:34,107 INFO c.s.a.ExhibitionServiceIntegrationTest [main] Started ExhibitionServiceIntegrationTest in 4.026 seconds (process running for 23.669)
+2023-12-09 12:43:34,339 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-09 12:43:34,461 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-09 12:43:34,572 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-09 12:43:34,576 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,578 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,580 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,581 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,583 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,584 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,586 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,588 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,589 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,591 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,593 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,594 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,596 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,597 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,599 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,601 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,602 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:34,603 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,606 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,606 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,608 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,608 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,610 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,610 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,612 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,612 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,614 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,615 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,618 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,618 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,621 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,621 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,623 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,623 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,625 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,625 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,627 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,627 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,628 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,629 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,631 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,631 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,634 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,634 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,636 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,636 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,638 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,639 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,641 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,642 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:34,644 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:34,650 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:34,653 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:34,657 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:34,661 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:34,663 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:34,665 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:34,668 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:34,669 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:34,672 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-09 12:43:34,675 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-09 12:43:34,757 INFO c.s.a.ArtworkSpaceApplication [main] Cleanup Expired Exhibitions task executed...
+2023-12-09 12:43:34,768 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.SecurityTest]: SecurityTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:34,776 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.SecurityTest
+2023-12-09 12:43:34,817 INFO c.s.a.SecurityTest [main] Starting SecurityTest using Java 17.0.1 with PID 5028 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-09 12:43:34,818 INFO c.s.a.SecurityTest [main] The following 1 profile is active: "dev"
+2023-12-09 12:43:35,367 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-09 12:43:35,444 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 75 ms. Found 7 JPA repository interfaces.
+2023-12-09 12:43:35,613 INFO c.z.h.HikariDataSource [main] HikariPool-3 - Starting...
+2023-12-09 12:43:35,614 INFO c.z.h.p.HikariPool [main] HikariPool-3 - Added connection conn20: url=jdbc:h2:mem:testdb user=SA
+2023-12-09 12:43:35,615 INFO c.z.h.HikariDataSource [main] HikariPool-3 - Start completed.
+2023-12-09 12:43:35,663 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-09 12:43:35,684 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:35,685 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-09 12:43:35,736 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:35,933 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-09 12:43:35,975 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:36,273 WARN o.s.b.c.l.AbstractListenerFactoryBean [main] org.springframework.batch.item.ItemReader is an interface. The implementing class will not be queried for annotation based listener configurations. If using @StepScope on a @Bean method, be sure to return the implementing class so listener annotations can be used.
+2023-12-09 12:43:36,647 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-09 12:43:36,760 INFO o.s.s.w.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5a4cf76c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d3b93b4, org.springframework.security.web.context.SecurityContextHolderFilter@3b8bb9a0, org.springframework.security.web.header.HeaderWriterFilter@729bdd9d, org.springframework.web.filter.CorsFilter@2454d007, org.springframework.security.web.csrf.CsrfFilter@82cd68d, org.springframework.security.web.authentication.logout.LogoutFilter@16d1f77d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4497e084, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@49f2b6ca, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5f3c97c9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5de49e5a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55fd98e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@65a9e8d7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6276fcd5, org.springframework.security.web.access.ExceptionTranslationFilter@31102e84, org.springframework.security.web.access.intercept.AuthorizationFilter@608cff9e]
+2023-12-09 12:43:37,379 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2023-12-09 12:43:37,382 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-12-09 12:43:37,382 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2023-12-09 12:43:37,382 INFO o.q.s.RAMJobStore [main] RAMJobStore initialized.
+2023-12-09 12:43:37,383 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-12-09 12:43:37,383 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-12-09 12:43:37,383 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2023-12-09 12:43:37,383 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@23edc081
+2023-12-09 12:43:37,445 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:37,446 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:37,447 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:37,458 INFO o.s.s.q.SchedulerFactoryBean [main] Starting Quartz Scheduler now
+2023-12-09 12:43:37,459 INFO o.q.c.QuartzScheduler [main] Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-12-09 12:43:37,465 INFO c.s.a.SecurityTest [main] Started SecurityTest in 2.682 seconds (process running for 27.027)
+2023-12-09 12:43:37,465 INFO c.s.a.ArtworkSpaceApplication [scheduling-1] Cache deleted for all exhibitions
+2023-12-09 12:43:37,584 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 1
+2023-12-09 12:43:37,696 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 2
+2023-12-09 12:43:37,806 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 3
+2023-12-09 12:43:37,809 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,811 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,812 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,813 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,815 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,816 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,817 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,819 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,820 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,821 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,822 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,824 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,825 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,827 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,828 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,829 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,829 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:37,830 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,833 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,833 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,835 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,835 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,837 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,837 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,839 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,839 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,840 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,840 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,842 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,842 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,844 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,845 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,847 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,847 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,851 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,851 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,853 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,853 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,855 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,855 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,856 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,856 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,858 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,858 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,861 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,861 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,863 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,864 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,866 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,866 INFO c.s.a.ArtworkSpaceApplication [main] Adding artwork with ID: null
+2023-12-09 12:43:37,869 INFO c.s.a.ArtworkSpaceApplication [main] Artwork added successfully.
+2023-12-09 12:43:37,875 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:37,879 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:37,882 INFO c.s.a.ArtworkSpaceApplication [main] Finding artwork by id (without CACHE)
+2023-12-09 12:43:37,886 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:37,889 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:37,891 INFO c.s.a.ArtworkSpaceApplication [main] Created auction with ID: 0
+2023-12-09 12:43:37,894 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:37,896 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 3
+2023-12-09 12:43:37,899 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 1
+2023-12-09 12:43:37,902 INFO c.s.a.ArtworkSpaceApplication [main] Created exhibition with ID: 2
+2023-12-09 12:43:37,919 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:37,919 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:37,921 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:37,927 INFO c.s.a.a.ArtworkController [main] Getting all artworks
+2023-12-09 12:43:37,964 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:37,965 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:37,966 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:37,970 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:37,974 INFO c.s.a.ArtworkSpaceApplication [main] Finding exhibition by id (without CACHE)
+2023-12-09 12:43:37,989 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:37,989 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:37,991 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:37,993 INFO c.s.a.a.AuctionArtistController [main] Fetching all active auctions
+2023-12-09 12:43:38,005 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved 3 active auctions.
+2023-12-09 12:43:38,005 INFO c.s.a.a.AuctionArtistController [main] Retrieved 3 active auctions.
+2023-12-09 12:43:38,016 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,017 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,018 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:38,020 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:38,023 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:38,025 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:38,027 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:38,030 INFO c.s.a.e.ExhibitionController [main] Retrieving exhibitions with curator ID: 1
+2023-12-09 12:43:38,038 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,038 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,041 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:38,042 INFO c.s.a.a.ArtworkController [main] Getting all artworks
+2023-12-09 12:43:38,072 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:38,075 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.UserControllerTest
+2023-12-09 12:43:38,082 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,082 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,087 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 5 ms
+2023-12-09 12:43:38,110 INFO c.s.a.u.UserController [main] Updating user with ID: 1
+2023-12-09 12:43:38,142 INFO c.s.a.ArtworkSpaceApplication [main] Updated user with ID: 1
+2023-12-09 12:43:38,142 INFO c.s.a.u.UserController [main] UserEntity updated with ID: 1
+2023-12-09 12:43:38,152 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,152 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,154 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:38,158 INFO c.s.a.u.UserController [main] Add artwork with Id 3 from collection of user with id 1
+2023-12-09 12:43:38,158 INFO c.s.a.ArtworkSpaceApplication [main] Getting user with id 1
+2023-12-09 12:43:38,161 ERROR c.s.a.u.UserController [main] ERROR: Artist cant have collection
+2023-12-09 12:43:38,170 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,170 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,171 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:38,184 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,184 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,186 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:38,188 INFO c.s.a.u.UserController [main] Deleting artwork with Id 2 from collection of user with id 1
+2023-12-09 12:43:38,189 INFO c.s.a.ArtworkSpaceApplication [main] Getting user with id 1
+2023-12-09 12:43:38,191 ERROR c.s.a.u.UserController [main] ERROR: Artist cant have collection
+2023-12-09 12:43:38,198 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,199 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,200 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:38,202 INFO c.s.a.u.UserController [main] Getting collection of user with ID 1
+2023-12-09 12:43:38,203 INFO c.s.a.ArtworkSpaceApplication [main] Getting user with id 1
+2023-12-09 12:43:38,205 ERROR c.s.a.u.UserController [main] ERROR: Artist cant have collection
+2023-12-09 12:43:38,213 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,214 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,215 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 1 ms
+2023-12-09 12:43:38,251 INFO c.s.a.u.UserController [main] Creating a user with ID: null
+2023-12-09 12:43:38,367 INFO c.s.a.ArtworkSpaceApplication [main] Created user with ID: 4
+2023-12-09 12:43:38,367 INFO c.s.a.u.UserController [main] User created with ID: 4
+2023-12-09 12:43:38,378 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,378 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,380 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:38,383 INFO c.s.a.u.UserController [main] Deleting user with ID: 1
+2023-12-09 12:43:38,476 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 23503, SQLState: 23503
+2023-12-09 12:43:38,477 ERROR o.h.e.j.s.SqlExceptionHelper [main] Referential integrity constraint violation: "FKLA948EG4FHUDD7B4TTUFW34AI: PUBLIC.ARTWORK_ENTITY FOREIGN KEY(USER_ID) REFERENCES PUBLIC.""user""(USER_ID) (CAST(1 AS BIGINT))"; SQL statement:
+delete from "user" where user_id=? [23503-214]
+2023-12-09 12:43:38,478 ERROR c.s.a.u.UserController [main] ERROR: could not execute statement [Referential integrity constraint violation: "FKLA948EG4FHUDD7B4TTUFW34AI: PUBLIC.ARTWORK_ENTITY FOREIGN KEY(USER_ID) REFERENCES PUBLIC.""user""(USER_ID) (CAST(1 AS BIGINT))"; SQL statement:
+delete from "user" where user_id=? [23503-214]] [delete from "user" where user_id=?]; SQL [delete from "user" where user_id=?]; constraint ["FKLA948EG4FHUDD7B4TTUFW34AI: PUBLIC.ARTWORK_ENTITY FOREIGN KEY(USER_ID) REFERENCES PUBLIC.""user""(USER_ID) (CAST(1 AS BIGINT))"; SQL statement:
+delete from "user" where user_id=? [23503-214]]
+2023-12-09 12:43:38,486 INFO o.s.b.t.m.w.SpringBootMockServletContext [main] Initializing Spring TestDispatcherServlet ''
+2023-12-09 12:43:38,486 INFO o.s.t.w.s.TestDispatcherServlet [main] Initializing Servlet ''
+2023-12-09 12:43:38,488 INFO o.s.t.w.s.TestDispatcherServlet [main] Completed initialization in 2 ms
+2023-12-09 12:43:38,490 INFO c.s.a.u.UserController [main] Retrieving user with ID: 1
+2023-12-09 12:43:38,493 INFO c.s.a.ArtworkSpaceApplication [main] Retrieved user with ID: 1
+2023-12-09 12:43:38,512 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.system.artworkspace.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-09 12:43:38,528 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.system.artworkspace.ArtworkSpaceApplication for test class com.system.artworkspace.UserRepositoryTest
+2023-12-09 12:43:38,582 INFO c.s.a.UserRepositoryTest [main] Starting UserRepositoryTest using Java 17.0.1 with PID 5028 (started by √Œ–¡¿Õ‹ ŒÀ‹√¿ in C:\Users\√Œ–¡¿Õ‹ ŒÀ‹√¿\Desktop\artwork_space\Backend\artwork-space-master)
+2023-12-09 12:43:38,583 INFO c.s.a.UserRepositoryTest [main] The following 1 profile is active: "dev"
+2023-12-09 12:43:38,765 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-09 12:43:38,822 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 56 ms. Found 7 JPA repository interfaces.
+2023-12-09 12:43:38,837 INFO o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor [main] Replacing 'dataSource' DataSource bean with embedded version
+2023-12-09 12:43:38,865 INFO o.s.j.d.e.EmbeddedDatabaseFactory [main] Starting embedded database: url='jdbc:h2:mem:0f4c809a-a597-4ace-901d-c1efde135430;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2023-12-09 12:43:38,889 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-09 12:43:38,900 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:38,900 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-09 12:43:38,938 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-12-09 12:43:39,070 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-09 12:43:39,099 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:39,313 INFO c.s.a.UserRepositoryTest [main] Started UserRepositoryTest in 0.775 seconds (process running for 28.874)
+2023-12-09 12:43:39,344 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,345 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-09 12:43:39,346 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-09 12:43:39,346 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,346 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-09 12:43:39,350 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:39,359 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-12-09 12:43:39,361 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-12-09 12:43:39,365 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,367 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-09 12:43:39,367 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-09 12:43:39,367 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,367 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-09 12:43:39,369 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:39,370 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown initiated...
+2023-12-09 12:43:39,371 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown completed.
+2023-12-09 12:43:39,373 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,373 INFO o.s.s.q.SchedulerFactoryBean [SpringApplicationShutdownHook] Shutting down Quartz Scheduler
+2023-12-09 12:43:39,373 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-12-09 12:43:39,374 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-12-09 12:43:39,374 INFO o.q.c.QuartzScheduler [SpringApplicationShutdownHook] Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-12-09 12:43:39,375 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-09 12:43:39,377 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown initiated...
+2023-12-09 12:43:39,379 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-3 - Shutdown completed.
+2023-12-09 12:43:39,380 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
