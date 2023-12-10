@@ -1,6 +1,5 @@
 import {User} from "./mockup_users";
 export interface NewRating {
-    id: number;
     rate: number;
     user: User;
     comment: string;

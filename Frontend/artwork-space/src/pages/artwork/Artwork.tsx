@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
@@ -8,17 +8,24 @@ import BookmarkButton from "../../components/BookmarkButton";
 import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
+import RatingModal from "../../components/modals/RatingModal";
+import {User} from "../../mockup/mockup_users";
 
 
 const Artwork = () => {
+
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const navigate = useNavigate();
     const { id } = useParams();
+    const [isRatingModalOpen, setRatingModalOpen] = useState(false);
     const [artwork, setArtwork] = useState<ArtworkType>();
-    const currentUser = {
-        role: "artist",
-       //role: "curator",
+    const currentUserRole = {
+        //role: "artist",
+       role: "curator",
         // role: "collectioneer",
     };
+    const ratingFormRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (id) {
@@ -33,6 +40,12 @@ const Artwork = () => {
         }
     }, [id]);
 
+    // New function to handle scrolling to RatingForm
+    function handleAddReview() {
+        if (currentUserRole.role === 'curator' && ratingFormRef.current) {
+            ratingFormRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     //todo change to custom window.confirm
     //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
@@ -72,7 +85,7 @@ const Artwork = () => {
                                     lastName={artwork.user.lastName}
                                 />
                                 {
-                                    currentUser.role === "curator"
+                                    currentUserRole.role === "curator"
                                         ?
                                         <BookmarkButton/>
                                         :
@@ -86,17 +99,17 @@ const Artwork = () => {
                             />
                             <div className={"flex flex-row gap-4"}>
                                 {
-                                    currentUser.role === 'artist'
+                                    currentUserRole.role === 'artist'
                                         ?
                                         <>
                                             <Button label={"Edit"} onClick={()=>{}}/>
                                             <Button label={"Delete"} onClick={handleDelete} outline/>
                                         </>
                                         :
-                                        currentUser.role === "curator"
+                                        currentUserRole.role === "curator"
                                             ?
                                             <>
-                                                <Button label={"Add review"} onClick={()=>{}}/>
+                                                <Button label={"Add review"} onClick={handleAddReview} />
                                             </>
                                             :
                                             <>
@@ -106,8 +119,13 @@ const Artwork = () => {
                             </div>
                         </section>
                     </div>
-                    <div style={{ width: '100%' }}>
-                        <ArtworkRatings ratings={artwork.ratings} />
+                    <div style={{ width: '100%' }} className={"mb-8"}>
+                        {currentUserRole.role === "curator" && (
+                            <div ref={ratingFormRef}>
+                                <RatingModal currentUser={currentUser} currentArtworkId={Number(id)} />
+                            </div>
+                        )}
+                        <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUserRole.role === "curator"} currentUser={currentUser} />
                     </div>
                 </>
             ) : (

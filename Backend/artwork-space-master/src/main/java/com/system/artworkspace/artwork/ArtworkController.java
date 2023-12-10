@@ -145,7 +145,11 @@ public class ArtworkController {
     }
     @PostMapping("/{artworkId}/addRating")
     @PreAuthorize("hasAuthority('CURATOR')")
-    public void addRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto) {
+    public void addRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
+        }
         logger.info("Adding rating with ID {} to artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.addRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating added to artwork with ID: {}", artworkId);
@@ -153,7 +157,11 @@ public class ArtworkController {
 
     @DeleteMapping("/{artworkId}/deleteRating")
     @PreAuthorize("hasAuthority('CURATOR')")
-    public void deleteRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto) {
+    public void deleteRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            String message = ExceptionHelper.formErrorMessage(bindingResult);
+            throw new ValidationException(message);
+        }
         logger.info("Removing rating with ID {} from artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.deleteRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating removed from artwork with ID: {}", artworkId);

@@ -4,12 +4,21 @@ import UserLink from '../UserLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import {User} from "../../mockup/mockup_users";
 
 interface ArtworkRatingsProps {
     ratings: Rating[];
+    showRatingForm: boolean;
+    currentUser: User;
+    currentArtworkId: number;
 }
 
-const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings }) => {
+/*TODO
+*  calculate average rating and show
+*  show only three ratings, other with show more button
+*  add rating should work properly with controllers and db (after login)
+*  add refresh the page when adding a rating*/
+const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings,showRatingForm,currentUser,currentArtworkId }) => {
     const renderStars = (rating: number) => {
         const totalStars = 10;
         const filledStars = Math.round((rating / totalStars) * 10);
