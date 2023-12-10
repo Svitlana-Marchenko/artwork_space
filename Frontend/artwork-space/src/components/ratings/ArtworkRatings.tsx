@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Rating } from '../../mockup/mockup_artworks';
 import UserLink from '../UserLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,10 +15,12 @@ interface ArtworkRatingsProps {
 
 /*TODO
 *  calculate average rating and show
-*  show only three ratings, other with show more button
 *  add rating should work properly with controllers and db (after login)
-*  add refresh the page when adding a rating*/
-const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings,showRatingForm,currentUser,currentArtworkId }) => {
+*  add refresh the page when adding a rating
+*  think about required rate/comment in the form*/
+const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings, showRatingForm, currentUser, currentArtworkId }) => {
+    const [showAllRatings, setShowAllRatings] = useState(false);
+
     const renderStars = (rating: number) => {
         const totalStars = 10;
         const filledStars = Math.round((rating / totalStars) * 10);
@@ -35,10 +37,17 @@ const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings,showRatingForm,
         );
     };
 
+
+    const handleClickToggle = () => {
+        setShowAllRatings(!showAllRatings);
+    };
+
+    const visibleRatings = showAllRatings ? ratings : ratings.slice(0, 3);
+
     return (
         <div style={{ width: '66.666%' }} className="mt-4 p-4 border border-gray-300 rounded mx-auto">
             <h3 className="text-lg font-semibold mb-2">Ratings</h3>
-            {ratings.length === 0 ? (
+            {visibleRatings.length === 0 ? (
                 <ul>
                     <li className="mb-4">
                         <p className="text-gray-600">No ratings yet.</p>
@@ -46,14 +55,13 @@ const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings,showRatingForm,
                 </ul>
             ) : (
                 <ul>
-                    {ratings.map((rating, index) => (
+                    {visibleRatings.map((rating, index) => (
                         <li
                             key={rating.id}
-                            className={`mb-4 ${index !== ratings.length - 1 ? 'border-b border-gray-300 pb-4' : ''}`}
+                            className={`mb-4 ${index !== visibleRatings.length - 1 ? 'border-b border-gray-300 pb-4' : ''}`}
                         >
                             <p className="text-gray-600">
-                                Rated by{' '}
-                                <UserLink id={rating.user.id} username={rating.user.username} />
+                                Rated by <UserLink id={rating.user.id} username={rating.user.username} />
                             </p>
                             <p className="text-lg">
                                 {renderStars(rating.rate)} ({rating.rate}/10)
@@ -61,6 +69,16 @@ const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings,showRatingForm,
                             <p className="text-gray-700">{rating.comment}</p>
                         </li>
                     ))}
+                    {ratings.length > 3 && (
+                        <li className="mt-2">
+                            <button
+                                className="text-gray-500 text-base underline cursor-pointer hover:text-gray-700"
+                                onClick={handleClickToggle}
+                            >
+                                {showAllRatings ? 'Show Less' : 'Show More'}
+                            </button>
+                        </li>
+                    )}
                 </ul>
             )}
         </div>
