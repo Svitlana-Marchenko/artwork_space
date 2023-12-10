@@ -5,10 +5,7 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
-import com.system.artworkspace.exceptions.InvalidOldPasswordException;
-import com.system.artworkspace.exceptions.NoSuchArtworkException;
-import com.system.artworkspace.exceptions.NoSuchUserException;
-import com.system.artworkspace.exceptions.WrongPasswordFormat;
+import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.exhibition.ExhibitionRepository;
 import com.system.artworkspace.user.changePassword.ChangePassword;
 import com.system.artworkspace.user.userUpdate.UserUpdate;
@@ -44,6 +41,8 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User createUser(User user) {
+        checkNewUsername(user.getUsername());
+        checkNewEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if(user.getCollection() == null){
             user.setCollection(new ArrayList<Artwork>());
@@ -60,8 +59,10 @@ public class UserServiceImpl implements UserService {
             User u = UserMapper.INSTANCE.userEntityToUser(userO.get());
             u.setFirstName(user.getFirstName());
             u.setLastName(user.getLastName());
+            if(!u.getUsername().equals(user.getUsername())){
+                checkNewUsername(user.getUsername());
+            }
             u.setUsername(user.getUsername());
-            //todo check username on unique
             UserEntity updatedUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(u));
             logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
             return UserMapper.INSTANCE.userEntityToUser(updatedUser);
@@ -180,8 +181,19 @@ public class UserServiceImpl implements UserService {
     }
 
     private void checkNewPasswordFormat(String password) {
+        //todo add regex for password
         if(password.length() < 8)
             throw new WrongPasswordFormat("Password length is less than 8 symbols.");
+    }
+
+    private void checkNewUsername(String username) {
+        if(userRepository.findByUsername(username).isPresent())
+            throw new InvalidUserDataException("This username is already exist");
+    }
+
+    private void checkNewEmail(String email) {
+        if(userRepository.findByEmail(email).isPresent())
+            throw new InvalidUserDataException("This email is already exist");
     }
 
     private void setNewPassword(User user, String newPassword) {
@@ -193,4 +205,6 @@ public class UserServiceImpl implements UserService {
     private String encryptPassword(String newPassword) {
         return passwordEncoder.encode(newPassword);
     }
+
+
 }
