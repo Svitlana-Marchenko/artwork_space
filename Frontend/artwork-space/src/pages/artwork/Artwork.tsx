@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
+import {Artwork as ArtworkType, Rating} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 import RatingModal from "../../components/modals/RatingModal";
 import {User} from "../../mockup/mockup_users";
+import {calculateAverageRating} from "../../utils/calculate-average-rate";
+
 
 
 const Artwork = () => {
@@ -18,7 +20,6 @@ const Artwork = () => {
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const navigate = useNavigate();
     const { id } = useParams();
-    const [isRatingModalOpen, setRatingModalOpen] = useState(false);
     const [artwork, setArtwork] = useState<ArtworkType>();
     const currentUserRole = {
         //role: "artist",
@@ -46,6 +47,9 @@ const Artwork = () => {
             ratingFormRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
+    const averageRating = calculateAverageRating(artwork?.ratings || []);
+
 
     //todo change to custom window.confirm
     //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
@@ -83,6 +87,7 @@ const Artwork = () => {
                                     username={artwork.user.username}
                                     firstName={artwork.user.firstName}
                                     lastName={artwork.user.lastName}
+                                    averageRating={averageRating}
                                 />
                                 {
                                     currentUserRole.role === "curator"
