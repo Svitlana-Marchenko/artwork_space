@@ -35,7 +35,7 @@ public class AuctionCollectioneerController {
     }
 
     @PutMapping("/{id}/placeBid")
-    public AuctionDto placeBid(@PathVariable Long id, @RequestParam double bidAmount) {
+    public AuctionDto placeBid(@PathVariable Long id, @RequestBody double bidAmount) {
         logger.info("Placing a bid for auction with ID: {}. Bid amount: {}", id, bidAmount);
         AuctionDto auction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionCollectioneerService.placeBid(id, bidAmount));
         logger.info("Bid placed for auction with ID: {}. Current bid: {}", auction.getId(), auction.getCurrentBid());

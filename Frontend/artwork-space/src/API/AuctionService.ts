@@ -1,6 +1,6 @@
 import axios from "axios";
 import {Auction, NewAuction} from "../mockup/mockup_auctions";
-//don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
+
 export default class AuctionService {
     static async getAllAuctions() {
         try {

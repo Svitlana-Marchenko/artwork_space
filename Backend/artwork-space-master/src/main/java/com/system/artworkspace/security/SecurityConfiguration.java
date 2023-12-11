@@ -56,22 +56,36 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**", "/signin/**"))
                 .authorizeHttpRequests((authorize) -> authorize
-                                //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
-                                .requestMatchers("/signin").permitAll()
-                                .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
-                                .requestMatchers("/auctions/**").hasAuthority("ARTIST")
-//                        .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
-//                        .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
-//                        .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
-                                //todo fix permitAll() for artwork
-                                .requestMatchers("/artworks/**").permitAll()
-                                //todo fix permitAll() for auction
-                                .requestMatchers(HttpMethod.GET, "/collectioneer/auctions/**").permitAll()
-                                //todo fix permitAll() for exhibition
-                                .requestMatchers("/exhibitions/**").permitAll()
-                                //todo fix permitall for user
-                                .requestMatchers("/users/**").permitAll()
-                                .anyRequest().authenticated()
+                                .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
+                                .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
+                                .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
+                                .requestMatchers(HttpMethod.POST, "/auctions/**").hasAuthority("ARTIST")
+                                .requestMatchers(HttpMethod.PUT, "/auctions/**").hasAuthority("ARTIST")
+                                .requestMatchers(HttpMethod.DELETE, "/auctions/**").hasAuthority("ARTIST")
+                                .requestMatchers("/users/new").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                                .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                                .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                                .requestMatchers(HttpMethod.POST, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                                .requestMatchers(HttpMethod.PUT, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                                .requestMatchers(HttpMethod.DELETE, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                                .anyRequest().permitAll()
+//                                //.requestMatchers("/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+//                                .requestMatchers("/signin").permitAll()
+//                                .requestMatchers("/collections/**").hasAuthority("COLLECTIONEER")
+//                                .requestMatchers("/auctions/**").hasAuthority("ARTIST")
+////                        .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
+////                        .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
+////                        .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
+//                                //todo fix permitAll() for artwork
+//                                .requestMatchers("/artworks/**").permitAll()
+//                                //todo fix permitAll() for auction
+//                                .requestMatchers(HttpMethod.GET, "/collectioneer/auctions/**").permitAll()
+//                                //todo fix permitAll() for exhibition
+//                                .requestMatchers("/exhibitions/**").permitAll()
+//                                //todo fix permitall for user
+//                                .requestMatchers("/users/**").permitAll()
+//                                .anyRequest().authenticated()
                 ).sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class

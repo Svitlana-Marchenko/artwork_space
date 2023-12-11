@@ -58,15 +58,13 @@ const Profile = () => {
                 })
             ArtworkService.getAllArtworksByArtistId(id)
                 .then(data => {
-                    console.log(data)
                     setArtworks(data);
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
         }
-        if (currentUser&&(!id)) {
+        if (currentUser&&(!id)&&(currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")) {
             CollectionService.getArtworksFromCollection(currentUser.id)
                 .then(data => {
-                    console.log(data)
                     setLikedArtworks(data);
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
@@ -81,6 +79,8 @@ const Profile = () => {
                 })
         }
     }, [profile])
+
+    //todo think about (my) artist profile, maybe add his/her artwork or auctions...
     const profileContent = (user: User) => {
         return (
             <>
@@ -109,7 +109,7 @@ const Profile = () => {
                 <hr className={'my-8'}/>
                 {
                     currentUser&&(!id)&&(
-                        currentUser.role === "CURATOR" || "COLLECTIONEER"
+                        (currentUser.role === "CURATOR" ||   currentUser.role === "COLLECTIONEER")
                             ?
                             <Collection artworks={likedArtworks}/>
                             :

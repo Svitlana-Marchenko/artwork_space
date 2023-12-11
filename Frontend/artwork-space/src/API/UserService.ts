@@ -1,6 +1,6 @@
 import axios from "axios";
 import {EditUser, NewUser, Password} from "../mockup/mockup_users";
-//don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
+
 export default class UserService {
     static async getUserById(id:number|string) {
         try {
@@ -24,7 +24,15 @@ export default class UserService {
 
     static async changePassword(password: Password) {
         try {
-            const response = await axios.put('http://localhost:8080/users/password', password)
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.put('http://localhost:8080/users/password', password, config);
             return response.data;
         } catch (error) {
             console.error('Помилка при зміні пароля:', error);
@@ -34,7 +42,15 @@ export default class UserService {
 
     static async changeProfile(user: EditUser) {
         try {
-            const response = await axios.put('http://localhost:8080/users', user)
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.put('http://localhost:8080/users', user, config);
             return response.data;
         } catch (error) {
             console.error('Помилка при зміні профілю:', error);
@@ -42,11 +58,19 @@ export default class UserService {
         }
     }
 
-    static async deleteUserById(id:number) {
+    static async deleteUserById(id: number) {
         try {
-            return await axios.delete(`http://localhost:8080/users/${id}`);
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            return await axios.delete(`http://localhost:8080/users/${id}`, config);
         } catch (error) {
-            console.error('Помилка при отриманні даних з сервера:', error);
+            console.error('Помилка при видаленні користувача:', error);
             throw error;
         }
     }
