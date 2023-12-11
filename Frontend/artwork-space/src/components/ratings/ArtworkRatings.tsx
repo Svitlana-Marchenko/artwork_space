@@ -14,7 +14,6 @@ interface ArtworkRatingsProps {
 }
 
 /*TODO
-*  calculate average rating and show
 *  add rating should work properly with controllers and db (after login)
 *  add refresh the page when adding a rating
 *  think about required rate/comment in the form*/

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
@@ -8,6 +8,8 @@ import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
 import {User} from "../../mockup/mockup_users";
 import SellButton from "../../components/icons/SellButton";
+import RatingModal from "../../components/modals/RatingModal";
+import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 
 
 const Artwork = () => {
@@ -16,6 +18,7 @@ const Artwork = () => {
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [artwork, setArtwork] = useState<ArtworkType>();
+    const ratingFormRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (id) {
@@ -29,6 +32,11 @@ const Artwork = () => {
         }
     }, [id]);
 
+    function handleAddReview() {
+        if (currentUser?.role === "CURATOR" && ratingFormRef.current) {
+            ratingFormRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     //todo change to custom window.confirm
     //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
@@ -57,9 +65,10 @@ const Artwork = () => {
     }
 
     return (
-        <div className="flex flex-row items-center justify-center gap-10">
+        <div className="flex flex-col items-center justify-center gap-10">
             {artwork ? (
                 <>
+                <div className="flex flex-row items-center justify-center gap-10">
                     <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
                     <section className="w-1/3">
                         <div className={'flex flex-row justify-between align-top'}>
@@ -96,7 +105,7 @@ const Artwork = () => {
                                     currentUser?.role === "CURATOR"
                                         ?
                                         <>
-                                            <Button label={"Add review"} onClick={()=>{}}/>
+                                            <Button label={"Add review"} onClick={handleAddReview}/>
                                             <Button label={"Save"} onClick={()=>{}}/>
                                         </>
                                         :
@@ -109,7 +118,16 @@ const Artwork = () => {
                                             <></>
                             }
                         </div>
-                    </section> </>
+                    </section>
+                </div>
+                <div style={{ width: '100%' }} className={"mb-8"}>
+                    {currentUser?.role === "CURATOR" && (
+                        <div ref={ratingFormRef}>
+                            <RatingModal currentUser={currentUser} currentArtworkId={Number(id)} />
+                        </div>
+                    )}
+                    <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />
+                </div></>
             ) : (
                 <div>Loading</div>
             )}
