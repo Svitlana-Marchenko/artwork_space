@@ -23,7 +23,6 @@ const Artwork = () => {
                 .then((data) => setArtwork(data))
                 .catch((error) => {
                     console.error('Помилка при отриманні даних з сервера:', error)
-
                     navigate(`/artworks`);
                     toast.error('Artwork not found');
                 });
@@ -42,9 +41,13 @@ const Artwork = () => {
                 .then((response) => {
                     if (response.ok) {
                         navigate(-1)
+                        console.log(response)
                         toast.success('Artwork deleted successfully');
                     } else {
-                        toast.error('Failed to delete artwork. This artwork may be used in exhibition or auction');
+                        response.text().then(errorMessage => {
+                            toast.error(errorMessage);
+                        });
+
                     }
                 })
                 .catch((error) => {
@@ -69,7 +72,7 @@ const Artwork = () => {
                                 averageRating={0}
                             />
                             {
-                                currentUser.role === "ARTIST"
+                                currentUser?.role === "ARTIST"
                                     ?
                                     <SellButton artwork={artwork} currentUser={currentUser}/>
                                     :
@@ -83,22 +86,27 @@ const Artwork = () => {
                         />
                         <div className={"flex flex-row gap-4"}>
                             {
-                                currentUser.role === 'ARTIST'
+                                currentUser?.role === 'ARTIST'
                                     ?
                                     <>
                                         <Button label={"Edit"} onClick={()=>{}}/>
                                         <Button label={"Delete"} onClick={handleDelete} outline/>
                                     </>
                                     :
-                                    currentUser.role === "CURATOR"
+                                    currentUser?.role === "CURATOR"
                                         ?
                                         <>
                                             <Button label={"Add review"} onClick={()=>{}}/>
-                                        </>
-                                        :
-                                        <>
                                             <Button label={"Save"} onClick={()=>{}}/>
                                         </>
+                                        :
+                                        currentUser?.role === "COLLECTIONEER"
+                                            ?
+                                            <>
+                                                <Button label={"Save"} onClick={()=>{}}/>
+                                            </>
+                                            :
+                                            <></>
                             }
                         </div>
                     </section> </>
@@ -109,6 +117,7 @@ const Artwork = () => {
     );
 };
 
+//todo OLYA like instead of save button
 //todo normal loading page
 
 export default Artwork;
