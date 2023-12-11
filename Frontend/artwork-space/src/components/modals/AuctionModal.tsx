@@ -50,7 +50,7 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
             artwork: artwork,
             startingPrice: data.startingPrice,
             step: data.step,
-            closingTime: new Date(data.closingTime),
+            closingTime: data.closingTime,
             user: currentUser,
             currentBid: data.startingPrice
         });

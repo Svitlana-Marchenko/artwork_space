@@ -24,7 +24,13 @@ export default class AuctionService {
 
     static async createAuction(auction: NewAuction) {
         try {
-            const response = await axios.post('http://localhost:8080/auctions', auction);
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+            const response = await axios.post('http://localhost:8080/auctions', auction, config);
             return response.data;
         } catch (e) {
             console.error('Помилка при створенні аукціону:', e);

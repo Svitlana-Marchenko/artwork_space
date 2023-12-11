@@ -9,7 +9,6 @@ export interface NewAuction {
     user: User;
     currentBid: number;
 }
-
 export interface Auction extends NewAuction{
     id: number;
 }

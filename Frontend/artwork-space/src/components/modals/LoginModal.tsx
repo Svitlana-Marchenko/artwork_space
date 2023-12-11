@@ -41,7 +41,7 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                     token = data;
                     const userId: number = jwtDecode<MyToken>(data).id;
                     const userData = await UserService.getUserById(userId);
-                    localStorage.setItem("authToken", data);
+                    localStorage.setItem("token", data);
                     localStorage.setItem("currentUser", JSON.stringify(userData));
                     console.log("User data fetched and saved to local storage:", userData);
                 }
