@@ -80,7 +80,7 @@ const Artwork = () => {
                                     null
                             }
                             {
-                                currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER"
+                                currentUser?.role === "CURATOR" || currentUser?.role === "COLLECTIONEER"
                                     ?
                                     <HeartButton artworkId={artwork.id} dark/>
                                     :

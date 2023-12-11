@@ -35,7 +35,15 @@ export default class ArtworkService {
 
     static async addRating(artworkId:number,rating:NewRating){
         try {
-            const response = await axios.post(`http://localhost:8080/artworks/${artworkId}/ratings`, rating);
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.post(`http://localhost:8080/artworks/${artworkId}/ratings`, rating, config);
             console.log(`Added rating with ID ${response.data.id} to artwork with ID: ${artworkId}`);
         } catch (error) {
             console.error('Error while adding rating:', error);

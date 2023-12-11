@@ -30,7 +30,7 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
             password: ''
         },
     });
-
+//todo прибрати/оновити бургер
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         let token: string | undefined = undefined;
         UserService.signIn(data.username, data.password)
