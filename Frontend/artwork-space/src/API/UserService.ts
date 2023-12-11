@@ -2,7 +2,7 @@ import axios from "axios";
 import {EditUser, NewUser, Password} from "../mockup/mockup_users";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class UserService {
-    static async getUserById(id:string) {
+    static async getUserById(id:number|string) {
         try {
             const response = await axios.get(`http://localhost:8080/users/${id}`);
             return response.data;
@@ -53,7 +53,8 @@ export default class UserService {
 
     static async signIn(username: string, password: string) {
         try {
-            return await axios.post('http://localhost:8080/signin', {username, password});
+            const response = await axios.post('http://localhost:8080/signin', {username, password});
+            return response.data;
         } catch (error) {
             console.error('Помилка авторизації з сервера:', error);
             throw error;

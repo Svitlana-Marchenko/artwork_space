@@ -4,12 +4,12 @@ import {
     SubmitHandler,
     useForm
 } from "react-hook-form";
-
+import { jwtDecode } from "jwt-decode";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
-import {LoginProps, NewUser} from "../../mockup/mockup_users";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
+import {MyToken, User} from "../../mockup/mockup_users";
 interface LoginModalProps {
     isOpen:boolean;
     toggle: () => void;
@@ -31,21 +31,26 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
         },
     });
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        UserService.signIn(data.username,data.password)
-            .then((data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        let token: string | undefined = undefined;
+        UserService.signIn(data.username, data.password)
+            .then(async (data) => {
                     toast.success("Successful authorization")
                     reset();
                     toggle();
-                    const currentUser = JSON.stringify(data);
-                    localStorage.setItem("currentUser", currentUser);
-                    console.log(data)
+                    token = data;
+                    const userId: number = jwtDecode<MyToken>(data).id;
+                    const userData = await UserService.getUserById(userId);
+                    localStorage.setItem("authToken", data);
+                    localStorage.setItem("currentUser", JSON.stringify(userData));
+                    console.log("User data fetched and saved to local storage:", userData);
                 }
             )
             .catch((error) => {
                 toast.error("Failed to log in to your profile")
                 console.error('Error in authorization:', error);
             });
+
     }
 
 

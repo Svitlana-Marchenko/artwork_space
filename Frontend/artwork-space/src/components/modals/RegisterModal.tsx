@@ -10,6 +10,7 @@ import {NewUser, User, UserRole} from "../../mockup/mockup_users";
 import Select from "../input/Select";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
+import {LoginModal} from "./LoginModal";
 
 interface RegisterModalProps {
     isOpen:boolean;
@@ -17,24 +18,27 @@ interface RegisterModalProps {
 }
 
 export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => {
-
-const {
-        register,
-        handleSubmit,
-        reset,
-        formState: {
-            errors,
-        },
-    } = useForm<FieldValues>({
-        defaultValues: {
-            username: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            role: '',
-            password: ''
-        },
-    });
+    const [isOpenLogin, setIsOpenLogin] = useState(false);
+    const toggleOpenLogin = useCallback(() => {
+        setIsOpenLogin((value) => !value);
+    }, []);
+    const {
+            register,
+            handleSubmit,
+            reset,
+            formState: {
+                errors,
+            },
+        } = useForm<FieldValues>({
+            defaultValues: {
+                username: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                role: '',
+                password: ''
+            },
+        });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         const userData: NewUser = {
@@ -50,9 +54,7 @@ const {
                 toast.success("Successful registration")
                 reset();
                 toggle();
-                const currentUser = JSON.stringify(data);
-                localStorage.setItem("currentUser", currentUser);
-                console.log(data)
+                toggleOpenLogin();
                 }
             )
             .catch((error) => {
@@ -130,14 +132,17 @@ const {
     )
 
     return(
-        <Modal
-            isOpen={isOpen}
-            title="Register"
-            actionLabel="Sign up"
-            onSubmit={handleSubmit(onSubmit)}
-            body={bodyContent}
-            toggleModal={toggle}
-        />
+        <>
+            <Modal
+                isOpen={isOpen}
+                title="Register"
+                actionLabel="Sign up"
+                onSubmit={handleSubmit(onSubmit)}
+                body={bodyContent}
+                toggleModal={toggle}
+            />
+            <LoginModal isOpen={isOpenLogin} toggle={toggleOpenLogin}/>
+        </>
     )
 
 }

@@ -1,5 +1,8 @@
 import {Artwork} from "./mockup_artworks";
-
+export interface MyToken {
+    id: number;
+    role: string;
+}
 export type Password = {
     id: number;
     oldPassword: string;
