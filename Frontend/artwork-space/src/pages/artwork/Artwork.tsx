@@ -8,6 +8,7 @@ import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
 import {User} from "../../mockup/mockup_users";
 import SellButton from "../../components/icons/SellButton";
+import HeartButton from "../../components/icons/HeartButton";
 
 
 const Artwork = () => {
@@ -78,6 +79,13 @@ const Artwork = () => {
                                     :
                                     null
                             }
+                            {
+                                currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER"
+                                    ?
+                                    <HeartButton artworkId={artwork.id} dark/>
+                                    :
+                                    null
+                            }
                         </div>
                         <ArtworkDescription
                             technique={artwork.technique}
@@ -97,16 +105,9 @@ const Artwork = () => {
                                         ?
                                         <>
                                             <Button label={"Add review"} onClick={()=>{}}/>
-                                            <Button label={"Save"} onClick={()=>{}}/>
                                         </>
                                         :
-                                        currentUser?.role === "COLLECTIONEER"
-                                            ?
-                                            <>
-                                                <Button label={"Save"} onClick={()=>{}}/>
-                                            </>
-                                            :
-                                            <></>
+                                        null
                             }
                         </div>
                     </section> </>

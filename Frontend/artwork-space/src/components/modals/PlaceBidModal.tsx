@@ -6,7 +6,6 @@ import {
 } from "react-hook-form";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
-import AuctionBid from "../input/AuctionInput";
 import {Auction} from "../../mockup/mockup_auctions";
 
 interface PlaceBidModalProps {
