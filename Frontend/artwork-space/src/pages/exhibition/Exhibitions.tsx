@@ -38,13 +38,13 @@ const Exhibitions = () => {
                     ?
                     currentUser && (
                         <>
-                            <p className={'text-3xl font-bold mt-8'}>
+                            <h2 className={'text-3xl font-bold mt-8'}>
                                 {currentUser.role === "CURATOR"
                                     ?
                                     "MY EXHIBITIONS"
                                     :
                                     `EXHIBITIONS BY ${currentUser.firstName.toUpperCase()} ${currentUser.lastName.toUpperCase()}`}
-                            </p>
+                            </h2>
                         </>
                     )
                     :
