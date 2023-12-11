@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {
     FieldValues,
     SubmitHandler,
@@ -7,31 +7,37 @@ import {
 import {Modal} from "./Modal";
 import Input from "../input/Input";
 import AuctionBid from "../input/AuctionInput";
+import {Auction} from "../../mockup/mockup_auctions";
 
 interface PlaceBidModalProps {
-    auctionId:number;
-    minVal:number
+    auction:Auction;
     isOpen:boolean;
     toggle: () => void;
 }
 
-export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auctionId, minVal, isOpen, toggle}) => {
+export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auction, isOpen, toggle}) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
     const {
         register,
         handleSubmit,
+        setValue,
         formState: {
             errors,
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            bid: '',
+            newPrice: '',
         },
     });
 
-    // Define the form submission handler
+    useEffect(()=>{
+        if (auction) {
+            setValue('newPrice', auction.currentBid+auction.bid);
+        }
+    }, [auction]);
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
     }
@@ -42,13 +48,23 @@ export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auctionId, minVal, i
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <div className={'text-center'}>
+                <div className="text-2xl font-bold">
+                    Bid settings
+                </div>
                 <div className="font-light text-neutral-500 mt-2">
-                    Place bid for this incredible artwork!
+                    {`Current price: ${auction.currentBid} Bid: ${auction.bid}`}
                 </div>
             </div>
 
-            <AuctionBid minValue={minVal}></AuctionBid>
-
+            <Input
+                id="newPrice"
+                label="New price"
+                placeholder="New price"
+                type="number"
+                register={register}
+                errors={errors}
+                required
+            />
         </div>
     )
 
@@ -56,7 +72,7 @@ export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auctionId, minVal, i
         <Modal
             isOpen={isOpen}
             title="Place Bid"
-            actionLabel="Place"
+            actionLabel="Submit"
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
             toggleModal={toggle}

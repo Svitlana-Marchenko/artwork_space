@@ -4,7 +4,7 @@ import {User} from "./mockup_users";
 export interface NewAuction {
     artwork: Artwork;
     startingPrice: number;
-    step: number;
+    bid: number;
     closingTime: Date;
     user: User;
     currentBid: number;

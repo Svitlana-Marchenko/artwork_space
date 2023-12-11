@@ -10,18 +10,19 @@ import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
 import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
 import {Rating} from "../../mockup/mockup_artworks";
 import {calculateAverageRating} from "../../utils/calculate-average-rate";
+import {User} from "../../mockup/mockup_users";
 
 const Auction = () => {
     const { id } = useParams();
     const [auction, setAuction] = useState<AuctionType>();
     const navigate = useNavigate();
-
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [isOpenPlaceBid, setIsOpenPlaceBid] = useState(false);
 
     const toggleOpenPlaceBid = useCallback(() => {
         setIsOpenPlaceBid((value) => !value);
     }, []);
-
 
     useEffect(() => {
         if (id) {
@@ -42,7 +43,7 @@ const Auction = () => {
 
     const {
         artwork,
-        step,
+        bid,
         closingTime,
         currentBid,
         startingPrice,
@@ -57,13 +58,6 @@ const Auction = () => {
         height
     } = artwork;
     const artist = artwork.user;
-
-    const currentUser = {
-        // role: "artist",
-        role: "curator",
-        // role: "collectioneer",
-    }
-
 
     return (
         <div className="flex flex-row items-center justify-center gap-10">
@@ -94,13 +88,13 @@ const Auction = () => {
                 <p className={'text-3xl font-bold mb-3'}>${currentBid}</p>
 
                 {
-                    currentUser.role === 'curator'
+                    currentUser.role === 'COLLECTIONEER'
                         ?
                         <Button label={'Place bid'} onClick={toggleOpenPlaceBid}/>
                         :
                         null
                 }
-                <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={auction.id} minVal={auction.currentBid+auction.step}/>
+                <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auction={auction}/>
 
             </div>
         </div>

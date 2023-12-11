@@ -44,7 +44,7 @@ const Auctions = () => {
                             key={auction.id}
                             artwork={auction.artwork}
                             id={auction.id}
-                            step={auction.step}
+                            bid={auction.bid}
                             currentBid={auction.currentBid}
                             user={auction.user}
                             closingTime={auction.closingTime}
