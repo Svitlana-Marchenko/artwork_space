@@ -8,6 +8,8 @@ import {Auction as AuctionType} from "../../mockup/mockup_auctions";
 import AuctionService from "../../API/AuctionService";
 import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
 import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
+import {Rating} from "../../mockup/mockup_artworks";
+import {calculateAverageRating} from "../../utils/calculate-average-rate";
 
 const Auction = () => {
     const { id } = useParams();
@@ -36,6 +38,7 @@ const Auction = () => {
         return <div>Loading...</div>;
     }
 
+    const averageRating = calculateAverageRating(auction.artwork?.ratings || []);
 
     const {
         artwork,
@@ -72,7 +75,8 @@ const Auction = () => {
                         username={artist.username}
                         firstName={artist.firstName}
                         lastName={artist.lastName}
-                        title={title}/>
+                        title={title}
+                        averageRating={averageRating}/>
                     <CountdownTimer targetDate={new Date(closingTime)}/>
                 </div>
                 <ArtworkDescription

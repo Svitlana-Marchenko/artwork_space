@@ -67,8 +67,22 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         List<ArtworkEntity> artworks = new ArrayList<>();
 
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../images/flowers.jpg", 250.0, new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 100.0, "../images/1.jpg", 250.0, new ArrayList<>()));
+        RatingEntity r1 = new RatingEntity(9,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Very beautiful artwork! I am impressed");
+        RatingEntity r2 = new RatingEntity(2,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"It is fake !!!!!!!! Fuck you people! I hate that! And what can you do? Nothing ahahahhahahah");
+        RatingEntity r3 = new RatingEntity(6,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Not bad.");
+        RatingEntity r4 = new RatingEntity(0,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"");
+        RatingEntity r5 = new RatingEntity(10,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
+
+        List<RatingEntity> ratings = new ArrayList<>();
+        ratings.add(r3);
+        ratings.add(r4);
+        ratings.add(r1);
+        ratings.add(r2);
+        ratings.add(r5);
+
+        ArtworkEntity art1 = new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../images/flowers.jpg", 250.0, ratings);
+        artworks.add(art1);
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 100.0, "../images/1.jpg", 250.0, ratings.subList(0,2)));
         artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../images/2.jpg", 250.0, new ArrayList<>()));
         artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний вибух кольору", "Експлозивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../images/3.jpg", 250.0, new ArrayList<>()));
         artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../images/4.jpg", 250.0, new ArrayList<>()));

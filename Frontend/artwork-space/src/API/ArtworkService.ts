@@ -1,4 +1,5 @@
 import axios from "axios";
+import {NewRating} from "../mockup/mockup_artworks";
 //don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class ArtworkService {
 
@@ -28,6 +29,16 @@ export default class ArtworkService {
             return response.data;
         } catch (error) {
             console.error('Помилка при отриманні даних з сервера:', error);
+            throw error;
+        }
+    }
+
+    static async addRating(artworkId:number,rating:NewRating){
+        try {
+            const response = await axios.post(`http://localhost:8080/artworks/${artworkId}/ratings`, rating);
+            console.log(`Added rating with ID ${response.data.id} to artwork with ID: ${artworkId}`);
+        } catch (error) {
+            console.error('Error while adding rating:', error);
             throw error;
         }
     }

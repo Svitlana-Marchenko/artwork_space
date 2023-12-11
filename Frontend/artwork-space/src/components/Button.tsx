@@ -8,6 +8,7 @@ interface ButtonProps {
     outline?: boolean;
     small?: boolean;
     icon?: IconType;
+    style?: React.CSSProperties;
 }
 
 export const Button: React.FC<ButtonProps> = ({
