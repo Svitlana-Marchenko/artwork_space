@@ -2,18 +2,28 @@ package com.system.artworkspace.artwork.artworkUpdate;
 
 public class ArtworkUpdate {
 
+    private Long id;
     private String title;
     private String description;
     private String technique;
     private double width;
     private double height;
 
-    public ArtworkUpdate(String title, String description, String technique, double width, double height) {
+    public ArtworkUpdate(Long id, String title, String description, String technique, double width, double height) {
+        this.id=id;
         this.title = title;
         this.description = description;
         this.technique = technique;
         this.width = width;
         this.height = height;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

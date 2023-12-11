@@ -80,14 +80,14 @@ public class ArtworkServiceImpl implements ArtworkService {
             logger.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", id);
         } else {
             logger.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", id);
-            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
         }
     }
 
     @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateArtwork(Long artworkId, ArtworkUpdate artworkUpdate) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
+    @CachePut(cacheNames="artwork", key="#artworkUpdate.id")
+    public Artwork updateArtwork(ArtworkUpdate artworkUpdate) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkUpdate.getId());
         if(optionalArtwork.isPresent()){
             ArtworkEntity artwork = optionalArtwork.get();
             artwork.setTitle(artworkUpdate.getTitle());
@@ -96,11 +96,11 @@ public class ArtworkServiceImpl implements ArtworkService {
             artwork.setWidth(artworkUpdate.getWidth());
             artwork.setHeight(artworkUpdate.getHeight());
             repository.save(artwork);
-            logger.info("Updating exhibition with id "+artworkId);
+            logger.info("Updating exhibition with id "+artworkUpdate.getId());
         }else{
-            throw new NoSuchArtworkException("No artwork with id "+artworkId+" to update");
+            throw new NoSuchArtworkException("No artwork with id "+artworkUpdate.getId()+" to update");
         }
-        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(repository.findById(artworkId).get());
+        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(repository.findById(artworkUpdate.getId()).get());
 
     }
 

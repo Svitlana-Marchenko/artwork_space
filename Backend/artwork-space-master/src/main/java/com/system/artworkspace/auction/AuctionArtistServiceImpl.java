@@ -3,6 +3,7 @@ package com.system.artworkspace.auction;
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.ArtworkService;
 import com.system.artworkspace.auction.Sale.*;
+import com.system.artworkspace.exceptions.NoSuchAuctionException;
 import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -65,7 +66,7 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     public double displayCurrentBid(Long id) {
         Optional<AuctionEntity> auction = auctionRepository.findById(id);
         logger.info(AUCTIONS_EVENTS, "Retrieved current bid for auction with ID: {}", id);
-        return auction.map(AuctionEntity::getCurrentBid).orElse(0.0);
+        return auction.map(AuctionEntity::getCurrentBid).orElseThrow(()-> new NoSuchAuctionException("Auction with id "+id+" not found"));
     }
 
     @Override

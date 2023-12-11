@@ -1,8 +1,9 @@
-package com.system.artworkspace;
+package com.system.artworkspace.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -40,11 +41,9 @@ public class AuctionCollectioneerControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "artist", authorities = "COLLECTIONEER")
     public void testPlaceBid() throws Exception {
-        // Implement your test logic for placing a bid on an auction
-        // You may need to mock the AuctionCollectioneerService and define its behavior
-
-        mockMvc.perform(put("/collectioneer/auctions/{id}/placeBid", 1)
+         mockMvc.perform(put("/collectioneer/auctions/{id}/placeBid", 1)
                         .param("bidAmount", "150.0"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
@@ -52,33 +51,30 @@ public class AuctionCollectioneerControllerTest {
     }
 
     @Test
-    public void testGetCurrentBid() throws Exception {
-        // Implement your test logic for retrieving the current bid for an auction
-        // You may need to mock the AuctionCollectioneerService and define its behavior
-
+    public void testGetCurrentBid_shouldReturn200() throws Exception {
         mockMvc.perform(get("/collectioneer/auctions/{id}/currentBid", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNumber());
     }
 
     @Test
-    public void testGetArtworkFromAuction() throws Exception {
-        // Implement your test logic for retrieving artwork from an auction
-        // You may need to mock the AuctionCollectioneerService and define its behavior
+    public void testDisplayCurrentBidOnNonExistingAuction_shouldReturn500() throws Exception {
+        mockMvc.perform(get("/auctions/{id}/currentBid", 100))
+                .andExpect(status().is5xxServerError());
+    }
 
+    @Test
+    public void testGetArtworkFromAuction() throws Exception {
         mockMvc.perform(get("/collectioneer/auctions/{id}/artwork", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.title").exists())
-                .andExpect(jsonPath("$.artist").exists());
+                .andExpect(jsonPath("$.user").exists());
     }
 
     @Test
     public void testGetAuctionById() throws Exception {
-        // Implement your test logic for retrieving an auction by ID
-        // You may need to mock the AuctionCollectioneerService and define its behavior
-
-        mockMvc.perform(get("/collectioneer/auctions/{id}", 1))
+      mockMvc.perform(get("/collectioneer/auctions/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.artwork.id").exists())
@@ -87,15 +83,10 @@ public class AuctionCollectioneerControllerTest {
 
     @Test
     public void testHandleException() throws Exception {
-        // Implement your test logic for handling exceptions in the controller
-        // You may need to mock the AuctionCollectioneerService to throw an exception
-
         mockMvc.perform(get("/collectioneer/auctions/invalid"))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().string(containsString("ERROR")));
     }
-
-    // Add more tests for other methods in the AuctionCollectioneerController
 
 }
 

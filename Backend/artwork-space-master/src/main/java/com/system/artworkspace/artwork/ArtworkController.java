@@ -1,15 +1,11 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
 import com.system.artworkspace.exceptions.ExceptionHelper;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
+import com.system.artworkspace.exceptions.NoSuchUserException;
 import com.system.artworkspace.exceptions.ValidationException;
-import com.system.artworkspace.exhibition.ExhibitionDto;
-import com.system.artworkspace.exhibition.ExhibitionMapper;
-import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
-import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMapper;
 import com.system.artworkspace.helpers.RateLimit;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
@@ -21,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,10 +65,10 @@ public class ArtworkController {
         return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.findArtworkById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     //@PreAuthorize("hasAuthority('ARTIST')")
+    //@PreAuthorize("#user.id == authentication.id")
     public ArtworkDto updateArtwork(
-            @PathVariable Long id,
             @RequestBody @Valid ArtworkUpdateDto artworkUpdateDto,
             BindingResult bindingResult
     ) {
@@ -81,17 +76,23 @@ public class ArtworkController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(id, ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
+        ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
         logger.info("Artwork updated with ID: {}", artworkN.getId());
         return artworkN;
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ARTIST')")
-    public void deleteArtwork(@PathVariable Long id) {
-        logger.info("Deleting artwork with ID: {}", id);
-        artworkService.deleteArtwork(id);
-        logger.info("Artwork deleted with ID: {}", id);
+    public ResponseEntity<String> deleteArtwork(@PathVariable Long id) {
+        try {
+            logger.info("Deleting artwork with ID: {}", id);
+            artworkService.deleteArtwork(id);
+            logger.info("Artwork deleted with ID: {}", id);
+            return ResponseEntity.ok("Artwork deleted successfully");
+        }catch (NoSuchArtworkException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Artwork not found");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete artwork");
+        }
     }
 
     @PutMapping("/{id}/title")

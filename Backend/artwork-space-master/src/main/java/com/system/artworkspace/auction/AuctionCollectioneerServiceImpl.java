@@ -84,7 +84,7 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
     public double getCurrentBid(Long id) {
         Optional<AuctionEntity> auction = auctionRepository.findById(id);
         logger.info(AUCTIONS_EVENTS, "Retrieved current bid for auction with ID: {}", id);
-        return auction.map(AuctionEntity::getCurrentBid).orElse(0.0);
+        return auction.map(AuctionEntity::getCurrentBid).orElseThrow(() -> new NoSuchAuctionException ("Auction with id "+id+" not found"));
     }
 
     @Override

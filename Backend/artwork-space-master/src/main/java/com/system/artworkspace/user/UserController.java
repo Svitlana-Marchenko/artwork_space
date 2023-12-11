@@ -72,10 +72,10 @@ public class UserController {
     }
 
     @PutMapping("/password")
-    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO request) {
+    public ResponseEntity<String> changePassword(@RequestBody @Valid ChangePasswordDTO request) {
         try {
             userService.changePassword(ChangePasswordMapper.INSTANCE.changePasswordDTOToChangePassword(request));
-            return ResponseEntity.ok("Пароль був змінений успішно!");
+            return ResponseEntity.ok("The password was changed successfully");
         } catch (NoSuchUserException e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();

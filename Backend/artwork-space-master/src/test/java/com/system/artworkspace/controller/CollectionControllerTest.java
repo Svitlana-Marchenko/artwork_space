@@ -1,4 +1,4 @@
-package com.system.artworkspace;
+package com.system.artworkspace.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,7 @@ public class CollectionControllerTest {
 
     @Test
     public void testGetAllCollections() throws Exception {
-        // Implement your test logic for getting all collections
-        // You may need to mock the CollectionService and define its behavior
-
-        mockMvc.perform(get("/collections"))
+       mockMvc.perform(get("/collections"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists())
                 .andExpect(jsonPath("$[0].name").exists());
