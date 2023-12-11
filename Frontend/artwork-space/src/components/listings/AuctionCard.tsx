@@ -9,13 +9,13 @@ import auction from "../../pages/auction/Auction";
 const AuctionCard:React.FC<Auction> = ({
                                            id,
                                            artwork,
-                                           bid,
+                                           step,
                                            closingTime,
                                            currentBid}) => {
     const navigate = useNavigate();
     const currentUser = {
         //role: "artist",
-         role: "curator",
+        role: "curator",
         // role: "collectioneer",
     }
 
@@ -37,14 +37,14 @@ const AuctionCard:React.FC<Auction> = ({
             </div>
             {
                 currentUser.role === "curator"
-                ?
+                    ?
                     <div className={"mt-3"}>
                         <Button label={`Place bid`} onClick={toggleOpenPlaceBid} outline/>
                     </div>
                     :
                     null
             }
-            <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={id} minVal={currentBid+bid}/>
+            <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={id} minVal={currentBid+step}/>
 
         </div>
     );

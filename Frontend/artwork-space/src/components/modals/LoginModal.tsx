@@ -26,30 +26,26 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            email: '',
+            username: '',
             password: ''
         },
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const userData: LoginProps = {
-            email: data.email,
-            password: data.password
-        };
-        // UserService.authorize(userData)
-        //     .then((data) => {
-        //             toast.success("Successful login")
-        //             reset();
-        //             toggle();
-        //             const currentUser = JSON.stringify(data);
-        //             localStorage.setItem("currentUser", currentUser);
-        //             console.log(data)
-        //         }
-        //     )
-        //     .catch((error) => {
-        //         toast.error("Failed to create your profile")
-        //         console.error('Error in creating your profile:', error);
-        //     });
+        UserService.signIn(data.username,data.password)
+            .then((data) => {
+                    toast.success("Successful authorization")
+                    reset();
+                    toggle();
+                    const currentUser = JSON.stringify(data);
+                    localStorage.setItem("currentUser", currentUser);
+                    console.log(data)
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to log in to your profile")
+                console.error('Error in authorization:', error);
+            });
     }
 
 
@@ -64,14 +60,13 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 </div>
             </div>
             <Input
-                id="email"
-                label="Email"
-                placeholder="Email"
+                id="username"
+                label="Username"
+                placeholder="Username"
                 register={register}
                 errors={errors}
                 required
             />
-
             <Input
                 id="password"
                 label="Password"

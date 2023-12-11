@@ -39,11 +39,11 @@ const Auction = () => {
 
     const {
         artwork,
-        bid,
+        step,
         closingTime,
         currentBid,
         startingPrice,
-        currentBuyer
+        user
     } = auction
 
     const {
@@ -56,8 +56,8 @@ const Auction = () => {
     const artist = artwork.user;
 
     const currentUser = {
-       // role: "artist",
-         role: "curator",
+        // role: "artist",
+        role: "curator",
         // role: "collectioneer",
     }
 
@@ -82,7 +82,7 @@ const Auction = () => {
                 />
                 {
                     startingPrice === currentBid
-                    ?
+                        ?
                         null
                         :
                         <p className={'text-gray-400 line-through'}>${startingPrice}</p>
@@ -96,10 +96,10 @@ const Auction = () => {
                         :
                         null
                 }
-                <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={auction.id} minVal={auction.currentBid+auction.bid}/>
+                <PlaceBidModal isOpen={isOpenPlaceBid} toggle={toggleOpenPlaceBid} auctionId={auction.id} minVal={auction.currentBid+auction.step}/>
 
             </div>
-            </div>
+        </div>
     );
 };
 

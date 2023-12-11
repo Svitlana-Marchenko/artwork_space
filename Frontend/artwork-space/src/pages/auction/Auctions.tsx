@@ -30,7 +30,7 @@ const Auctions = () => {
     if (auctions.length === 0) {
 
         return <div>
-           No auctions here
+            No auctions here
 
         </div>
     }
@@ -44,11 +44,9 @@ const Auctions = () => {
                             key={auction.id}
                             artwork={auction.artwork}
                             id={auction.id}
-                            title={auction.title}
-                            bid={auction.bid}
+                            step={auction.step}
                             currentBid={auction.currentBid}
-                            currentBuyer={auction.currentBuyer}
-                            description={auction.description}
+                            user={auction.user}
                             closingTime={auction.closingTime}
                             startingPrice={auction.startingPrice}
                         />

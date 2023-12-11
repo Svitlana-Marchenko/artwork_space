@@ -50,4 +50,14 @@ export default class UserService {
             throw error;
         }
     }
+
+    static async signIn(username: string, password: string) {
+        try {
+            return await axios.post('http://localhost:8080/signin', {username, password});
+        } catch (error) {
+            console.error('Помилка авторизації з сервера:', error);
+            throw error;
+        }
+
+    }
 }

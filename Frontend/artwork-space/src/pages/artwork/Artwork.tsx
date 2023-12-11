@@ -4,20 +4,18 @@ import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
 import {Button} from "../../components/Button";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
-import BookmarkButton from "../../components/BookmarkButton";
 import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
+import {User} from "../../mockup/mockup_users";
+import SellButton from "../../components/icons/SellButton";
 
 
 const Artwork = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [artwork, setArtwork] = useState<ArtworkType>();
-    const currentUser = {
-        role: "artist",
-       //role: "curator",
-        // role: "collectioneer",
-    };
 
     useEffect(() => {
         if (id) {
@@ -59,50 +57,50 @@ const Artwork = () => {
         <div className="flex flex-row items-center justify-center gap-10">
             {artwork ? (
                 <>
-            <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
-            <section className="w-1/3">
-                <div className={'flex flex-row justify-between align-top'}>
-                    <ArtworkHeading
-                        title={artwork.title}
-                        id={artwork.user.id}
-                        username={artwork.user.username}
-                        firstName={artwork.user.firstName}
-                        lastName={artwork.user.lastName}
-                    />
-                    {
-                        currentUser.role === "curator"
-                            ?
-                            <BookmarkButton/>
-                            :
-                            null
-                    }
-                </div>
-                <ArtworkDescription
-                    technique={artwork.technique}
-                    width={artwork.width}
-                    height={artwork.height}
-                />
-                <div className={"flex flex-row gap-4"}>
-                    {
-                        currentUser.role === 'artist'
-                        ?
-                          <>
-                              <Button label={"Edit"} onClick={()=>{}}/>
-                              <Button label={"Delete"} onClick={handleDelete} outline/>
-                          </>
-                            :
-                            currentUser.role === "curator"
-                        ?
-                                <>
-                                    <Button label={"Add review"} onClick={()=>{}}/>
-                                </>
-                                :
-                                <>
-                                    <Button label={"Save"} onClick={()=>{}}/>
-                                </>
-                    }
-                </div>
-            </section> </>
+                    <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
+                    <section className="w-1/3">
+                        <div className={'flex flex-row justify-between align-top'}>
+                            <ArtworkHeading
+                                title={artwork.title}
+                                id={artwork.user.id}
+                                username={artwork.user.username}
+                                firstName={artwork.user.firstName}
+                                lastName={artwork.user.lastName}
+                            />
+                            {
+                                currentUser.role === "ARTIST"
+                                    ?
+                                    <SellButton artwork={artwork} currentUser={currentUser}/>
+                                    :
+                                    null
+                            }
+                        </div>
+                        <ArtworkDescription
+                            technique={artwork.technique}
+                            width={artwork.width}
+                            height={artwork.height}
+                        />
+                        <div className={"flex flex-row gap-4"}>
+                            {
+                                currentUser.role === 'ARTIST'
+                                    ?
+                                    <>
+                                        <Button label={"Edit"} onClick={()=>{}}/>
+                                        <Button label={"Delete"} onClick={handleDelete} outline/>
+                                    </>
+                                    :
+                                    currentUser.role === "CURATOR"
+                                        ?
+                                        <>
+                                            <Button label={"Add review"} onClick={()=>{}}/>
+                                        </>
+                                        :
+                                        <>
+                                            <Button label={"Save"} onClick={()=>{}}/>
+                                        </>
+                            }
+                        </div>
+                    </section> </>
             ) : (
                 <div>Loading</div>
             )}
