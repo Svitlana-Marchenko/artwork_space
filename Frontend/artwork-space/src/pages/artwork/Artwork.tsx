@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import {User} from "../../mockup/mockup_users";
 import SellButton from "../../components/icons/SellButton";
 import HeartButton from "../../components/icons/HeartButton";
+import Empty from "../../empty";
 
 
 const Artwork = () => {
@@ -24,7 +25,6 @@ const Artwork = () => {
                 .then((data) => setArtwork(data))
                 .catch((error) => {
                     console.error('Помилка при отриманні даних з сервера:', error)
-                    navigate(`/artworks`);
                     toast.error('Artwork not found');
                 });
         }
@@ -112,13 +112,10 @@ const Artwork = () => {
                         </div>
                     </section> </>
             ) : (
-                <div>Loading</div>
+                <Empty message={"Theres no such artwork here"} link={`/artworks`} dist={'all artworks'}/>
             )}
         </div>
     );
 };
-
-//todo OLYA like instead of save button
-//todo normal loading page
 
 export default Artwork;

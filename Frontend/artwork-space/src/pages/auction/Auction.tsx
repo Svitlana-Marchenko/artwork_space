@@ -11,11 +11,11 @@ import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
 import {Rating} from "../../mockup/mockup_artworks";
 import {calculateAverageRating} from "../../utils/calculate-average-rate";
 import {User} from "../../mockup/mockup_users";
+import Empty from "../../empty";
 
 const Auction = () => {
     const { id } = useParams();
     const [auction, setAuction] = useState<AuctionType>();
-    const navigate = useNavigate();
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [isOpenPlaceBid, setIsOpenPlaceBid] = useState(false);
@@ -34,9 +34,8 @@ const Auction = () => {
         }
     }, [id]);
 
-    //todo normal page for error
     if (!auction) {
-        return <div>Loading...</div>;
+        return <Empty message={"Theres no such auction"} link={`/auctions`} dist={'all the auctions'}/>;
     }
 
     const averageRating = calculateAverageRating(auction.artwork?.ratings || []);

@@ -56,6 +56,10 @@ const Profile = () => {
                 .then((data) => {
                     setProfile(data);
                 })
+                .catch(() => {
+                    navigate(-1)
+                    toast.error('Failed to load the profile');
+                })
             ArtworkService.getAllArtworksByArtistId(id)
                 .then(data => {
                     console.log(data)
@@ -70,7 +74,6 @@ const Profile = () => {
                     setLikedArtworks(data);
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
-
         }
     }, []);
     useEffect(()=>{

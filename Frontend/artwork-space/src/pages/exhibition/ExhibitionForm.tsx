@@ -10,6 +10,7 @@ import {User} from "../../mockup/mockup_users";
 import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
 import {EditExhibition, Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
+import Empty from "../../empty";
 
 const ExhibitionForm = () => {
     const {id} = useParams();
@@ -116,12 +117,9 @@ const ExhibitionForm = () => {
     }
 
     if(!artworks) {
-        return <div>
-            No artworks
-        </div>;
+        return <Empty message={"Theres no artworks here"} link={`/exhibitions`} dist={'all exhibitions'}/>;
     }
-    //todo edit page, save values in input,
-    //TODO fix login page when create exhibition
+
     return (
         <div className='mx-32'>
             <div className='flex flex-col space-y-4 my-8'>

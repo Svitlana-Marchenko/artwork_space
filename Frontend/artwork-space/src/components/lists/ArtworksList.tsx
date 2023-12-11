@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ArtworkCard from "../listings/ArtworkCard";
 import {Artwork} from "../../mockup/mockup_artworks";
 import ArtworkService from "../../API/ArtworkService";
+import Empty from "../../empty";
 
 interface ArtworksListProps {
    artworks: Artwork[];
@@ -10,9 +11,8 @@ interface ArtworksListProps {
 
 const ArtworksList:React.FC<ArtworksListProps> = ({artworks, onAddToExhibition}) => {
 
-    //todo normal empty page
     if(artworks.length ===0){
-        return <div>No artworks</div>
+        return <Empty message={"Theres no artworks here"} link={`/artworks`} dist={'all artworks'}/>
     }
 
     const totalHeight = artworks.reduce((sum, artwork) => sum + artwork.height, 0);
