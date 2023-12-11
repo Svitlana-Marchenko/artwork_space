@@ -43,7 +43,6 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                     const userData = await UserService.getUserById(userId);
                     localStorage.setItem("token", data);
                     localStorage.setItem("currentUser", JSON.stringify(userData));
-                    console.log("User data fetched and saved to local storage:", userData);
                 }
             )
             .catch((error) => {

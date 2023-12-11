@@ -7,6 +7,11 @@ import {
 import {Modal} from "./Modal";
 import Input from "../input/Input";
 import {Auction} from "../../mockup/mockup_auctions";
+import {Password} from "../../mockup/mockup_users";
+import UserService from "../../API/UserService";
+import toast from "react-hot-toast";
+import AuctionService from "../../API/AuctionService";
+import {useNavigate} from "react-router-dom";
 
 interface PlaceBidModalProps {
     auction:Auction;
@@ -15,12 +20,11 @@ interface PlaceBidModalProps {
 }
 
 export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auction, isOpen, toggle}) => {
-
-    const [isLoading, setIsLoading] = useState(false);
-
+const navigate = useNavigate();
     const {
         register,
         handleSubmit,
+        reset,
         setValue,
         formState: {
             errors,
@@ -38,11 +42,21 @@ export const PlaceBidModal:React.FC<PlaceBidModalProps> = ({auction, isOpen, tog
     }, [auction]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-
+        AuctionService.placeBid(auction.id, data.newPrice)
+            .then(() => {
+                    toast.success("The bid was placed successfully")
+                    reset();
+                    toggle();
+                    window.location.reload()
+                }
+            )
+            .catch((error) => {
+                toast.error("Failed to place your bid")
+                console.error('Error in placing your bid:', error);
+            });
     }
 
     //todo edit email + server checking
-    //todo implement functionality
 
     const bodyContent = (
         <div className="flex flex-col gap-4">

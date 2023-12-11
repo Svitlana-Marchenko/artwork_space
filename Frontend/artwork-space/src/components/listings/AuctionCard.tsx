@@ -1,10 +1,6 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import {Auction} from "../../mockup/mockup_auctions";
 import {useNavigate} from "react-router-dom";
-import HeartButton from "../icons/HeartButton";
-import {Button} from "../Button";
-import {PlaceBidModal} from "../modals/PlaceBidModal";
-import auction from "../../pages/auction/Auction";
 
 const AuctionCard:React.FC<Auction> = ({
                                            id,

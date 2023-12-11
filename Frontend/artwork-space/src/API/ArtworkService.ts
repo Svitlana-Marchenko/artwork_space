@@ -1,6 +1,5 @@
 import axios from "axios";
 import {NewRating} from "../mockup/mockup_artworks";
-//don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
 export default class ArtworkService {
 
     static async getAllArtworks() {

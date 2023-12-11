@@ -37,4 +37,21 @@ export default class AuctionService {
             throw e;
         }
     }
+
+    static async placeBid(id: string | number, bid: number) {
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+            const response = await axios.put(`http://localhost:8080/collectioneer/auctions/${id}/placeBid`,  JSON.stringify(bid), config);
+            return response.data;
+        } catch (e) {
+            console.error('Помилка при створенні ставки на аукціон:', e);
+            throw e;
+        }
+    }
 }

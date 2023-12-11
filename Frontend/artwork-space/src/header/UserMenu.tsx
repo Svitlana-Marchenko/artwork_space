@@ -22,6 +22,7 @@ const UserMenu:React.FC<UserMenuProps> = ({}) => {
         setIsOpenUserMenu((value) => !value);
     }, []);
     const toggleOpenLogin = useCallback(() => {
+        setIsOpenUserMenu(false);
         setIsOpenLogin((value) => !value);
     }, []);
     const toggleOpenRegister = useCallback(() => {
