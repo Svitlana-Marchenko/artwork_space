@@ -34,7 +34,13 @@ public class AuctionCollectioneerController {
         return availableAuctions;
     }
 
-    @PutMapping("/{id}/placeBid")
+    @GetMapping("/user/{id}")
+    public List<AuctionDto> getAllAuctionsByCustomerId(@PathVariable Long id) {
+        logger.info("Getting all auction from artist with id {}", id);
+        return auctionCollectioneerService.getAllAuctionsByCustomerId(id).stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
+    }
+
+        @PutMapping("/{id}/placeBid")
     public AuctionDto placeBid(@PathVariable Long id, @RequestBody double bidAmount) {
         logger.info("Placing a bid for auction with ID: {}. Bid amount: {}", id, bidAmount);
         AuctionDto auction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionCollectioneerService.placeBid(id, bidAmount));

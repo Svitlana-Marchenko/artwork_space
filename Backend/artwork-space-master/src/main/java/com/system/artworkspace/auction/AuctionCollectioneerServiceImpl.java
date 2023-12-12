@@ -7,6 +7,7 @@ import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.exceptions.NoSuchAuctionException;
+import com.system.artworkspace.user.Role;
 import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -130,6 +131,19 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
             throw new NoSuchAuctionException("Auction with id " + id + " not found");
 
 
+    }
+
+    @Override
+    public List<Auction> getAllAuctionsByCustomerId(Long id) {
+        logger.info("Getting auctions, where artist id "+id);
+        User user = userService.getUserById(id);
+        if(!user.getRole().equals(Role.COLLECTIONEER)){
+            throw new RuntimeException("Trying to get auctions with non collectioneer user");
+        }
+        List<AuctionEntity> activeAuctionEntities = auctionRepository.findAllAuctionsByUserId(id);
+        return activeAuctionEntities.stream()
+                .map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x))
+                .collect(Collectors.toList());
     }
 
 }

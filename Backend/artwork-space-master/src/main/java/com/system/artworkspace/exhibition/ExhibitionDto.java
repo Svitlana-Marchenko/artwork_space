@@ -18,7 +18,7 @@ public class ExhibitionDto {
     @NotNull(message = "curator is null")
     private UserDto curator;
 
-    @Size(max = 50, message = "name is longer than 50")
+    @Size(max = 100, message = "name is longer than 100")
     @NotBlank(message = "name is blank")
     private String title;
 

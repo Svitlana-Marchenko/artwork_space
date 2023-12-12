@@ -3,6 +3,7 @@ package com.system.artworkspace.auction;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkDto;
 
+import java.util.Arrays;
 import java.util.List;
 
 public interface AuctionCollectioneerService {
@@ -17,4 +18,6 @@ public interface AuctionCollectioneerService {
     Auction getAuctionByPaintingId(Long paintingId);
 
     Auction getAuctionById(Long id);
+
+    List<Auction> getAllAuctionsByCustomerId(Long id);
 }

@@ -4,8 +4,8 @@ import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.ArtworkService;
 import com.system.artworkspace.auction.Sale.*;
 import com.system.artworkspace.exceptions.NoSuchAuctionException;
-import com.system.artworkspace.user.User;
-import com.system.artworkspace.user.UserMapper;
+import com.system.artworkspace.exceptions.NoSuchUserException;
+import com.system.artworkspace.user.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +14,9 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -34,6 +37,8 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Autowired
     private AuctionRepository auctionRepository;
     @Autowired
+    private UserService userService;
+    @Autowired
     private ArtworkService artworkService;
     @Autowired
     private SaleService saleService;
@@ -43,15 +48,18 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Autowired
     Job job;
 
+    //todo check cache after deleting auction
+
     @Override
     public Auction createAuction(Auction auction) {
         auction.setCurrentBid(auction.getStartingPrice());
-        auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
+        AuctionEntity a = auctionRepository.save(AuctionMapper.INSTANCE.auctionToAuctionEntity(auction));
         logger.info(AUCTIONS_EVENTS, "Created auction with ID: {}", auction.getId());
-        return auction;
+        return AuctionMapper.INSTANCE.auctionEntityToAuction(a);
     }
 
     @Override
+    @Cacheable(cacheNames="auction", key="#id")
     public Auction getAuctionById(Long id) {
         Optional<AuctionEntity> auction = auctionRepository.findById(id);
         logger.info("Finding auction by id ");
@@ -115,11 +123,27 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     }
 
     @Override
+    @CacheEvict(cacheNames="auction", key="#id")
     public void deleteAuctionById(Long id) {
         logger.info("Deleting auction with ID: {}", id);
         auctionRepository.deleteById(id);
         logger.info("Auction deleted with ID: {}", id);
     }
+
+    @Override
+    public List<Auction> getAllAuctionsByUserId(Long id) {
+        logger.info("Getting auctions, where artist id "+id);
+       User user = userService.getUserById(id);
+
+        if(!user.getRole().equals(Role.ARTIST)){
+            throw new RuntimeException("Trying to get auctions from non artist user");
+        }
+        List<AuctionEntity> activeAuctionEntities = auctionRepository.findAllAuctionsByArtworkArtistId(id);
+        return activeAuctionEntities.stream()
+                .map(x -> AuctionMapper.INSTANCE.auctionEntityToAuction(x))
+                .collect(Collectors.toList());
+    }
+
     //@Scheduled(fixedRate = 7000) //for testing
     @Scheduled(cron = "0 59 23 * * *") // Execute every day at 23:59
     public void performAuctionClosingJob() {

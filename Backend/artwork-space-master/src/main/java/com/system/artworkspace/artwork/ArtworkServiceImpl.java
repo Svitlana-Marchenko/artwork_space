@@ -59,10 +59,9 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     public Artwork addArtwork(Artwork artwork) {
         logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
-        repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
+        ArtworkEntity art = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
         logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
-
-        return artwork;
+        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(art);
     }
 
     @Override
