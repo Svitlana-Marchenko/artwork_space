@@ -113,14 +113,7 @@ const Artwork = () => {
                                         <Button label={"Delete"} onClick={handleDelete} outline/>
                                     </>
                                     :
-                                    currentUser?.role === "CURATOR"
-                                        ?
-                                        <>
-                                            <Button label={"Add review"} onClick={handleAddReview}/>
-                                            <Button label={"Save"} onClick={()=>{}}/>
-                                        </>
-                                        :
-                                        null
+                                    null
                             }
                         </div>
                     </section>
@@ -140,7 +133,6 @@ const Artwork = () => {
     );
 };
 
-//todo OLYA like instead of save button
 //todo normal loading page
 
 export default Artwork;
