@@ -132,7 +132,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
             startDate1 = dateFormat.parse("2023-01-23");
             endDate1 = dateFormat.parse("2024-02-23");
             startDate2 = dateFormat.parse("2023-10-23");
-            endDate2 = dateFormat.parse("2023-11-23");
+            endDate2 = dateFormat.parse("2023-12-23");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -159,6 +159,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition1));
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition2));
 
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(1l));
     }
 
 
