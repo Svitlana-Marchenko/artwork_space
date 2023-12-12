@@ -11,6 +11,12 @@ import Select from "../input/Select";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import {LoginModal} from "./LoginModal";
+import {
+    emailValidation,
+    lettersOnlyValidation,
+    maxLengthValidation, passwordValidation,
+    requiredValidation
+} from "../../utils/validationUtils";
 
 interface RegisterModalProps {
     isOpen:boolean;
@@ -81,7 +87,10 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
                     type='email'
                     register={register}
                     errors={errors}
-                    required
+                    validationOptions={{
+                        ...requiredValidation,
+                        ...emailValidation
+                    }}
                 />
                 <Input
                     id="username"
@@ -89,7 +98,9 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
                     placeholder="Username"
                     register={register}
                     errors={errors}
-                    required
+                    validationOptions={{
+                        ...requiredValidation,
+                    }}
                 />
             </div>
                 <Input
@@ -98,7 +109,11 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
                     placeholder="First name"
                     register={register}
                     errors={errors}
-                    required
+                    validationOptions={{
+                        ...requiredValidation,
+                        ...maxLengthValidation(100),
+                        ...lettersOnlyValidation
+                    }}
                 />
                 <Input
                     id="lastName"
@@ -106,7 +121,11 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
                     placeholder="Last name"
                     register={register}
                     errors={errors}
-                    required
+                    validationOptions={{
+                        ...requiredValidation,
+                        ...maxLengthValidation(100),
+                        ...lettersOnlyValidation
+                    }}
                 />
             <div className={"flex flex-row space-x-4 items-center"}>
                 <Select
@@ -125,7 +144,10 @@ export const RegisterModal:React.FC<RegisterModalProps> = ({isOpen, toggle}) => 
                     placeholder="Password"
                     register={register}
                     errors={errors}
-                    required
+                    validationOptions={{
+                        ...requiredValidation,
+                        ...passwordValidation
+                    }}
                 />
             </div>
         </div>

@@ -1,9 +1,7 @@
 import React from 'react';
 import {Artwork, NewArtwork} from "../../mockup/mockup_artworks";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {NewUser, User, UserRole} from "../../mockup/mockup_users";
-import UserService from "../../API/UserService";
-import toast from "react-hot-toast";
+import {User} from "../../mockup/mockup_users";
 
 interface ArtworkModalProps {
     isOpen:boolean;

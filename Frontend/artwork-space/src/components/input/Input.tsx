@@ -1,9 +1,10 @@
 import {
     FieldErrors,
     FieldValues,
-    UseFormRegister
-} from "react-hook-form";
-import React from "react";
+    UseFormRegister,
+    RegisterOptions,
+} from 'react-hook-form';
+import React from 'react';
 
 export interface InputProps {
     id: string;
@@ -15,19 +16,20 @@ export interface InputProps {
     errors: FieldErrors;
     isTextArea?: boolean;
     minValue?: number;
+    validationOptions?: RegisterOptions;
 }
 
 const Input: React.FC<InputProps> = ({
                                          id,
                                          label,
-                                         type = "text",
+                                         type = 'text',
                                          placeholder,
                                          register,
                                          required,
                                          errors,
-                                         isTextArea=false
+                                         isTextArea = false,
+                                         validationOptions,
                                      }) => {
-
     const inputClasses = `
                     peer
                     w-full
@@ -42,12 +44,13 @@ const Input: React.FC<InputProps> = ({
                     ${errors[id] ? 'focus:border-black' : 'focus:border-[#a62c2a]'}
                     ${isTextArea ? 'h-48' : null}
                   `;
+
     return (
         <div className="w-full relative">
             {isTextArea ? (
                 <textarea
                     id={id}
-                    {...register(id, { required })}
+                    {...register(id, { required, ...validationOptions })}
                     placeholder={placeholder}
                     className={inputClasses}
                     rows={4}
@@ -55,7 +58,7 @@ const Input: React.FC<InputProps> = ({
             ) : (
                 <input
                     id={id}
-                    {...register(id, { required })}
+                    {...register(id, { required, ...validationOptions })}
                     placeholder={placeholder}
                     type={type}
                     className={inputClasses}
@@ -86,8 +89,11 @@ const Input: React.FC<InputProps> = ({
             >
                 {label}
             </label>
+            {errors[id] && (
+                <p className="text-[#a62c2a] text-sm mt-1">{errors[id]?.message?.toString()}</p>
+            )}
         </div>
     );
-}
+};
 
 export default Input;

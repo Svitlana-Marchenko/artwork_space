@@ -11,6 +11,13 @@ import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
 import {EditExhibition, Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
 import Empty from "../../empty";
+import {
+    dateValidation,
+    endDateValidation,
+    lettersOnlyValidation,
+    maxLengthValidation,
+    requiredValidation
+} from "../../utils/validationUtils";
 
 const ExhibitionForm = () => {
     const {id} = useParams();
@@ -67,7 +74,7 @@ const ExhibitionForm = () => {
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (currentUser && selectedArtworks) {
+        if (currentUser && selectedArtworks.length !== 0) {
 
             const exhibitionData:NewExhibition = {
                 curator: currentUser,
@@ -96,7 +103,7 @@ const ExhibitionForm = () => {
                         toast.error("Failed to edit exhibition")
                         console.error('Error in editing exhibition:', error);
                     });
-            }else {
+            } else {
                 ExhibitionService.createExhibition(exhibitionData)
                     .then((data) => {
                             toast.success("Exhibition was created")
@@ -113,7 +120,6 @@ const ExhibitionForm = () => {
         } else {
             toast.error("Exhibition has no artworks")
         }
-
     }
 
     if(!artworks) {
@@ -131,7 +137,11 @@ const ExhibitionForm = () => {
                         placeholder="Title"
                         register={register}
                         errors={errors}
-                        required
+                        validationOptions={{
+                            ...lettersOnlyValidation,
+                            ...requiredValidation,
+                            ...maxLengthValidation(100),
+                        }}
                     />
                     </div>
                     <div className='w-1/4'>
@@ -151,7 +161,10 @@ const ExhibitionForm = () => {
                                 type='date'
                                 register={register}
                                 errors={errors}
-                                required
+                                validationOptions={{
+                                    ...requiredValidation,
+                                    ...dateValidation,
+                                }}
                             />
                             <Input
                                 id="endDate"
@@ -160,7 +173,10 @@ const ExhibitionForm = () => {
                                 type='date'
                                 register={register}
                                 errors={errors}
-                                required
+                                validationOptions={{
+                                    ...requiredValidation,
+                                    ...endDateValidation,
+                                }}
                             />
                         </div>
                     )
@@ -171,6 +187,9 @@ const ExhibitionForm = () => {
                     placeholder="Description"
                     register={register}
                     errors={errors}
+                    validationOptions={{
+                        ...requiredValidation,
+                        ...maxLengthValidation(2000),}}
                     isTextArea
                     required
                 />

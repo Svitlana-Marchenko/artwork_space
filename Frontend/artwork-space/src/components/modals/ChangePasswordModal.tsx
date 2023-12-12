@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import {
     FieldValues,
     SubmitHandler,
@@ -9,6 +9,7 @@ import Input from "../input/Input";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import {Password, User} from "../../mockup/mockup_users";
+import {passwordValidation, repeatPasswordValidation, requiredValidation} from "../../utils/validationUtils";
 interface ChangePasswordModalProps {
     isOpen:boolean;
     toggle: () => void;
@@ -67,7 +68,9 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 type="password"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                }}
                 
             />
             <Input
@@ -77,8 +80,10 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 type="password"
                 register={register}
                 errors={errors}
-                required
-                
+                validationOptions={{
+                    ...passwordValidation,
+                    ...requiredValidation,
+                }}
             />
             <Input
                 id="newRepeatPassword"
@@ -87,8 +92,10 @@ export const ChangePasswordModal:React.FC<ChangePasswordModalProps> = ({isOpen, 
                 type="password"
                 register={register}
                 errors={errors}
-                required
-                
+                validationOptions={{
+                    ...repeatPasswordValidation,
+                    ...requiredValidation,
+                }}
             />
         </div>
     )

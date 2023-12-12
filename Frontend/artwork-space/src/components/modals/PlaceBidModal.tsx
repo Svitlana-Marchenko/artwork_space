@@ -12,6 +12,7 @@ import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import AuctionService from "../../API/AuctionService";
 import {useNavigate} from "react-router-dom";
+import {minValueValidation, requiredValidation} from "../../utils/validationUtils";
 
 interface PlaceBidModalProps {
     auction:Auction;
@@ -56,8 +57,6 @@ const navigate = useNavigate();
             });
     }
 
-    //todo edit email + server checking
-
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <div className={'text-center'}>
@@ -76,7 +75,10 @@ const navigate = useNavigate();
                 type="number"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...minValueValidation(auction.currentBid+auction.bid)
+                }}
             />
         </div>
     )

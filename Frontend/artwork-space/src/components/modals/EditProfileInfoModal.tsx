@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {
     FieldValues,
     SubmitHandler,
@@ -6,9 +6,10 @@ import {
 } from "react-hook-form";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
-import {EditUser, Password, User} from "../../mockup/mockup_users";
+import {EditUser, User} from "../../mockup/mockup_users";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
+import {lettersOnlyValidation, maxLengthValidation, requiredValidation} from "../../utils/validationUtils";
 
 interface EditProfileInfoModalProps {
     isOpen:boolean;
@@ -43,28 +44,24 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
     }, [currentUser, setValue]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data)
         const userData:EditUser = {
             id: currentUser.id,
             username: data.username,
             firstName: data.firstname,
             lastName: data.lastname
         };
-        console.log(userData)
         UserService.changeProfile(userData)
             .then(() => {
                     toast.success("The profile was changed successfully")
                     reset();
                     toggle();
+                    window.location.reload()
                 }
             )
             .catch(() => {
                 toast.error("Failed to change your profile")
             });
     }
-
-    //todo edit email + server checking
-    //todo implement functionality
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -82,7 +79,10 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 placeholder="Username"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...maxLengthValidation(100)
+                }}
             />
 
             <Input
@@ -91,7 +91,11 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 placeholder="First name"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...maxLengthValidation(100),
+                    ...lettersOnlyValidation
+                }}
             />
 
             <Input
@@ -100,7 +104,11 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
                 placeholder="Last name"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...maxLengthValidation(100),
+                    ...lettersOnlyValidation
+                }}
             />
 
         </div>
@@ -117,8 +125,4 @@ export const EditProfileInfoModal:React.FC<EditProfileInfoModalProps> = ({isOpen
         />
     )
 
-}
-
-function setValue(arg0: string, firstname: any) {
-    throw new Error("Function not implemented.");
 }

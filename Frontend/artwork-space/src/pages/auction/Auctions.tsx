@@ -19,7 +19,7 @@ const Auctions = () => {
     }, []);
 
     if (auctions.length === 0) {
-        return <Empty message={"Theres no such auctions here"} link={`/auctions`} dist={'all the auctions'}/>;
+        return <Empty message={"Theres no auctions here"} link={`/artworks`} dist={'all the artworks'}/>;
     }
 
     return (

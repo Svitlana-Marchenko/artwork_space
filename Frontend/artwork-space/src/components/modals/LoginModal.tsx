@@ -10,6 +10,7 @@ import Input from "../input/Input";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import {MyToken, User} from "../../mockup/mockup_users";
+import {passwordValidation, requiredValidation} from "../../utils/validationUtils";
 interface LoginModalProps {
     isOpen:boolean;
     toggle: () => void;
@@ -69,7 +70,9 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 placeholder="Username"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                }}
             />
             <Input
                 id="password"
@@ -78,7 +81,9 @@ export const LoginModal:React.FC<LoginModalProps> = ({isOpen, toggle}) => {
                 type="password"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation
+                }}
             />
         </div>
     )

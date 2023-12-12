@@ -11,6 +11,7 @@ import useAuction from "../../hooks/useAuction";
 import {NewAuction} from "../../mockup/mockup_auctions";
 import AuctionService from "../../API/AuctionService";
 import {useNavigate} from "react-router-dom";
+import {dateValidation, maxLengthValidation, minValueValidation, requiredValidation} from "../../utils/validationUtils";
 
 interface AuctionModalProps {
     isOpen:boolean;
@@ -33,18 +34,9 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
         defaultValues: {
             startingPrice: 0,
             step: 0,
-            closingTime: new Date,
+            closingTime: new Date(),
         },
     });
-    /*
-     id: number;
-    artwork: Artwork;
-    startingPrice: number;
-    step: number;
-    closingTime: Date;
-    user: User;
-    currentBid: number;
-     */
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setNewAuction({
             artwork: artwork,
@@ -85,7 +77,10 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
                 type="number"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...minValueValidation(0),
+                }}
             />
             <Input
                 id="step"
@@ -94,7 +89,10 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
                 type="number"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...minValueValidation(0),
+                }}
             />
             <Input
                 id="closingTime"
@@ -103,7 +101,10 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
                 type="date"
                 register={register}
                 errors={errors}
-                required
+                validationOptions={{
+                    ...requiredValidation,
+                    ...dateValidation
+                }}
             />
         </div>
     )
