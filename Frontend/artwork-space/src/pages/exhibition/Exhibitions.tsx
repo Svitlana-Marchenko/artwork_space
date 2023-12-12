@@ -6,6 +6,7 @@ import {User} from "../../mockup/mockup_users";
 
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast/headless";
+import Empty from "../../empty";
 
 const Exhibitions = () => {
     const { id } = useParams();
@@ -29,8 +30,6 @@ const Exhibitions = () => {
         }
     }, []);
 
-    //todo normal empty page
-
     return (
         <div className="mx-32">
             {
@@ -38,21 +37,23 @@ const Exhibitions = () => {
                     ?
                     currentUser && (
                         <>
-                            <p className={'text-3xl font-bold mt-8'}>
+                            <h2 className={'text-3xl font-bold mt-8'}>
                                 {currentUser.role === "CURATOR"
                                     ?
                                     "MY EXHIBITIONS"
                                     :
                                     `EXHIBITIONS BY ${currentUser.firstName.toUpperCase()} ${currentUser.lastName.toUpperCase()}`}
-                            </p>
+                            </h2>
                         </>
                     )
                     :
                     <p className={'text-3xl font-bold mt-8'}>ACTIVE EXHIBITIONS</p>
             }
+
             {exhibitions.length === 0 &&
-            <div>No exhibition</div>
+                <Empty message={"Theres no exhibitions"} link={`/`} dist={'all the main page'}/>
             }
+
             {exhibitions.length > 0 && exhibitions.map((exhibition) => {
                 return (
                     <ExhibitionList
@@ -71,5 +72,3 @@ const Exhibitions = () => {
 };
 
 export default Exhibitions;
-
-//todo show Olya bug with link in exhibition carousel

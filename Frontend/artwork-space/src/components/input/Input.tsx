@@ -13,7 +13,8 @@ export interface InputProps {
     required?: boolean;
     register: UseFormRegister<FieldValues>;
     errors: FieldErrors;
-    isTextArea?: boolean
+    isTextArea?: boolean;
+    minValue?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,19 +29,19 @@ const Input: React.FC<InputProps> = ({
                                      }) => {
 
     const inputClasses = `
-    peer
-    w-full
-    p-2
-    font-light 
-    bg-white 
-    border-2
-    rounded-md
-    outline-none
-    transition
-    ${errors[id] ? 'border-black' : 'border-gray-200'}
-    ${errors[id] ? 'focus:border-black' : 'focus:border-[#a62c2a]'}
-    ${isTextArea ? 'h-48' : null}
-  `;
+                    peer
+                    w-full
+                    p-2
+                    font-light 
+                    bg-white 
+                    border-2
+                    rounded-md
+                    outline-none
+                    transition
+                    ${errors[id] ? 'border-black' : 'border-gray-200'}
+                    ${errors[id] ? 'focus:border-black' : 'focus:border-[#a62c2a]'}
+                    ${isTextArea ? 'h-48' : null}
+                  `;
     return (
         <div className="w-full relative">
             {isTextArea ? (
@@ -49,7 +50,7 @@ const Input: React.FC<InputProps> = ({
                     {...register(id, { required })}
                     placeholder={placeholder}
                     className={inputClasses}
-                    rows={4} // Змініть це значення за потреби
+                    rows={4}
                 />
             ) : (
                 <input

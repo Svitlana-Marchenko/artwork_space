@@ -10,6 +10,8 @@ import {User} from "../../mockup/mockup_users";
 import SellButton from "../../components/icons/SellButton";
 import RatingModal from "../../components/modals/RatingModal";
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
+import HeartButton from "../../components/icons/HeartButton";
+import Empty from "../../empty";
 
 
 const Artwork = () => {
@@ -87,6 +89,13 @@ const Artwork = () => {
                                     :
                                     null
                             }
+                            {
+                                currentUser?.role === "CURATOR" || currentUser?.role === "COLLECTIONEER"
+                                    ?
+                                    <HeartButton artworkId={artwork.id} dark/>
+                                    :
+                                    null
+                            }
                         </div>
                         <ArtworkDescription
                             technique={artwork.technique}
@@ -109,13 +118,7 @@ const Artwork = () => {
                                             <Button label={"Save"} onClick={()=>{}}/>
                                         </>
                                         :
-                                        currentUser?.role === "COLLECTIONEER"
-                                            ?
-                                            <>
-                                                <Button label={"Save"} onClick={()=>{}}/>
-                                            </>
-                                            :
-                                            <></>
+                                        null
                             }
                         </div>
                     </section>
@@ -129,7 +132,7 @@ const Artwork = () => {
                     <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />
                 </div></>
             ) : (
-                <div>Loading</div>
+                <Empty message={"Theres no such artwork here"} link={`/artworks`} dist={'all artworks'}/>
             )}
         </div>
     );

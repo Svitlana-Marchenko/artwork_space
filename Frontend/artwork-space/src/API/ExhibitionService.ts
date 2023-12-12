@@ -1,6 +1,6 @@
 import axios from "axios";
 import {EditExhibition, NewExhibition} from "../mockup/mockup_exhibitions";
-//don't forget to install axios (try to press on the line above or write something like 'npm install axios' in terminal)
+
 export default class ExhibitionService {
     static async getAllActiveExhibitions() {
         try {
@@ -34,7 +34,15 @@ export default class ExhibitionService {
 
     static async deleteExhibition(id:string) {
         try {
-            const response = await axios.delete(`http://localhost:8080/exhibitions/${id}`);
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.delete(`http://localhost:8080/exhibitions/${id}`, config);
             return response.data;
         } catch (error) {
             console.error('Помилка при отриманні даних з сервера про видалення виставки:', error);
@@ -44,7 +52,15 @@ export default class ExhibitionService {
 
     static async createExhibition(exhibition:NewExhibition) {
         try {
-            const response = await axios.post('http://localhost:8080/exhibitions', exhibition);
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.post('http://localhost:8080/exhibitions', exhibition, config);
             return response.data;
         } catch (error) {
             console.error('Помилка при отриманні даних з сервера про створення виставки:', error);
@@ -54,7 +70,15 @@ export default class ExhibitionService {
 
     static async editExhibition(exhibition:EditExhibition) {
         try {
-            const response = await axios.put('http://localhost:8080/exhibitions', exhibition);
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await axios.put('http://localhost:8080/exhibitions', exhibition, config);
             return response.data;
         } catch (error) {
             console.error('Помилка при отриманні даних з сервера про редагування виставки:', error);

@@ -6,6 +6,7 @@ import {Button} from "../../components/Button";
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
 import {User} from "../../mockup/mockup_users";
+import Empty from "../../empty";
 
 const Exhibition = () => {
     const navigate = useNavigate();
@@ -38,9 +39,8 @@ const Exhibition = () => {
         }
     }
 
-    //todo normal page for error
     if (!exhibition) {
-        return <div>Loading...</div>;
+        return <Empty message={"Theres no such exhibition"} link={`/exhibitions`} dist={'all the exhibitions'}/>;
     }
 
     return (

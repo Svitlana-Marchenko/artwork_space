@@ -5,9 +5,10 @@ import useFavorite from "../../hooks/useFavorite";
 
 interface HeartButtonProps {
     artworkId: number;
+    dark?: boolean;
 }
 
-const HeartButton:React.FC<HeartButtonProps> = ({artworkId}) => {
+const HeartButton:React.FC<HeartButtonProps> = ({artworkId, dark}) => {
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const { hasFavorite, toggleFavorite } = useFavorite({
@@ -28,12 +29,12 @@ const HeartButton:React.FC<HeartButtonProps> = ({artworkId}) => {
         >
             <AiOutlineHeart
                 size={28}
-                className="
-          fill-white
-          absolute
-          -top-[2px]
-          -right-[2px]
-        "
+                className={`
+                      ${dark ? "fill-[#a62c2a]" : "fill-white"}
+                      absolute
+                      -top-[2px]
+                      -right-[2px]
+                        `}
             />
             <AiFillHeart
                 size={24}
