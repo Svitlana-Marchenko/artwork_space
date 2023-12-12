@@ -8,16 +8,14 @@ import {Artwork} from "../../mockup/mockup_artworks";
 
 const Artworks = () => {
     const { id } = useParams();
-    const [artist, setArtist] = useState<User>();
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
-
     const [artworks, setArtworks] = useState<Artwork[]>([]);
 
     //todo check artistid role (like unable to see artwork of non-artist users)
 
     useEffect(() => {
-        if (id !== undefined) {
+        if (id) {
             ArtworkService.getAllArtworksByArtistId(id)
                 .then(data => {setArtworks(data);
                 })
@@ -35,21 +33,9 @@ const Artworks = () => {
     return (
         <div className="mx-32">
             {
-                id
-                ?
-                    artist && (
-                        <>
-                            <p className={'text-3xl font-bold my-8'}>
-                                {currentUser?.id === convertToInt(id)
-                                    ?
-                                    "MY"
-                                    :
-                                    `${artist.firstName.toUpperCase()} ${artist.lastName.toUpperCase()}`} ARTWORKS
-                            </p>
-                        </>
-                    )
-                    :
-                    null
+                (currentUser?.id === convertToInt(id))&&(
+                    <p className={'text-3xl font-bold my-8'}> MY ARTWORKS</p>
+                )
             }
             <ArtworksList artworks={artworks}/>
         </div>
