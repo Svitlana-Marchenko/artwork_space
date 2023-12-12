@@ -12,6 +12,7 @@ import RatingModal from "../../components/modals/RatingModal";
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 import HeartButton from "../../components/icons/HeartButton";
 import Empty from "../../empty";
+import {calculateAverageRating} from "../../utils/calculate-average-rate";
 
 
 const Artwork = () => {
@@ -39,6 +40,7 @@ const Artwork = () => {
             ratingFormRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }
+    const averageRating = calculateAverageRating(artwork?.ratings || []);
 
     //todo change to custom window.confirm
     //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
@@ -80,7 +82,7 @@ const Artwork = () => {
                                 username={artwork.user.username}
                                 firstName={artwork.user.firstName}
                                 lastName={artwork.user.lastName}
-                                averageRating={0}
+                                averageRating={averageRating}
                             />
                             {
                                 currentUser?.role === "ARTIST"
