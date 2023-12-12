@@ -1,4 +1,4 @@
-import {Artwork} from "./mockup_artworks";
+import {Artwork} from "./artworkTypes";
 export interface MyToken {
     id: number;
     role: string;

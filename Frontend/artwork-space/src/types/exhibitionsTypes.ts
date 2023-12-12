@@ -1,5 +1,5 @@
-import {Artwork} from "./mockup_artworks";
-import {User} from "./mockup_users";
+import {Artwork} from "./artworkTypes";
+import {User} from "./usersTypes";
 
 export type EditExhibition = {
     id: number;

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Exhibition} from "../../mockup/mockup_exhibitions";
+import {Exhibition} from "../../types/exhibitionsTypes";
 import ExhibitionList from "../../components/lists/ExhibitionList";
 import {useParams} from "react-router-dom";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast/headless";

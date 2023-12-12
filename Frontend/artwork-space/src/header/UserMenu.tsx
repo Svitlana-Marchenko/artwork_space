@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {AiOutlineMenu} from "react-icons/ai";
 import MenuItem from "./MenuItem";
 import {useNavigate} from "react-router-dom";
-import {User} from "../mockup/mockup_users"
+import {User} from "../types/usersTypes"
 import {LoginModal} from "../components/modals/LoginModal";
 import {RegisterModal} from "../components/modals/RegisterModal";
 

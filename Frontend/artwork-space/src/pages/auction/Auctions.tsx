@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Auction} from "../../mockup/mockup_auctions";
+import {Auction} from "../../types/auctionsTypes";
 import AuctionCard from "../../components/listings/AuctionCard";
 import AuctionService from "../../API/AuctionService";
 import Empty from "../../empty";

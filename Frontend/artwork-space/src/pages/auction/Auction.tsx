@@ -4,13 +4,13 @@ import {Button} from "../../components/Button";
 import CountdownTimer from "../../components/countdown/CountdownTimer";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
-import {Auction as AuctionType} from "../../mockup/mockup_auctions";
+import {Auction as AuctionType} from "../../types/auctionsTypes";
 import AuctionService from "../../API/AuctionService";
 import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
 import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
-import {Rating} from "../../mockup/mockup_artworks";
+import {Rating} from "../../types/artworkTypes";
 import {calculateAverageRating} from "../../utils/calculate-average-rate";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import Empty from "../../empty";
 
 const Auction = () => {

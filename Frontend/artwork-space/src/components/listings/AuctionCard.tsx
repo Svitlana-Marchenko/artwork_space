@@ -1,5 +1,5 @@
 import React from 'react';
-import {Auction} from "../../mockup/mockup_auctions";
+import {Auction} from "../../types/auctionsTypes";
 import {useNavigate} from "react-router-dom";
 
 const AuctionCard:React.FC<Auction> = ({

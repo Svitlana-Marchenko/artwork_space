@@ -1,8 +1,8 @@
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
-import {User, users} from "../../mockup/mockup_users";
+import {User, users} from "../../types/usersTypes";
 import React, {useState} from "react";
 
 export const NewArtwork = () => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Auction, NewAuction} from "../mockup/mockup_auctions";
+import {Auction, NewAuction} from "../types/auctionsTypes";
 
 export default class AuctionService {
     static async getAllAuctions() {

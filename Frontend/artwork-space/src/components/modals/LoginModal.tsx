@@ -9,7 +9,7 @@ import {Modal} from "./Modal";
 import Input from "../input/Input";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
-import {MyToken, User} from "../../mockup/mockup_users";
+import {MyToken, User} from "../../types/usersTypes";
 import {passwordValidation, requiredValidation} from "../../utils/validationUtils";
 interface LoginModalProps {
     isOpen:boolean;

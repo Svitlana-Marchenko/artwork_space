@@ -1,5 +1,5 @@
 import axios from "axios";
-import {EditUser, NewUser, Password} from "../mockup/mockup_users";
+import {EditUser, NewUser, Password} from "../types/usersTypes";
 
 export default class UserService {
     static async getUserById(id:number|string) {

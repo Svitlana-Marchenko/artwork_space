@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {Artwork as ArtworkType} from '../../mockup/mockup_artworks'
+import {Artwork as ArtworkType} from '../../types/artworkTypes'
 import {Button} from "../../components/Button";
 import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import SellButton from "../../components/icons/SellButton";
 import RatingModal from "../../components/modals/RatingModal";
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";

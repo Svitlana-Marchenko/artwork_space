@@ -1,5 +1,5 @@
 import React from 'react';
-import {Artwork} from "../mockup/mockup_artworks";
+import {Artwork} from "../types/artworkTypes";
 import ArtworksList from "./lists/ArtworksList";
 interface CollectionProps {
     artworks?: Artwork[];

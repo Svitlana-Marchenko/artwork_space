@@ -4,12 +4,12 @@ import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
 import ArtworksList from "../../components/lists/ArtworksList";
 import ArtworkService from "../../API/ArtworkService";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import Input from "../../components/input/Input";
 import {Button} from "../../components/Button";
-import {EditExhibition, Exhibition, NewExhibition} from "../../mockup/mockup_exhibitions";
+import {EditExhibition, Exhibition, NewExhibition} from "../../types/exhibitionsTypes";
 import Empty from "../../empty";
 import {
     dateValidation,

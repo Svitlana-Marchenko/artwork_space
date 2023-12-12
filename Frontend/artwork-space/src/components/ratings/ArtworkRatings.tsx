@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Rating } from '../../mockup/mockup_artworks';
+import { Rating } from '../../types/artworkTypes';
 import UserLink from '../UserLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 
 interface ArtworkRatingsProps {
     ratings: Rating[];

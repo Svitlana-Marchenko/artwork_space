@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import ExhibitionService from "../API/ExhibitionService";
-import {User} from "../mockup/mockup_users";
-import {Exhibition} from "../mockup/mockup_exhibitions";
+import {User} from "../types/usersTypes";
+import {Exhibition} from "../types/exhibitionsTypes";
 
 interface IUseMyExhibition {
     exhibition: Exhibition | undefined;

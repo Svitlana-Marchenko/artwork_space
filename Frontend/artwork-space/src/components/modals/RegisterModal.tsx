@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 import Input from "../input/Input";
 import {Modal} from "./Modal";
-import {NewUser, User, UserRole} from "../../mockup/mockup_users";
+import {NewUser, User, UserRole} from "../../types/usersTypes";
 import Select from "../input/Select";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";

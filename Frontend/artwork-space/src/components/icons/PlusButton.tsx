@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {IoAddCircleOutline, IoCheckmarkCircle} from "react-icons/io5";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 interface PlusButtonProps {
     artwork: Artwork;
     onAddToExhibition: (artwork: Artwork) => void;

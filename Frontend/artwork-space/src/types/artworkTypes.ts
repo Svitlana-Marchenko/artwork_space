@@ -1,4 +1,4 @@
-import {User} from "./mockup_users";
+import {User} from "./usersTypes";
 export interface NewRating {
     rate: number;
     user: User;

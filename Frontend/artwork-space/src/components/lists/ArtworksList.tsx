@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ArtworkCard from "../listings/ArtworkCard";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 import ArtworkService from "../../API/ArtworkService";
 import Empty from "../../empty";
 

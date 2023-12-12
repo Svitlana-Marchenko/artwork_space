@@ -8,7 +8,7 @@ import {Modal} from "./Modal";
 import Input from "../input/Input";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
-import {Password, User} from "../../mockup/mockup_users";
+import {Password, User} from "../../types/usersTypes";
 import {passwordValidation, repeatPasswordValidation, requiredValidation} from "../../utils/validationUtils";
 interface ChangePasswordModalProps {
     isOpen:boolean;

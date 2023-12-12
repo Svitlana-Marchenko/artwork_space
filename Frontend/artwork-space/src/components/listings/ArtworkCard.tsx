@@ -2,8 +2,8 @@ import React from 'react';
 import HeartButton from "../icons/HeartButton";
 import {useNavigate} from "react-router-dom";
 import UserLink from "../UserLink";
-import {User} from "../../mockup/mockup_users";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {User} from "../../types/usersTypes";
+import {Artwork} from "../../types/artworkTypes";
 import PlusButton from "../icons/PlusButton";
 
 interface ArtworkCardProps {

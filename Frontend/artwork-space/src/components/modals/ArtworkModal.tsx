@@ -1,7 +1,7 @@
 import React from 'react';
-import {Artwork, NewArtwork} from "../../mockup/mockup_artworks";
+import {Artwork, NewArtwork} from "../../types/artworkTypes";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 
 interface ArtworkModalProps {
     isOpen:boolean;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {NewRating} from "../mockup/mockup_artworks";
+import {NewRating} from "../types/artworkTypes";
 export default class ArtworkService {
 
     static async getAllArtworks() {

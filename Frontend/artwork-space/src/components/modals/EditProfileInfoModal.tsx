@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
-import {EditUser, User} from "../../mockup/mockup_users";
+import {EditUser, User} from "../../types/usersTypes";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import {lettersOnlyValidation, maxLengthValidation, requiredValidation} from "../../utils/validationUtils";

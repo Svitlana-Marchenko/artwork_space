@@ -6,8 +6,8 @@ import {
 } from "react-hook-form";
 import {Modal} from "./Modal";
 import Input from "../input/Input";
-import {Auction} from "../../mockup/mockup_auctions";
-import {Password} from "../../mockup/mockup_users";
+import {Auction} from "../../types/auctionsTypes";
+import {Password} from "../../types/usersTypes";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import AuctionService from "../../API/AuctionService";

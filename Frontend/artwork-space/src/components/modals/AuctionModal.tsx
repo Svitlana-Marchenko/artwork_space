@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import {Password, User} from "../../mockup/mockup_users";
+import {Password, User} from "../../types/usersTypes";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import UserService from "../../API/UserService";
 import toast from "react-hot-toast";
 import Input from "../input/Input";
 import {Modal} from "./Modal";
-import {NewExhibition} from "../../mockup/mockup_exhibitions";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {NewExhibition} from "../../types/exhibitionsTypes";
+import {Artwork} from "../../types/artworkTypes";
 import useAuction from "../../hooks/useAuction";
-import {NewAuction} from "../../mockup/mockup_auctions";
+import {NewAuction} from "../../types/auctionsTypes";
 import AuctionService from "../../API/AuctionService";
 import {useNavigate} from "react-router-dom";
 import {dateValidation, maxLengthValidation, minValueValidation, requiredValidation} from "../../utils/validationUtils";

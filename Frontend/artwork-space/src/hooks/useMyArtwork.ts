@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {Artwork as ArtworkType} from "../mockup/mockup_artworks";
+import {Artwork as ArtworkType} from "../types/artworkTypes";
 import ArtworkService from "../API/ArtworkService";
-import {User} from "../mockup/mockup_users";
+import {User} from "../types/usersTypes";
 
 interface IUseMyArtwork {
     artwork: ArtworkType | undefined;

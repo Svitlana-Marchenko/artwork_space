@@ -1,10 +1,10 @@
 import React from 'react';
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 import NavigationLink from "../../header/NavigationLink";
 import ScrollCarousel from 'scroll-carousel-react';
 import ArtworkCard from "../listings/ArtworkCard";
 import {useNavigate} from "react-router-dom";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 
 interface ExhibitionListProps {
     id: string;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import AuctionService from "../API/AuctionService";
-import { Artwork } from "../mockup/mockup_artworks";
-import {Auction} from "../mockup/mockup_auctions";
+import { Artwork } from "../types/artworkTypes";
+import {Auction} from "../types/auctionsTypes";
 
 interface IUseAuction {
     artwork: Artwork;

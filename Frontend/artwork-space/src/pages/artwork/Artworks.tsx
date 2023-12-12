@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ArtworksList from "../../components/lists/ArtworksList";
 import {useParams} from "react-router-dom";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import {convertToInt} from "../../actions/functions";
 import ArtworkService from "../../API/ArtworkService";
-import {Artwork} from "../../mockup/mockup_artworks";
+import {Artwork} from "../../types/artworkTypes";
 
 const Artworks = () => {
     const { id } = useParams();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {EditExhibition, NewExhibition} from "../mockup/mockup_exhibitions";
+import {EditExhibition, NewExhibition} from "../types/exhibitionsTypes";
 
 export default class ExhibitionService {
     static async getAllActiveExhibitions() {

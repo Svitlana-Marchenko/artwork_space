@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {Exhibition as ExhibitionType} from "../../mockup/mockup_exhibitions";
+import {Exhibition as ExhibitionType} from "../../types/exhibitionsTypes";
 import ArtworksList from "../../components/lists/ArtworksList";
 import {Button} from "../../components/Button";
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import Empty from "../../empty";
 import useMyExhibition from "../../hooks/useMyExhibitions";
 

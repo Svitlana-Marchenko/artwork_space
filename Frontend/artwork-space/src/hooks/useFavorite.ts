@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from "react";
 import { toast } from "react-hot-toast";
 import React from "react";
-import {User} from "../mockup/mockup_users";
+import {User} from "../types/usersTypes";
 import CollectionService from "../API/CollectionService";
-import {Artwork} from "../mockup/mockup_artworks";
+import {Artwork} from "../types/artworkTypes";
 
 interface IUseFavorite {
     artworkId: number;

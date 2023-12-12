@@ -3,8 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import toast from "react-hot-toast";
 import {ChangePasswordModal} from "../components/modals/ChangePasswordModal";
 import {EditProfileInfoModal} from "../components/modals/EditProfileInfoModal";
-import {User} from "../mockup/mockup_users";
-import {Artwork} from "../mockup/mockup_artworks";
+import {User} from "../types/usersTypes";
+import {Artwork} from "../types/artworkTypes";
 import Collection from "../components/Collection";
 import {Button} from "../components/Button";
 import CollectionService from "../API/CollectionService";
@@ -12,7 +12,7 @@ import UserService from "../API/UserService";
 import ArtworksList from "../components/lists/ArtworksList";
 import ExhibitionList from "../components/lists/ExhibitionList";
 import ArtworkService from "../API/ArtworkService";
-import {Exhibition} from "../mockup/mockup_exhibitions";
+import {Exhibition} from "../types/exhibitionsTypes";
 import ExhibitionService from "../API/ExhibitionService";
 
 const Profile = () => {

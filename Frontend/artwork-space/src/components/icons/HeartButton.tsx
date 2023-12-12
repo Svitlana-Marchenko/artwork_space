@@ -1,6 +1,6 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import React, {useEffect, useState} from "react";
-import {User} from "../../mockup/mockup_users";
+import {User} from "../../types/usersTypes";
 import useFavorite from "../../hooks/useFavorite";
 
 interface HeartButtonProps {

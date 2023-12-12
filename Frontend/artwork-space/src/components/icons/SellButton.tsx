@@ -1,9 +1,9 @@
     import React, {useCallback, useEffect, useState} from "react";
     import {MdOutlineSell, MdSell} from "react-icons/md";
     import useAuction from "../../hooks/useAuction";
-    import {User} from "../../mockup/mockup_users";
-    import {Artwork} from "../../mockup/mockup_artworks";
-    import {Auction} from "../../mockup/mockup_auctions";
+    import {User} from "../../types/usersTypes";
+    import {Artwork} from "../../types/artworkTypes";
+    import {Auction} from "../../types/auctionsTypes";
     import AuctionModal from "../modals/AuctionModal";
     import toast from "react-hot-toast";
     interface SellButtonProps {
