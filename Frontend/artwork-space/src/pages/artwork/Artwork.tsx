@@ -13,6 +13,7 @@ import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 import HeartButton from "../../components/icons/HeartButton";
 import Empty from "../../empty";
 import {calculateAverageRating} from "../../utils/calculate-average-rate";
+import useMyArtwork from "../../hooks/useMyArtwork";
 
 
 const Artwork = () => {
@@ -22,7 +23,10 @@ const Artwork = () => {
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [artwork, setArtwork] = useState<ArtworkType>();
     const ratingFormRef = useRef<HTMLDivElement>(null);
-
+    const { isMyArtwork } = useMyArtwork({
+        user: currentUser,
+        artwork
+    });
     useEffect(() => {
         if (id) {
             ArtworkService.getArtworkById(id)
@@ -87,7 +91,7 @@ const Artwork = () => {
                             {
                                 currentUser?.role === "ARTIST"
                                     ?
-                                    <SellButton artwork={artwork} currentUser={currentUser}/>
+                                    isMyArtwork && (<SellButton artwork={artwork} currentUser={currentUser}/>)
                                     :
                                     null
                             }
@@ -108,10 +112,10 @@ const Artwork = () => {
                             {
                                 currentUser?.role === 'ARTIST'
                                     ?
-                                    <>
+                                    isMyArtwork && (<>
                                         <Button label={"Edit"} onClick={()=>{}}/>
                                         <Button label={"Delete"} onClick={handleDelete} outline/>
-                                    </>
+                                    </>)
                                     :
                                     null
                             }

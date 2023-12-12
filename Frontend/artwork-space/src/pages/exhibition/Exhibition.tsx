@@ -7,14 +7,18 @@ import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast";
 import {User} from "../../mockup/mockup_users";
 import Empty from "../../empty";
+import useMyExhibition from "../../hooks/useMyExhibitions";
 
 const Exhibition = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const storedUserString = localStorage.getItem("currentUser");
-    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
+    const currentUser: User = storedUserString ? JSON.parse(storedUserString) : null;
     const [exhibition, setExhibition] = useState<ExhibitionType>();
-
+    const { isMyExhibition } = useMyExhibition({
+        user: currentUser,
+        exhibition
+    });
     useEffect(() => {
         if (id) {
             ExhibitionService.getExhibitionById(id)
@@ -64,15 +68,14 @@ const Exhibition = () => {
                             {
                                 currentUser.role === "CURATOR"
                                     ?
-                                    <>
+                                    isMyExhibition&&(<>
                                         <div className={"flex flex-row space-x-4 w-1/4 h-1/2"}>
                                             <>
                                                 <Button label={"Edit"} onClick={()=>{navigate(`/edit-exhibition/${exhibition?.id}`)}}/>
                                                 <Button label={"Delete"} onClick={handleDelete} outline/>
                                             </>
                                         </div>
-
-                                    </>
+                                    </>)
                                     :
                                     null
                             }

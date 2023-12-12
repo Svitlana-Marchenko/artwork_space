@@ -22,7 +22,7 @@ export default class ExhibitionService {
         }
     }
 
-    static async getExhibitionByCuratorId(id:string) {
+    static async getExhibitionByCuratorId(id:string|number) {
         try {
             const response = await axios.get(`http://localhost:8080/exhibitions/curator/${id}`);
             return response.data;
