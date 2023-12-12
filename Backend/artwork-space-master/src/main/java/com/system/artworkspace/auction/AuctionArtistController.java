@@ -62,6 +62,12 @@ public class AuctionArtistController {
 
     }
 
+    @GetMapping("artist/{id}")
+    public List<AuctionDto> getAllAuctionsByUserId(@PathVariable Long id){
+        logger.info("Getting all auction from artist with id {}", id);
+        return auctionService.getAllAuctionsByUserId(id).stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
+    }
+
     @GetMapping("/active")
     public List<AuctionDto> getAllActiveAuctions() {
         logger.info("Fetching all active auctions");
