@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Controller
 public class ArtworkWebController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ArtworkController.class);
+   /* private static final Logger logger = LoggerFactory.getLogger(ArtworkController.class);
 
     private final ArtworkService artworkService;
 
@@ -88,5 +88,5 @@ public class ArtworkWebController {
             logger.error(e.getMessage());
             return "artwork/addArtwork";
         }
-    }
+    }*/
 }

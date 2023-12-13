@@ -25,7 +25,6 @@ public class ArtworkDto {
     private double height;
     @NotNull(message = "artist id is null")
     private UserDto user;
-    @NotBlank(message = "image URL is blank")
     private String imageURL;
     private double imageSize;
 

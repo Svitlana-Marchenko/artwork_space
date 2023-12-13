@@ -1,5 +1,7 @@
 package com.system.artworkspace.artwork;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
 import com.system.artworkspace.exceptions.ExceptionHelper;
@@ -10,6 +12,10 @@ import com.system.artworkspace.helpers.RateLimit;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
 import javax.validation.Valid;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +24,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,15 +56,29 @@ public class ArtworkController {
     @PostMapping
     @PreAuthorize("hasAuthority('ARTIST')")
     @RateLimit(maxCalls = 2)
-    public ArtworkDto addArtwork(@RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
+    public ArtworkDto addArtwork( @RequestPart("file") MultipartFile file,
+                                  @RequestPart("artwork") @Valid String artworkJson,
+                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        logger.info("Adding artwork with ID: {}", artwork.getId());
-        ArtworkDto addedArtwork = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.addArtwork(ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork)));
-        logger.info("Artwork added successfully.");
-        return addedArtwork;
+        try {
+            ArtworkDto artwork = new ObjectMapper().readValue(artworkJson, ArtworkDto.class);
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<ArtworkDto>> violations = validator.validate(artwork);
+
+            if (!violations.isEmpty()) {
+                String message = ExceptionHelper.formErrorMessage(violations);
+                throw new javax.validation.ValidationException(message);
+            }else{
+                ArtworkDto addedArtwork = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.addArtwork(ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork),file));
+                logger.info("Artwork added successfully with ID: {}", addedArtwork.getId());
+                return addedArtwork;
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/{id}")

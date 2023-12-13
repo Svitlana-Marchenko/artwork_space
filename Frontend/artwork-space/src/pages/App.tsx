@@ -10,7 +10,7 @@ function App() {
             </div>
             <CustomLink title={"See all artworks"} url={"artworks"}/>
         </div>
-      <img src={"./images/flowers.jpg"} alt={"Flowers painting"} className={"w-1/2"}/>
+      <img src={"./images/5.jpg"} alt={"Flowers painting"} className={"w-1/2"}/>
     </div>
   );
 }

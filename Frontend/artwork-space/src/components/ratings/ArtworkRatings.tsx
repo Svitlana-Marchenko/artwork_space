@@ -41,7 +41,7 @@ const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings, showRatingForm
         setShowAllRatings(!showAllRatings);
     };
 
-    const visibleRatings = showAllRatings ? ratings : ratings.slice(0, 3);
+    const visibleRatings = showAllRatings ? ratings : ratings.slice(0, 5);
 
     return (
         <div style={{ width: '66.666%' }} className="mt-4 p-4 border border-gray-300 rounded mx-auto">
@@ -68,7 +68,7 @@ const ArtworkRatings: React.FC<ArtworkRatingsProps> = ({ ratings, showRatingForm
                             <p className="text-gray-700">{rating.comment}</p>
                         </li>
                     ))}
-                    {ratings.length > 3 && (
+                    {ratings.length > 5 && (
                         <li className="mt-2">
                             <button
                                 className="text-gray-500 text-base underline cursor-pointer hover:text-gray-700"

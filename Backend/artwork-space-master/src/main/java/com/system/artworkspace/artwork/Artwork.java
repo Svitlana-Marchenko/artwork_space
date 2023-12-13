@@ -20,6 +20,17 @@ public class Artwork {
 
     public Artwork() {
     }
+    public Artwork(String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize, List<Rating> ratings) {
+        this.title = title;
+        this.description = description;
+        this.technique = technique;
+        this.width = width;
+        this.height = height;
+        this.imageURL = imageURL;
+        this.imageSize = imageSize;
+        this.user = artist;
+        this.ratings=ratings;
+    }
 
     public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize, List<Rating> ratings) {
         this.id = id;

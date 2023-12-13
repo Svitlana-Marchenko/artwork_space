@@ -7,6 +7,7 @@ import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
 import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.exhibition.ExhibitionRepository;
+import com.system.artworkspace.helpers.SaveImagesManager;
 import com.system.artworkspace.user.changePassword.ChangePassword;
 import com.system.artworkspace.user.userUpdate.UserUpdate;
 import com.system.artworkspace.user.userUpdate.UserUpdateMapper;
@@ -16,6 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +54,8 @@ public class UserServiceImpl implements UserService {
         }
         UserEntity createdUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", createdUser.getId());
+        if(user.getRole().equals(Role.ARTIST))
+            SaveImagesManager.createFolderForArtist(createdUser.getId());
         return UserMapper.INSTANCE.userEntityToUser(createdUser);
     }
 
@@ -157,6 +164,7 @@ public class UserServiceImpl implements UserService {
         user.getCollection().add(artwork);
         userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
     }
+
     //todo normal error
     @Override
     public void removeArtworkFromCollection(Long id, Long artworkId) {
