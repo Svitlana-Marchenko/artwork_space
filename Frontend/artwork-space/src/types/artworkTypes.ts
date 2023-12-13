@@ -19,3 +19,18 @@ export interface NewArtwork {
 export interface Artwork extends NewArtwork{
     id:number;
 }
+/*
+export interface NewArtwork {
+    title: string;
+    technique: string;
+    width: number;
+    height: number;
+    user: User;
+}
+
+export interface Artwork extends NewArtwork{
+    id:number;
+    ratings: Rating[];
+    imageURL: string;
+}
+ */
