@@ -10,8 +10,7 @@ public class RatingDto {
 
     private Long id;
 
-    @NotBlank(message = "Rating cant be blank")
-    @Min(1)
+    @Min(0)
     @Max(10)
     private double rate;
 

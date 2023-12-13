@@ -40,8 +40,9 @@ public interface ArtworkService {
 
     List<Rating> getAllRating(Long id);
 
-    void addRating(Long artworkId, Rating rating);
+    Artwork addRating(Long artworkId, Rating rating);
 
     void deleteRating(Long artworkId, Rating rating);
+    boolean existsRatingByCurator(Long curatorId, Long artworkId);
 
 }

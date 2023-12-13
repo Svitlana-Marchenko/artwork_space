@@ -13,10 +13,11 @@ import {useNavigate} from "react-router-dom";
 interface RatingModalProps {
     currentUser: User;
     currentArtworkId: number;
+    onRatingAdded: () => void;
 }
 
 
-const RatingModal: React.FC<RatingModalProps> = ({ currentUser,currentArtworkId }) => {
+const RatingModal: React.FC<RatingModalProps> = ({ currentUser,currentArtworkId, onRatingAdded }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ rate: 0, comment: '' });
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -30,7 +31,8 @@ const RatingModal: React.FC<RatingModalProps> = ({ currentUser,currentArtworkId 
         ArtworkService.addRating(currentArtworkId, ratingData)
             .then(() => {
                     toast.success("The rating was added successfully")
-                navigate(`/artwork/${currentArtworkId}`);
+                    onRatingAdded();
+                    navigate(`/artwork/${currentArtworkId}`);
                 }
             )
             .catch(() => {

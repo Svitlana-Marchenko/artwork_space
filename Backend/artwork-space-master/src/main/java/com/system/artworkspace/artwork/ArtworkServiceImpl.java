@@ -297,17 +297,19 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public void addRating(Long artworkId,Rating rating) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkId);
+    @CachePut(cacheNames="artwork", key="#id")
+    public Artwork addRating(Long id,Rating rating) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.getRatings().add(RatingMapper.INSTANCE.ratingToRatingEntity(rating));
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Added ratting with ID {} to artwork with ID: {}", rating.getId(), artworkId);
+            logger.info(ARTWORK_EVENTS,"Added ratting with ID {} to artwork with ID: {}", rating.getId(), id);
+            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
-            logger.warn(ARTWORK_EVENTS,"ArtworkEntity not found for adding rating with ID: {} to artwork with ID: {}", rating.getId(), artworkId);
-            throw new IllegalArgumentException("ArtworkEntity not found with ID: " + artworkId);
+            logger.warn(ARTWORK_EVENTS,"ArtworkEntity not found for adding rating with ID: {} to artwork with ID: {}", rating.getId(), id);
+            throw new IllegalArgumentException("ArtworkEntity not found with ID: " + id);
         }
     }
 
@@ -324,6 +326,11 @@ public class ArtworkServiceImpl implements ArtworkService {
             logger.warn(ARTWORK_EVENTS,"Artwork not found for removing rating with ID: {} from artwork with ID: {}", rating.getId(), artworkId);
             throw new NoSuchArtworkException("Artwork not found with ID: " + artworkId);
         }
+    }
+
+    @Override
+    public boolean existsRatingByCurator(Long curatorId, Long artworkId) {
+        return repository.existsRatingForUser(artworkId,curatorId);
     }
 
 

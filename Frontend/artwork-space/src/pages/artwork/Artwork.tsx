@@ -38,6 +38,14 @@ const Artwork = () => {
                 });
         }
     }, [id]);
+    const [newRatingAdded, setNewRatingAdded] = useState(false); // State to track new rating
+
+    useEffect(() => {
+        if (newRatingAdded) {
+            // Refresh the page when a new rating is added
+            window.location.reload();
+        }
+    }, [newRatingAdded]);
 
     function handleAddReview() {
         if (currentUser?.role === "CURATOR" && ratingFormRef.current) {
@@ -126,7 +134,8 @@ const Artwork = () => {
                 <div style={{ width: '100%' }} className={"mb-8"}>
                     {currentUser?.role === "CURATOR" && (
                         <div ref={ratingFormRef}>
-                            <RatingModal currentUser={currentUser} currentArtworkId={Number(id)} />
+                            <RatingModal currentUser={currentUser} currentArtworkId={Number(id)}
+                                         onRatingAdded={() => setNewRatingAdded(true)}/>
                         </div>
                     )}
                     <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />

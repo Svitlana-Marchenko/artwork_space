@@ -166,7 +166,7 @@ public class ArtworkController {
         logger.error(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @PostMapping("/{artworkId}/addRating")
+    @PostMapping("/{artworkId}/ratings")
     @PreAuthorize("hasAuthority('CURATOR')")
     public void addRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -178,7 +178,7 @@ public class ArtworkController {
         logger.info("Rating added to artwork with ID: {}", artworkId);
     }
 
-    @DeleteMapping("/{artworkId}/deleteRating")
+    @DeleteMapping("/{artworkId}/ratings")
     @PreAuthorize("hasAuthority('CURATOR')")
     public void deleteRating(@PathVariable Long artworkId, @RequestBody @Valid RatingDto ratingDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
