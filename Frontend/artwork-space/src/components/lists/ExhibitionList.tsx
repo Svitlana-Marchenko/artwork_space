@@ -36,6 +36,7 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                         >
                             {curator.firstName} {curator.lastName}
                         </span>
+                        , artworks collected: {artworks.length}
                     </p>
                 </div>
                 <div className="text-right">
@@ -43,26 +44,31 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                     <NavigationLink title={"View all"} path={`/exhibition/${id}`}/>
                 </div>
             </div>
-            <ScrollCarousel
-                autoplay
-                autoplaySpeed={1}
-                smartSpeed
-                direction="rtl"
-                speed={5}
-                margin={20}
-            >
-                {
-                    artworks.map((artwork) => {
-                        return (
-                            <ArtworkCard
-                                key={artwork.id}
-                                artwork={artwork}
-                                sm
-                            />
-                        )
-                    })
-                }
-            </ScrollCarousel>
+            {
+                artworks.length>2&&(
+                    <ScrollCarousel
+                        autoplay
+                        autoplaySpeed={1}
+                        smartSpeed
+                        direction="rtl"
+                        speed={5}
+                        margin={20}
+                    >
+                        {
+                            artworks.map((artwork) => {
+                                return (
+                                    <ArtworkCard
+                                        key={artwork.id}
+                                        artwork={artwork}
+                                        sm
+                                        disabled
+                                    />
+                                )
+                            })
+                        }
+                    </ScrollCarousel>
+                )
+            }
         </div>
     );
 };

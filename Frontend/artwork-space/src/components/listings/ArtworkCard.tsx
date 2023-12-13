@@ -9,6 +9,7 @@ import PlusButton from "../icons/PlusButton";
 interface ArtworkCardProps {
     artwork: Artwork;
     sm?:boolean;
+    disabled?: boolean;
     onAddToExhibition?:  (artwork: Artwork) => void;
 }
 
@@ -16,6 +17,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                                     artwork,
                                                     sm,
                                                     onAddToExhibition,
+                                                    disabled
                                                 }) => {
     const navigate = useNavigate();
     const storedUserString = localStorage.getItem("currentUser");
@@ -23,6 +25,12 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
     const imageStyle = sm
         ? "object-cover h-[360px] w-auto"
         : "object-cover w-full h-auto";
+
+    const handleClick = () => {
+        if (!disabled) {
+            navigate(`/artwork/${artwork.id}`);
+        }
+    };
 
     return (
         <div className="relative">
@@ -45,7 +53,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                 text-white"
             >
                 <div className="flex flex-row justify-between items-center" >
-                    <div onClick={()=>{navigate(`/artwork/${artwork.id}`)}} className={"cursor-pointer"}>
+                    <div onClick={handleClick} className={ disabled ? 'cursor-default' : "cursor-pointer"}>
                         <p className="text-2xl font-bold">{artwork.title}</p>
                         <p className="text-xs">{artwork.technique}</p>
                     </div>
@@ -57,7 +65,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                             currentUser && (
                                 <>
                                 {
-                                    currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER"
+                                    (currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")&&!disabled
                                     ?
                                         <HeartButton artworkId={artwork.id}/>
                                         :
@@ -70,7 +78,11 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                 </div>
                 <div className="flex flex-row justify-between items-end">
                     <div>
-                        <UserLink id={artwork.user.id} username={artwork.user.username}/>
+                        {
+                            !disabled&&(
+                                <UserLink id={artwork.user.id} username={artwork.user.username}/>
+                            )
+                        }
                         <p>{artwork.user.firstName} {artwork.user.lastName}</p>
                     </div>
                     <p className="text-xs">{artwork.width} W &times; {artwork.height} H cm</p>

@@ -12,7 +12,7 @@ export const maxLengthValidation = (max: number) => ({
 });
 export const lettersOnlyValidation = {
     pattern: {
-        value: /^[A-Za-z]+$/,
+        value: /^[A-Za-z ]+$/,
         message: 'Only letters are allowed',
     },
 };
