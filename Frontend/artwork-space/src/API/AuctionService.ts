@@ -22,6 +22,15 @@ export default class AuctionService {
         }
     }
 
+    static async getAuctionsByArtistId(id: string | number) {
+        try {
+            const response = await axios.get(`http://localhost:8080/auctions/artist/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про аукціони:', error);
+            throw error;
+        }
+    }
     static async createAuction(auction: NewAuction) {
         try {
             const token = localStorage.getItem('token');

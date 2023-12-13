@@ -12,8 +12,6 @@ const Artworks = () => {
     const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
     const [artworks, setArtworks] = useState<Artwork[]>([]);
 
-    //todo check artistid role (like unable to see artwork of non-artist users)
-
     useEffect(() => {
         if (id) {
             ArtworkService.getAllArtworksByArtistId(id)
