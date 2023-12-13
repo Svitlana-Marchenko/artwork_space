@@ -15,24 +15,22 @@ public class Artwork {
     private double height;
     private User user;
     private String imageURL;
-    private double imageSize;
     private List<Rating> ratings;
 
     public Artwork() {
     }
-    public Artwork(String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize, List<Rating> ratings) {
+    public Artwork(String title, String description, String technique, double width, double height, User artist, String imageURL, List<Rating> ratings) {
         this.title = title;
         this.description = description;
         this.technique = technique;
         this.width = width;
         this.height = height;
         this.imageURL = imageURL;
-        this.imageSize = imageSize;
         this.user = artist;
         this.ratings=ratings;
     }
 
-    public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, double imageSize, List<Rating> ratings) {
+    public Artwork(Long id, String title, String description, String technique, double width, double height, User artist, String imageURL, List<Rating> ratings) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -40,7 +38,6 @@ public class Artwork {
         this.width = width;
         this.height = height;
         this.imageURL = imageURL;
-        this.imageSize = imageSize;
         this.user = artist;
         this.ratings=ratings;
     }
@@ -107,14 +104,6 @@ public class Artwork {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
-    }
-
-    public double getImageSize() {
-        return imageSize;
-    }
-
-    public void setImageSize(double imageSize) {
-        this.imageSize = imageSize;
     }
 
     public List<Rating> getRatings() {

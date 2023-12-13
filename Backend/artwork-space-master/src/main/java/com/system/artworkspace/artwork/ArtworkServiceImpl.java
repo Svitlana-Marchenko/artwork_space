@@ -251,22 +251,6 @@ public class ArtworkServiceImpl implements ArtworkService {
         }
     }
 
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateImgSize(Long id, double size) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setImageSize(size);
-            repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS, "Image Size updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
 
     @Override
     public List<Artwork> getArtworksByTitle(String title) {

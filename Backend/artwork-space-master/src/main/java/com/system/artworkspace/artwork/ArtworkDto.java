@@ -26,13 +26,12 @@ public class ArtworkDto {
     @NotNull(message = "artist id is null")
     private UserDto user;
     private String imageURL;
-    private double imageSize;
 
     private List<RatingDto> ratings;
     public ArtworkDto() {
     }
 
-    public ArtworkDto(Long id, String title, String description, String technique, double width, double height, UserDto artist, String imageURL, double imageSize,  List<RatingDto> ratings) {
+    public ArtworkDto(Long id, String title, String description, String technique, double width, double height, UserDto artist, String imageURL,  List<RatingDto> ratings) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -41,7 +40,6 @@ public class ArtworkDto {
         this.height = height;
         this.user =artist;
         this.imageURL = imageURL;
-        this.imageSize = imageSize;
         this.ratings=ratings;
     }
 
@@ -117,11 +115,4 @@ public class ArtworkDto {
         this.imageURL = imageURL;
     }
 
-    public double getImageSize() {
-        return imageSize;
-    }
-
-    public void setImageSize(double imageSize) {
-        this.imageSize = imageSize;
-    }
 }

@@ -23,11 +23,10 @@ public class ArtworkEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
     private String imageURL;
-    private double imageSize;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<RatingEntity> ratings;
 
-    public ArtworkEntity(UserEntity artist, String title, String description, String technique, double width, double height, String imageURL, double imageSize, List<RatingEntity> ratings) {
+    public ArtworkEntity(UserEntity artist, String title, String description, String technique, double width, double height, String imageURL, List<RatingEntity> ratings) {
         this.user = artist;
         this.title=title;
         this.width=width;
@@ -35,7 +34,6 @@ public class ArtworkEntity {
         this.imageURL=imageURL;
         this.technique=technique;
         this.description=description;
-        this.imageSize=imageSize;
         this.ratings=ratings;
     }
 
@@ -120,11 +118,4 @@ public class ArtworkEntity {
         this.imageURL = imageURL;
     }
 
-    public double getImageSize() {
-        return imageSize;
-    }
-
-    public void setImageSize(double imageSize) {
-        this.imageSize = imageSize;
-    }
 }

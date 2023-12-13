@@ -34,8 +34,6 @@ public interface ArtworkService {
 
     Artwork updateImgUrl(Long id, String url);
 
-    Artwork updateImgSize(Long id, double size);
-
     List<Artwork> getArtworksByTitle(String title);
 
     List<Rating> getAllRating(Long id);
