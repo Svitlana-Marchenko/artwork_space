@@ -84,10 +84,11 @@ public class ArtworkController {
         return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.findArtworkById(id));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     //@PreAuthorize("hasAuthority('ARTIST')")
     //@PreAuthorize("#user.id == authentication.id")
     public ArtworkDto updateArtwork(
+            @PathVariable Long id,
             @RequestBody @Valid ArtworkUpdateDto artworkUpdateDto,
             BindingResult bindingResult
     ) {
@@ -95,7 +96,7 @@ public class ArtworkController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
+        ArtworkDto artworkN = ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.updateArtwork(id, ArtworkUpdateMapper.INSTANCE.artworkUpdateDtoToArtworkUpdate(artworkUpdateDto)));
         logger.info("Artwork updated with ID: {}", artworkN.getId());
         return artworkN;
     }

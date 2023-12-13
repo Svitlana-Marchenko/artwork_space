@@ -105,9 +105,9 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    @CachePut(cacheNames="artwork", key="#artworkUpdate.id")
-    public Artwork updateArtwork(ArtworkUpdate artworkUpdate) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(artworkUpdate.getId());
+    @CachePut(cacheNames="artwork", key="#id")
+    public Artwork updateArtwork(Long id, ArtworkUpdate artworkUpdate) {
+        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
         if(optionalArtwork.isPresent()){
             ArtworkEntity artwork = optionalArtwork.get();
             artwork.setTitle(artworkUpdate.getTitle());
@@ -116,11 +116,11 @@ public class ArtworkServiceImpl implements ArtworkService {
             artwork.setWidth(artworkUpdate.getWidth());
             artwork.setHeight(artworkUpdate.getHeight());
             repository.save(artwork);
-            logger.info("Updating exhibition with id "+artworkUpdate.getId());
+            logger.info("Updating exhibition with id "+id);
         }else{
-            throw new NoSuchArtworkException("No artwork with id "+artworkUpdate.getId()+" to update");
+            throw new NoSuchArtworkException("No artwork with id "+id+" to update");
         }
-        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(repository.findById(artworkUpdate.getId()).get());
+        return ArtworkMapper.INSTANCE.artworkEntityToArtwork(repository.findById(id).get());
 
     }
 

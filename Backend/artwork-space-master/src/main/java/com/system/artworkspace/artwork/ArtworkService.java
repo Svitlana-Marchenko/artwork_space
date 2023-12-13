@@ -18,7 +18,7 @@ public interface ArtworkService {
 
     void deleteArtwork(Long artworkId);
 
-    Artwork updateArtwork (ArtworkUpdate artworkUpdate);
+    Artwork updateArtwork (Long id, ArtworkUpdate artworkUpdate);
 
     Artwork findArtworkById(Long id);
 

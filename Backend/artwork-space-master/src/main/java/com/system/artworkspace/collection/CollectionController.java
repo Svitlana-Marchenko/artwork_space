@@ -65,7 +65,6 @@ public class CollectionController {
         logger.info("Collection deleted with ID: {}", collectionId);
     }
 
-    //TODO think about using artwork id
     @DeleteMapping("/{collectionId}/removeArtwork")
     public void deleteFromCollection(@PathVariable Long collectionId, @RequestBody @Valid ArtworkDto artwork, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -82,7 +81,6 @@ public class CollectionController {
         logger.error(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    //Todo think about only id
     @PutMapping("/{collectionId}/editName")
     public void editName(@PathVariable Long collectionId, @RequestParam String name) {
         logger.info("Updating collection name for collection with ID: {}", collectionId);
