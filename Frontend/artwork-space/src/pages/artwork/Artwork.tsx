@@ -87,6 +87,7 @@ const Artwork = () => {
                                 firstName={artwork.user.firstName}
                                 lastName={artwork.user.lastName}
                                 averageRating={averageRating}
+                                showAverageRating={artwork.ratings.length>0}
                             />
                             {
                                 currentUser?.role === "ARTIST"

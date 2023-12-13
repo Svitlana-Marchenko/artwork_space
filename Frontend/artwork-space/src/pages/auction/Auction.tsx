@@ -69,7 +69,8 @@ const Auction = () => {
                         firstName={artist.firstName}
                         lastName={artist.lastName}
                         title={title}
-                        averageRating={averageRating}/>
+                        averageRating={averageRating}
+                        showAverageRating={artwork.ratings.length>0}/>
                     <CountdownTimer targetDate={new Date(closingTime)}/>
                 </div>
                 <ArtworkDescription
