@@ -11,7 +11,7 @@ import SellButton from "../../components/icons/SellButton";
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 import HeartButton from "../../components/icons/HeartButton";
 import Empty from "../../empty";
-import {calculateAverageRating} from "../../utils/calculate-average-rate";
+import {calculateAverageRating, hasUserRatedArtwork} from "../../utils/ratingUtils";
 import useMyArtwork from "../../hooks/useMyArtwork";
 import RatingModal from "../../components/modals/RatingModal";
 
@@ -22,7 +22,7 @@ const Artwork = () => {
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User= storedUserString ? JSON.parse(storedUserString) : null;
     const [artwork, setArtwork] = useState<ArtworkType>();
-    const ratingFormRef = useRef<HTMLDivElement>(null);
+    const ratingFormRef = useRef<HTMLDivElement  | null>(null);
     const { isMyArtwork } = useMyArtwork({
         user: currentUser,
         artwork
@@ -46,6 +46,8 @@ const Artwork = () => {
             window.location.reload();
         }
     }, [newRatingAdded]);
+// Check if the current user has already rated the artwork
+    const hasUserRated = hasUserRatedArtwork(artwork?.ratings || [], currentUser);
 
     function handleAddReview() {
         if (currentUser?.role === "CURATOR" && ratingFormRef.current) {
@@ -132,7 +134,7 @@ const Artwork = () => {
                     </section>
                 </div>
                 <div style={{ width: '100%' }} className={"mb-8"}>
-                    {currentUser?.role === "CURATOR" && (
+                    {currentUser?.role === "CURATOR" && !hasUserRated && (
                         <div ref={ratingFormRef}>
                             <RatingModal currentUser={currentUser} currentArtworkId={Number(id)}
                                          onRatingAdded={() => setNewRatingAdded(true)}/>
