@@ -17,7 +17,7 @@ public class ExhibitionEntity {
     private String title;
     @Column(length = 2000)
     private String description;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "exhibition_artwork",
             joinColumns = @JoinColumn(name = "exhibition_id"),

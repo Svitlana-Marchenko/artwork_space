@@ -68,8 +68,10 @@ public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerServ
     @Override
     public Auction placeBid(Long id, double bidAmount) {
         AuctionEntity auction = auctionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Auction not found with ID: " + id));
+                .orElseThrow(() -> new NoSuchAuctionException("Auction not found with ID: " + id));
         Auction auc = AuctionMapper.INSTANCE.auctionEntityToAuction(auction);
+        if (bidAmount < auc.getCurrentBid()+auc.getBid())
+            throw new RuntimeException("Trying to place incorrect bid");
         auc.setCurrentBid(bidAmount);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();

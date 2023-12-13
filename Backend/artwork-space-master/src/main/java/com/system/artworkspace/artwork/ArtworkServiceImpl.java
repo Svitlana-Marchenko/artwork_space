@@ -7,6 +7,7 @@ import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.exhibition.ExhibitionMapper;
+import com.system.artworkspace.helpers.SaveImagesManager;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
@@ -22,8 +23,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +59,24 @@ public class ArtworkServiceImpl implements ArtworkService {
         return repository.findAllByUserId(id).stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
 
     }
+    @Transactional
+    @Override
+    public Artwork addArtwork(Artwork artwork, MultipartFile file) {
+        try {
 
+            logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
+            ArtworkEntity ent = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
+            String imagePath= SaveImagesManager.saveImage(file,artwork.getUser().getId(),ent.getId());
+            repository.updateImageUrl(ent.getId(),imagePath);
+            artwork.setImageURL(imagePath);
+            logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return artwork;
+    }
     @Override
     public Artwork addArtwork(Artwork artwork) {
         logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
