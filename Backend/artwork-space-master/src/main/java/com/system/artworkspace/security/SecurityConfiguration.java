@@ -32,7 +32,7 @@ public class SecurityConfiguration {
     public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-
+//todo security for rating
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors
@@ -53,9 +53,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.PUT, "/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.DELETE, "/auctions/**").hasAuthority("ARTIST")
-                        .requestMatchers(HttpMethod.POST, "/artworks/**").hasAuthority("ARTIST")
+//                        .requestMatchers(HttpMethod.POST, "/artworks/{id}/addRating").hasAuthority("CURATOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/artworks/{id}/deleteRating").hasAuthority("CURATOR")
+                        .requestMatchers(HttpMethod.POST, "/artworks/**").hasAnyAuthority("ARTIST", "CURATOR")
                         .requestMatchers(HttpMethod.PUT, "/artworks/**").hasAuthority("ARTIST")
-                        .requestMatchers(HttpMethod.DELETE, "/artworks/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.DELETE, "/artworks/**").hasAnyAuthority("ARTIST", "CURATOR")
                         .requestMatchers("/users/new").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
                         .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
