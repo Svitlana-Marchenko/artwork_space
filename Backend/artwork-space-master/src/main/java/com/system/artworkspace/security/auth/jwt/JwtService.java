@@ -1,4 +1,4 @@
-package com.system.artworkspace.security.auth;
+package com.system.artworkspace.security.auth.jwt;
 
 import com.system.artworkspace.user.User;
 import io.jsonwebtoken.Jwts;

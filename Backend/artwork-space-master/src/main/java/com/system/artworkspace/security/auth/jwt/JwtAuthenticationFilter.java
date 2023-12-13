@@ -1,4 +1,4 @@
-package com.system.artworkspace.security.auth;
+package com.system.artworkspace.security.auth.jwt;
 
 import com.system.artworkspace.security.UserInfoUserDetailsService;
 import jakarta.servlet.FilterChain;

@@ -1,4 +1,4 @@
-package com.system.artworkspace.security.auth;
+package com.system.artworkspace.security.auth.authentication;
 
 public interface AuthenticationService {
 
