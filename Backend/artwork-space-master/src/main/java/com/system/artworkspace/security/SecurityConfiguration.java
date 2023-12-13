@@ -1,6 +1,6 @@
 package com.system.artworkspace.security;
 
-import com.system.artworkspace.security.auth.JwtAuthenticationFilter;
+import com.system.artworkspace.security.auth.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -47,20 +47,23 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**", "/signin/**"))
                 .authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
-                                .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
-                                .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
-                                .requestMatchers(HttpMethod.POST, "/auctions/**").hasAuthority("ARTIST")
-                                .requestMatchers(HttpMethod.PUT, "/auctions/**").hasAuthority("ARTIST")
-                                .requestMatchers(HttpMethod.DELETE, "/auctions/**").hasAuthority("ARTIST")
-                                .requestMatchers("/users/new").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
-                                .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
-                                .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
-                                .requestMatchers(HttpMethod.POST, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
-                                .requestMatchers(HttpMethod.PUT, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
-                                .requestMatchers(HttpMethod.DELETE, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
-                                .anyRequest().permitAll()
+                        .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
+                        .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")
+                        .requestMatchers(HttpMethod.DELETE, "/exhibitions/**").hasAuthority("CURATOR")
+                        .requestMatchers(HttpMethod.POST, "/auctions/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.PUT, "/auctions/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.DELETE, "/auctions/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.POST, "/artworks/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.PUT, "/artworks/**").hasAuthority("ARTIST")
+                        .requestMatchers(HttpMethod.DELETE, "/artworks/**").hasAuthority("ARTIST")
+                        .requestMatchers("/users/new").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                        .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority("COLLECTIONEER", "ARTIST", "CURATOR")
+                        .requestMatchers(HttpMethod.POST, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        .requestMatchers(HttpMethod.PUT, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        .requestMatchers(HttpMethod.DELETE, "/collectioneer/auctions/**").hasAuthority("COLLECTIONEER")
+                        .anyRequest().permitAll()
                 ).sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class

@@ -1,4 +1,4 @@
-package com.system.artworkspace.security.auth;
+package com.system.artworkspace.security.auth.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

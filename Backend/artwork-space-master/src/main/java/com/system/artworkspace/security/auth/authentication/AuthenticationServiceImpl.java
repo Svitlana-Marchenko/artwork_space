@@ -1,5 +1,6 @@
-package com.system.artworkspace.security.auth;
+package com.system.artworkspace.security.auth.authentication;
 
+import com.system.artworkspace.security.auth.jwt.JwtService;
 import com.system.artworkspace.user.UserMapper;
 import com.system.artworkspace.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationServiceImpl implements AuthenticationService{
+public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private final UserRepository userRepository;
     @Autowired
