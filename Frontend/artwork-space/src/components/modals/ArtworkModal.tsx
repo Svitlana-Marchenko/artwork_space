@@ -1,5 +1,5 @@
 import React from 'react';
-import {Artwork, NewArtwork} from "../../types/artworkTypes";
+import {Artwork} from "../../types/artworkTypes";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {User} from "../../types/usersTypes";
 
@@ -39,17 +39,17 @@ const ArtworkModal:React.FC<ArtworkModalProps> = ({isOpen, toggle, artwork}) => 
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (currentUser) {
-            const artworkData: NewArtwork = {
-                title: '',
-                technique: '',
-                width: 0,
-                height: 0,
-                imageURL: '',
-                user: currentUser,
-                ratings:[]
-            };
-        }
+        // if (currentUser) {
+        //     const artworkData: NewArtwork = {
+        //         title: '',
+        //         technique: '',
+        //         width: 0,
+        //         height: 0,
+        //         imageURL: '',
+        //         user: currentUser,
+        //         ratings:[]
+        //     };
+        // }
         // UserService.createUser(userData)
         //     .then((data) => {
         //             toast.success("Successful registration")

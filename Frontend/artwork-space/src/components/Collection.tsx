@@ -7,7 +7,7 @@ interface CollectionProps {
 const Collection:React.FC<CollectionProps> = ({artworks}) => {
     return (
         <div>
-            <p className={"text-2xl font-bold pb-4"}>My Collection</p>
+            <p className={'text-3xl font-bold my-4'}> MY COLLECTION</p>
             {
                 artworks
                 ?

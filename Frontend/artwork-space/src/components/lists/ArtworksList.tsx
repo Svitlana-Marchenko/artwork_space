@@ -24,7 +24,7 @@ const ArtworksList:React.FC<ArtworksListProps> = ({artworks, onAddToExhibition})
     let currentColumnHeight = 0;
 
     artworks.forEach((artwork) => {
-        if (currentColumnHeight + artwork.height <= targetHeight*1.2 || currentColumnIndex === 2) {
+        if (currentColumnHeight + artwork.height <= targetHeight*1.3 || currentColumnIndex === 2) {
             columns[currentColumnIndex].push(artwork);
             currentColumnHeight += artwork.height;
         } else {

@@ -8,12 +8,12 @@ import ArtworkService from "../../API/ArtworkService";
 import toast from 'react-hot-toast';
 import {User} from "../../types/usersTypes";
 import SellButton from "../../components/icons/SellButton";
-import RatingModal from "../../components/modals/RatingModal";
 import ArtworkRatings from "../../components/ratings/ArtworkRatings";
 import HeartButton from "../../components/icons/HeartButton";
 import Empty from "../../empty";
 import {calculateAverageRating} from "../../utils/calculate-average-rate";
 import useMyArtwork from "../../hooks/useMyArtwork";
+import RatingModal from "../../components/modals/RatingModal";
 
 
 const Artwork = () => {

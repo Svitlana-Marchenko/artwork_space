@@ -14,6 +14,9 @@ import ExhibitionList from "../components/lists/ExhibitionList";
 import ArtworkService from "../API/ArtworkService";
 import {Exhibition} from "../types/exhibitionsTypes";
 import ExhibitionService from "../API/ExhibitionService";
+import AuctionService from "../API/AuctionService";
+import AuctionList from "../components/lists/AuctionList";
+import {Auction} from "../types/auctionsTypes";
 
 const Profile = () => {
     const storedUserString = localStorage.getItem("currentUser");
@@ -22,6 +25,7 @@ const Profile = () => {
     const {id} = useParams();
     const [likedArtworks, setLikedArtworks] = useState<Artwork[]>([]);
     const [artworks, setArtworks] = useState<Artwork[]>([]);
+    const [auctions, setAuctions] = useState<Auction[]>([]);
     const [exhibitions, setExhibitions] = useState<Exhibition[]>([]);
     const [profile, setProfile] = useState<User>();
 
@@ -73,6 +77,13 @@ const Profile = () => {
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
         }
+        if (currentUser&&(!id)&&(currentUser.role === "ARTIST")) {
+            AuctionService.getAuctionsByArtistId(currentUser.id)
+                .then(data => {
+                    setAuctions(data);
+                })
+                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+        }
     }, []);
     useEffect(()=>{
         if (id) {
@@ -83,7 +94,6 @@ const Profile = () => {
         }
     }, [profile])
 
-    //todo think about (my) artist profile, maybe add his/her artwork or auctions...
     const profileContent = (user: User) => {
         return (
             <>
@@ -115,6 +125,18 @@ const Profile = () => {
                         (currentUser.role === "CURATOR" ||   currentUser.role === "COLLECTIONEER")
                             ?
                             <Collection artworks={likedArtworks}/>
+                            :
+                            null
+                    )
+                }
+                {
+                    currentUser&&(!id)&&(
+                        (currentUser.role === "ARTIST")
+                            ?
+                            <>
+                                <p className={'text-3xl font-bold my-4'}> MY AUCTIONS</p>
+                                <AuctionList auctions={auctions}/>
+                            </>
                             :
                             null
                     )

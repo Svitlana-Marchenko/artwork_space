@@ -65,6 +65,10 @@ const RatingModal: React.FC<RatingModalProps> = ({ currentUser,currentArtworkId,
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (formData.comment.length > 5000) {
+            toast.error("Comment length cannot exceed 5000 characters");
+            return;
+        }
         onSubmit(formData);
     };
 
@@ -77,7 +81,7 @@ const RatingModal: React.FC<RatingModalProps> = ({ currentUser,currentArtworkId,
                     value={formData.comment}
                     onChange={handleCommentChange}
                     placeholder="Add your comments..."
-                    rows={4}
+                    rows={8}
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 />
                 <div style={{ width: '15%'}} className="flex justify-start mt-2">
