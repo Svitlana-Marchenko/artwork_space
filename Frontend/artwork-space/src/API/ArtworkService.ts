@@ -1,5 +1,5 @@
 import axios from "axios";
-import {NewRating} from "../types/artworkTypes";
+import {NewArtwork, NewRating} from "../types/artworkTypes";
 export default class ArtworkService {
 
     static async getAllArtworks() {
@@ -31,6 +31,60 @@ export default class ArtworkService {
             throw error;
         }
     }
+    static async deleteArtworkById(id: string|number){
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.delete(`http://localhost:8080/artworks/${id}`,config)
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при видаленні даних з сервера:', error);
+            throw error;
+        }
+    }
+    static async editArtworkById(id: string|number, artwork: NewArtwork){
+        try {
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.put(`http://localhost:8080/artworks/${id}`, artwork, config)
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при редагуванні даних з сервера:', error);
+            throw error;
+        }
+    }
+
+    static async addArtwork(artwork: NewArtwork, file: File) {
+        try {
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('artwork', JSON.stringify(artwork));
+
+            const response = await axios.post('http://localhost:8080/artworks', formData, config);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера:', error);
+            throw error;
+        }
+    }
 
     static async addRating(artworkId:number,rating:NewRating){
         try {
@@ -41,7 +95,6 @@ export default class ArtworkService {
                     'Authorization': `Bearer ${token}`,
                 },
             };
-
             const response = await axios.post(`http://localhost:8080/artworks/${artworkId}/ratings`, rating, config);
             console.log(`Added rating with ID ${response.data.id} to artwork with ID: ${artworkId}`);
         } catch (error) {

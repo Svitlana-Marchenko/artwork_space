@@ -9,28 +9,14 @@ export interface Rating extends NewRating{
 }
 export interface NewArtwork {
     title: string;
-    technique: string;
-    imageURL: string;
-    width: number;
-    height: number;
-    user: User;
-    ratings: Rating[];
-}
-export interface Artwork extends NewArtwork{
-    id:number;
-}
-/*
-export interface NewArtwork {
-    title: string;
+    description: string;
     technique: string;
     width: number;
     height: number;
     user: User;
 }
-
 export interface Artwork extends NewArtwork{
     id:number;
-    ratings: Rating[];
     imageURL: string;
+    ratings: Rating[];
 }
- */

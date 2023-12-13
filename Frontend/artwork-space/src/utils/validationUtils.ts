@@ -12,13 +12,11 @@ export const maxLengthValidation = (max: number) => ({
 });
 export const lettersOnlyValidation = {
     pattern: {
-        value: /^[A-Za-z ]+$/,
+        value: /^[A-Za-zА-Яа-яії ]+$/,
         message: 'Only letters are allowed',
     },
 };
 export const minValueValidation = (min: number) => ({
-    // value: min,
-    // message: `Must be greater than or equal to ${min}`,
     validate: (value: number | string) => {
         const numericValue = parseFloat(value as string);
         return numericValue >= min || `Must be greater than or equal to ${min}`;
@@ -58,4 +56,18 @@ export const emailValidation = {
         message: 'Enter a valid email address',
     },
 };
+export const imageFileValidation = {
+    validate: (file: FileList) => {
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+        const fileName = file[0].name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (fileExtension && !allowedExtensions.includes(fileExtension)) {
+            return 'Only image files with extensions: jpg, jpeg, png are allowed';
+        }
+        return true;
+    },
+};
+
 

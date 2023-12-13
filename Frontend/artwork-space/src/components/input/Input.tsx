@@ -53,7 +53,7 @@ const Input: React.FC<InputProps> = ({
                     {...register(id, { required, ...validationOptions })}
                     placeholder={placeholder}
                     className={inputClasses}
-                    rows={4}
+                    rows={8}
                 />
             ) : (
                 <input

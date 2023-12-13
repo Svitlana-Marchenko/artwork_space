@@ -14,6 +14,7 @@ import Empty from "../../empty";
 import {calculateAverageRating, hasUserRatedArtwork} from "../../utils/ratingUtils";
 import useMyArtwork from "../../hooks/useMyArtwork";
 import RatingModal from "../../components/modals/RatingModal";
+import ExhibitionService from "../../API/ExhibitionService";
 
 
 const Artwork = () => {
@@ -56,28 +57,16 @@ const Artwork = () => {
     }
     const averageRating = calculateAverageRating(artwork?.ratings || []);
 
-    //todo change to custom window.confirm
-    //todo допиши хендлер помилок, коли артворк в виставці, коли у колекції та коли на аукціоні
-    //todo add link to api folder
     function handleDelete() {
-        if (window.confirm('Are you sure you want to delete this artwork?')) {
-            fetch(`http://localhost:8080/artworks/${id}`, {
-                method: 'DELETE',
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        navigate(-1)
-                        console.log(response)
-                        toast.success('Artwork deleted successfully');
-                    } else {
-                        response.text().then(errorMessage => {
-                            toast.error(errorMessage);
-                        });
-
-                    }
+        if (id) {
+            ArtworkService.deleteArtworkById(id)
+                .then(() => {
+                    navigate(-1)
+                    toast.success('Artwork was deleted');
                 })
                 .catch((error) => {
-                    console.error('Error while deleting artwork:', error);
+                    toast.error('Failed to delete artwork.');
+                    console.log(error)
                 });
         }
     }
@@ -124,7 +113,7 @@ const Artwork = () => {
                                 currentUser?.role === 'ARTIST'
                                     ?
                                     isMyArtwork && (<>
-                                        <Button label={"Edit"} onClick={()=>{}}/>
+                                        <Button label={"Edit"} onClick={()=>{navigate(`/edit-artwork/${id}`)}}/>
                                         <Button label={"Delete"} onClick={handleDelete} outline/>
                                     </>)
                                     :
@@ -148,7 +137,5 @@ const Artwork = () => {
         </div>
     );
 };
-
-//todo normal loading page
 
 export default Artwork;
