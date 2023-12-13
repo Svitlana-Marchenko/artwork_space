@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
-import com.system.artworkspace.exceptions.ExceptionHelper;
-import com.system.artworkspace.exceptions.NoSuchArtworkException;
-import com.system.artworkspace.exceptions.NoSuchUserException;
-import com.system.artworkspace.exceptions.ValidationException;
+import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.helpers.RateLimit;
 import com.system.artworkspace.rating.RatingDto;
 import com.system.artworkspace.rating.RatingMapper;
@@ -173,6 +170,8 @@ public class ArtworkController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
+        if(artworkService.existsRatingByCurator(ratingDto.getUser().getId(),artworkId))
+            throw new TooManyRatingsException();
         logger.info("Adding rating with ID {} to artwork with ID: {}", ratingDto.getId(), artworkId);
         artworkService.addRating(artworkId, RatingMapper.INSTANCE.ratingDtoToRating(ratingDto));
         logger.info("Rating added to artwork with ID: {}", artworkId);

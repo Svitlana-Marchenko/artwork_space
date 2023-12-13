@@ -9,7 +9,7 @@ import AuctionService from "../../API/AuctionService";
 import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
 import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
 import {Rating} from "../../types/artworkTypes";
-import {calculateAverageRating} from "../../utils/calculate-average-rate";
+import {calculateAverageRating} from "../../utils/ratingUtils";
 import {User} from "../../types/usersTypes";
 import Empty from "../../empty";
 
