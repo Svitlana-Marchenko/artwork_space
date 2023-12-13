@@ -79,7 +79,7 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
                 errors={errors}
                 validationOptions={{
                     ...requiredValidation,
-                    ...minValueValidation(0),
+                    ...minValueValidation(1),
                 }}
             />
             <Input
@@ -91,7 +91,7 @@ const AuctionModal:React.FC<AuctionModalProps> = ({isOpen, toggle, artwork}) => 
                 errors={errors}
                 validationOptions={{
                     ...requiredValidation,
-                    ...minValueValidation(0),
+                    ...minValueValidation(1),
                 }}
             />
             <Input

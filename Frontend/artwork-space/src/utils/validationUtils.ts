@@ -17,9 +17,11 @@ export const lettersOnlyValidation = {
     },
 };
 export const minValueValidation = (min: number) => ({
-    minValue: {
-        value: min,
-        message: `Must be greater than or equal to ${min}`,
+    // value: min,
+    // message: `Must be greater than or equal to ${min}`,
+    validate: (value: number | string) => {
+        const numericValue = parseFloat(value as string);
+        return numericValue >= min || `Must be greater than or equal to ${min}`;
     },
 });
 
