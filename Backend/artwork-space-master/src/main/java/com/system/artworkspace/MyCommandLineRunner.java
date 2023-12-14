@@ -5,9 +5,6 @@ import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkService;
 import com.system.artworkspace.auction.*;
-import com.system.artworkspace.collection.CollectionEntity;
-import com.system.artworkspace.collection.CollectionMapper;
-import com.system.artworkspace.collection.CollectionService;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.ExhibitionService;
@@ -41,8 +38,6 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Autowired
     UserService userService;
-    @Autowired
-    CollectionService collectionService;
 
     @Autowired
     ExhibitionService exhibitionService;
