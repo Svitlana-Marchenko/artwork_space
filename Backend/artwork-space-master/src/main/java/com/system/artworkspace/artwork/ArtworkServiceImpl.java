@@ -2,12 +2,8 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
-import com.system.artworkspace.collection.CollectionEntity;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
-import com.system.artworkspace.exceptions.NoSuchExhibitionException;
-import com.system.artworkspace.exhibition.ExhibitionEntity;
-import com.system.artworkspace.exhibition.ExhibitionMapper;
-import com.system.artworkspace.helpers.SaveImagesManager;
+import com.system.artworkspace.helpers.ImagesManager;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
@@ -20,22 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.system.artworkspace.logger.LoggingMarkers.*;
-import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
 
 
 @Service
@@ -66,7 +57,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
             logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
             ArtworkEntity ent = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
-            String imagePath= SaveImagesManager.saveImage(file,artwork.getUser().getId(),ent.getId());
+            String imagePath= ImagesManager.saveImage(file,artwork.getUser().getId(),ent.getId());
             repository.updateImageUrl(ent.getId(),imagePath);
             artwork.setImageURL(imagePath);
             logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
@@ -96,8 +87,13 @@ public class ArtworkServiceImpl implements ArtworkService {
         Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
-            repository.deleteById(id);
-            logger.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", id);
+            try {
+                repository.deleteById(id);
+                ImagesManager.deleteImage(optionalArtwork.get().getImageURL());
+                logger.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", id);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             logger.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", id);
             throw new NoSuchArtworkException("Artwork not found with ID: " + id);
