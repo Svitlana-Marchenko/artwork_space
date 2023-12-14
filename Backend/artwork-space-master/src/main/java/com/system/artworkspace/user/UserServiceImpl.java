@@ -5,6 +5,8 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
+import com.system.artworkspace.auction.Sale.Sale;
+import com.system.artworkspace.auction.Sale.SaleRepository;
 import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.helpers.ImagesManager;
 import com.system.artworkspace.user.changePassword.ChangePassword;
@@ -32,7 +34,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
     private ArtworkRepository artworkRepository;
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            ArtworkRepository artworkRepository) {
@@ -179,6 +180,7 @@ public class UserServiceImpl implements UserService {
         user.getCollection().removeIf((x) -> x.getId().equals(artworkId));
         userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
     }
+
 
     private void checkOldPassword(String oldPassword, String passwordInDb) {
         if (!passwordEncoder.matches(oldPassword, passwordInDb))

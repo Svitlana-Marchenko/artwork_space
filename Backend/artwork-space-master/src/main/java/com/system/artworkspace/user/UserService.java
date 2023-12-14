@@ -1,6 +1,7 @@
 package com.system.artworkspace.user;
 
 import com.system.artworkspace.artwork.Artwork;
+import com.system.artworkspace.auction.Sale.Sale;
 import com.system.artworkspace.user.changePassword.ChangePassword;
 import com.system.artworkspace.user.userUpdate.UserUpdate;
 

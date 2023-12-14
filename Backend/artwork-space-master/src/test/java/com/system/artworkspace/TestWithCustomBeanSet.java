@@ -2,6 +2,7 @@ package com.system.artworkspace;
 
 import com.system.artworkspace.artwork.ArtworkRepository;
 import com.system.artworkspace.auction.*;
+import com.system.artworkspace.auction.Sale.SaleRepository;
 import com.system.artworkspace.user.UserRepository;
 import com.system.artworkspace.user.UserService;
 import com.system.artworkspace.user.UserServiceImpl;

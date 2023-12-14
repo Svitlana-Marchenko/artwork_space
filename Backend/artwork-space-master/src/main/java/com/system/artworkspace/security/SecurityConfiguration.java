@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                         })
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**", "/signin/**"))
+                        .ignoringRequestMatchers("/sales/**","/users/**", "/artworks/**", "/auctions/**", "/exhibitions/**", "/collections/**", "/collectioneer/auctions/**", "/signin/**"))
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(HttpMethod.POST, "/exhibitions/**").hasAuthority("CURATOR")
                         .requestMatchers(HttpMethod.PUT, "/exhibitions/**").hasAuthority("CURATOR")

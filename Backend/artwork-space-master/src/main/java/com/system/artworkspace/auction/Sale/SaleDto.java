@@ -18,7 +18,7 @@ public class SaleDto {
     private UserDto buyer;
     @NotNull(message = "Seller of artwork cant be null")
     private UserDto seller;
-    @NotBlank(message = "Price cant be blank")
+
     @Min(value = 1, message = "Price must be > 0")
     private double price;
     @NotNull(message = "Date of sale cant be null")
