@@ -1,4 +1,4 @@
-package com.system.artworkspace;
+package com.system.artworkspace.integration;
 
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
