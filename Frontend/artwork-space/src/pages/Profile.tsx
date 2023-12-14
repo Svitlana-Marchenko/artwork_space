@@ -17,6 +17,7 @@ import ExhibitionService from "../API/ExhibitionService";
 import AuctionService from "../API/AuctionService";
 import AuctionList from "../components/lists/AuctionList";
 import {Auction} from "../types/auctionsTypes";
+import SalesList from "../components/lists/SalesList";
 
 const Profile = () => {
     const storedUserString = localStorage.getItem("currentUser");
@@ -120,6 +121,15 @@ const Profile = () => {
                     )
                 }
                 <hr className={'my-8'}/>
+                {
+                    currentUser&&(!id)&&(
+                        (currentUser.role === "ARTIST" ||   currentUser.role === "COLLECTIONEER")
+                            ?
+                            <SalesList/>
+                            :
+                            null
+                    )
+                }
                 {
                     currentUser&&(!id)&&(
                         (currentUser.role === "CURATOR" ||   currentUser.role === "COLLECTIONEER")

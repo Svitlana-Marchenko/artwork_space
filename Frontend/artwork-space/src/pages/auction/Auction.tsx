@@ -6,9 +6,7 @@ import ArtworkHeading from "../../components/artwork/ArtworkHeading";
 import ArtworkDescription from "../../components/artwork/ArtworkDescription";
 import {Auction as AuctionType} from "../../types/auctionsTypes";
 import AuctionService from "../../API/AuctionService";
-import {ChangePasswordModal} from "../../components/modals/ChangePasswordModal";
 import {PlaceBidModal} from "../../components/modals/PlaceBidModal";
-import {Rating} from "../../types/artworkTypes";
 import {calculateAverageRating} from "../../utils/ratingUtils";
 import {User} from "../../types/usersTypes";
 import Empty from "../../empty";
@@ -27,7 +25,9 @@ const Auction = () => {
     useEffect(() => {
         if (id) {
             AuctionService.getAuctionById(id)
-                .then((data) => setAuction(data))
+                .then((data) => {
+                    setAuction(data)
+                })
                 .catch((error) =>
                     console.error('Error fetching auction by ID:', error)
                 );
@@ -71,12 +71,15 @@ const Auction = () => {
                         title={title}
                         averageRating={averageRating}
                         showAverageRating={artwork.ratings.length>0}/>
-                    <CountdownTimer targetDate={new Date(closingTime)}/>
+                    <div className={'h-[160px]'}>
+                        <CountdownTimer targetDate={new Date(closingTime)}/>
+                    </div>
                 </div>
                 <ArtworkDescription
                     technique={technique}
                     width={width}
                     height={height}
+                    currentBuyer={user}
                 />
                 {
                     startingPrice === currentBid

@@ -1,18 +1,27 @@
 import React from 'react';
+import {User} from "../../types/usersTypes";
 
-interface ArtworkDescription {
+interface ArtworkDescriptionProps {
     technique: string;
     width: number;
     height: number;
+    currentBuyer?: User;
 }
-//todo think/add artwork description field
-const ArtworkDescription:React.FC<ArtworkDescription> = ({technique, width, height}) => {
+const ArtworkDescription:React.FC<ArtworkDescriptionProps> = ({technique, width, height, currentBuyer}) => {
     return (
         <div className="grid grid-cols-2 gap-x-8 my-6">
             <p>Technique</p>
             <p className={"text-gray-400"}>{technique}</p>
             <p>Size</p>
             <p className={"text-gray-400"}>{width}&times;{height} cm</p>
+            {
+                currentBuyer&&(
+                    <>
+                        <p>Current buyer</p>
+                        <p className={"text-gray-400"}>{currentBuyer.firstName} {currentBuyer.lastName}</p>
+                    </>
+                )
+            }
         </div>
     );
 };
