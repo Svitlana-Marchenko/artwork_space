@@ -7,7 +7,7 @@ import ArtworkService from "../../API/ArtworkService";
 import toast from "react-hot-toast";
 import Input from "../../components/input/Input";
 import {
-    dateValidation, endDateValidation, imageFileValidation,
+    dateValidation, endDateValidation, fileSizeValidation, imageFileValidation,
     lettersOnlyValidation,
     maxLengthValidation, minValueValidation,
     requiredValidation
@@ -95,7 +95,7 @@ const ArtworkForm = () => {
                         console.error('Error in editing artwork:', error);
                     });
             }else{
-                ArtworkService.addArtwork(artworkData, data.file)
+                ArtworkService.addArtwork(artworkData, data.file[0])
                     .then((data) => {
                             toast.success("Artwork was created")
                             reset();
@@ -185,7 +185,8 @@ const ArtworkForm = () => {
                                 errors={errors}
                                 validationOptions={{
                                     ...requiredValidation,
-                                    ...imageFileValidation
+                                    ...imageFileValidation,
+                                    ...fileSizeValidation(10)
                                 }}/>
                         )
                     }

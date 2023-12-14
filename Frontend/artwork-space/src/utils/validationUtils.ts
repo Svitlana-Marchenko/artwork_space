@@ -70,4 +70,20 @@ export const imageFileValidation = {
     },
 };
 
+export const fileSizeValidation = (maxSizeInMB: number) => ({
+    validate: (file: FileList) => {
+        if (file) {
+            const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+            const fileSize = file[0].size;
+
+            if (fileSize > maxSizeInBytes) {
+                return `File size must be less than ${maxSizeInMB} MB`;
+            }
+
+            return true;
+        }
+    }
+});
+
+
 

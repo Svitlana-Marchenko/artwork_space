@@ -66,17 +66,15 @@ export default class ArtworkService {
     static async addArtwork(artwork: NewArtwork, file: File) {
         try {
             const token = localStorage.getItem('token');
-
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('artwork', JSON.stringify(artwork));
             const config = {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
                 },
             };
-
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('artwork', JSON.stringify(artwork));
 
             const response = await axios.post('http://localhost:8080/artworks', formData, config);
             return response.data;
