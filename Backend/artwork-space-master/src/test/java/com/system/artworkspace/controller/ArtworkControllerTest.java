@@ -57,7 +57,7 @@ public class ArtworkControllerTest {
     @Test
     @WithMockUser(username = "artist", authorities = "ARTIST")
     public void deleteExistingArtwork_shouldReturn200() throws Exception {
-        mockMvc.perform(delete("/artworks/{id}", 12))
+        mockMvc.perform(delete("/artworks/{id}", 2))
                 .andExpect(status().is2xxSuccessful());
     }
 

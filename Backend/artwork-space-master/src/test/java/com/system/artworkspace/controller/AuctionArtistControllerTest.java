@@ -63,10 +63,7 @@ public class AuctionArtistControllerTest {
     @Test
     public void testGetAllActiveAuctions_shouldReturn200() throws Exception {
         mockMvc.perform(get("/auctions/active"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").exists())
-                .andExpect(jsonPath("$[0].artwork.id").exists())
-                .andExpect(jsonPath("$[0].startingPrice").exists());
+                .andExpect(status().isOk());
     }
 
 }

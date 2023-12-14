@@ -20,5 +20,8 @@ public interface ArtworkRepository extends JpaRepository<ArtworkEntity, Long> {
             "WHERE a.id = :artworkId AND r.user.id = :userId")
     boolean existsRatingForUser(@Param("artworkId") Long artworkId, @Param("userId") Long userId);
 
+    @Modifying
+    @Query("DELETE FROM ArtworkEntity a WHERE a.user.id = :userId")
+    void deleteArtworksByUserId(Long userId);
     List<ArtworkEntity> findAllByUserId(Long artistId);
 }

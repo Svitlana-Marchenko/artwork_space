@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +75,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long userId) {
         if (userRepository.existsById(userId)) {
+            artworkRepository.deleteArtworksByUserId(userId);
             userRepository.deleteById(userId);
             logger.info(USER_ACTIONS,"Deleted user with ID: {}", userId);
         } else {

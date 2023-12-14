@@ -21,10 +21,8 @@ public class UserEntity {
     //private RoleEntity role;
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
-//    private List<ArtworkEntity> artworkEntities;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_artwork",
             joinColumns = @JoinColumn(name = "user_id"),
