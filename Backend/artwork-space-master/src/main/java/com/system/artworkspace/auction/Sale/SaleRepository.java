@@ -9,10 +9,11 @@ import java.util.List;
 
 @Repository
 public interface SaleRepository extends JpaRepository<SaleEntity,Long> {
-    @Query("SELECT s FROM SaleEntity s WHERE s.seller.id = :sellerId")
-    List<SaleEntity> findAllSalesBySellerId(@Param("sellerId") Long sellerId);
 
-    @Query("SELECT s FROM SaleEntity s WHERE s.buyer.id = :buyerId")
-    List<SaleEntity> findAllSalesByBuyerId(@Param("buyerId") Long sellerId);
+    List<SaleEntity> findAllBySellerId(Long sellerId);
+
+    List<SaleEntity> findAllByBuyerId(Long id);
+
+    boolean existsSaleEntityByArtworkId(Long id);
 
 }

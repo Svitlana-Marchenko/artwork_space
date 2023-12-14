@@ -42,5 +42,6 @@ public interface ArtworkService {
 
     void deleteRating(Long artworkId, Rating rating);
     boolean existsRatingByCurator(Long curatorId, Long artworkId);
+    boolean isSold(Long id);
 
 }

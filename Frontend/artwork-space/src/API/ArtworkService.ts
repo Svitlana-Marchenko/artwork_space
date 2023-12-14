@@ -31,6 +31,15 @@ export default class ArtworkService {
             throw error;
         }
     }
+    static async isArtworkSold(id: number | undefined) {
+        try {
+            const response = await axios.get(`http://localhost:8080/artworks/${id}/sold`);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера:', error);
+            throw error;
+        }
+    }
     static async deleteArtworkById(id: string|number){
         try {
             const token = localStorage.getItem('token');

@@ -2,6 +2,7 @@ package com.system.artworkspace.artwork;
 
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
+import com.system.artworkspace.auction.Sale.SaleRepository;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import com.system.artworkspace.helpers.ImagesManager;
 import com.system.artworkspace.rating.Rating;
@@ -34,10 +35,12 @@ public class ArtworkServiceImpl implements ArtworkService {
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     private final ArtworkRepository repository;
+    private final SaleRepository saleRepository;
 
     @Autowired
-    public ArtworkServiceImpl(ArtworkRepository repository) {
+    public ArtworkServiceImpl(ArtworkRepository repository, SaleRepository saleRepository) {
         this.repository = repository;
+        this.saleRepository=saleRepository;
     }
 
     @Override
@@ -311,6 +314,11 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     public boolean existsRatingByCurator(Long curatorId, Long artworkId) {
         return repository.existsRatingForUser(artworkId,curatorId);
+    }
+
+    @Override
+    public boolean isSold(Long id) {
+        return saleRepository.existsSaleEntityByArtworkId(id);
     }
 
 

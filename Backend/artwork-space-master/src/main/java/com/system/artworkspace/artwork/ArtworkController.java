@@ -151,6 +151,11 @@ public class ArtworkController {
 
     }
 
+    @GetMapping("/{id}/sold")
+    public boolean isSold(@PathVariable Long id){
+        return artworkService.isSold(id);
+    }
+
     @ExceptionHandler(NoSuchArtworkException.class)
     public ResponseEntity<String> handleNoSuchArtworkException(NoSuchArtworkException e) {
         String errorMessage = "ERROR: " + e.getMessage();

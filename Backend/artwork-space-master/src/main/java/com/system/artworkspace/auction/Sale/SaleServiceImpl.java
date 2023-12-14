@@ -55,11 +55,11 @@ public class SaleServiceImpl implements SaleService{
 
     @Override
     public List<Sale> getSalesForArtist(Long id) {
-        return repository.findAllSalesBySellerId(id).stream().map(x -> SaleMapper.INSTANCE.saleEntityToSale(x)).collect(Collectors.toList());
+        return repository.findAllBySellerId(id).stream().map(x -> SaleMapper.INSTANCE.saleEntityToSale(x)).collect(Collectors.toList());
     }
 
     @Override
     public List<Sale> getSalesForCollectioneer(Long id) {
-        return repository.findAllSalesByBuyerId(id).stream().map(x -> SaleMapper.INSTANCE.saleEntityToSale(x)).collect(Collectors.toList());
+        return repository.findAllByBuyerId(id).stream().map(x -> SaleMapper.INSTANCE.saleEntityToSale(x)).collect(Collectors.toList());
     }
 }

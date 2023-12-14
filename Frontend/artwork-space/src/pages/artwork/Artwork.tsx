@@ -50,6 +50,17 @@ const Artwork = () => {
     }, [newRatingAdded]);
 // Check if the current user has already rated the artwork
     const hasUserRated = hasUserRatedArtwork(artwork?.ratings || [], currentUser);
+    const [isArtworkSold, setIsArtworkSold] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        if (artwork?.id && currentUser?.role === "ARTIST") {
+            ArtworkService.isArtworkSold(artwork.id)
+                .then((data) => setIsArtworkSold(data))
+                .catch((error) => console.error('Error checking if artwork is sold:', error));
+        } else {
+            setIsArtworkSold(false);
+        }
+    }, [artwork?.id, currentUser?.role]);
 
     function handleAddReview() {
         if (currentUser?.role === "CURATOR" && ratingFormRef.current) {
@@ -92,7 +103,7 @@ const Artwork = () => {
                             {
                                 currentUser?.role === "ARTIST"
                                     ?
-                                    isMyArtwork && (<SellButton artwork={artwork} currentUser={currentUser}/>)
+                                    isMyArtwork && !isArtworkSold && (<SellButton artwork={artwork} currentUser={currentUser}/>)
                                     :
                                     null
                             }
