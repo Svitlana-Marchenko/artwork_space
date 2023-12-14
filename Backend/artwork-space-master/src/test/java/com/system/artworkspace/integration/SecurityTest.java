@@ -1,4 +1,4 @@
-package com.system.artworkspace;
+package com.system.artworkspace.integration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
