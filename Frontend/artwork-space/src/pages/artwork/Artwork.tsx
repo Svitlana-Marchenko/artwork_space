@@ -15,6 +15,7 @@ import {calculateAverageRating, hasUserRatedArtwork} from "../../utils/ratingUti
 import useMyArtwork from "../../hooks/useMyArtwork";
 import RatingModal from "../../components/modals/RatingModal";
 import ExhibitionService from "../../API/ExhibitionService";
+import artworks from "./Artworks";
 
 
 const Artwork = () => {
@@ -77,7 +78,7 @@ const Artwork = () => {
                 <>
                 <div className="flex flex-row items-center justify-center gap-10">
                     <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
-                    <section className="w-1/3">
+                    <section className="w-[400px]">
                         <div className={'flex flex-row justify-between align-top'}>
                             <ArtworkHeading
                                 title={artwork.title}
@@ -122,6 +123,10 @@ const Artwork = () => {
                         </div>
                     </section>
                 </div>
+                    <div className={'w-2/3'}>
+                        <h4 className="text-lg font-semibold mb-2" style={{ textAlign: 'left' }}>Description</h4>
+                        <p>{artwork.description}</p>
+                    </div>
                 <div style={{ width: '100%' }} className={"mb-8"}>
                     {currentUser?.role === "CURATOR" && !hasUserRated && (
                         <div ref={ratingFormRef}>
@@ -130,7 +135,8 @@ const Artwork = () => {
                         </div>
                     )}
                     <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />
-                </div></>
+                </div>
+                </>
             ) : (
                 <Empty message={"Theres no such artwork here"} link={`/artworks`} dist={'all artworks'}/>
             )}
