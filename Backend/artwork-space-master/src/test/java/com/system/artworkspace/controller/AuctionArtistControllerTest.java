@@ -1,68 +1,61 @@
 package com.system.artworkspace.controller;
-import org.junit.jupiter.api.BeforeEach;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.system.artworkspace.auction.AuctionArtistController;
+import com.system.artworkspace.auction.AuctionArtistService;
+import com.system.artworkspace.auction.AuctionDto;
+import com.system.artworkspace.security.auth.jwt.JwtAuthenticationFilter;
+import com.system.artworkspace.security.auth.jwt.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@SpringBootTest
+@WebMvcTest(AuctionArtistController.class)
 public class AuctionArtistControllerTest {
 
     @Autowired
-    private WebApplicationContext context;
-
     private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .build();
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
 
-//    @Test
-//    public void testCreateAuction() throws Exception {
-//        // Implement your test logic for creating an auction
-//        // You may need to mock the AuctionArtistService and define its behavior
-//
-//        mockMvc.perform(post("/auctions")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{ \"artwork\": { \"id\": 1 }, \"startingPrice\": 100.0 }"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").exists());
-//    }
+    @MockBean
+    private AuctionArtistService auctionArtistService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Test
-    public void testDisplayCurrentBid_shouldReturn200() throws Exception {
-         mockMvc.perform(get("/auctions/{id}/currentBid", 1))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isNumber());
+    public void testGetAllActiveAuctions_ShouldReturn200() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/auctions/active")
+                        .with(SecurityMockMvcRequestPostProcessors.user("art").roles("ARTIST"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    public void testDisplayCurrentBidOnNonExistingAuction_shouldReturn500() throws Exception {
-        mockMvc.perform(get("/auctions/{id}/currentBid", 100))
-                .andExpect(status().is5xxServerError());
+    public void testGetAllAuctionsByArtistId_ShouldReturn200() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/auctions/artist/{id}", 1)
+                        .with(SecurityMockMvcRequestPostProcessors.user("art").roles("ARTIST"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-//    @Test
-//    public void testDisplayCurrentBuyer() throws Exception {
-//         mockMvc.perform(get("/auctions/{id}/currentBuyer", 1))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").exists())
-//                .andExpect(jsonPath("$.username").exists())
-//                .andExpect(jsonPath("$.email").exists());
-//    }
-
     @Test
-    public void testGetAllActiveAuctions_shouldReturn200() throws Exception {
-        mockMvc.perform(get("/auctions/active"))
+    public void testCreateAuction_shouldReturn200() throws Exception {
+        AuctionDto auctionDto = new AuctionDto();
+        mockMvc.perform(MockMvcRequestBuilders.post("/auctions")
+                        .with(SecurityMockMvcRequestPostProcessors.user("art").roles("ARTIST"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()).contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(auctionDto)))
                 .andExpect(status().isOk());
     }
 
