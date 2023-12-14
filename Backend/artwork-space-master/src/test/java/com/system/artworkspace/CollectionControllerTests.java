@@ -39,7 +39,7 @@ public class CollectionControllerTests {
 
     @Test
     public void testAddToCollection() throws Exception {
-        ArtworkDto artworkDto = new ArtworkDto(99L,"Test","Desc","Tech",67,78,new UserDto(),"url",6.6,new ArrayList<RatingDto>());
+        ArtworkDto artworkDto = new ArtworkDto(99L,"Test","Desc","Tech",67,78,new UserDto(),"url",new ArrayList<RatingDto>());
 
         mockMvc.perform(MockMvcRequestBuilders.post("/collections/{id}/addArtwork", 1)
                         .with(SecurityMockMvcRequestPostProcessors.user("col").roles("COLLECTIONEER"))

@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class ArtworkEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50)
     private String title;

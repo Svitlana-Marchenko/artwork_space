@@ -1,5 +1,6 @@
 package com.system.artworkspace.rating;
 
+import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
 
@@ -8,14 +9,13 @@ import java.util.Objects;
 @Entity
 public class RatingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double rate;
     @ManyToOne
     private UserEntity user;
     @Column(length = 2000)
     private String comment;
-
     public Long getId() {
         return id;
     }
