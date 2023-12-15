@@ -79,10 +79,6 @@ public class MyCommandLineRunner implements CommandLineRunner {
         users.add(u4);
         users.add(u5);
         users.add(u6);
-        users.add(c1);
-        users.add(c2);
-        users.add(c3);
-        users.add(c4);
 
 
         users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
@@ -94,7 +90,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
         users.add(new UserEntity("noah_clark", "Noah", "Clark", "noah.clark@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
         users.add(new UserEntity("ava_ava", "Ava", "Moore", "ava.moore@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
         users.add(new UserEntity("liam_artlover", "Liam", "White", "liam.white@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-
+        users.add(c1);
+        users.add(c2);
+        users.add(c3);
+        users.add(c4);
         for (UserEntity a: users){
             userService.createUser(UserMapper.INSTANCE.userEntityToUser(a));
         }
@@ -103,10 +102,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         RatingEntity r1 = new RatingEntity(9, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Very beautiful artwork! I am impressed");
         RatingEntity r2 = new RatingEntity(0, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(6L)), "It is fake !!!!!!!! I have seen the same in my local gallery! Why do you post a replica?");
-        RatingEntity r3 = new RatingEntity(6, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Not bad.");
-        RatingEntity r4 = new RatingEntity(2, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(8L)), "");
-        RatingEntity r5 = new RatingEntity(10, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(9L)), "Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
-        RatingEntity r6 = new RatingEntity(8, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "I like this artwork! Especially a combination of colours!");
+        RatingEntity r3 = new RatingEntity(6, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(16L)), "Not bad.");
+        RatingEntity r4 = new RatingEntity(2, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(17L)), "");
+        RatingEntity r5 = new RatingEntity(10, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(18L)), "Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
+        RatingEntity r6 = new RatingEntity(8, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(19L)), "I like this artwork! Especially a combination of colours!");
 
         List<RatingEntity> ratings = new ArrayList<>();
         ratings.add(r3);
