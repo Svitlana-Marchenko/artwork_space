@@ -46,29 +46,50 @@ public class MyCommandLineRunner implements CommandLineRunner {
     ArtworkService artworkService;
     @Autowired
     AuctionArtistService auctionArtistService;
+
     @Override
     public void run(String... args) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         createTestData();
     }
 
-
     @SuppressWarnings("deprecation")
     private void createTestData() {
+        List<UserEntity> users = new ArrayList<>();
         UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>());
         UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>());
         UserEntity u3 = new UserEntity("cur", "Alex", "Doe", "alex.doe@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>());
+        UserEntity u4  = (new UserEntity("alice_art", "Alice", "Smith", "alice.smith@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
+        UserEntity u5 = (new UserEntity("robert_johnson", "Robert", "Johnson", "robert.johnson@gmail.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
+        UserEntity u6 = (new UserEntity("emily_exh", "Emily", "Anderson", "emily.anderson@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
 
-        userService.createUser(UserMapper.INSTANCE.userEntityToUser(u1));
-        userService.createUser(UserMapper.INSTANCE.userEntityToUser(u2));
-        userService.createUser(UserMapper.INSTANCE.userEntityToUser(u3));
+        users.add(u1);
+        users.add(u2);
+        users.add(u3);
+        users.add(u4);
+        users.add(u5);
+        users.add(u6);
+
+        users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("sara_art_lover", "Sarah", "Brown", "sarah.brown@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("art_michael", "Michael", "Davis", "michael.davis@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("olivko", "Olivia", "Wilson", "olivia.wilson@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("ethan_martin", "Ethan", "Martin", "ethan.martin@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("sofa_sofa", "Sophia", "Thompson", "sophia.thompson@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("noah_clark", "Noah", "Clark", "noah.clark@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("ava_ava", "Ava", "Moore", "ava.moore@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("liam_artlover", "Liam", "White", "liam.white@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+
+        for (UserEntity a: users){
+            userService.createUser(UserMapper.INSTANCE.userEntityToUser(a));
+        }
 
         List<ArtworkEntity> artworks = new ArrayList<>();
 
-        RatingEntity r1 = new RatingEntity(9,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Very beautiful artwork! I am impressed");
-        RatingEntity r2 = new RatingEntity(2,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"It is fake !!!!!!!! Fuck you people! I hate that! And what can you do? Nothing ahahahhahahah");
-        RatingEntity r3 = new RatingEntity(6,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Not bad.");
-        RatingEntity r4 = new RatingEntity(0,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"");
-        RatingEntity r5 = new RatingEntity(10,UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),"Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
+        RatingEntity r1 = new RatingEntity(9, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Very beautiful artwork! I am impressed");
+        RatingEntity r2 = new RatingEntity(2, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "It is fake !!!!!!!! Fuck you people! I hate that! And what can you do? Nothing ahahahhahahah");
+        RatingEntity r3 = new RatingEntity(6, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Not bad.");
+        RatingEntity r4 = new RatingEntity(0, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "");
+        RatingEntity r5 = new RatingEntity(10, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
 
         List<RatingEntity> ratings = new ArrayList<>();
         ratings.add(r3);
@@ -77,46 +98,40 @@ public class MyCommandLineRunner implements CommandLineRunner {
         ratings.add(r2);
         ratings.add(r5);
 
-        ArtworkEntity art1 = new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg", ratings);//../../../data/artist_1/1.jpg
+        ArtworkEntity art1 = new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Янголи", "Неймовірної краси янголи", "Oil Painting", 60.0, 40.0, "../data/artist_1/1.jpg", ratings);//../../../data/artist_1/1.jpg
         artworks.add(art1);
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0,30.0, "../data/artist_1/1.jpg",  ratings.subList(0,2)));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний вибух кольору", "Експлозивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.jpg", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ліс восени", "Чарівний ліс восени, коли листя стає яскравими фарбами.", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Битва за свободу", "Мистецьке відтворення історичної битви за свободу.", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Яскраві квіти", "Сповнені кольору квіти, які вражають своєю красою.", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg", new ArrayList<>()));
 
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_1/1.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний вибух кольору", "Експлозивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.jpg",  new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактний вибух кольору", "Ексклюзивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../data/artist_4/6.jpg", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../data/artist_4/7.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактні думки", "Мої справжні думки", "Oil Painting", 60.0, 40.0, "../data/artist_4/8.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактний вибух зебр", "Експлозивна абстрактна робота з тваринними мотивами", "Oil Painting", 60.0, 40.0, "../data/artist_4/9.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Портрет таємничого ведмедя", "Портрет ведмедика з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_4/10.jpeg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстракція", "Сучасний абстракція, яка залишає всіх враженими", "Oil Painting", 60.0, 40.0, "../data/artist_4/11.jpg", new ArrayList<>()));
 
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0,"../data/artist_1/1.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Абстрактний вибух кольору", "Експлозивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.jpg",  new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Погляд", "Погляд, який залишає всіх враженими.", "Oil Painting", 80.0, 50.0, "../data/artist_7/12.jpeg", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Ранок у колі родини", "Родинний ранок мами з ведмежатами", "Oil Painting", 60.0, 40.0, "../data/artist_7/13.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Серйозність", "Портрет носоріга з загадковими очима та серйозним виразом обличчя.", "Oil Painting", 80.0, 30.0, "../data/artist_7/14.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Погляд прискіпливості", "Портрет лами з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_7/15.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_7/16.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_7/17.jpg", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Ранок в оточенні свійських тварин", "Живописний ранок з різноманітними тваринами", "Oil Painting", 60.0, 40.0, "../data/artist_7/18.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Акварельні квіти", "Живописний квіти", "Watercolor Painting", 60.0, 40.0, "../data/artist_7/19.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Ведмідь сидить", "Ведмідь з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 70.0, "../data/artist_7/20.jpg", new ArrayList<>()));
 
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg",  new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0,"../data/artist_1/1.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Квіти", "Живописні квіти", "Oil Painting", 60.0, 40.0, "../data/artist_10/21.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Ранок у горах з озером", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_10/22.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Питання?", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_10/23.jpeg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Квіти на зеленому фоні", "Ексклюзивна робота", "Oil Painting", 60.0, 40.0, "../data/artist_10/24.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Насолода", "Сучасний твір", "Oil Painting", 60.0, 40.0, "../data/artist_10/25.jpg", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "Портрет таємничої корови", "Портрет корови з загадковими очима та виразом обличчя, який залишає всіх враженими.", "Oil Painting", 80.0, 30.0, "../data/artist_10/26.jpeg", new ArrayList<>()));
 
-
-        for (ArtworkEntity a: artworks){
+        for (ArtworkEntity a : artworks) {
             artworkService.addArtwork(ArtworkMapper.INSTANCE.artworkEntityToArtwork(a));
         }
-
-        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(1L)),  0.0, 10, new Date(), null, 0);
-        AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(2L)),  0.0, 10, new Date(), null, 0);
-        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(3L)),  100.0, 10, new Date(), u2, 100);
-        u2.setId(2L);
-
-        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa1));
-        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa2));
-        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa3));
-
-//        CollectionEntity collectionEntity1 = new CollectionEntity("Coll1",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
-//        CollectionEntity collectionEntity2 = new CollectionEntity("Coll2",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
-//        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity1));
-//        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collectionEntity2));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -134,11 +149,28 @@ public class MyCommandLineRunner implements CommandLineRunner {
             e.printStackTrace();
         }
 
+        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(1L)), 10.0, 5, new Date(), null, 0);
+        AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(2L)), 30.0, 10, endDate2, null, 0);
+        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(3L)), 100.0, 15, new Date(), u2, 150);
+        AuctionEntity aa4 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(4L)), 50.0, 5, new Date(), u2, 70);
+        AuctionEntity aa5 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(20L)), 70.0, 1, new Date(), u2, 80);
+        AuctionEntity aa6 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(21L)), 90.0, 20, new Date(), null, 0);
+
+        u2.setId(2L);
+
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa1));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa2));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa3));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa4));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa5));
+        auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa6));
+
+
 
         ExhibitionEntity exhibition1 = new ExhibitionEntity(
                 UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),
-                "Ex1",
-                "Description",
+                "Абстракція",
+                "Виставка показує основні твори абстрактного мистецтва, які представлені на мистецькому порталі",
                 new LinkedList<ArtworkEntity>(),
                 startDate1,
                 endDate1
@@ -146,8 +178,26 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         ExhibitionEntity exhibition2 = new ExhibitionEntity(
                 UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),
-                "Ex2",
-                "Description",
+                "Світ ведмедя",
+                "Найкращі картини ведмедів з мистецього порталу",
+                new LinkedList<ArtworkEntity>(),
+                startDate2,
+                endDate2
+        );
+
+        ExhibitionEntity exhibition3 = new ExhibitionEntity(
+                UserMapper.INSTANCE.userToUserEntity(userService.getUserById(6L)),
+                "Світ тварин",
+                "Найкращі картини тварин з мистецього порталу",
+                new LinkedList<ArtworkEntity>(),
+                startDate1,
+                endDate2
+        );
+
+        ExhibitionEntity exhibition4 = new ExhibitionEntity(
+                UserMapper.INSTANCE.userToUserEntity(userService.getUserById(6L)),
+                "Вибрані твори",
+                "Найкращі твори з мистецього порталу",
                 new LinkedList<ArtworkEntity>(),
                 startDate2,
                 endDate2
@@ -155,10 +205,42 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition1));
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition2));
+        exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition3));
+        exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition4));
 
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(1l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(6l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(7l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(8l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(9l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(11l));
+
+
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(10l));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(12l));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(13l));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(20l));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(25l));
+
+
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(14l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(23l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(13l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(15l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(12l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(26l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(10l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(16l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(20l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(18l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(25l));
+
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(19l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(8l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(4l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(5l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(3l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(24l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(11l));
     }
-
-
 }
 
