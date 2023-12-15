@@ -5,6 +5,9 @@ import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkService;
 import com.system.artworkspace.auction.*;
+import com.system.artworkspace.auction.Sale.SaleEntity;
+import com.system.artworkspace.auction.Sale.SaleMapper;
+import com.system.artworkspace.auction.Sale.SaleService;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.ExhibitionService;
@@ -45,6 +48,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @Autowired
     ArtworkService artworkService;
     @Autowired
+    SaleService saleService;
+    @Autowired
     AuctionArtistService auctionArtistService;
 
     @Override
@@ -62,12 +67,23 @@ public class MyCommandLineRunner implements CommandLineRunner {
         UserEntity u5 = (new UserEntity("robert_johnson", "Robert", "Johnson", "robert.johnson@gmail.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
         UserEntity u6 = (new UserEntity("emily_exh", "Emily", "Anderson", "emily.anderson@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
 
+        UserEntity c1 = (new UserEntity("anna_doys", "Anna", "Doyson", "anna.doyson@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        UserEntity c2 = (new UserEntity("david_stark", "David", "Stark", "david.stark@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        UserEntity c3 = (new UserEntity("andrew_spens", "Andrew", "Spensor", "andrew.spensor@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        UserEntity c4 = (new UserEntity("elizabeth_bret", "Elizabeth", "Bret", "elizabeth.bret@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+
+
         users.add(u1);
         users.add(u2);
         users.add(u3);
         users.add(u4);
         users.add(u5);
         users.add(u6);
+        users.add(c1);
+        users.add(c2);
+        users.add(c3);
+        users.add(c4);
+
 
         users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
         users.add(new UserEntity("sara_art_lover", "Sarah", "Brown", "sarah.brown@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
@@ -86,10 +102,11 @@ public class MyCommandLineRunner implements CommandLineRunner {
         List<ArtworkEntity> artworks = new ArrayList<>();
 
         RatingEntity r1 = new RatingEntity(9, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Very beautiful artwork! I am impressed");
-        RatingEntity r2 = new RatingEntity(2, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "It is fake !!!!!!!! Fuck you people! I hate that! And what can you do? Nothing ahahahhahahah");
-        RatingEntity r3 = new RatingEntity(6, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Not bad.");
-        RatingEntity r4 = new RatingEntity(0, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "");
-        RatingEntity r5 = new RatingEntity(10, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)), "Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
+        RatingEntity r2 = new RatingEntity(0, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(6L)), "It is fake !!!!!!!! I have seen the same in my local gallery! Why do you post a replica?");
+        RatingEntity r3 = new RatingEntity(6, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(7L)), "Not bad.");
+        RatingEntity r4 = new RatingEntity(2, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(8L)), "");
+        RatingEntity r5 = new RatingEntity(10, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(9L)), "Oh my Goodness! I can`t believe my eyes! It is an absolute masterpiece! I am totally in love! The artist is soooooo talented! Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :* Pleaseeeee put it on the auction, I will buy it for 100000000000000$ :*");
+        RatingEntity r6 = new RatingEntity(8, UserMapper.INSTANCE.userToUserEntity(userService.getUserById(10L)), "I like this artwork! Especially a combination of colours!");
 
         List<RatingEntity> ratings = new ArrayList<>();
         ratings.add(r3);
@@ -97,6 +114,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
         ratings.add(r1);
         ratings.add(r2);
         ratings.add(r5);
+        ratings.add(r6);
+
 
         ArtworkEntity art1 = new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Янголи", "Неймовірної краси янголи", "Oil Painting", 60.0, 40.0, "../data/artist_1/1.jpg", ratings);//../../../data/artist_1/1.jpg
         artworks.add(art1);
@@ -241,6 +260,17 @@ public class MyCommandLineRunner implements CommandLineRunner {
         exhibitionService.addToExhibition(4L, artworkService.findArtworkById(3l));
         exhibitionService.addToExhibition(4L, artworkService.findArtworkById(24l));
         exhibitionService.addToExhibition(4L, artworkService.findArtworkById(11l));
+
+        try {
+            SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2023-10-23"));
+            saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale));
+            SaleEntity sale2 = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(8L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(5L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),8990.0,dateFormat.parse("2023-10-10"));
+            saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale2));
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
 

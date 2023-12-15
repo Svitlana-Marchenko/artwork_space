@@ -37,6 +37,13 @@ public class SaleEntity {
         this.price = price;
         this.dateOfBuying = dateOfBuying;
     }
+    public SaleEntity(ArtworkEntity artwork, UserEntity buyer, UserEntity seller, double price, Date dateOfBuying) {
+        this.artwork = artwork;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.price = price;
+        this.dateOfBuying = dateOfBuying;
+    }
 
     public Long getId() {
         return id;
