@@ -35,11 +35,10 @@ public class UserDto {
 
     private Role role;
 
-    private List<ArtworkDto> collection;
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Role role, List<ArtworkDto> collection) {
+    public UserDto(Long id, String username, String firstName, String lastName, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -47,7 +46,6 @@ public class UserDto {
         this.email = email;
         this.password = password;
         this.role=role;
-        this.collection=collection;
     }
     public Long getId() {
         return id;
@@ -105,11 +103,4 @@ public class UserDto {
         this.role = role;
     }
 
-    public List<ArtworkDto> getCollection() {
-        return collection;
-    }
-
-    public void setCollection(List<ArtworkDto> collection) {
-        this.collection = collection;
-    }
 }

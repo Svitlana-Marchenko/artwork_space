@@ -114,5 +114,16 @@ public class ArtworkDto {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ArtworkDto artwork = (ArtworkDto) obj;
+        return id == artwork.id;
+    }
 
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

@@ -45,9 +45,6 @@ public class UserServiceImpl implements UserService {
         checkNewUsername(user.getUsername());
         checkNewEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(user.getCollection() == null){
-            user.setCollection(new ArrayList<Artwork>());
-        }
         UserEntity createdUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
         logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", createdUser.getId());
         if(user.getRole().equals(Role.ARTIST))
@@ -120,65 +117,6 @@ public class UserServiceImpl implements UserService {
             logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", changePassword.getId());
             throw new NoSuchUserException("User with id " + changePassword.getId() + " not found");
         }
-    }
-
-    @Override
-    public List<Artwork> getCollectionByUserId(Long id) {
-        logger.info("Getting user with id "+id);
-        Optional<UserEntity> userO = userRepository.findById(id);
-        if(!userO.isPresent()){
-            throw new NoSuchUserException("UserEntity not found with ID: "+id);
-        }
-
-        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
-        if(user.getRole()==Role.ARTIST){
-            throw new RuntimeException("Artist cant have collection");
-        }
-        return user.getCollection();
-    }
-
-    @Override
-    public void addArtworkToCollection(Long id, Long artworkId) {
-        logger.info("Getting user with id "+id);
-        Optional<UserEntity> userO = userRepository.findById(id);
-        if(!userO.isPresent()){
-            throw new NoSuchUserException("UserEntity not found with ID: "+id);
-        }
-        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
-        if(user.getRole()==Role.ARTIST){
-            throw new RuntimeException("Artist cant have collection");
-        }
-        logger.info("Adding artwork with id "+artworkId+" from user`s with id "+ id+" collection");
-
-        Optional<ArtworkEntity> artworkO = artworkRepository.findById(artworkId);
-        if(!artworkO.isPresent()){
-            throw new NoSuchUserException("ArtworkEntity not found with ID: "+artworkId);
-        }
-        Artwork artwork = ArtworkMapper.INSTANCE.artworkEntityToArtwork(artworkO.get());
-
-        if(user.getCollection().contains(artwork)){
-            return;
-        }
-        user.getCollection().add(artwork);
-        userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
-    }
-
-    //todo normal error
-    @Override
-    public void removeArtworkFromCollection(Long id, Long artworkId) {
-        logger.info("Getting user with id "+id);
-        Optional<UserEntity> userO = userRepository.findById(id);
-        if(!userO.isPresent()){
-            throw new NoSuchUserException("UserEntity not found with ID: "+id);
-        }
-        User user = UserMapper.INSTANCE.userEntityToUser(userO.get());
-        if(user.getRole()==Role.ARTIST){
-            throw new RuntimeException("Artist cant have collection");
-        }
-        logger.info("Removing artwork with id "+artworkId+" from user`s with id "+ id+" collection");
-
-        user.getCollection().removeIf((x) -> x.getId().equals(artworkId));
-        userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
     }
 
 

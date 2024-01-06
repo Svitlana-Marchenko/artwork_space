@@ -30,11 +30,10 @@ public class User {
    // private Long roleId;
    private Role role;
 
-   private List<Artwork> collection;
     public User() {
     }
 
-    public User(Long id, String username, String firstName, String lastName, String email, String password, Role role, List<Artwork> collection) {
+    public User(Long id, String username, String firstName, String lastName, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -43,7 +42,6 @@ public class User {
         this.password = password;
         //this.roleId = roleId;
         this.role=role;
-        this.collection=collection;
     }
     public Long getId() {
         return id;
@@ -109,11 +107,4 @@ public class User {
         this.role = role;
     }
 
-    public List<Artwork> getCollection() {
-        return collection;
-    }
-
-    public void setCollection(List<Artwork> collection) {
-        this.collection = collection;
-    }
 }

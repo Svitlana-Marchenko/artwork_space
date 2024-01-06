@@ -113,5 +113,17 @@ public class Artwork {
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Artwork artwork = (Artwork) obj;
+        return id == artwork.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
 

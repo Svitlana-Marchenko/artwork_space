@@ -1,6 +1,10 @@
 import axios from "axios";
+import {NewAuction} from "../types/auctionsTypes";
+import {NewCollection} from "../types/collectionTypes";
+import {Artwork} from "../types/artworkTypes";
 export default class CollectionService {
-    static async getArtworksFromCollection(id:number) {
+
+    static async getAllCollectionsByUser(userId:string|number) {
         try {
             const token = localStorage.getItem('token');
 
@@ -9,14 +13,92 @@ export default class CollectionService {
                     'Authorization': `Bearer ${token}`,
                 },
             };
-            const response = await axios.get(`http://localhost:8080/users/${id}/collection`, config);
+            const response = await axios.get(`http://localhost:8080/collections/user/${userId}`, config);
             return response.data;
         } catch (error) {
-            console.error('Помилка при отриманні даних з сервера про картини з колекції:', error);
+            console.error('Помилка при отриманні даних з сервера про колекцію:', error);
             throw error;
         }
     }
-    static async deleteArtworkFromCollection(userId:number, artworkId:number) {
+    static async getArtworksFromAllCollectionsByUser(userId:number) {
+        try {
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get(`http://localhost:8080/collections/user/${userId}/all`, config);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про колекцію:', error);
+            throw error;
+        }
+    }
+    static async deleteCollectionById(id: string){
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.delete(`http://localhost:8080/collections/${id}`,config)
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при видаленні даних з сервера:', error);
+            throw error;
+        }
+    }
+    static async getCollectionById(id: string) {
+        try {
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get(`http://localhost:8080/collections/${id}`, config);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про колекцію:', error);
+            throw error;
+        }
+    }
+    static async getArtworksByCollectionId(id:number) {
+        try {
+            const token = localStorage.getItem('token');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get(`http://localhost:8080/collections/${id}/artworks`, config);
+            return response.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з сервера про колекцію:', error);
+            throw error;
+        }
+    }
+    static async createCollection(collection: NewCollection) {
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+            const response = await axios.post('http://localhost:8080/collections', collection, config);
+            return response.data;
+        } catch (e) {
+            console.error('Помилка при створенні колекції:', e);
+            throw e;
+        }
+    }
+    static async deleteArtworkFromCollection(collectionId:number, artworkId:number) {
         try {
             const token = localStorage.getItem('token');
 
@@ -27,7 +109,7 @@ export default class CollectionService {
                 },
             };
 
-            const response = await axios.put(`http://localhost:8080/users/${userId}/collection/remove`, JSON.stringify(artworkId), config
+            const response = await axios.delete(`http://localhost:8080/collections/${collectionId}/removeArtwork?artworkId=${artworkId}`, config
              );
             return response.data;
         } catch (error) {
@@ -35,7 +117,7 @@ export default class CollectionService {
             throw error;
         }
     }
-    static async addArtworkToCollection(userId:number, artworkId:number) {
+    static async addArtworkToCollection(collectionId:number, artworkId:number) {
         try {
             const token = localStorage.getItem('token');
 
@@ -46,7 +128,7 @@ export default class CollectionService {
                 },
             };
 
-            const response = await axios.put(`http://localhost:8080/users/${userId}/collection/add`, JSON.stringify(artworkId), config);
+            const response = await axios.post(`http://localhost:8080/collections/${collectionId}/addArtwork?artworkId=${artworkId}`, null, config);
         return response.data;
     } catch (error) {
         console.error( error);

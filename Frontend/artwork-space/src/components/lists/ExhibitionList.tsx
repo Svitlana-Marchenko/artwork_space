@@ -1,10 +1,12 @@
-import React from 'react';
-import {Artwork} from "../../types/artworkTypes";
+import React, {useEffect, useState} from 'react';
+import {Artwork as ArtworkType, Artwork} from "../../types/artworkTypes";
 import NavigationLink from "../../header/NavigationLink";
 import ScrollCarousel from 'scroll-carousel-react';
 import ArtworkCard from "../listings/ArtworkCard";
 import {useNavigate} from "react-router-dom";
 import {User} from "../../types/usersTypes";
+import CollectionService from "../../API/CollectionService";
+import {Collection} from "../../types/collectionTypes";
 
 interface ExhibitionListProps {
     id: string;
@@ -13,6 +15,7 @@ interface ExhibitionListProps {
     artworks: Artwork[];
     startDate: Date;
     endDate: Date;
+    collections:Collection[]
 }
 const ExhibitionList:React.FC<ExhibitionListProps> = ({
                                                  id,
@@ -20,8 +23,12 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                                                  title,
                                                  artworks,
                                                  startDate,
-                                                 endDate
+                                                 endDate,
+    collections
 }) => {
+   // const [favoriteArtworksByCollection, setFavoriteArtworksByCollection] = useState<Record<number, ArtworkType[]>>({});
+    const storedUserString = localStorage.getItem("currentUser");
+    const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
 
     const navigate = useNavigate();
     return (
@@ -62,6 +69,7 @@ const ExhibitionList:React.FC<ExhibitionListProps> = ({
                                         artwork={artwork}
                                         sm
                                         disabled
+                                        favoriteArtworks={collections}
                                     />
                                 )
                             })

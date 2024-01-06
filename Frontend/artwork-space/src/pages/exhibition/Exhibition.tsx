@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import {User} from "../../types/usersTypes";
 import Empty from "../../empty";
 import useMyExhibition from "../../hooks/useMyExhibitions";
+import {Collection} from "../../types/collectionTypes";
+import CollectionService from "../../API/CollectionService";
 
 const Exhibition = () => {
     const navigate = useNavigate();
@@ -19,6 +21,9 @@ const Exhibition = () => {
         user: currentUser,
         exhibition
     });
+    const [allCollections, setAllCollections] = useState<Collection[]>([]);
+
+
     useEffect(() => {
         if (id) {
             ExhibitionService.getExhibitionById(id)
@@ -26,6 +31,12 @@ const Exhibition = () => {
                 .catch((error) =>
                     console.error('Error fetching auction by ID:', error)
                 );
+            if(currentUser && (currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")) {
+                CollectionService.getAllCollectionsByUser(currentUser.id)
+                    .then(data => {setAllCollections(data);
+                    })
+                    .catch(error => console.error('Error getting collections:', error));
+            }
         }
     }, [id]);
 
@@ -84,7 +95,7 @@ const Exhibition = () => {
                 }
             </div>
             <p className={"mt-6 mb-12"}>{exhibition.description}</p>
-            <ArtworksList artworks={exhibition.artworks}/>
+            <ArtworksList artworks={exhibition.artworks} collections={allCollections}/>
         </div>
     );
 };

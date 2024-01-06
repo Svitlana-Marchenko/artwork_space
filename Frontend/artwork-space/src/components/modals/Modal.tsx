@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {CSSProperties, useCallback, useEffect, useState} from "react";
 import {IoMdClose} from "react-icons/io";
 
 import {Button} from "../Button";
@@ -10,6 +10,7 @@ interface ModalProps {
     body?: React.ReactElement;
     actionLabel: string;
     toggleModal: () => void;
+    style?: CSSProperties;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -18,7 +19,8 @@ export const Modal: React.FC<ModalProps> = ({
                                                 title,
                                                 body,
                                                 actionLabel,
-                                                toggleModal
+                                                toggleModal,
+    style
                                             }) => {
     const[showModal, setShowModal] = useState(isOpen);
 
@@ -107,7 +109,7 @@ export const Modal: React.FC<ModalProps> = ({
                                 >
                                     <IoMdClose size={18} />
                                 </button>
-                                <div className="text-lg font-semibold">
+                                <div  style={style} className="text-lg font-semibold">
                                     {title}
                                 </div>
                             </div>

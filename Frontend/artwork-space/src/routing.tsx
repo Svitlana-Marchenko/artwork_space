@@ -11,6 +11,7 @@ import Exhibition from "./pages/exhibition/Exhibition";
 import Auction from "./pages/auction/Auction";
 import ExhibitionForm from "./pages/exhibition/ExhibitionForm";
 import ArtworkForm from "./pages/artwork/ArtworkForm";
+import Collection from "./pages/Collection";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             {
                 path: "/exhibition/:id",
                 element: <Exhibition/>
+            },
+            {
+                path: "/collection/:id",
+                element: <Collection/>
             },
             {
                 path: "/new-exhibition",

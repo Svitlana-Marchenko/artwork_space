@@ -1,27 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import HeartButton from "../icons/HeartButton";
 import {useNavigate} from "react-router-dom";
 import UserLink from "../UserLink";
 import {User} from "../../types/usersTypes";
-import {Artwork} from "../../types/artworkTypes";
+import {Artwork as ArtworkType, Artwork} from "../../types/artworkTypes";
 import PlusButton from "../icons/PlusButton";
+import {Collection} from "../../types/collectionTypes";
 
 interface ArtworkCardProps {
     artwork: Artwork;
     sm?:boolean;
     disabled?: boolean;
     onAddToExhibition?:  (artwork: Artwork) => void;
+    favoriteArtworks:Collection[]
+    chosenCollection?:Collection
 }
 
 const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                                     artwork,
                                                     sm,
                                                     onAddToExhibition,
-                                                    disabled
+                                                    disabled,
+                                                    favoriteArtworks,
+                                                    chosenCollection
                                                 }) => {
     const navigate = useNavigate();
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
+
     const imageStyle = sm
         ? "object-cover h-[360px] w-auto"
         : "object-cover w-full h-auto";
@@ -67,7 +73,7 @@ const ArtworkCard:React.FC<ArtworkCardProps> = ({
                                 {
                                     (currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")&&!disabled
                                     ?
-                                        <HeartButton artworkId={artwork.id}/>
+                                        <HeartButton artworkId={artwork.id} favouriteArtworks={favoriteArtworks} chosenCollection={chosenCollection} menuWidth={"1/2"} menuRight={"4"} menuTop={"10"}/>
                                         :
                                         null
                                 }

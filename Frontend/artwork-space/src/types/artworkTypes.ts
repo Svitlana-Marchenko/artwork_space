@@ -1,4 +1,5 @@
 import {User} from "./usersTypes";
+import {Collection} from "./collectionTypes";
 export interface NewRating {
     rate: number;
     user: User;

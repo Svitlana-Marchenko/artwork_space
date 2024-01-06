@@ -22,22 +22,15 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_artwork",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "artwork_id")
-    )
-    private List<ArtworkEntity> collection;
 
-    public UserEntity(String username, String firstName, String lastName, String email, String password, Role role, List <ArtworkEntity> collection)  {
+
+    public UserEntity(String username, String firstName, String lastName, String email, String password, Role role)  {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.collection=collection;
     }
 
     public Long getId() {
@@ -98,11 +91,4 @@ public class UserEntity {
         this.password = password;
     }
 
-    public List<ArtworkEntity> getCollection() {
-        return collection;
-    }
-
-    public void setCollection(List<ArtworkEntity> collection) {
-        this.collection = collection;
-    }
 }

@@ -199,6 +199,7 @@ const ExhibitionForm = () => {
                     <ArtworksList
                         artworks={artworks}
                         onAddToExhibition={handleAddToExhibition}
+                        collections={[]}
                     />
                 )
             }

@@ -4,7 +4,7 @@ import {
     UseFormRegister,
     RegisterOptions,
 } from 'react-hook-form';
-import React from 'react';
+import React, {CSSProperties} from 'react';
 
 export interface InputProps {
     id: string;
@@ -17,6 +17,7 @@ export interface InputProps {
     isTextArea?: boolean;
     minValue?: number;
     validationOptions?: RegisterOptions;
+    style?: CSSProperties;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,6 +30,7 @@ const Input: React.FC<InputProps> = ({
                                          errors,
                                          isTextArea = false,
                                          validationOptions,
+    style
                                      }) => {
     const inputClasses = `
                     peer
@@ -50,6 +52,7 @@ const Input: React.FC<InputProps> = ({
             {isTextArea ? (
                 <textarea
                     id={id}
+                    style={style}
                     {...register(id, { required, ...validationOptions })}
                     placeholder={placeholder}
                     className={inputClasses}
@@ -61,6 +64,7 @@ const Input: React.FC<InputProps> = ({
                     {...register(id, { required, ...validationOptions })}
                     placeholder={placeholder}
                     type={type}
+                    style={style}
                     className={inputClasses}
                 />
             )}

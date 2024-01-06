@@ -16,6 +16,8 @@ import useMyArtwork from "../../hooks/useMyArtwork";
 import RatingModal from "../../components/modals/RatingModal";
 import ExhibitionService from "../../API/ExhibitionService";
 import artworks from "./Artworks";
+import CollectionService from "../../API/CollectionService";
+import {Collection} from "../../types/collectionTypes";
 
 
 const Artwork = () => {
@@ -38,6 +40,11 @@ const Artwork = () => {
                     navigate(`/artworks`);
                     toast.error('Artwork not found');
                 });
+            if(currentUser && (currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")) {
+                CollectionService.getAllCollectionsByUser(currentUser.id)
+                    .then((data) => setAllCollections(data || []))
+                    .catch((error) => console.error('Error getting favourites:', error));
+            }
         }
     }, [id]);
     const [newRatingAdded, setNewRatingAdded] = useState(false); // State to track new rating
@@ -51,6 +58,9 @@ const Artwork = () => {
 // Check if the current user has already rated the artwork
     const hasUserRated = hasUserRatedArtwork(artwork?.ratings || [], currentUser);
     const [isArtworkSold, setIsArtworkSold] = useState<boolean | null>(null);
+   // const [favoriteArtworksByCollection, setFavoriteArtworksByCollection] = useState<Record<number, ArtworkType[]>>({});
+
+    const [allCollections, setAllCollections] = useState<Collection[]>([]);
 
     useEffect(() => {
         if (artwork?.id && currentUser?.role === "ARTIST") {
@@ -87,66 +97,66 @@ const Artwork = () => {
         <div className="flex flex-col items-center justify-center gap-10">
             {artwork ? (
                 <>
-                <div className="flex flex-row items-center justify-center gap-10">
-                    <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
-                    <section className="w-[400px]">
-                        <div className={'flex flex-row justify-between align-top'}>
-                            <ArtworkHeading
-                                title={artwork.title}
-                                id={artwork.user.id}
-                                username={artwork.user.username}
-                                firstName={artwork.user.firstName}
-                                lastName={artwork.user.lastName}
-                                averageRating={averageRating}
-                                showAverageRating={artwork.ratings.length>0}
+                    <div className="flex flex-row items-center justify-center gap-10">
+                        <img src={artwork.imageURL} alt={artwork.title} className="w-auto max-w-3xl h-[600px] object-cover"/>
+                        <section className="w-[400px]">
+                            <div className={'flex flex-row justify-between align-top'}>
+                                <ArtworkHeading
+                                    title={artwork.title}
+                                    id={artwork.user.id}
+                                    username={artwork.user.username}
+                                    firstName={artwork.user.firstName}
+                                    lastName={artwork.user.lastName}
+                                    averageRating={averageRating}
+                                    showAverageRating={artwork.ratings.length>0}
+                                />
+                                {
+                                    currentUser?.role === "ARTIST"
+                                        ?
+                                        isMyArtwork && !isArtworkSold && (<SellButton artwork={artwork} currentUser={currentUser}/>)
+                                        :
+                                        null
+                                }
+                                {
+                                    currentUser?.role === "CURATOR" || currentUser?.role === "COLLECTIONEER"
+                                        ?
+                                        <HeartButton artworkId={artwork.id} dark favouriteArtworks={allCollections} menuWidth={"1/4"} menuRight={"3"} menuTop={"6"}/>
+                                        :
+                                        null
+                                }
+                            </div>
+                            <ArtworkDescription
+                                technique={artwork.technique}
+                                width={artwork.width}
+                                height={artwork.height}
                             />
-                            {
-                                currentUser?.role === "ARTIST"
-                                    ?
-                                    isMyArtwork && !isArtworkSold && (<SellButton artwork={artwork} currentUser={currentUser}/>)
-                                    :
-                                    null
-                            }
-                            {
-                                currentUser?.role === "CURATOR" || currentUser?.role === "COLLECTIONEER"
-                                    ?
-                                    <HeartButton artworkId={artwork.id} dark/>
-                                    :
-                                    null
-                            }
-                        </div>
-                        <ArtworkDescription
-                            technique={artwork.technique}
-                            width={artwork.width}
-                            height={artwork.height}
-                        />
-                        <div className={"flex flex-row gap-4"}>
-                            {
-                                currentUser?.role === 'ARTIST'
-                                    ?
-                                    isMyArtwork && (<>
-                                        <Button label={"Edit"} onClick={()=>{navigate(`/edit-artwork/${id}`)}}/>
-                                        <Button label={"Delete"} onClick={handleDelete} outline/>
-                                    </>)
-                                    :
-                                    null
-                            }
-                        </div>
-                    </section>
-                </div>
+                            <div className={"flex flex-row gap-4"}>
+                                {
+                                    currentUser?.role === 'ARTIST'
+                                        ?
+                                        isMyArtwork && (<>
+                                            <Button label={"Edit"} onClick={()=>{navigate(`/edit-artwork/${id}`)}}/>
+                                            <Button label={"Delete"} onClick={handleDelete} outline/>
+                                        </>)
+                                        :
+                                        null
+                                }
+                            </div>
+                        </section>
+                    </div>
                     <div className={'w-2/3'}>
                         <h4 className="text-lg font-semibold mb-2" style={{ textAlign: 'left' }}>Description</h4>
                         <p>{artwork.description}</p>
                     </div>
-                <div style={{ width: '100%' }} className={"mb-8"}>
-                    {currentUser?.role === "CURATOR" && !hasUserRated && (
-                        <div ref={ratingFormRef}>
-                            <RatingModal currentUser={currentUser} currentArtworkId={Number(id)}
-                                         onRatingAdded={() => setNewRatingAdded(true)}/>
-                        </div>
-                    )}
-                    <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />
-                </div>
+                    <div style={{ width: '100%' }} className={"mb-8"}>
+                        {currentUser?.role === "CURATOR" && !hasUserRated && (
+                            <div ref={ratingFormRef}>
+                                <RatingModal currentUser={currentUser} currentArtworkId={Number(id)}
+                                             onRatingAdded={() => setNewRatingAdded(true)}/>
+                            </div>
+                        )}
+                        <ArtworkRatings ratings={artwork.ratings} currentArtworkId={Number(id)} showRatingForm={currentUser?.role === "CURATOR"} currentUser={currentUser} />
+                    </div>
                 </>
             ) : (
                 <Empty message={"Theres no such artwork here"} link={`/artworks`} dist={'all artworks'}/>

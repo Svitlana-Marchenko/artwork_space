@@ -3,66 +3,112 @@ import { toast } from "react-hot-toast";
 import React from "react";
 import {User} from "../types/usersTypes";
 import CollectionService from "../API/CollectionService";
-import {Artwork} from "../types/artworkTypes";
+import {Artwork as ArtworkType, Artwork} from "../types/artworkTypes";
+import {Collection} from "../types/collectionTypes";
 
 interface IUseFavorite {
     artworkId: number;
-    currentUser: User
+    currentUser: User;
+    favouriteArtworks: Collection[];
+    chosenCollection?: Collection;
 }
 
-const useFavorite = ({ artworkId, currentUser }: IUseFavorite) => {
-    const [hasFavorite, setHasFavorite] = useState<boolean | null>(null);
+const useFavorite = ({ artworkId, currentUser, favouriteArtworks,chosenCollection }: IUseFavorite) => {
+    const [hasFavorite, setHasFavorite] = useState<boolean>(false);
+
+    const [collectionId, setCollectionId] = useState<number | null>(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const list: Artwork[] | null = await CollectionService.getArtworksFromCollection(currentUser.id) || [];
-                const isFavorite = list ? list.some((artwork) => artwork.id === artworkId) : false;
-                setHasFavorite(isFavorite);
-            } catch (error) {
-                console.error('Помилка при отриманні даних з сервера:', error);
-                setHasFavorite(false);
+        const foundCollectionId = findCollectionIdByArtworkId(favouriteArtworks, artworkId);
+        setCollectionId(foundCollectionId);
+        setHasFavorite(foundCollectionId !== null);
+    }, [favouriteArtworks, artworkId]);
+
+    const findCollectionIdByArtworkId = (collections: Collection[], artworkId: number): number | null => {
+        for (const collection of collections) {
+            const artworkIdsInCollection = collection.artworks.map((artwork: Artwork) => artwork.id);
+            if (artworkIdsInCollection.includes(artworkId)) {
+                return collection.id;
             }
-        };
-
-        fetchData();
-    }, [currentUser, artworkId]);
-
-    const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-            e.stopPropagation();
-
+        }
+        return null;
+    };
+    const toggleFavorite = useCallback(async () => {
             try {
                 let request;
 
+                if(chosenCollection){
+                    if(hasFavorite){
+                        request = () => CollectionService.deleteArtworkFromCollection(chosenCollection.id, artworkId);
+                    }else {
+                        request = () => CollectionService.addArtworkToCollection(chosenCollection.id, artworkId);
+                        toast.success('Added to collection');
+                        setHasFavorite(!hasFavorite);
+                    }
+                    await request();
+                }
+                else if (collectionId !== null) {
+                    request = () => CollectionService.deleteArtworkFromCollection(collectionId, artworkId);
+                    await request();
+                }
+
                 if (hasFavorite) {
-                    request = () => CollectionService.deleteArtworkFromCollection(currentUser.id, artworkId);
-                } else {
-                    request = () => CollectionService.addArtworkToCollection(currentUser.id, artworkId);
-                }
-
-                await request();
-                if (!hasFavorite) {
-                    toast.success('Added to collection');
-                } else {
                     toast.success('Deleted from collection');
+                    setHasFavorite(!hasFavorite);
                 }
 
-                setHasFavorite(!hasFavorite);
             } catch (error) {
-                toast.error('Failed to add to collection');
+                toast.error('Failed to perform the action');
             }
         },
         [
             currentUser,
             hasFavorite,
             artworkId,
+            chosenCollection,
         ]);
+
+    const setHasFavoriteDirectly = (value: boolean) => {
+        setHasFavorite(value);
+    };
 
     return {
         hasFavorite,
         toggleFavorite,
+        setHasFavoriteDirectly, // Provide the direct setter
     };
 };
 
 
 export default useFavorite;
+
+
+/*
+*   const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
+            e.stopPropagation();
+
+            try {
+                let request;
+
+                if (collectionId !== null) {
+                    request = () => CollectionService.deleteArtworkFromCollection(currentUser.id, artworkId);
+                    await request();
+                    toast.success('Deleted from collection');
+                    setHasFavorite(!hasFavorite);
+                }
+
+
+                if (hasFavorite) {
+                    toast.success('Deleted from collection');
+                    setHasFavorite(!hasFavorite);
+                }
+
+            } catch (error) {
+                toast.error('Failed to perform the action');
+            }
+        },
+        [
+            currentUser,
+            hasFavorite,
+            artworkId,
+        ]);*/

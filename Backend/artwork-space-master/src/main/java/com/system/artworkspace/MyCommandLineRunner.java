@@ -8,6 +8,9 @@ import com.system.artworkspace.auction.*;
 import com.system.artworkspace.auction.Sale.SaleEntity;
 import com.system.artworkspace.auction.Sale.SaleMapper;
 import com.system.artworkspace.auction.Sale.SaleService;
+import com.system.artworkspace.collection.CollectionEntity;
+import com.system.artworkspace.collection.CollectionMapper;
+import com.system.artworkspace.collection.CollectionService;
 import com.system.artworkspace.exhibition.ExhibitionEntity;
 import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.ExhibitionService;
@@ -41,6 +44,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Autowired
     UserService userService;
+    @Autowired
+    CollectionService collectionService;
 
     @Autowired
     ExhibitionService exhibitionService;
@@ -60,17 +65,17 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @SuppressWarnings("deprecation")
     private void createTestData() {
         List<UserEntity> users = new ArrayList<>();
-        UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>());
-        UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>());
-        UserEntity u3 = new UserEntity("cur", "Alex", "Doe", "alex.doe@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>());
-        UserEntity u4  = (new UserEntity("alice_art", "Alice", "Smith", "alice.smith@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
-        UserEntity u5 = (new UserEntity("robert_johnson", "Robert", "Johnson", "robert.johnson@gmail.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
-        UserEntity u6 = (new UserEntity("emily_exh", "Emily", "Anderson", "emily.anderson@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST);
+        UserEntity u2 = new UserEntity("col", "Anton", "Doe", "anton.doe@example.com", "password", Role.COLLECTIONEER);
+        UserEntity u3 = new UserEntity("cur", "Alex", "Doe", "alex.doe@example.com", "password", Role.CURATOR);
+        UserEntity u4  = (new UserEntity("alice_art", "Alice", "Smith", "alice.smith@gmail.com", "password", Role.ARTIST));
+        UserEntity u5 = (new UserEntity("robert_johnson", "Robert", "Johnson", "robert.johnson@gmail.com", "password", Role.COLLECTIONEER));
+        UserEntity u6 = (new UserEntity("emily_exh", "Emily", "Anderson", "emily.anderson@gmail.com", "password", Role.CURATOR));
 
-        UserEntity c1 = (new UserEntity("anna_doys", "Anna", "Doyson", "anna.doyson@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-        UserEntity c2 = (new UserEntity("david_stark", "David", "Stark", "david.stark@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-        UserEntity c3 = (new UserEntity("andrew_spens", "Andrew", "Spensor", "andrew.spensor@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-        UserEntity c4 = (new UserEntity("elizabeth_bret", "Elizabeth", "Bret", "elizabeth.bret@gmail.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        UserEntity c1 = (new UserEntity("anna_doys", "Anna", "Doyson", "anna.doyson@gmail.com", "password", Role.CURATOR));
+        UserEntity c2 = (new UserEntity("david_stark", "David", "Stark", "david.stark@gmail.com", "password", Role.CURATOR));
+        UserEntity c3 = (new UserEntity("andrew_spens", "Andrew", "Spensor", "andrew.spensor@gmail.com", "password", Role.CURATOR));
+        UserEntity c4 = (new UserEntity("elizabeth_bret", "Elizabeth", "Bret", "elizabeth.bret@gmail.com", "password", Role.CURATOR));
 
 
         users.add(u1);
@@ -81,15 +86,15 @@ public class MyCommandLineRunner implements CommandLineRunner {
         users.add(u6);
 
 
-        users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("sara_art_lover", "Sarah", "Brown", "sarah.brown@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("art_michael", "Michael", "Davis", "michael.davis@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("olivko", "Olivia", "Wilson", "olivia.wilson@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("ethan_martin", "Ethan", "Martin", "ethan.martin@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("sofa_sofa", "Sophia", "Thompson", "sophia.thompson@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("noah_clark", "Noah", "Clark", "noah.clark@example.com", "password", Role.ARTIST, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("ava_ava", "Ava", "Moore", "ava.moore@example.com", "password", Role.COLLECTIONEER, new ArrayList<ArtworkEntity>()));
-        users.add(new UserEntity("liam_artlover", "Liam", "White", "liam.white@example.com", "password", Role.CURATOR, new ArrayList<ArtworkEntity>()));
+        users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST));
+        users.add(new UserEntity("sara_art_lover", "Sarah", "Brown", "sarah.brown@example.com", "password", Role.COLLECTIONEER));
+        users.add(new UserEntity("art_michael", "Michael", "Davis", "michael.davis@example.com", "password", Role.CURATOR));
+        users.add(new UserEntity("olivko", "Olivia", "Wilson", "olivia.wilson@example.com", "password", Role.ARTIST));
+        users.add(new UserEntity("ethan_martin", "Ethan", "Martin", "ethan.martin@example.com", "password", Role.COLLECTIONEER));
+        users.add(new UserEntity("sofa_sofa", "Sophia", "Thompson", "sophia.thompson@example.com", "password", Role.CURATOR));
+        users.add(new UserEntity("noah_clark", "Noah", "Clark", "noah.clark@example.com", "password", Role.ARTIST));
+        users.add(new UserEntity("ava_ava", "Ava", "Moore", "ava.moore@example.com", "password", Role.COLLECTIONEER));
+        users.add(new UserEntity("liam_artlover", "Liam", "White", "liam.white@example.com", "password", Role.CURATOR));
         users.add(c1);
         users.add(c2);
         users.add(c3);
@@ -184,6 +189,25 @@ public class MyCommandLineRunner implements CommandLineRunner {
         auctionArtistService.createAuction(AuctionMapper.INSTANCE.auctionEntityToAuction(aa6));
 
 
+        CollectionEntity collection1 = new CollectionEntity("Test",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+        CollectionEntity collection2 = new CollectionEntity("COLLECTION WOW",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+        CollectionEntity collection3 = new CollectionEntity("HAHA FUNNY",UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)));
+
+        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collection1));
+        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collection2));
+        collectionService.createCollection(CollectionMapper.INSTANCE.collectionEntityToCollection(collection3));
+
+        collectionService.addToCollection(1L,6L);
+        collectionService.addToCollection(1L,7L);
+        collectionService.addToCollection(1L,8L);
+        collectionService.addToCollection(1L,9L);
+        collectionService.addToCollection(1L,10L);
+
+        collectionService.addToCollection(2L,1L);
+        collectionService.addToCollection(2L,2L);
+        collectionService.addToCollection(2L,3L);
+        collectionService.addToCollection(2L,7L);
+        collectionService.addToCollection(2L,6L);
 
         ExhibitionEntity exhibition1 = new ExhibitionEntity(
                 UserMapper.INSTANCE.userToUserEntity(userService.getUserById(3L)),

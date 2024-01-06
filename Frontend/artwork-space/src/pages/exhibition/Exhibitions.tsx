@@ -7,12 +7,15 @@ import {User} from "../../types/usersTypes";
 import ExhibitionService from "../../API/ExhibitionService";
 import toast from "react-hot-toast/headless";
 import Empty from "../../empty";
+import CollectionService from "../../API/CollectionService";
+import {Collection} from "../../types/collectionTypes";
 
 const Exhibitions = () => {
     const { id } = useParams();
     const [exhibitions, setExhibitions] = useState<Exhibition[]>([])
     const storedUserString = localStorage.getItem("currentUser");
     const currentUser: User | null = storedUserString ? JSON.parse(storedUserString) : null;
+    const [allCollections, setAllCollections] = useState<Collection[]>([]);
 
     useEffect(() => {
         if (id !== undefined) {
@@ -20,13 +23,24 @@ const Exhibitions = () => {
                 .then(data => {setExhibitions(data);
                 })
                 .catch(error => console.error('Помилка при отриманні даних про список виставок:', error));
-
+            if(currentUser && (currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")) {
+                CollectionService.getAllCollectionsByUser(currentUser.id)
+                    .then(data => {setAllCollections(data);
+                    })
+                    .catch(error => console.error('Error getting collections:', error));
+            }
         } else {
             ExhibitionService.getAllActiveExhibitions()
                 .then(data => {
                     setExhibitions(data);
                 })
                 .catch(error => {toast.error("Shiiit")});
+            if(currentUser){
+                CollectionService.getAllCollectionsByUser(currentUser.id)
+                    .then(data => {setAllCollections(data);
+                    })
+                    .catch(error => console.error('Error getting collections:', error));
+            }
         }
     }, []);
 
@@ -64,6 +78,7 @@ const Exhibitions = () => {
                         artworks={exhibition.artworks}
                         startDate={exhibition.startDate}
                         endDate={exhibition.endDate}
+                        collections={allCollections}
                     />
                 )
             })}

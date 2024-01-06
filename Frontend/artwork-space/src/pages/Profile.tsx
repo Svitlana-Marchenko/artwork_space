@@ -5,7 +5,8 @@ import {ChangePasswordModal} from "../components/modals/ChangePasswordModal";
 import {EditProfileInfoModal} from "../components/modals/EditProfileInfoModal";
 import {User} from "../types/usersTypes";
 import {Artwork} from "../types/artworkTypes";
-import Collection from "../components/Collection";
+import {Collection as CollectionType} from "../types/collectionTypes";
+
 import {Button} from "../components/Button";
 import CollectionService from "../API/CollectionService";
 import UserService from "../API/UserService";
@@ -18,6 +19,7 @@ import AuctionService from "../API/AuctionService";
 import AuctionList from "../components/lists/AuctionList";
 import {Auction} from "../types/auctionsTypes";
 import SalesList from "../components/lists/SalesList";
+import CollectionList from "../components/lists/CollectionList";
 
 const Profile = () => {
     const storedUserString = localStorage.getItem("currentUser");
@@ -32,6 +34,7 @@ const Profile = () => {
 
     const [isOpenPassword, setIsOpenPassword] = useState(false);
     const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+    const [allCollections, setAllCollections] = useState<CollectionType[]>([]);
 
     const toggleOpenPassword = useCallback(() => {
         setIsOpenPassword((value) => !value);
@@ -72,11 +75,10 @@ const Profile = () => {
                 .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
         }
         if (currentUser&&(!id)&&(currentUser.role === "CURATOR" || currentUser.role === "COLLECTIONEER")) {
-            CollectionService.getArtworksFromCollection(currentUser.id)
-                .then(data => {
-                    setLikedArtworks(data);
+            CollectionService.getAllCollectionsByUser(currentUser.id)
+                .then(data => {setAllCollections(data);
                 })
-                .catch(error => console.error('Помилка при отриманні даних про список картин:', error));
+                .catch(error => console.error('Error getting collections:', error));
         }
         if (currentUser&&(!id)&&(currentUser.role === "ARTIST")) {
             AuctionService.getAuctionsByArtistId(currentUser.id)
@@ -94,6 +96,7 @@ const Profile = () => {
                 })
         }
     }, [profile])
+
 
     const profileContent = (user: User) => {
         return (
@@ -134,7 +137,22 @@ const Profile = () => {
                     currentUser&&(!id)&&(
                         (currentUser.role === "CURATOR" ||   currentUser.role === "COLLECTIONEER")
                             ?
-                            <Collection artworks={likedArtworks}/>
+                            <>
+
+                                <h3 className={'font-bold text-3xl mt-14'}>COLLECTIONS</h3>
+                                {allCollections.length > 0 && allCollections.map((collection) => {
+                                    return (
+                                        <CollectionList
+                                            key={collection.id.toString()}
+                                            id={collection.id.toString()}
+                                            owner={collection.owner}
+                                            title={collection.title}
+                                            artworks={collection.artworks}
+                                            collections={allCollections}
+                                        />
+                                    )
+                                })}
+                            </>
                             :
                             null
                     )
@@ -154,7 +172,7 @@ const Profile = () => {
                 {profile && (
                     <>
                         {profile.role === "ARTIST" && (
-                            <ArtworksList artworks={artworks}/>
+                            <ArtworksList artworks={artworks} collections={allCollections}/>
                         )}
 
                         {profile.role === "CURATOR" && (
@@ -169,6 +187,7 @@ const Profile = () => {
                                             artworks={exhibition.artworks}
                                             startDate={exhibition.startDate}
                                             endDate={exhibition.endDate}
+                                            collections={allCollections}
                                         />
                                     )
                                 })}
@@ -179,7 +198,7 @@ const Profile = () => {
             </>
         )}
     return (
-        <div className="mx-32 mt-16">
+        <div className="mx-32 mt-16 mb-8">
             {
                 id
                     ?

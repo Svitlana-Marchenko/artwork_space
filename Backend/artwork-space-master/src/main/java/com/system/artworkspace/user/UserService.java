@@ -20,9 +20,5 @@ public interface UserService {
 
     void changePassword(ChangePassword changePassword);
 
-    List<Artwork> getCollectionByUserId(Long id);
-    void addArtworkToCollection(Long id, Long artworkId);
-    void removeArtworkFromCollection (Long id, Long artworkId);
-
 }
 
