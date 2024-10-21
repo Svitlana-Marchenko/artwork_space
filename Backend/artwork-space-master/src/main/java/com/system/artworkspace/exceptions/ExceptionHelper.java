@@ -10,17 +10,17 @@ import java.util.Set;
 public class ExceptionHelper {
     public static String formErrorMessage(BindingResult bindingResult) {
         List<ObjectError> allErrors = bindingResult.getAllErrors();
-        String message = "Validation failed: ";
+        StringBuilder message = new StringBuilder("Validation failed: ");
         for (ObjectError o : allErrors){
-            message+=o.getDefaultMessage()+"\n";
+            message.append(o.getDefaultMessage()).append("\n");
         }
-        return message;
+        return message.toString();
     }
     public static <T> String formErrorMessage(Set<ConstraintViolation<T>> violations) {
-        String message = "Validation failed: ";
+        StringBuilder message = new StringBuilder("Validation failed: ");
         for (ConstraintViolation<T> violation : violations) {
-            message += violation.getPropertyPath() + " " + violation.getMessage() + "\n";
+            message.append(violation.getPropertyPath()).append(" ").append(violation.getMessage()).append("\n");
         }
-        return message;
+        return message.toString();
     }
 }

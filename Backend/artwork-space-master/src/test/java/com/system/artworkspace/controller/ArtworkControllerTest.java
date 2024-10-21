@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ArtworkController.class)
 public class ArtworkControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 

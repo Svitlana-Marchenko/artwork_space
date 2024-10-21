@@ -1,8 +1,5 @@
 package com.system.artworkspace.user.userUpdate;
 
-import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
-import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateDto;
-import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdateMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,6 +11,4 @@ public interface UserUpdateMapper {
     UserUpdateDto userUpdateToUserUpdateDto(UserUpdate userUpdate);
 
     UserUpdate userUpdateDtoToUserUpdate(UserUpdateDto userUpdateDto);
-
-
 }

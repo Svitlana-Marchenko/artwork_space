@@ -19,6 +19,7 @@ import java.util.Map;
 public class UserValidator implements Validator {
 
     private final String apiKey = "1365lhqahv1r42ilsl2kg9cupp6jjr08tj50mkjv73g6dnnea9hcp";
+
     @Override
     public boolean supports(Class<?> clazz) {
         return UserEntity.class.isAssignableFrom(clazz);

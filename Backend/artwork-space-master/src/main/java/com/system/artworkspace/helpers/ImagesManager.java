@@ -11,7 +11,8 @@ import java.nio.file.Paths;
 public class ImagesManager {
     private final static String PREFIX_FOR_ARTIST_FOLDER="artist_";
     private final static String PATH_TO_IMAGE="../data/"+PREFIX_FOR_ARTIST_FOLDER;
-    private final static String ROOT_PATH=new File("").getAbsolutePath() + "\\Frontend\\artwork-space\\public\\data";
+    //private final static String ROOT_PATH=new File("").getAbsolutePath() + "/Frontend/artwork-space/public/data";
+    private final static String ROOT_PATH = "/Users/Svitlana/Documents/SpringBootMainProject/artwork_space/Frontend/artwork-space/public/data";
     public static void createFolderForArtist(Long id) {
         // Create the folder name using the artist's ID
         String folderName = PREFIX_FOR_ARTIST_FOLDER + id;
@@ -32,13 +33,13 @@ public class ImagesManager {
     }
     public static void deleteImage(String path) throws IOException {
         String[] parts = path.split("/");
-        String pathToDelete=ROOT_PATH+"\\"+parts[2]+"\\"+parts[3];
+        String pathToDelete=ROOT_PATH+"/"+parts[2]+"/"+parts[3];
         Path filePath = Paths.get(pathToDelete);
         Files.delete(filePath);
     }
     public static String saveImage(MultipartFile file, Long userId, Long artworkId) throws IOException {
         String imageName=artworkId+"."+getFileExtension(file.getOriginalFilename());
-        String pathInProject = "\\"+PREFIX_FOR_ARTIST_FOLDER+userId +"\\"+ imageName;
+        String pathInProject = "/"+PREFIX_FOR_ARTIST_FOLDER+userId +"/"+ imageName;
         String imagePath = ROOT_PATH+pathInProject;
         file.transferTo(new File(imagePath));
         return PATH_TO_IMAGE+userId+"/"+imageName;

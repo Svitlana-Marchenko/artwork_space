@@ -1,60 +1,36 @@
 package com.system.artworkspace.rating;
 
-import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class RatingEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private double rate;
+
     @ManyToOne
     private UserEntity user;
+
     @Column(length = 2000)
     private String comment;
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public RatingEntity(double rate, UserEntity curator, String comment) {
         this.rate = rate;
         this.user = curator;
-        this.comment = comment;
-    }
-
-    public RatingEntity() {
-
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity curator) {
-        this.user = curator;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
         this.comment = comment;
     }
 

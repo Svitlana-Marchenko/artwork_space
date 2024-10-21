@@ -1,67 +1,37 @@
 package com.system.artworkspace.rating;
 
 import com.system.artworkspace.user.UserDto;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.util.Objects;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RatingDto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Min(0)
     @Max(10)
     private double rate;
 
-    @NotNull(message = "curator can`t be null")
+    @NotNull(message = "Curator can`t be null")
     private UserDto user;
 
     @Size(max = 5000, message = "Comment cant be longer than 5000 symbols")
     private String comment;
-
-    public RatingDto() {
-    }
-
-    public RatingDto(Long id, double rate, UserDto curator, String comment) {
-        this.id = id;
-        this.rate = rate;
-        this.user = curator;
-        this.comment = comment;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public UserDto getUser() {
-        return user;
-    }
-
-    public void setUser(UserDto user) {
-        this.user = user;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     @Override
     public boolean equals(Object o) {

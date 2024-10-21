@@ -1,12 +1,10 @@
 package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.ArtworkDto;
-
-import java.util.Arrays;
 import java.util.List;
 
 public interface AuctionCollectioneerService {
+
     List<Auction> getAvailableAuctions();
 
     Auction placeBid(Long id, double bidAmount);

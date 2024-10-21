@@ -1,21 +1,15 @@
 package com.system.artworkspace.auction;
 
-import com.system.artworkspace.artwork.ArtworkDto;
-import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.exceptions.ExceptionHelper;
 import com.system.artworkspace.exceptions.ValidationException;
-import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.User;
 import com.system.artworkspace.user.UserDto;
-import com.system.artworkspace.user.UserEntity;
 import com.system.artworkspace.user.UserMapper;
 import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +18,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auctions")
-//@PreAuthorize("hasAuthority('ARTIST')")
+@Slf4j
 public class AuctionArtistController {
-    private static final Logger logger = LoggerFactory.getLogger(AuctionArtistController.class);
+   
     private final AuctionArtistService auctionService;
 
     @Autowired
@@ -42,21 +36,21 @@ public class AuctionArtistController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        logger.info("Creating an auction for artwork with ID: {}", auction.getArtwork().getId());
+        log.info("Creating an auction for artwork with ID: {}", auction.getArtwork().getId());
         AuctionDto createdAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(AuctionMapper.INSTANCE.auctionDtoToAuction(auction)));
-        logger.info("Auction created with ID: {}", createdAuction.getId());
+        log.info("Auction created with ID: {}", createdAuction.getId());
         return createdAuction;
     }
 
     @GetMapping("/{id}/currentBid")
     public double displayCurrentBid(@PathVariable Long id) {
-        logger.info("Displaying current bid for auction with ID: {}", id);
+        log.debug("Displaying current bid for auction with ID: {}", id);
         return auctionService.displayCurrentBid(id);
     }
 
     @GetMapping("/{id}/currentBuyer")
     public UserDto displayCurrentBuyer(@PathVariable Long id) {
-        logger.info("Displaying current buyer for auction with ID: {}", id);
+        log.debug("Displaying current buyer for auction with ID: {}", id);
         User current = auctionService.displayCurrentBuyer(id);
         return UserMapper.INSTANCE.userToUserDto(current);
 
@@ -64,29 +58,29 @@ public class AuctionArtistController {
 
     @GetMapping("artist/{id}")
     public List<AuctionDto> getAllAuctionsByUserId(@PathVariable Long id){
-        logger.info("Getting all auction from artist with id {}", id);
-        return auctionService.getAllAuctionsByUserId(id).stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
+        log.debug("Getting all auction from artist with id {}", id);
+        return auctionService.getAllAuctionsByUserId(id).stream().map(AuctionMapper.INSTANCE::auctionToAuctionDto).collect(Collectors.toList());
     }
 
     @GetMapping("/active")
     public List<AuctionDto> getAllActiveAuctions() {
-        logger.info("Fetching all active auctions");
-        List<AuctionDto> activeAuctions = auctionService.getAllActiveAuctions().stream().map(x -> AuctionMapper.INSTANCE.auctionToAuctionDto(x)).collect(Collectors.toList());
-        logger.info("Retrieved {} active auctions.", activeAuctions.size());
+        log.debug("Fetching all active auctions");
+        List<AuctionDto> activeAuctions = auctionService.getAllActiveAuctions().stream().map(AuctionMapper.INSTANCE::auctionToAuctionDto).collect(Collectors.toList());
+        log.debug("Retrieved {} active auctions.", activeAuctions.size());
         return activeAuctions;
+    }
+
+    @PutMapping("/{id}/close")
+    public void closeAuction(@PathVariable Long id) {
+        log.info("Closing auction with ID: {}", id);
+        auctionService.closeAuction(id);
+        log.info("Auction closed with ID: {}", id);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         String errorMessage = "ERROR: " + e.getMessage();
-        logger.error(errorMessage);
+        log.error(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @PutMapping("/{id}/close")
-    public void closeAuction(@PathVariable Long id) {
-        logger.info("Closing auction with ID: {}", id);
-        auctionService.closeAuction(id);
-        logger.info("Auction closed with ID: {}", id);
-    }
-
 }

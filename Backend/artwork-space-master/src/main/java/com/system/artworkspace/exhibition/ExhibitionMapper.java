@@ -5,6 +5,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface ExhibitionMapper {
+
     ExhibitionMapper INSTANCE = Mappers.getMapper(ExhibitionMapper.class);
 
     ExhibitionDto exhibitionToExhibitionDto(Exhibition exhibition);

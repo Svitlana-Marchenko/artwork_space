@@ -3,13 +3,11 @@ package com.system.artworkspace.helpers;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
 
 public class CustomCacheManager implements CacheManager {
 
@@ -17,14 +15,8 @@ public class CustomCacheManager implements CacheManager {
 
     @Override
     public Cache getCache(String name) {
-        Cache cache = cacheMap.get(name);
-        if (cache == null) {
-            cache = new ConcurrentMapCache(name, new ConcurrentHashMap<>(), false);
-            cacheMap.put(name, cache);
-        }
-        return cache;
+        return cacheMap.computeIfAbsent(name, n -> new ConcurrentMapCache(n, new ConcurrentHashMap<>(), false));
     }
-
 
     @Override
     public Collection<String> getCacheNames() {

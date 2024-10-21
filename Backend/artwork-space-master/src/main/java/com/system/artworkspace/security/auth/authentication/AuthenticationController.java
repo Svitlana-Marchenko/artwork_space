@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    @Autowired
     private final AuthenticationService authenticationService;
 
+    @Autowired
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
-        @PostMapping("/signin")
-        public String signin(@RequestBody SignInRequest signinRequest){
-            return authenticationService.signin(signinRequest);
-        }
+    @PostMapping("/signin")
+    public String signin(@RequestBody SignInRequest signinRequest) {
+        return authenticationService.signin(signinRequest);
     }
+}

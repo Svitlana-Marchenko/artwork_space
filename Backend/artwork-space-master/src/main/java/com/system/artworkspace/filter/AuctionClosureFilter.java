@@ -1,19 +1,19 @@
 package com.system.artworkspace.filter;
 
 import com.system.artworkspace.auction.Auction;
-import com.system.artworkspace.auction.AuctionCollectioneerServiceImpl;
+import com.system.artworkspace.auction.AuctionCollectioneerService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
 @WebFilter("/collectioneer/auctions/**")
+@Slf4j
 public class AuctionClosureFilter implements Filter {
-    private AuctionCollectioneerServiceImpl auctionService;
-    private final Logger logger = LoggerFactory.getLogger(AuctionClosureFilter.class);
+
+    private AuctionCollectioneerService auctionService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -22,12 +22,12 @@ public class AuctionClosureFilter implements Filter {
             Auction auction = auctionService.getAuctionByPaintingId(paintingId);
 
             if (auction != null && auction.isClosed()) {
-                logger.warn("Access denied. Auction with ID {} is closed.", auction.getId());
+                log.warn("Access denied. Auction with ID {} is closed.", auction.getId());
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
                 httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
             }
         } catch (NumberFormatException e) {
-            logger.warn("Invalid number");
+            log.warn("Invalid number");
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }

@@ -5,6 +5,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface CollectionMapper {
+
     CollectionMapper INSTANCE = Mappers.getMapper(CollectionMapper.class);
 
     CollectionDto collectionToCollectionDto(Collection auction);

@@ -1,11 +1,8 @@
 package com.system.artworkspace.collection;
 
-import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.*;
-import com.system.artworkspace.exceptions.NoSuchArtworkException;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,33 +10,34 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.system.artworkspace.logger.LoggingMarkers.COLLECTION_EVENTS;
 
 @Service
+@Slf4j
 public class CollectionServiceImpl implements CollectionService{
-    private CollectionRepository repository;
-    @Autowired
-    private ArtworkService artworkService;
-    private static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
+
+    private final CollectionRepository repository;
+
+    private final ArtworkService artworkService;
 
     @Autowired
-    public CollectionServiceImpl(CollectionRepository repository) {
+    public CollectionServiceImpl(CollectionRepository repository, ArtworkService artworkService) {
         this.repository = repository;
+        this.artworkService = artworkService;
     }
 
     @Override
     public Collection createCollection(Collection collection) {
         repository.save(CollectionMapper.INSTANCE.collectionToCollectionEntity(collection));
-        logger.info(COLLECTION_EVENTS,"Created collection with ID: {}", collection.getId());
+        log.info(COLLECTION_EVENTS,"Created collection with ID: {}", collection.getId());
         return collection;
     }
 
     @Override
     public Collection getCollectionById(Long id) {
         Optional<CollectionEntity> collection = repository.findById(id);
-        logger.info("Finding collection by id (without CACHE)");
+        log.debug("Finding collection by id (without CACHE): {}", id);
         if (collection.isPresent())
             return CollectionMapper.INSTANCE.collectionEntityToCollection(collection.get());
         else
@@ -49,8 +47,7 @@ public class CollectionServiceImpl implements CollectionService{
 
     @Override
     public List<Collection> getCollectionsByUserId(Long id) {
-        List<Collection> cols =  repository.getCollectionEntitiesByOwnerId(id).stream().map(x -> CollectionMapper.INSTANCE.collectionEntityToCollection(x)).collect(Collectors.toList());
-        return cols;
+        return repository.getCollectionEntitiesByOwnerId(id).stream().map(CollectionMapper.INSTANCE::collectionEntityToCollection).collect(Collectors.toList());
     }
 
     @Override
@@ -60,9 +57,7 @@ public class CollectionServiceImpl implements CollectionService{
         for(Collection col: collections){
             listOfLists.add(col.getArtworks());
         }
-        List<Artwork> unionList = unionArtworkLists(listOfLists);
-
-        return unionList;
+        return unionArtworkLists(listOfLists);
     }
 
     @Override
@@ -71,7 +66,6 @@ public class CollectionServiceImpl implements CollectionService{
     }
 
     private List<Artwork> unionArtworkLists(List<List<Artwork>> listOfLists) {
-        // Use Stream API to flatten the list of lists, then remove duplicates
         return listOfLists.stream()
                 .flatMap(List::stream)
                 .distinct()
@@ -90,9 +84,9 @@ public class CollectionServiceImpl implements CollectionService{
                 CollectionEntity existingCollectionEntity = optionalCollection.get();
                 existingCollectionEntity.addNewArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
                 repository.save(existingCollectionEntity);
-                logger.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), id);
+                log.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), id);
             } else {
-                logger.warn(COLLECTION_EVENTS,"Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), id);
+                log.warn(COLLECTION_EVENTS,"Collection not found for adding artwork with ID: {} to collection with ID: {}", artwork.getId(), id);
                 throw new EntityNotFoundException("Collection not found with ID: " + id);
             }
         }
@@ -105,9 +99,9 @@ public class CollectionServiceImpl implements CollectionService{
         if (optionalCollection.isPresent()) {
             CollectionEntity existingCollectionEntity = optionalCollection.get();
             repository.delete(existingCollectionEntity);
-            logger.info(COLLECTION_EVENTS,"Deleted collection with ID: {}", id);
+            log.info(COLLECTION_EVENTS,"Deleted collection with ID: {}", id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for deletion with ID: {}", id);
+            log.warn(COLLECTION_EVENTS,"Collection not found for deletion with ID: {}", id);
             throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
@@ -121,9 +115,9 @@ public class CollectionServiceImpl implements CollectionService{
             CollectionEntity existingCollectionEntity = optionalCollection.get();
             existingCollectionEntity.removeArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
             repository.save(existingCollectionEntity);
-            logger.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), id);
+            log.info(COLLECTION_EVENTS,"Removed artwork with ID {} from collection with ID: {}", artwork.getId(), id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), id);
+            log.warn(COLLECTION_EVENTS,"Collection not found for removing artwork with ID: {} from collection with ID: {}", artwork.getId(), id);
             throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
@@ -135,16 +129,15 @@ public class CollectionServiceImpl implements CollectionService{
             CollectionEntity existingCollectionEntity = optionalCollection.get();
             existingCollectionEntity.setTitle(name);
             repository.save(existingCollectionEntity);
-            logger.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", id);
+            log.info(COLLECTION_EVENTS,"Updated collection name for collection with ID: {}", id);
         } else {
-            logger.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", id);
+            log.warn(COLLECTION_EVENTS,"Collection not found for updating name with ID: {}", id);
             throw new EntityNotFoundException("Collection not found with ID: " + id);
         }
     }
 
     @Override
     public List<Collection> getAllCollections() {
-        return repository.findAll().stream().map(x -> CollectionMapper.INSTANCE.collectionEntityToCollection(x)).collect(Collectors.toList());
+        return repository.findAll().stream().map(CollectionMapper.INSTANCE::collectionEntityToCollection).collect(Collectors.toList());
     }
-
 }

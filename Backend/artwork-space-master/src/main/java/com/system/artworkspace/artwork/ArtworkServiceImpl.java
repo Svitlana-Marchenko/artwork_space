@@ -1,6 +1,5 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.artworkUpdate.ArtworkUpdate;
 import com.system.artworkspace.auction.Sale.SaleRepository;
 import com.system.artworkspace.exceptions.NoSuchArtworkException;
@@ -9,10 +8,8 @@ import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
 import com.system.artworkspace.validation.ArtworkValidator;
-import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.ThreadContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -20,21 +17,20 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.system.artworkspace.logger.LoggingMarkers.*;
-
+import static com.system.artworkspace.logger.LoggingMarkers.ARTWORK_EVENTS;
 
 @Service
+@Slf4j
 public class ArtworkServiceImpl implements ArtworkService {
-    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
-
+    
     private final ArtworkRepository repository;
+    
     private final SaleRepository saleRepository;
 
     @Autowired
@@ -45,25 +41,25 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public List<Artwork> getAllArtwork() {
-        return repository.findAll().stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
+        return repository.findAll().stream().map(ArtworkMapper.INSTANCE::artworkEntityToArtwork).collect(Collectors.toList());
     }
 
     @Override
     public List<Artwork> getAllArtworkByArtistId(Long id) {
-        return repository.findAllByUserId(id).stream().map(x -> ArtworkMapper.INSTANCE.artworkEntityToArtwork(x)).collect(Collectors.toList());
-
+        return repository.findAllByUserId(id).stream().map(ArtworkMapper.INSTANCE::artworkEntityToArtwork).collect(Collectors.toList());
     }
+
     @Transactional
     @Override
     public Artwork addArtwork(Artwork artwork, MultipartFile file) {
         try {
 
-            logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
+            log.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
             ArtworkEntity ent = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
             String imagePath= ImagesManager.saveImage(file,artwork.getUser().getId(),ent.getId());
             repository.updateImageUrl(ent.getId(),imagePath);
             artwork.setImageURL(imagePath);
-            logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
+            log.info(ARTWORK_EVENTS, "Artwork added successfully.");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,11 +67,12 @@ public class ArtworkServiceImpl implements ArtworkService {
         }
         return artwork;
     }
+
     @Override
     public Artwork addArtwork(Artwork artwork) {
-        logger.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
+        log.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
         ArtworkEntity art = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
-        logger.info(ARTWORK_EVENTS, "Artwork added successfully.");
+        log.info(ARTWORK_EVENTS, "Artwork added successfully.");
         return ArtworkMapper.INSTANCE.artworkEntityToArtwork(art);
     }
 
@@ -93,12 +90,12 @@ public class ArtworkServiceImpl implements ArtworkService {
             try {
                 repository.deleteById(id);
                 ImagesManager.deleteImage(optionalArtwork.get().getImageURL());
-                logger.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", id);
+                log.info(ARTWORK_EVENTS, "Artwork deleted with ID: {}", id);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else {
-            logger.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", id);
+            log.warn(ARTWORK_EVENTS, "Artwork not found for deletion with ID: {}", id);
             throw new NoSuchArtworkException("Artwork not found with ID: " + id);
         }
     }
@@ -115,7 +112,7 @@ public class ArtworkServiceImpl implements ArtworkService {
             artwork.setWidth(artworkUpdate.getWidth());
             artwork.setHeight(artworkUpdate.getHeight());
             repository.save(artwork);
-            logger.info("Updating exhibition with id "+id);
+            log.info("Updating exhibition with id "+id);
         }else{
             throw new NoSuchArtworkException("No artwork with id "+id+" to update");
         }
@@ -127,7 +124,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Cacheable(cacheNames="artwork", key="#id")
     public Artwork findArtworkById(Long id) {
         Optional<ArtworkEntity> artwork = repository.findById(id);
-        logger.info("Finding artwork by id (without CACHE)");
+        log.debug("Finding artwork by id (without CACHE)");
         if (artwork.isPresent())
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(artwork.get());
         else
@@ -152,10 +149,10 @@ public class ArtworkServiceImpl implements ArtworkService {
 
             existingArtwork.setTitle(title);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
         }
 
     }
@@ -169,10 +166,10 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setDescription(description);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS, "Description updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS, "Description updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
         }
     }
 
@@ -190,7 +187,7 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setTechnique(technique);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
             throw new  NoSuchArtworkException("Artwork not found with ID: " + id);
@@ -206,7 +203,7 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setWidth(width);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS, "Width updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS, "Width updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
             throw new NoSuchArtworkException("Artwork not found with ID: " + id);
@@ -222,7 +219,7 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setHeight(height);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS, "Height updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS, "Height updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
             throw new NoSuchArtworkException("Artwork not found with ID: " + id);
@@ -236,14 +233,13 @@ public class ArtworkServiceImpl implements ArtworkService {
         ArtworkValidator.validateImageURL(url);
         ThreadContext.clearAll();
 
-
         Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
 
         if (optionalArtwork.isPresent()) {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.setImageURL(url);
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", id);
+            log.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
             throw new NoSuchArtworkException("Artwork not found with ID: " + id);
@@ -272,10 +268,10 @@ public class ArtworkServiceImpl implements ArtworkService {
 
             List<RatingEntity> ratingEntities = existingArtwork.getRatings().stream().toList();
 
-            return ratingEntities.stream().map(x -> RatingMapper.INSTANCE.ratingEntityToRating(x)).collect(Collectors.toList());
+            return ratingEntities.stream().map(RatingMapper.INSTANCE::ratingEntityToRating).collect(Collectors.toList());
 
         } else {
-            throw new EntityNotFoundException("Artwork not found with ID: " + id);
+            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
         }
     }
 
@@ -288,10 +284,10 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtwork = optionalArtwork.get();
             existingArtwork.getRatings().add(RatingMapper.INSTANCE.ratingToRatingEntity(rating));
             repository.save(existingArtwork);
-            logger.info(ARTWORK_EVENTS,"Added ratting with ID {} to artwork with ID: {}", rating.getId(), id);
+            log.info(ARTWORK_EVENTS,"Added ratting with ID {} to artwork with ID: {}", rating.getId(), id);
             return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
         } else {
-            logger.warn(ARTWORK_EVENTS,"ArtworkEntity not found for adding rating with ID: {} to artwork with ID: {}", rating.getId(), id);
+            log.warn(ARTWORK_EVENTS,"ArtworkEntity not found for adding rating with ID: {} to artwork with ID: {}", rating.getId(), id);
             throw new IllegalArgumentException("ArtworkEntity not found with ID: " + id);
         }
     }
@@ -304,9 +300,9 @@ public class ArtworkServiceImpl implements ArtworkService {
             ArtworkEntity existingArtworkEntity = optionalArtwork.get();
             existingArtworkEntity.getRatings().remove(RatingMapper.INSTANCE.ratingToRatingEntity(rating));
             repository.save(existingArtworkEntity);
-            logger.info(ARTWORK_EVENTS,"Removed rating with ID {} from artwork with ID: {}", rating.getId(), artworkId);
+            log.info(ARTWORK_EVENTS,"Removed rating with ID {} from artwork with ID: {}", rating.getId(), artworkId);
         } else {
-            logger.warn(ARTWORK_EVENTS,"Artwork not found for removing rating with ID: {} from artwork with ID: {}", rating.getId(), artworkId);
+            log.warn(ARTWORK_EVENTS,"Artwork not found for removing rating with ID: {} from artwork with ID: {}", rating.getId(), artworkId);
             throw new NoSuchArtworkException("Artwork not found with ID: " + artworkId);
         }
     }
@@ -320,6 +316,4 @@ public class ArtworkServiceImpl implements ArtworkService {
     public boolean isSold(Long id) {
         return saleRepository.existsSaleEntityByArtworkId(id);
     }
-
-
 }

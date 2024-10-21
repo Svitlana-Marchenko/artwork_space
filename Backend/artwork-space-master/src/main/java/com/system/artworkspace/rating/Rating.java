@@ -1,6 +1,10 @@
 package com.system.artworkspace.rating;
 
 import com.system.artworkspace.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -8,7 +12,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Rating {
+
     @NotNull
     private Long id;
 
@@ -17,53 +26,10 @@ public class Rating {
     @Max(10)
     private double rate;
 
-   private User user;
+    private User user;
 
     @Size(max = 5000)
     private String comment;
-
-    public Rating() {
-    }
-
-    public Rating(Long id, double rate, User curator, String comment) {
-        this.id = id;
-        this.rate = rate;
-        this.user = curator;
-        this.comment = comment;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     @Override
     public boolean equals(Object o) {

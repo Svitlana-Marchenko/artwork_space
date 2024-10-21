@@ -1,6 +1,5 @@
 package com.system.artworkspace;
 
-import com.system.artworkspace.artwork.ArtworkDto;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkService;
@@ -16,20 +15,11 @@ import com.system.artworkspace.exhibition.ExhibitionMapper;
 import com.system.artworkspace.exhibition.ExhibitionService;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.user.*;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersInvalidException;
-import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
-import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,11 +29,8 @@ import java.util.*;
 public class MyCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    UserRepository repo;
-
-
-    @Autowired
     UserService userService;
+
     @Autowired
     CollectionService collectionService;
 
@@ -52,17 +39,18 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Autowired
     ArtworkService artworkService;
+
     @Autowired
     SaleService saleService;
+
     @Autowired
     AuctionArtistService auctionArtistService;
 
     @Override
-    public void run(String... args) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
+    public void run(String... args) {
         createTestData();
     }
 
-    @SuppressWarnings("deprecation")
     private void createTestData() {
         List<UserEntity> users = new ArrayList<>();
         UserEntity u1 = new UserEntity("art", "John", "Doe", "john.doe@example.com", "password", Role.ARTIST);
@@ -250,39 +238,37 @@ public class MyCommandLineRunner implements CommandLineRunner {
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition3));
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition4));
 
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(6l));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(7l));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(8l));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(9l));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(11l));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(6L));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(7L));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(8L));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(9L));
+        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(11L));
 
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(10L));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(12L));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(13L));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(20L));
+        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(25L));
 
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(10l));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(12l));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(13l));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(20l));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(25l));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(14L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(23L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(13L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(15L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(12L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(26L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(10L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(16L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(20L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(18L));
+        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(25L));
 
-
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(14l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(23l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(13l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(15l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(12l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(26l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(10l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(16l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(20l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(18l));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(25l));
-
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(19l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(8l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(4l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(5l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(3l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(24l));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(11l));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(19L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(8L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(4L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(5L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(3L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(24L));
+        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(11L));
 
         try {
             SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2023-10-23"));
@@ -293,7 +279,6 @@ public class MyCommandLineRunner implements CommandLineRunner {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
 

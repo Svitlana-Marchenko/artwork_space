@@ -10,9 +10,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserInfoUserDetails implements UserDetails {
+
     private UserEntity user;
+
     private String name;
+
     private String password;
+
     private List<GrantedAuthority> authorities;
 
     public UserInfoUserDetails(UserEntity user) {

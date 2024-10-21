@@ -1,13 +1,10 @@
 package com.system.artworkspace.user;
 
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.auction.Sale.Sale;
 import com.system.artworkspace.user.changePassword.ChangePassword;
 import com.system.artworkspace.user.userUpdate.UserUpdate;
 
-import java.util.List;
-
 public interface UserService {
+
     User createUser(User user);
 
     User updateUser(UserUpdate user);
@@ -19,6 +16,5 @@ public interface UserService {
     User getUserByUsername(String username);
 
     void changePassword(ChangePassword changePassword);
-
 }
 

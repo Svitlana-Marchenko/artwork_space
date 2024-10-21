@@ -8,11 +8,20 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.util.Date;
 import java.util.List;
+
+@Setter
+@Getter
 @ValidExhibitionDates
+@NoArgsConstructor
+@AllArgsConstructor
 public class ExhibitionDto {
     private Long id;
     @NotNull(message = "curator is null")
@@ -34,74 +43,4 @@ public class ExhibitionDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-
-    public ExhibitionDto() {
-    }
-
-    public ExhibitionDto(Long id, UserDto curator, String title, String description, List<ArtworkDto> artworks, Date startDate, Date endDate) {
-        this.id = id;
-        this.curator = curator;
-        this.title = title;
-        this.description = description;
-        this.artworks = artworks;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<ArtworkDto> getArtworks() {
-        return artworks;
-    }
-
-    public void setArtworks(List<ArtworkDto> artworks) {
-        this.artworks = artworks;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public UserDto getCurator() {
-        return curator;
-    }
-
-    public void setCurator(UserDto curator) {
-        this.curator = curator;
-    }
 }

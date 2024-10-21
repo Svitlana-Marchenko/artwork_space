@@ -1,52 +1,45 @@
 package com.system.artworkspace.user;
 
-import com.system.artworkspace.ArtworkSpaceApplication;
-import com.system.artworkspace.artwork.Artwork;
-import com.system.artworkspace.artwork.ArtworkEntity;
-import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.artwork.ArtworkRepository;
-import com.system.artworkspace.auction.Sale.Sale;
-import com.system.artworkspace.auction.Sale.SaleRepository;
 import com.system.artworkspace.exceptions.*;
 import com.system.artworkspace.helpers.ImagesManager;
 import com.system.artworkspace.user.changePassword.ChangePassword;
 import com.system.artworkspace.user.userUpdate.UserUpdate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
 import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_USER_EVENTS;
 import static com.system.artworkspace.logger.LoggingMarkers.USER_ACTIONS;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
+    
+    private final PasswordEncoder passwordEncoder;
 
+    private final UserRepository userRepository;
+    
+    private final ArtworkRepository artworkRepository;
+    
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    private UserRepository userRepository;
-    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
-    private ArtworkRepository artworkRepository;
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository,
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
                            ArtworkRepository artworkRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.artworkRepository = artworkRepository;
     }
+    
     @Override
     public User createUser(User user) {
         checkNewUsername(user.getUsername());
         checkNewEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         UserEntity createdUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(user));
-        logger.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", createdUser.getId());
+        log.info(CONFIDENTIAL_USER_EVENTS,"Created user with ID: {}", createdUser.getId());
         if(user.getRole().equals(Role.ARTIST))
             ImagesManager.createFolderForArtist(createdUser.getId());
         return UserMapper.INSTANCE.userEntityToUser(createdUser);
@@ -64,7 +57,7 @@ public class UserServiceImpl implements UserService {
             }
             u.setUsername(user.getUsername());
             UserEntity updatedUser = userRepository.save(UserMapper.INSTANCE.userToUserEntity(u));
-            logger.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
+            log.info(USER_ACTIONS,"Updated user with ID: {}", updatedUser.getId());
             return UserMapper.INSTANCE.userEntityToUser(updatedUser);
         }
         else{
@@ -78,9 +71,9 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(userId)) {
             artworkRepository.deleteArtworksByUserId(userId);
             userRepository.deleteById(userId);
-            logger.info(USER_ACTIONS,"Deleted user with ID: {}", userId);
+            log.info(USER_ACTIONS,"Deleted user with ID: {}", userId);
         } else {
-            logger.warn(USER_ACTIONS,"UserEntity not found for deletion with ID: {}", userId);
+            log.warn(USER_ACTIONS,"UserEntity not found for deletion with ID: {}", userId);
         }
     }
 
@@ -88,9 +81,9 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long userId) {
         UserEntity user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            logger.info(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
+            log.info(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
         } else {
-            logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", userId);
+            log.warn(USER_ACTIONS,"UserEntity not found with ID: {}", userId);
             throw new NoSuchUserException("User with id " + userId + " not found");
         }
         return UserMapper.INSTANCE.userEntityToUser(user);
@@ -114,7 +107,7 @@ public class UserServiceImpl implements UserService {
             checkNewPasswordFormat(changePassword.getNewPassword());
             setNewPassword(user, changePassword.getNewPassword());
         } else {
-            logger.warn(USER_ACTIONS,"UserEntity not found with ID: {}", changePassword.getId());
+            log.warn(USER_ACTIONS,"UserEntity not found with ID: {}", changePassword.getId());
             throw new NoSuchUserException("User with id " + changePassword.getId() + " not found");
         }
     }
@@ -126,7 +119,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private void checkNewPasswordFormat(String password) {
-        //todo add regex for password
         if(password.length() < 8)
             throw new WrongPasswordFormat("Password length is less than 8 symbols.");
     }

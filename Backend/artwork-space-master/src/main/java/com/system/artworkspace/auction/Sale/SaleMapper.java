@@ -1,9 +1,5 @@
 package com.system.artworkspace.auction.Sale;
 
-import com.system.artworkspace.auction.Auction;
-import com.system.artworkspace.auction.AuctionDto;
-import com.system.artworkspace.auction.AuctionEntity;
-import com.system.artworkspace.auction.AuctionMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -3,12 +3,9 @@ package com.system.artworkspace.exhibition;
 import com.system.artworkspace.ArtworkSpaceApplication;
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
-import com.system.artworkspace.auction.AuctionEntity;
-import com.system.artworkspace.auction.AuctionMapper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdate;
 import jakarta.persistence.EntityNotFoundException;
-import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +32,17 @@ import static com.system.artworkspace.logger.LoggingMarkers.*;
 public class ExhibitionServiceImpl implements ExhibitionService {
 
     private ExhibitionRepository exhibitionRepository;
+
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
+
     @Value("${exhibition.max-size}")
     private int maxSize;
+
     @Autowired
-    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository) throws SchedulerException {
+    public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository){
         this.exhibitionRepository = exhibitionRepository;
     }
+
     @Override
     public Exhibition createExhibition(Exhibition exhibition) {
         ExhibitionEntity ex = exhibitionRepository.save(ExhibitionMapper.INSTANCE.exhibitionToExhibitionEntity(exhibition));
@@ -225,7 +226,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
         logger.info(AUCTIONS_EVENTS, "Retrieved {} active exhibitions.", validExhibitionEntities.size());
 
         return validExhibitionEntities.stream()
-                .map(x -> ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(x))
+                .map(ExhibitionMapper.INSTANCE::exhibitionEntityToExhibition)
                 .collect(Collectors.toList());
     }
 
@@ -233,9 +234,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     public List<Exhibition> getAllExhibitionsByCuratorId(Long id) {
         logger.info("Getting exhibition with curator ID: " + id);
         return exhibitionRepository.findByCuratorId(id).stream()
-                .map(x -> ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(x))
+                .map(ExhibitionMapper.INSTANCE::exhibitionEntityToExhibition)
                 .collect(Collectors.toList());
     }
-
-
 }

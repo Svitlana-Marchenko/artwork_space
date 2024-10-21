@@ -9,12 +9,15 @@ public class NoSuchAuctionException extends RuntimeException{
     public NoSuchAuctionException() {
         super();
     }
+
     public NoSuchAuctionException(String message, Throwable cause) {
         super(message, cause);
     }
+
     public NoSuchAuctionException(String message) {
         super(message);
     }
+
     public NoSuchAuctionException(Throwable cause) {
         super(cause);
     }

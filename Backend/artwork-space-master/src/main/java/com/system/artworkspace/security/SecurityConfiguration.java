@@ -22,7 +22,6 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Collections;
 
-
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfiguration {
@@ -32,7 +31,7 @@ public class SecurityConfiguration {
     public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-//todo security for rating
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors
@@ -53,8 +52,6 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.PUT, "/auctions/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.DELETE, "/auctions/**").hasAuthority("ARTIST")
-//                        .requestMatchers(HttpMethod.POST, "/artworks/{id}/addRating").hasAuthority("CURATOR")
-//                        .requestMatchers(HttpMethod.DELETE, "/artworks/{id}/deleteRating").hasAuthority("CURATOR")
                         .requestMatchers(HttpMethod.POST, "/artworks/**").hasAnyAuthority("ARTIST", "CURATOR")
                         .requestMatchers(HttpMethod.PUT, "/artworks/**").hasAuthority("ARTIST")
                         .requestMatchers(HttpMethod.DELETE, "/artworks/**").hasAnyAuthority("ARTIST", "CURATOR")
@@ -82,7 +79,6 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-
         return new UserInfoUserDetailsService();
     }
 

@@ -19,6 +19,7 @@ import java.util.function.Function;
 public class JwtService {
 
     public static final String SECRET = "357638792F423F4428472B4B6250655368566D597133743677397A2443264629";
+
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
 
     public String extractUsername(String token) {
@@ -61,7 +62,6 @@ public class JwtService {
             User user
     ) {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
-
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
