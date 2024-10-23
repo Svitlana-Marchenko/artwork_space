@@ -21,5 +21,4 @@ public class ArtworkSpaceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ArtworkSpaceApplication.class, args);
 	}
-
 }

@@ -147,5 +147,4 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
             log.error("Error executing auctionClosingJob", e);
         }
     }
-
 }

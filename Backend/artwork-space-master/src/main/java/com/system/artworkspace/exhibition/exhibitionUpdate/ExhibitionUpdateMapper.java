@@ -11,5 +11,4 @@ public interface ExhibitionUpdateMapper {
     ExhibitionUpdateDto exhibitionUpdateToExhibitionUpdateDto(ExhibitionUpdate exhibitionUpdate);
 
     ExhibitionUpdate exhibitionUpdateDtoToExhibitionUpdate(ExhibitionUpdateDto exhibitionUpdateDto);
-
 }

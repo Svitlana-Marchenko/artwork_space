@@ -23,7 +23,6 @@ public class SaleServiceImpl implements SaleService{
     public Sale createSale(Sale sale) {
         log.info("Adding sale with ID: {}", sale.getId());
         repository.save(SaleMapper.INSTANCE.saleToSaleEntity(sale));
-        log.info("Sale added successfully.");
         return sale;
     }
 

@@ -75,7 +75,7 @@ public class CollectionServiceImpl implements CollectionService{
     @Override
     public void addToCollection(Long id,  Long artworkId) {
         Optional<CollectionEntity> collectionEntity = repository.findById(id);
-        Artwork artwork = artworkService.findArtworkById(artworkId);
+        Artwork artwork = artworkService.getArtworkById(artworkId);
 
          if (collectionEntity.isPresent()) {
             Optional<CollectionEntity> optionalCollection = repository.findById(id);
@@ -110,7 +110,7 @@ public class CollectionServiceImpl implements CollectionService{
     public void deleteFromCollection(Long id, Long artworkId) {
         Optional<CollectionEntity> optionalCollection = repository.findById(id);
 
-        Artwork artwork = artworkService.findArtworkById(artworkId);
+        Artwork artwork = artworkService.getArtworkById(artworkId);
         if (optionalCollection.isPresent()) {
             CollectionEntity existingCollectionEntity = optionalCollection.get();
             existingCollectionEntity.removeArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));

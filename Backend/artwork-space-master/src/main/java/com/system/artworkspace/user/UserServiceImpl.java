@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long userId) {
         UserEntity user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            log.info(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
+            log.debug(USER_ACTIONS,"Retrieved user with ID: {}", user.getId());
         } else {
             log.warn(USER_ACTIONS,"UserEntity not found with ID: {}", userId);
             throw new NoSuchUserException("User with id " + userId + " not found");
@@ -92,10 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUsername(String username) {
         Optional<UserEntity> user = userRepository.findByUsername(username);
-        if(user.isPresent()){
-            return UserMapper.INSTANCE.userEntityToUser(user.get());
-        }
-        return null;
+        return user.map(UserMapper.INSTANCE::userEntityToUser).orElse(null);
     }
 
     @Override
@@ -142,6 +139,4 @@ public class UserServiceImpl implements UserService {
     private String encryptPassword(String newPassword) {
         return passwordEncoder.encode(newPassword);
     }
-
-
 }

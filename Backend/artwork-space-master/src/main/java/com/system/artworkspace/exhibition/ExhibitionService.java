@@ -18,10 +18,6 @@ public interface ExhibitionService{
 
     Exhibition deleteFromExhibition(Long id, Artwork artwork);
 
-    Exhibition editName(Long id, String newName);
-
-    Exhibition editDescription(Long id, String newDescription);
-
     Exhibition findById(Long id);
 
     void deleteExhibition(Long id);

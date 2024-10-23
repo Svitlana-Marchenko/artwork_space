@@ -160,12 +160,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
             e.printStackTrace();
         }
 
-        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(1L)), 10.0, 5, new Date(), null, 0);
-        AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(2L)), 30.0, 10, endDate2, null, 0);
-        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(3L)), 100.0, 15, new Date(), u2, 150);
-        AuctionEntity aa4 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(4L)), 50.0, 5, new Date(), u2, 70);
-        AuctionEntity aa5 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(20L)), 70.0, 1, new Date(), u2, 80);
-        AuctionEntity aa6 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(21L)), 90.0, 20, new Date(), null, 0);
+        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(1L)), 10.0, 5, new Date(), null, 0);
+        AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(2L)), 30.0, 10, endDate2, null, 0);
+        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(3L)), 100.0, 15, new Date(), u2, 150);
+        AuctionEntity aa4 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(4L)), 50.0, 5, new Date(), u2, 70);
+        AuctionEntity aa5 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(20L)), 70.0, 1, new Date(), u2, 80);
+        AuctionEntity aa6 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(21L)), 90.0, 20, new Date(), null, 0);
 
         u2.setId(2L);
 
@@ -238,42 +238,42 @@ public class MyCommandLineRunner implements CommandLineRunner {
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition3));
         exhibitionService.createExhibition(ExhibitionMapper.INSTANCE.exhibitionEntityToExhibition(exhibition4));
 
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(6L));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(7L));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(8L));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(9L));
-        exhibitionService.addToExhibition(1L, artworkService.findArtworkById(11L));
+        exhibitionService.addToExhibition(1L, artworkService.getArtworkById(6L));
+        exhibitionService.addToExhibition(1L, artworkService.getArtworkById(7L));
+        exhibitionService.addToExhibition(1L, artworkService.getArtworkById(8L));
+        exhibitionService.addToExhibition(1L, artworkService.getArtworkById(9L));
+        exhibitionService.addToExhibition(1L, artworkService.getArtworkById(11L));
 
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(10L));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(12L));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(13L));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(20L));
-        exhibitionService.addToExhibition(2L, artworkService.findArtworkById(25L));
+        exhibitionService.addToExhibition(2L, artworkService.getArtworkById(10L));
+        exhibitionService.addToExhibition(2L, artworkService.getArtworkById(12L));
+        exhibitionService.addToExhibition(2L, artworkService.getArtworkById(13L));
+        exhibitionService.addToExhibition(2L, artworkService.getArtworkById(20L));
+        exhibitionService.addToExhibition(2L, artworkService.getArtworkById(25L));
 
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(14L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(23L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(13L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(15L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(12L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(26L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(10L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(16L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(20L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(18L));
-        exhibitionService.addToExhibition(3L, artworkService.findArtworkById(25L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(14L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(23L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(13L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(15L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(12L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(26L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(10L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(16L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(20L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(18L));
+        exhibitionService.addToExhibition(3L, artworkService.getArtworkById(25L));
 
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(19L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(8L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(4L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(5L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(3L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(24L));
-        exhibitionService.addToExhibition(4L, artworkService.findArtworkById(11L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(19L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(8L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(4L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(5L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(3L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(24L));
+        exhibitionService.addToExhibition(4L, artworkService.getArtworkById(11L));
 
         try {
-            SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2023-10-23"));
+            SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2023-10-23"));
             saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale));
-            SaleEntity sale2 = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.findArtworkById(8L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(5L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),8990.0,dateFormat.parse("2023-10-10"));
+            SaleEntity sale2 = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(8L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(5L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),8990.0,dateFormat.parse("2023-10-10"));
             saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale2));
 
         } catch (ParseException e) {

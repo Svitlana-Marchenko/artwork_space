@@ -37,9 +37,7 @@ public class AuctionArtistController {
             throw new ValidationException(message);
         }
         log.info("Creating an auction for artwork with ID: {}", auction.getArtwork().getId());
-        AuctionDto createdAuction = AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(AuctionMapper.INSTANCE.auctionDtoToAuction(auction)));
-        log.info("Auction created with ID: {}", createdAuction.getId());
-        return createdAuction;
+        return AuctionMapper.INSTANCE.auctionToAuctionDto(auctionService.createAuction(AuctionMapper.INSTANCE.auctionDtoToAuction(auction)));
     }
 
     @GetMapping("/{id}/currentBid")
@@ -65,9 +63,7 @@ public class AuctionArtistController {
     @GetMapping("/active")
     public List<AuctionDto> getAllActiveAuctions() {
         log.debug("Fetching all active auctions");
-        List<AuctionDto> activeAuctions = auctionService.getAllActiveAuctions().stream().map(AuctionMapper.INSTANCE::auctionToAuctionDto).collect(Collectors.toList());
-        log.debug("Retrieved {} active auctions.", activeAuctions.size());
-        return activeAuctions;
+        return auctionService.getAllActiveAuctions().stream().map(AuctionMapper.INSTANCE::auctionToAuctionDto).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}/close")

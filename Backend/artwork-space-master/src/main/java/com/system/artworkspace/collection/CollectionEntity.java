@@ -41,5 +41,4 @@ public class CollectionEntity {
     public void removeArtwork(ArtworkEntity artworkEntity){
         artworks.remove(artworkEntity);
     }
-
 }

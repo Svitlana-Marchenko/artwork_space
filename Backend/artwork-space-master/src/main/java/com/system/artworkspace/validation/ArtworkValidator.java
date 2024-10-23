@@ -15,19 +15,12 @@ import static com.system.artworkspace.logger.LoggingMarkers.ARTWORK_EVENTS;
 @ConditionalOnClass(Artwork.class)
 @Slf4j
 public class ArtworkValidator { 
-    
-    private long fileSizeLimitInMB;
 
-    public ArtworkValidator() {
-        this.fileSizeLimitInMB = 1000;
-    }
     public static boolean validateTitle(String title){
         log.info(ARTWORK_EVENTS,"Validation of title of artwork ID: {}", ThreadContext.get("artwork_id"));
-
         String regex = "^[A-Za-z0-9!?(),._\\s]{1,50}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(title);
-
         return matcher.matches();
     }
 
@@ -56,15 +49,9 @@ public class ArtworkValidator {
 
     public static boolean validateTechnique(String technique){
         log.info(ARTWORK_EVENTS,"Validation of technique of artwork ID: {}", ThreadContext.get("artwork_id"));
-
         String regex = "^[A-Za-z0-9(),\\s]{1,100}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(technique);
-
         return matcher.matches();
-    }
-
-    public boolean isFileSizeValid(long fileSizeInBytes) {
-        return fileSizeInBytes <= (fileSizeLimitInMB * 1024 * 1024);
     }
 }

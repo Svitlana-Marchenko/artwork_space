@@ -8,15 +8,12 @@ import com.system.artworkspace.exceptions.ValidationException;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateDto;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdateMapper;
 import javax.validation.Valid;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,7 +70,6 @@ public class ExhibitionController {
         }
         log.info("Adding artwork with ID {} to exhibition with ID: {}", artwork.getId(), exhibitionId);
         exhibitionService.addToExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
-        log.info("Artwork added to exhibition with ID: {}", exhibitionId);
     }
 
     @PutMapping("/{exhibitionId}/changeDates")
@@ -89,7 +85,6 @@ public class ExhibitionController {
         }
         log.info("Changing dates for exhibition with ID: {}", exhibitionId);
         exhibitionService.changeDates(exhibitionId, startDate, endDate);
-        log.info("Dates changed for exhibition with ID: {}", exhibitionId);
     }
 
     @DeleteMapping("/{exhibitionId}/removeArtwork")
@@ -103,27 +98,6 @@ public class ExhibitionController {
         }
         log.info("Removing artwork with ID {} from exhibition with ID: {}", artwork.getId(), exhibitionId);
         exhibitionService.deleteFromExhibition(exhibitionId, ArtworkMapper.INSTANCE.artworkDtoToArtwork(artwork));
-        log.info("Artwork removed from exhibition with ID: {}", exhibitionId);
-    }
-
-    @PutMapping("/{exhibitionId}/editName")
-    public void editName(
-            @PathVariable Long exhibitionId,
-            @RequestParam String name
-    ) {
-        log.info("Updating exhibition name for exhibition with ID: {}", exhibitionId);
-        exhibitionService.editName(exhibitionId, name);
-        log.info("ExhibitionEntity name updated for exhibition with ID: {}", exhibitionId);
-    }
-
-    @PutMapping("/{exhibitionId}/editDescription")
-    public void editDescription(
-            @PathVariable Long exhibitionId,
-            @RequestParam String description
-    ) {
-        log.info("Updating exhibition description for exhibition with ID: {}", exhibitionId);
-        exhibitionService.editDescription(exhibitionId, description);
-        log.info("ExhibitionEntity description updated for exhibition with ID: {}", exhibitionId);
     }
 
     @GetMapping("/{exhibitionId}")
@@ -141,16 +115,13 @@ public class ExhibitionController {
     @GetMapping("/active")
     public List<ExhibitionDto> getAllActive() {
         log.debug("Fetching all active auctions");
-        List<ExhibitionDto> activeExhibitions = exhibitionService.getAllActiveExhibition().stream().map(ExhibitionMapper.INSTANCE::exhibitionToExhibitionDto).collect(Collectors.toList());
-        log.debug("Retrieving info about active exhibitions");
-        return activeExhibitions;
+        return exhibitionService.getAllActiveExhibition().stream().map(ExhibitionMapper.INSTANCE::exhibitionToExhibitionDto).collect(Collectors.toList());
     }
 
     @DeleteMapping("/{exhibitionId}")
     public void deleteExhibition(@PathVariable Long exhibitionId) {
         log.info("Deleting exhibition with ID: {}", exhibitionId);
         exhibitionService.deleteExhibition(exhibitionId);
-        log.info("ExhibitionEntity deleted with ID: {}", exhibitionId);
     }
 
     @ExceptionHandler(NoSuchExhibitionException.class)

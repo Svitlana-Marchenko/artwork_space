@@ -27,15 +27,19 @@ import static com.system.artworkspace.logger.LoggingMarkers.AUCTIONS_EVENTS;
 @Service
 @Slf4j
 public class AuctionCollectioneerServiceImpl implements AuctionCollectioneerService {
-    
+
+    private final AuctionRepository auctionRepository;
+
+    private final ArtworkRepository artworkRepository;
+
+    private final UserService userService;
+
     @Autowired
-    private AuctionRepository auctionRepository;
-    
-    @Autowired
-    private ArtworkRepository artworkRepository;
-    
-    @Autowired
-    private UserService userService;
+    public AuctionCollectioneerServiceImpl(AuctionRepository auctionRepository, ArtworkRepository artworkRepository, UserService userService) {
+        this.auctionRepository = auctionRepository;
+        this.artworkRepository = artworkRepository;
+        this.userService = userService;
+    }
 
     public List<Auction> getAvailableAuctions() {
 

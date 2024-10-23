@@ -8,6 +8,7 @@ import com.system.artworkspace.auction.AuctionRepository;
 import com.system.artworkspace.auction.Sale.Sale;
 import com.system.artworkspace.auction.Sale.SaleService;
 import jakarta.persistence.EntityManagerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -53,10 +54,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
+@Slf4j
 public class AuctionJobConfig {
+
     @Autowired
     private AuctionRepository auctionRepository;
-    static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
     @Bean(name = "auctionClosingJob")
     public Job auctionClosingJob(JobRepository jobRepository,
@@ -69,14 +71,13 @@ public class AuctionJobConfig {
                 .build();
     }
 
-    //Step 1
     @Bean(name = "deleteClosingAuctionsTasklet")
     protected Tasklet deleteClosingAuctionsTasklet() {
         return (contribution, chunkContext) -> {
             List<AuctionEntity> closingAuctions = auctionRepository.findClosingTodayWithNoBuyer(new Date(), PageRequest.of(0, 10));
             auctionRepository.deleteAllById(closingAuctions.stream().map(AuctionEntity::getId).collect(Collectors.toList()));
             for (AuctionEntity auction : closingAuctions) {
-                logger.info("Deleted auction with ID: {}", auction.getId());
+                log.info("Deleted auction with ID: {}", auction.getId());
             }
             return RepeatStatus.FINISHED;
         };
@@ -88,7 +89,6 @@ public class AuctionJobConfig {
                 .build();
     }
 
-    //Step 2
     @Bean(name = "formSale")
     protected Step formSale(JobRepository jobRepository, PlatformTransactionManager transactionManager, @Qualifier("formingSaleReader") ItemReader<AuctionEntity> reader, @Qualifier("formingSaleProcessor") ItemProcessor<AuctionEntity, AuctionEntity> processor, @Qualifier("formingSaleWriter") ItemWriter<AuctionEntity> writer) {
         return new StepBuilder("formSale", jobRepository).<AuctionEntity,AuctionEntity> chunk(2, transactionManager)

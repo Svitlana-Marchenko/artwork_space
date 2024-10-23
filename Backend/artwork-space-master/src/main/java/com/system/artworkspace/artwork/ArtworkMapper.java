@@ -1,10 +1,7 @@
 package com.system.artworkspace.artwork;
 
-import com.system.artworkspace.user.*;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
 public interface ArtworkMapper {

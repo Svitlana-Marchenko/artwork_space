@@ -11,5 +11,4 @@ public interface ChangePasswordMapper {
     ChangePassword changePasswordDTOToChangePassword(ChangePasswordDTO changePasswordDTO);
 
     ChangePasswordDTO changePasswordToChangePasswordDTO(ChangePassword changePassword);
-
 }

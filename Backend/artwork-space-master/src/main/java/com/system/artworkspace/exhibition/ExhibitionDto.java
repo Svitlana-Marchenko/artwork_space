@@ -23,7 +23,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExhibitionDto {
+
     private Long id;
+
     @NotNull(message = "curator is null")
     private UserDto curator;
 

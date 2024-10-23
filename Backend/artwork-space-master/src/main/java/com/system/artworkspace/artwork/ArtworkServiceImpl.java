@@ -7,9 +7,7 @@ import com.system.artworkspace.helpers.ImagesManager;
 import com.system.artworkspace.rating.Rating;
 import com.system.artworkspace.rating.RatingEntity;
 import com.system.artworkspace.rating.RatingMapper;
-import com.system.artworkspace.validation.ArtworkValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -72,13 +70,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     public Artwork addArtwork(Artwork artwork) {
         log.info(ARTWORK_EVENTS, "Adding artwork with ID: {}", artwork.getId());
         ArtworkEntity art = repository.save(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
-        log.info(ARTWORK_EVENTS, "Artwork added successfully.");
         return ArtworkMapper.INSTANCE.artworkEntityToArtwork(art);
-    }
-
-    @Override
-    public String saveImage(MultipartFile file) {
-        return null;
     }
 
     @Override
@@ -122,7 +114,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     @Cacheable(cacheNames="artwork", key="#id")
-    public Artwork findArtworkById(Long id) {
+    public Artwork getArtworkById(Long id) {
         Optional<ArtworkEntity> artwork = repository.findById(id);
         log.debug("Finding artwork by id (without CACHE)");
         if (artwork.isPresent())
@@ -130,122 +122,6 @@ public class ArtworkServiceImpl implements ArtworkService {
         else
            throw new NoSuchArtworkException("Artwork with id " + id + " not found");
     }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateTitle(Long id, String title) {
-        ThreadContext.put("artwork_id", id.toString());
-        ArtworkValidator.validateTitle(title);
-        ThreadContext.clearAll();
-
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork= optionalArtwork.get();
-
-            ThreadContext.put("artwork_id", id.toString());
-            ArtworkValidator.validateTitle(title);
-            ThreadContext.clearAll();
-
-            existingArtwork.setTitle(title);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS,"Title updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-
-    }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateDescription(Long id, String description) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setDescription(description);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS, "Description updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateTechnique(Long id, String technique) {
-
-        ThreadContext.put("artwork_id", id.toString());
-        ArtworkValidator.validateTechnique(technique);
-        ThreadContext.clearAll();
-
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setTechnique(technique);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS,"Technique updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new  NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateWidth(Long id, double width) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setWidth(width);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS, "Width updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateHeight(Long id, double height) {
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setHeight(height);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS, "Height updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
-    @Override
-    @CachePut(cacheNames="artwork", key="#id")
-    public Artwork updateImgUrl(Long id, String url) {
-        ThreadContext.put("artwork_id", id.toString());
-        ArtworkValidator.validateImageURL(url);
-        ThreadContext.clearAll();
-
-        Optional<ArtworkEntity> optionalArtwork = repository.findById(id);
-
-        if (optionalArtwork.isPresent()) {
-            ArtworkEntity existingArtwork = optionalArtwork.get();
-            existingArtwork.setImageURL(url);
-            repository.save(existingArtwork);
-            log.info(ARTWORK_EVENTS,"Image URL updated for artwork with ID: {}", id);
-            return ArtworkMapper.INSTANCE.artworkEntityToArtwork(existingArtwork);
-        } else {
-            throw new NoSuchArtworkException("Artwork not found with ID: " + id);
-        }
-    }
-
 
     @Override
     public List<Artwork> getArtworksByTitle(String title) {

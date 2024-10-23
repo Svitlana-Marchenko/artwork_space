@@ -36,24 +36,24 @@ public class CollectionController {
     }
     @GetMapping("/{id}")
     public CollectionDto getCollectionById(@PathVariable Long id){
-        log.info("Getting collection by id");
+        log.debug("Getting collection by id");
         return CollectionMapper.INSTANCE.collectionToCollectionDto(collectionService.getCollectionById(id));
     }
     @GetMapping("/{id}/artworks")
     public List<ArtworkDto> getArtworksByCollectionId(@PathVariable Long id){
-        log.info("Getting artworks by collection id");
+        log.debug("Getting artworks by collection id");
         return collectionService.getArtworksByCollection(id).stream().map(ArtworkMapper.INSTANCE::artworkToArtworkDto).collect(Collectors.toList());
     }
 
     @GetMapping("/user/{userId}")
     public List<CollectionDto> getCollectionsByUserId(@PathVariable Long userId){
-        log.info("Getting collections by user id");
+        log.debug("Getting collections by user id");
         return collectionService.getCollectionsByUserId(userId).stream().map(CollectionMapper.INSTANCE::collectionToCollectionDto).collect(Collectors.toList());
     }
 
     @GetMapping("/user/{userId}/all")
     public List<ArtworkDto> getArtworksFromCollectionsByUserId(@PathVariable Long userId){
-        log.info("Getting collections by user id");
+        log.debug("Getting collections by user id");
         return collectionService.getArtworksFromCollectionsByUserId(userId).stream().map(ArtworkMapper.INSTANCE::artworkToArtworkDto).collect(Collectors.toList());
     }
 
@@ -63,7 +63,6 @@ public class CollectionController {
             String message = ExceptionHelper.formErrorMessage(bindingResult);
             throw new ValidationException(message);
         }
-        log.info("Creating a collection with ID: {}", collection.getId());
         CollectionDto createdCollection = CollectionMapper.INSTANCE.collectionToCollectionDto(collectionService.createCollection(CollectionMapper.INSTANCE.collectionDtoToCollection(collection)));
         log.info("Collection created with ID: {}", createdCollection.getId());
         return createdCollection;
@@ -73,32 +72,31 @@ public class CollectionController {
     public void addToCollection(@PathVariable Long collectionId, @RequestParam Long artworkId) {
         log.info("Adding artwork with ID {} to collection with ID: {}",artworkId, collectionId);
         collectionService.addToCollection(collectionId, artworkId);
-        log.info("Artwork added to collection with ID: {}", collectionId);
     }
 
     @DeleteMapping("/{collectionId}")
     public void deleteCollection(@PathVariable Long collectionId) {
         log.info("Deleting collection with ID: {}", collectionId);
         collectionService.deleteCollection(collectionId);
-        log.info("Collection deleted with ID: {}", collectionId);
     }
 
     @DeleteMapping("/{collectionId}/removeArtwork")
     public void deleteFromCollection(@PathVariable Long collectionId, @RequestParam Long artworkId) {
         log.info("Removing artwork with ID {} from collection with ID: {}", artworkId, collectionId);
         collectionService.deleteFromCollection(collectionId, artworkId);
-        log.info("Artwork removed from collection with ID: {}", collectionId);
     }
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleException(Exception e) {
-        String errorMessage = "ERROR: " + e.getMessage();
-        log.error(errorMessage);
-        return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+
     @PutMapping("/{collectionId}/editName")
     public void editName(@PathVariable Long collectionId, @RequestParam String name) {
         log.info("Updating collection name for collection with ID: {}", collectionId);
         collectionService.editName(collectionId, name);
         log.info("Collection name updated for collection with ID: {}", collectionId);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        String errorMessage = "ERROR: " + e.getMessage();
+        log.error(errorMessage);
+        return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

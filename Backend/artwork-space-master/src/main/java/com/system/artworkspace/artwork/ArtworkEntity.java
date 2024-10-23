@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 @Getter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 public class ArtworkEntity {
 
@@ -55,9 +54,9 @@ public class ArtworkEntity {
     }
 
 
-    public ArtworkEntity(Long id) {
-        this.id=id;
-    }
+//    public ArtworkEntity(Long id) {
+//        this.id=id;
+//    }
 
     @Override
     public boolean equals(Object obj) {

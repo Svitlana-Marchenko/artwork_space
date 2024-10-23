@@ -15,8 +15,10 @@ import java.util.List;
 
 @Configuration
 public class AuctionEntityItemReader {
+
     @Autowired
     private AuctionRepository auctionRepository;
+
     @Bean(name = "formingSaleReader")
     @StepScope
     public ItemReader<AuctionEntity> formingSaleReader() {

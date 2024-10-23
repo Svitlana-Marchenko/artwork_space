@@ -59,7 +59,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public UserDto getUserById(@PathVariable Long userId) {
-        log.info("Retrieving user with ID: {}", userId);
+        log.debug("Retrieving user with ID: {}", userId);
         return UserMapper.INSTANCE.userToUserDto(userService.getUserById(userId));
     }
 
@@ -91,6 +91,7 @@ public class UserController {
     public ResponseEntity<String> handleNoSuchUserException(NoSuchUserException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserEntity not found: " + e.getMessage());
     }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         String errorMessage = "ERROR: " + e.getMessage();

@@ -78,7 +78,7 @@ public class ArtworkController {
     @GetMapping("/{id}")
     public ArtworkDto findArtworkById(@PathVariable Long id) {
         log.debug("Fetching artwork with ID: {}", id);
-        return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.findArtworkById(id));
+        return ArtworkMapper.INSTANCE.artworkToArtworkDto(artworkService.getArtworkById(id));
     }
 
     @PutMapping("/{id}")
@@ -110,31 +110,6 @@ public class ArtworkController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete artwork");
         }
-    }
-
-    @PutMapping("/{id}/title")
-    @PreAuthorize("hasAuthority('ARTIST')")
-    public void updateTitle(@PathVariable Long id, @RequestParam @Valid String title) {
-        log.info("Updating title for artwork with ID: {}", id);
-        artworkService.updateTitle(id, title);
-        log.info("Title updated for artwork with ID: {}", id);
-    }
-
-    @PutMapping("/{id}/description")
-    @PreAuthorize("hasAuthority('ARTIST')")
-    public void updateDescription(@PathVariable Long id, @RequestParam @Valid String description) {
-        log.info("Updating description for artwork with ID: {}", id);
-        artworkService.updateDescription(id, description);
-        log.info("Description updated for artwork with ID: {}", id);
-    }
-
-    @PutMapping("/{id}/technique")
-    @PreAuthorize("hasAuthority('ARTIST')")
-    public void updateTechnique(@PathVariable Long id, @RequestParam @Valid String technique) {
-        log.info("Updating technique for artwork with ID: {}", id);
-        artworkService.updateTechnique(id, technique);
-        log.info("Technique updated for artwork with ID: {}", id);
-
     }
 
     @GetMapping("/byTitle")
