@@ -58,5 +58,4 @@ public class AuctionArtistControllerTest {
                         .content(objectMapper.writeValueAsString(auctionDto)))
                 .andExpect(status().isOk());
     }
-
 }

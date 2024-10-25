@@ -68,6 +68,4 @@ public class AuctionCollectioneerControllerTest {
                         .content(objectMapper.writeValueAsString(100)))
                 .andExpect(status().isOk());
     }
-
 }
-

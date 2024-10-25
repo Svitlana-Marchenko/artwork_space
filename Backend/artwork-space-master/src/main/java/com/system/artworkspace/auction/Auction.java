@@ -2,16 +2,15 @@ package com.system.artworkspace.auction;
 
 import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.Date;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Auction {
 
     private long id;

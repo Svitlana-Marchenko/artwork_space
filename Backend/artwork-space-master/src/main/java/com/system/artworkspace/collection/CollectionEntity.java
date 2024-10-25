@@ -3,6 +3,7 @@ package com.system.artworkspace.collection;
 import com.system.artworkspace.artwork.ArtworkEntity;
 import com.system.artworkspace.user.UserEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class CollectionEntity {
 
     @Id

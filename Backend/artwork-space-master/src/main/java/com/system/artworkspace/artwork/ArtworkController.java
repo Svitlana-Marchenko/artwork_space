@@ -38,13 +38,13 @@ public class ArtworkController {
 
     @GetMapping
     public List<ArtworkDto> getAll() {
-        log.info("Getting all artworks");
+        log.debug("Getting all artworks");
         return artworkService.getAllArtwork().stream().map(ArtworkMapper.INSTANCE::artworkToArtworkDto).collect(Collectors.toList());
     }
 
     @GetMapping("/artist/{id}")
     public List<ArtworkDto> getAllByUserId(@PathVariable Long id) {
-        log.info("Getting all artworks");
+        log.debug("Getting all artworks by userId {}", id);
         return artworkService.getAllArtworkByArtistId(id).stream().map(ArtworkMapper.INSTANCE::artworkToArtworkDto).collect(Collectors.toList());
     }
 

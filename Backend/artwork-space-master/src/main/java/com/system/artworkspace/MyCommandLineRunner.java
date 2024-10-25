@@ -65,14 +65,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         UserEntity c3 = (new UserEntity("andrew_spens", "Andrew", "Spensor", "andrew.spensor@gmail.com", "password", Role.CURATOR));
         UserEntity c4 = (new UserEntity("elizabeth_bret", "Elizabeth", "Bret", "elizabeth.bret@gmail.com", "password", Role.CURATOR));
 
-
         users.add(u1);
         users.add(u2);
         users.add(u3);
         users.add(u4);
         users.add(u5);
         users.add(u6);
-
 
         users.add(new UserEntity("williams_artist", "David", "Williams", "david.williams@gmail.com", "password", Role.ARTIST));
         users.add(new UserEntity("sara_art_lover", "Sarah", "Brown", "sarah.brown@example.com", "password", Role.COLLECTIONEER));
@@ -83,10 +81,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         users.add(new UserEntity("noah_clark", "Noah", "Clark", "noah.clark@example.com", "password", Role.ARTIST));
         users.add(new UserEntity("ava_ava", "Ava", "Moore", "ava.moore@example.com", "password", Role.COLLECTIONEER));
         users.add(new UserEntity("liam_artlover", "Liam", "White", "liam.white@example.com", "password", Role.CURATOR));
+
         users.add(c1);
         users.add(c2);
         users.add(c3);
         users.add(c4);
+
         for (UserEntity a: users){
             userService.createUser(UserMapper.INSTANCE.userEntityToUser(a));
         }
@@ -108,13 +108,11 @@ public class MyCommandLineRunner implements CommandLineRunner {
         ratings.add(r5);
         ratings.add(r6);
 
-
-        ArtworkEntity art1 = new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Янголи", "Неймовірної краси янголи", "Oil Painting", 60.0, 40.0, "../data/artist_1/1.jpg", ratings);//../../../data/artist_1/1.jpg
-        artworks.add(art1);
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ранок у горах", "Живописний ранок у горах", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.jpg", ratings));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Ліс восени", "Чарівний ліс восени, коли листя стає яскравими фарбами.", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Битва за свободу", "Мистецьке відтворення історичної битви за свободу.", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.jpg", new ArrayList<>()));
-        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Яскраві квіти", "Сповнені кольору квіти, які вражають своєю красою.", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.jpg", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Пані", "Неймовірної краси пані", "Oil Painting", 60.0, 40.0, "../data/artist_1/1.png", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Дивина", "Різні емоції", "Oil Painting", 60.0, 40.0, "../data/artist_1/2.png", ratings));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Пан", "Чарівний козел", "Oil Painting", 60.0, 40.0, "../data/artist_1/3.png", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Яскраві квіти", "Сповнені кольору квіти, які вражають своєю красою.", "Oil Painting", 60.0, 40.0, "../data/artist_1/4.png", new ArrayList<>()));
+        artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(1L)), "Серйозність", "Серйозний козел", "Oil Painting", 60.0, 40.0, "../data/artist_1/5.png", new ArrayList<>()));
 
         artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактний вибух кольору", "Ексклюзивна абстрактна робота", "Oil Painting", 60.0, 40.0, "../data/artist_4/6.jpg", ratings));
         artworks.add(new ArtworkEntity(UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)), "Абстрактний витвір", "Сучасний абстрактний твір", "Oil Painting", 60.0, 40.0, "../data/artist_4/7.jpg", new ArrayList<>()));
@@ -152,17 +150,17 @@ public class MyCommandLineRunner implements CommandLineRunner {
         Date endDate2 = null;
 
         try {
-            startDate1 = dateFormat.parse("2023-01-23");
-            endDate1 = dateFormat.parse("2024-02-23");
-            startDate2 = dateFormat.parse("2023-10-23");
-            endDate2 = dateFormat.parse("2023-12-23");
+            startDate1 = dateFormat.parse("2024-01-23");
+            endDate1 = dateFormat.parse("2025-02-23");
+            startDate2 = dateFormat.parse("2024-10-23");
+            endDate2 = dateFormat.parse("2024-12-23");
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(1L)), 10.0, 5, new Date(), null, 0);
+        AuctionEntity aa1 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(1L)), 10.0, 5, endDate1, null, 0);
         AuctionEntity aa2 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(2L)), 30.0, 10, endDate2, null, 0);
-        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(3L)), 100.0, 15, new Date(), u2, 150);
+        AuctionEntity aa3 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(3L)), 100.0, 15, endDate1, u2, 150);
         AuctionEntity aa4 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(4L)), 50.0, 5, new Date(), u2, 70);
         AuctionEntity aa5 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(20L)), 70.0, 1, new Date(), u2, 80);
         AuctionEntity aa6 = new AuctionEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(21L)), 90.0, 20, new Date(), null, 0);
@@ -271,9 +269,9 @@ public class MyCommandLineRunner implements CommandLineRunner {
         exhibitionService.addToExhibition(4L, artworkService.getArtworkById(11L));
 
         try {
-            SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2023-10-23"));
+            SaleEntity sale = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(7L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(2L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),200.0,dateFormat.parse("2024-10-23"));
             saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale));
-            SaleEntity sale2 = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(8L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(5L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),8990.0,dateFormat.parse("2023-10-10"));
+            SaleEntity sale2 = new SaleEntity(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artworkService.getArtworkById(8L)),UserMapper.INSTANCE.userToUserEntity(userService.getUserById(5L)), UserMapper.INSTANCE.userToUserEntity(userService.getUserById(4L)),8990.0,dateFormat.parse("2024-10-10"));
             saleService.createSale(SaleMapper.INSTANCE.saleEntityToSale(sale2));
 
         } catch (ParseException e) {

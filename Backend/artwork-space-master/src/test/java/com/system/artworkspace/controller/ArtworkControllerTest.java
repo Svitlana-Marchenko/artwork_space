@@ -98,5 +98,4 @@ public class ArtworkControllerTest {
                         .content(objectMapper.writeValueAsString(ratingDto)))
                 .andExpect(status().isOk());
     }
-
 }

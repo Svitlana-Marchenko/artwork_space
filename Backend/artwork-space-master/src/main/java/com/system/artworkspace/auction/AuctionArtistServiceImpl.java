@@ -9,7 +9,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -26,22 +25,25 @@ import static com.system.artworkspace.logger.LoggingMarkers.CONFIDENTIAL_EVENTS;
 @Service
 @Slf4j
 public class AuctionArtistServiceImpl implements AuctionArtistService {
-    
-    @Autowired
-    private AuctionRepository auctionRepository;
-    
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private SaleService saleService;
-    
-    @Autowired
-    JobLauncher jobLauncher;
+    private final AuctionRepository auctionRepository;
 
-    @Autowired
-    Job job;
-    
+    private final UserService userService;
+
+    private final SaleService saleService;
+
+    private final JobLauncher jobLauncher;
+
+    private final Job job;
+
+    public AuctionArtistServiceImpl(AuctionRepository auctionRepository, UserService userService, SaleService saleService, JobLauncher jobLauncher, Job job) {
+        this.auctionRepository = auctionRepository;
+        this.userService = userService;
+        this.saleService = saleService;
+        this.jobLauncher = jobLauncher;
+        this.job = job;
+    }
+
     @Override
     public Auction createAuction(Auction auction) {
         auction.setCurrentBid(auction.getStartingPrice());
@@ -72,9 +74,8 @@ public class AuctionArtistServiceImpl implements AuctionArtistService {
     @Override
     public User displayCurrentBuyer(Long id) {
         log.info(CONFIDENTIAL_EVENTS, "Displaying current buyer for auction with ID: {}", id);
-        if (auctionRepository.findById(id).isPresent())
-            return UserMapper.INSTANCE.userEntityToUser(auctionRepository.findById(id).get().getUser());
-        return null;
+        Optional<AuctionEntity> auction = auctionRepository.findById(id);
+        return auction.map(auctionEntity -> UserMapper.INSTANCE.userEntityToUser(auctionEntity.getUser())).orElse(null);
     }
 
     @Override

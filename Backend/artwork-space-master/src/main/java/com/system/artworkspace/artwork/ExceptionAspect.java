@@ -23,5 +23,4 @@ public class ExceptionAspect {
         String methodName = jp.getSignature().getName();
         log.error("Error in " + methodName + " with text: " + ex.getMessage());
     }
-
 }

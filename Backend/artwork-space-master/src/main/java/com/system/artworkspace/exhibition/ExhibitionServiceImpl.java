@@ -5,12 +5,9 @@ import com.system.artworkspace.artwork.Artwork;
 import com.system.artworkspace.artwork.ArtworkMapper;
 import com.system.artworkspace.exceptions.NoSuchExhibitionException;
 import com.system.artworkspace.exhibition.exhibitionUpdate.ExhibitionUpdate;
-import jakarta.persistence.EntityNotFoundException;
-import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -35,8 +32,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     static final Logger logger = LoggerFactory.getLogger(ArtworkSpaceApplication.class);
 
-    @Value("${exhibition.max-size}")
-    private int maxSize;
+    private int maxSize = 100;
 
     @Autowired
     public ExhibitionServiceImpl(ExhibitionRepository exhibitionRepository){
@@ -141,7 +137,6 @@ public class ExhibitionServiceImpl implements ExhibitionService {
             logger.info(COLLECTION_EVENTS,"Deleted exhibition with ID: {}", id);
         } else {
             logger.warn(COLLECTION_EVENTS,"Exhibition not found for deletion with ID: {}", id);
-            throw new EntityNotFoundException("Exhibition not found with ID: " + id);
         }
     }
 

@@ -78,10 +78,7 @@ public class CollectionServiceImpl implements CollectionService{
         Artwork artwork = artworkService.getArtworkById(artworkId);
 
          if (collectionEntity.isPresent()) {
-            Optional<CollectionEntity> optionalCollection = repository.findById(id);
-
-            if (optionalCollection.isPresent()) {
-                CollectionEntity existingCollectionEntity = optionalCollection.get();
+                CollectionEntity existingCollectionEntity = collectionEntity.get();
                 existingCollectionEntity.addNewArtwork(ArtworkMapper.INSTANCE.artworkToArtworkEntity(artwork));
                 repository.save(existingCollectionEntity);
                 log.info(COLLECTION_EVENTS,"Added artwork with ID {} to collection with ID: {}", artwork.getId(), id);
@@ -90,7 +87,6 @@ public class CollectionServiceImpl implements CollectionService{
                 throw new EntityNotFoundException("Collection not found with ID: " + id);
             }
         }
-    }
 
     @Override
     public void deleteCollection(Long id) {
@@ -109,7 +105,6 @@ public class CollectionServiceImpl implements CollectionService{
     @Override
     public void deleteFromCollection(Long id, Long artworkId) {
         Optional<CollectionEntity> optionalCollection = repository.findById(id);
-
         Artwork artwork = artworkService.getArtworkById(artworkId);
         if (optionalCollection.isPresent()) {
             CollectionEntity existingCollectionEntity = optionalCollection.get();
